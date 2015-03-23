@@ -16,9 +16,23 @@ shekelApp.controller('ShekelController', function($scope, $http) {
 	    { label: "10 (500)", value: 10}
 	];                     
                              
-    $scope.aiPacks = $scope.aiPackOptions[0]; 
+    $scope.aiPacks = $scope.aiPackOptions[0];  
     
-    $scope.avgRam = [.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 10, 20, "too much"];
+    $scope.avgRamOptions = [ 
+	    { value: .5 },
+	    { value: 1  },
+	    { value: 1.5},
+	    { value: 2  },
+	    { value: 2.5},
+	    { value: 3  },
+	    { value: 4  },
+	    { value: 6  },
+	    { value: 10 },
+	    { value: 20 }
+	]; 
+    
+    $scope.avgRam = $scope.avgRamOptions[0];
+
     
     $scope.deaSize = ["Small", "Medium", "Large", "Bad idea"];
     
@@ -44,6 +58,28 @@ shekelApp.controller('ShekelController', function($scope, $http) {
     $scope.setAis = function() { 
     	$scope.aiPacks = $scope.aiPackOptions[$scope.ais() - 1];
     }
+    
+    
+    $scope.deaDef = { 
+    	usableRam: 10
+    };
+    
+    $scope.nPlusX = 2;
+    
+    /**
+     * DEA Calculator
+     */
+    $scope.numDeas = function() { 
+    	var totalRam = ($scope.aiPacks.value * 50 * $scope.avgRam.value)
+    	var deas = (totalRam / $scope.deaDef.usableRam) + $scope.nPlusX;
+    	//This might have a bug in it, double check when we're writing real apps.
+    	if (deas == Math.round(deas)) { 
+    		return deas;
+    	}
+    	return parseInt(deas) +1;
+    };
+    
+    
 
 });
 

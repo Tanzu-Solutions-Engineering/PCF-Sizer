@@ -39,9 +39,8 @@
         </div>
         
         RAM:
-        <select>
-        	<option ng-repeat="i in avgRam">{{i}}GB</option>
-        </select>
+        <select ng-model="avgRam"
+        	ng-options="opt as opt.value for opt in avgRamOptions"></select>
         
         DEA:
         <select>
@@ -54,6 +53,7 @@
         </select>
     </div>
     
+    <p>Using n+x factor {{nPlusX}}</p>
 
     <div id="sizing-output">
     	<h2>Watcha need:</h2>
@@ -66,9 +66,14 @@
     		</thead>	    		
     		<tr>
     			<td>Router</td><td>2</td>
-    			<td>DEA</td><td>N</td>
+   			</tr>
+   			<tr>
+    			<td>DEA</td><td>{{numDeas()}}</td>
+   			</tr>
+    		<tr>
     			<td>...</td><td>...</td>
     		</tr>
+    		
     	</table>
     </div>
 </div>
