@@ -15,9 +15,9 @@
         
         <div id="ai-packs">
 	        AI Packs:
-	        <select>
-	            <option ng-repeat="i in aiPacks">{{i}}</option>
-	        </select>
+	        <select ng-model="aiPacks" 
+	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
+	        
 	        </br>
 	        
 	        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">Help me choose</a>
@@ -34,6 +34,7 @@
 	        	<br/>
 	        	
 	        	<p>You need {{ais()}} ai packs</p>
+	        	<a href="#" ng-click="setAis()">Set it!</a>
 	        </div>
         </div>
         
