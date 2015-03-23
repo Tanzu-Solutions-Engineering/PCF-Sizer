@@ -56,26 +56,22 @@
     <p>Calculating using {{deaDef.usableRam}} GB DEA head room.</p>
     <p>Using n+x factor {{nPlusX}}.</p>
     <p>The foundation has {{numAZ}} availability zones.</p>
-
+ 	<p>Total # of DEA's: {{totalDEAs()}}</p>
+	<p>DEA per AZ: {{deasPerAz()}}</p>
+	
     <div id="sizing-output">
-    	<h2>Watcha need:</h2>
+    	<h2>Watcha need (full calculation)</h2>
+    	<a href="#" ng-click="buildVms()">rebuild</a>!
     	<table>
     		<thead>
     			<tr>
 	    			<td>CF VM</td>
 	    			<td>Qty</td>
     			</tr>
-    		</thead>	    		
+    		</thead>
+    		<tr ng-repeat="vm in vms">
+    			<td>{{vm.name}}</td><td>{{vm.qty}}</td>	    		
     		<tr>
-    			<td>Router</td><td>2</td>
-   			</tr>
-   			<tr>
-    			<td>DEA</td><td>{{totalDEAs()}}</td>
-   			</tr>
-    		<tr>
-    			<td>DEAs Per AZ</td><td>{{deasPerAz()}}</td>
-    		</tr>
-    		
     	</table>
     </div>
 </div>
