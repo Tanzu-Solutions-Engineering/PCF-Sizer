@@ -6,9 +6,30 @@
 </head>
 
 <body ng-app="ShekelApp">
+
 <div ng-controller="ShekelController">
     <h1>Hello Shekel</h1>
+
+    <div id="sizing-input">
+        <h2>Sizing:</h2>
+        AI Packs:
+        <select>
+            <option ng-repeat="i in aiPacks">{{i}}</option>
+        </select>
+        
+        RAM:
+        <select>
+        	<option ng-repeat="i in avgRam">{{i}}</option>
+        </select>
+        
+        DEA:
+        <select>
+        	<option ng-repeat="i in deaSize">{{i}}</option>
+        </select>
+    </div>
 </div>
+
+
 
 </body>
 </html>
