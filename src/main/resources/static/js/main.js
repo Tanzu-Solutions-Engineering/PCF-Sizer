@@ -10,5 +10,25 @@ shekelApp.controller('ShekelController', function($scope, $http) {
     $scope.deaSize = ["Small", "Medium", "Large", "Bad idea"];
     
     $scope.aZRecoveryCapacity = [25, 50, 100];
+    
+    $scope.aiHelpMeChoose = false;
+    
+    $scope.aiChooser = { 
+    	apps: 1,
+    	devs: 1,
+    	steps: 1,
+    };
+       
+	// This is the app instances formula. Change it here.
+    $scope.ais = function() {  
+    	var totalAis = $scope.aiChooser.apps 
+    			* $scope.aiChooser.devs 
+    			* $scope.aiChooser.steps;
+    	var packs = (totalAis /  50) + 1;
+    	return parseInt(packs);
+    };
+    
+    $scope.numAis = $scope.ais();
+
 });
 

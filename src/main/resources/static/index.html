@@ -12,10 +12,30 @@
 
     <div id="sizing-input">
         <h2>Sizing:</h2>
-        AI Packs:
-        <select>
-            <option ng-repeat="i in aiPacks">{{i}}</option>
-        </select>
+        
+        <div id="ai-packs">
+	        AI Packs:
+	        <select>
+	            <option ng-repeat="i in aiPacks">{{i}}</option>
+	        </select>
+	        </br>
+	        
+	        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">Help me choose</a>
+	        
+	        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose">
+	        	How many apps you got? 
+	        	<input type="number" ng-model="aiChooser.apps" value="{{aiChooser.apps}}"></input>
+	        	<br/>
+	        	How many folks on your dev teams (avg)?
+	        	<input type="number" ng-model="aiChooser.devs" value="{{aiChooser.devs}}"></input>
+	        	<br/>
+	        	How many steps in your pipeline
+	        	<input type="number" ng-model="aiChooser.steps"value="{{aiChooser.steps}}" ></input>
+	        	<br/>
+	        	
+	        	<p>You need {{ais()}} ai packs</p>
+	        </div>
+        </div>
         
         RAM:
         <select>
