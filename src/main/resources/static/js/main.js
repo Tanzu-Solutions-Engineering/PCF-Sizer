@@ -7,6 +7,8 @@ shekelApp.controller('ShekelController', function($scope, $http) {
 
     $scope.avgRam = [.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 10, 20, "too much"];
     
-    $scope.deaSize = ["Small", "Medium", "Large", "Bad idea"]
+    $scope.deaSize = ["Small", "Medium", "Large", "Bad idea"];
+    
+    $scope.aZRecoveryCapacity = [25, 50, 100];
 });
 

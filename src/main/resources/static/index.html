@@ -19,12 +19,17 @@
         
         RAM:
         <select>
-        	<option ng-repeat="i in avgRam">{{i}}</option>
+        	<option ng-repeat="i in avgRam">{{i}}GB</option>
         </select>
         
         DEA:
         <select>
         	<option ng-repeat="i in deaSize">{{i}}</option>
+        </select>
+        
+        AZ Recovery
+        <select>
+        	<option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
         </select>
     </div>
 </div>
