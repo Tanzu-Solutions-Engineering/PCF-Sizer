@@ -53,14 +53,16 @@
         </select>
     </div>
     
-    <p>Using n+x factor {{nPlusX}}</p>
+    <p>Calculating using {{deaDef.usableRam}} GB DEA head room.</p>
+    <p>Using n+x factor {{nPlusX}}.</p>
+    <p>The foundation has {{numAZ}} avalibility zones.</p>
 
     <div id="sizing-output">
     	<h2>Watcha need:</h2>
     	<table>
     		<thead>
     			<tr>
-	    			<td>Thing</td>
+	    			<td>CF VM</td>
 	    			<td>Qty</td>
     			</tr>
     		</thead>	    		
@@ -68,10 +70,10 @@
     			<td>Router</td><td>2</td>
    			</tr>
    			<tr>
-    			<td>DEA</td><td>{{numDeas()}}</td>
+    			<td>DEA</td><td>{{totalDEAs()}}</td>
    			</tr>
     		<tr>
-    			<td>...</td><td>...</td>
+    			<td>DEAs Per AZ</td><td>{{deasPerAz()}}</td>
     		</tr>
     		
     	</table>

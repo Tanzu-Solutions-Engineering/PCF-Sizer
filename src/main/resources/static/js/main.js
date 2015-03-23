@@ -38,6 +38,8 @@ shekelApp.controller('ShekelController', function($scope, $http) {
     
     $scope.aZRecoveryCapacity = [25, 50, 100];
     
+    $scope.numAZ = 2; 
+    
     $scope.aiHelpMeChoose = false;
     
     $scope.aiChooser = { 
@@ -66,20 +68,34 @@ shekelApp.controller('ShekelController', function($scope, $http) {
     
     $scope.nPlusX = 2;
     
+    $scope.roundUp = function(x) {  
+    	var totalX;
+	    if (x == Math.round(x)) { 
+			totalX = x;
+		} else  { 
+			totalX = parseInt(x) +1;
+		}
+	    return totalX;
+    }
+    
     /**
      * DEA Calculator
      */
-    $scope.numDeas = function() { 
+    $scope.numDeasToRunAIs = function() { 
     	var totalRam = ($scope.aiPacks.value * 50 * $scope.avgRam.value)
     	var deas = (totalRam / $scope.deaDef.usableRam) + $scope.nPlusX;
-    	//This might have a bug in it, double check when we're writing real apps.
-    	if (deas == Math.round(deas)) { 
-    		return deas;
-    	}
-    	return parseInt(deas) +1;
+    	return $scope.roundUp(deas);
     };
     
+    $scope.deasPerAz = function() { 
+    	var azDeas = $scope.numDeasToRunAIs() / $scope.numAZ;
+    	return $scope.roundUp(azDeas);
+    };
     
+    $scope.totalDEAs = function() { 
+    	var deas =  $scope.deasPerAz() * $scope.numAZ;
+    	return deas;
+    }
 
 });
 
