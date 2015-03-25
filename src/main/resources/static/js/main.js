@@ -126,6 +126,8 @@ shekelApp.controller('ShekelSizingController', function($scope) {
      
     $scope.vms = {}
     $scope.buildVms(); 
+    
+    $scope.showTable=false;
 });
 
 shekelApp.controller('ShekelFoundationController', function($scope) {
@@ -136,6 +138,10 @@ shekelApp.controller('ShekelFoundationController', function($scope) {
 	
 	$scope.foundations = function() { 
 		var multiplier = $scope.seperateForProd == "yes" ? 2 : 1;
+		//Gross side effect... 
+		if ( $scope.singleComplianceZone == "yes") { 
+			$scope.complianceZones = 1;
+		}
 		return $scope.physicalDC * $scope.complianceZones * multiplier; 
 	}
 	
