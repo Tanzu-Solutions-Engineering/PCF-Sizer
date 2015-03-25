@@ -68,10 +68,11 @@
 	<p>DEA per AZ: {{deasPerAz()}}</p>
 	<div id="resource-ask">
 		<p>Resource Ask Summary</p>
-		<p>RAM:</p>
-		<p>Disk TB:</p>
-		<p>VCPU:</p>
+		<p>RAM: {{iaasAskSummary.ram}}</p>
+		<p>Disk TB: {{iaasAskSummary.disk}} </p>
+		<p>VCPU: {{iaasAskSummary.vcpu}}</p>
 	</div>
+	
     <div id="sizing-output">
     	<a href="#" ng-click="showTable = !showTable">Show all PCF Virtual Machine Detail.</a>
     	<div id="sizing-table" ng-show="showTable">

@@ -1,7 +1,7 @@
 "use strict"
 var shekelApp = angular.module('ShekelApp', []);
 
-shekelApp.controller('ShekelSizingController', function($scope) {
+shekelApp.controller('ShekelSizingController', function($scope, $http) {
 
     $scope.aiPackOptions = new Array();         
     
@@ -128,6 +128,25 @@ shekelApp.controller('ShekelSizingController', function($scope) {
     $scope.buildVms(); 
     
     $scope.showTable=false;
+    
+    $scope.iaasAskSummary = {
+    	ram: 1,
+    	disk: 1, 
+    	vcpu: 1
+    };
+    
+    $scope.azTemplate = null;
+    
+    $scope.loadAzTemplate = function() {
+    	$http.get('/js/data/ers_vms_single_az_template.json')
+    		.success(function(data) { 
+    			$scope.azTemplate = data
+    		}).error(function(data) { 
+    			alert("Failed to get json template");
+    		});
+    };
+    
+    $scope.loadAzTemplate();
 });
 
 shekelApp.controller('ShekelFoundationController', function($scope) {
