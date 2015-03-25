@@ -1,0 +1,6 @@
+applications:
+- name: shekel
+  memory: 512M
+  host: shekel-dev-01
+  path: target/shekel-0.0.1-SNAPSHOT.jar
+

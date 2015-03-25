@@ -1,0 +1,6 @@
+.ideal/
+.idea/
+/target/
+.classpath
+.project
+.settings/
