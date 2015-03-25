@@ -135,18 +135,43 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     	vcpu: 1
     };
     
-    $scope.azTemplate = null;
+    $scope.vmLayout = null;
+    
+    $scope.doIaaSAskForVm = function(vm) {
+    	$scope.iaasAskSummary.ram += (vm.ram / 1024) * vm.instances;
+		$scope.iaasAskSummary.disk 
+			+= ((vm.persistent_disk + vm.ephemeral_disk) / 1024) * vm.instances;
+		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
+    }
+
+    $scope.applyTemplate = function(template) { 
+    	$scope.vmLayout = new Array();
+        for (var i = 0; i < template.length; i++) {
+        	var vm = {};
+    		angular.extend(vm, template[i]);
+    		if ( !vm.singleton ) { 
+    			vm.instances = vm.instances *  $scope.numAz
+    		}   
+    		$scope.doIaaSAskForVm(vm);
+			$scope.vmLayout.push(vm);
+    	}
+    };
+    
+ 
     
     $scope.loadAzTemplate = function() {
     	$http.get('/js/data/ers_vms_single_az_template.json')
     		.success(function(data) { 
-    			$scope.azTemplate = data
+    			$scope.applyTemplate(data);
     		}).error(function(data) { 
     			alert("Failed to get json template");
     		});
     };
     
-    $scope.loadAzTemplate();
+	$scope.loadAzTemplate();
+
+
+    
 });
 
 shekelApp.controller('ShekelFoundationController', function($scope) {
@@ -163,6 +188,5 @@ shekelApp.controller('ShekelFoundationController', function($scope) {
 		}
 		return $scope.physicalDC * $scope.complianceZones * multiplier; 
 	}
-	
-	
+
 });
