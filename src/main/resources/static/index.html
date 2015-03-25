@@ -77,7 +77,7 @@
     	<a href="#" ng-click="showTable = !showTable">Show all PCF Virtual Machine Detail.</a>
     	<div id="sizing-table" ng-show="showTable">
 	    	<h2>Watcha need (full calculation)</h2>
-	    	<a href="#" ng-click="buildVms()">rebuild</a>!
+	    	<a href="#" ng-click="applyTemplate(vmTemplate)">rebuild</a>!
 	    	<table>
 	    		<thead>
 	    			<tr>
@@ -85,8 +85,8 @@
 		    			<td>Qty</td>
 	    			</tr>
 	    		</thead>
-	    		<tr ng-repeat="vm in vms">
-	    			<td>{{vm.name}}</td><td>{{vm.qty}}</td>	    		
+	    		<tr ng-repeat="vm in vmLayout">
+	    			<td>{{vm.vm}}</td><td>{{vm.instances}}</td>	    		
 	    		<tr>
 	    	</table>
     	</div>

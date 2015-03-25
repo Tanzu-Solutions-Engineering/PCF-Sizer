@@ -94,39 +94,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     	return $scope.deasPerAz() * $scope.numAZ;
     }
     
-    //Does not account (well) for singletons or az's.
-    $scope.buildVms = function () {
-    	$scope.vms = [
-           {name: "DEA", 				qty: $scope.totalDEAs()},
-           {name: "DEA per AZ", 			qty: $scope.deasPerAz()},
-           {name: "Ops Manager", 		qty: 1},
-           {name: "Ops Manager Director",qty: 1},
-           {name: "HAProxy", 			qty: $scope.numAZ}, //Depends on production
-           {name: "NATS", 				qty: $scope.numAZ},
-           {name: "etcd", 				qty: $scope.numAZ},
-           {name: "Health Manager",		qty: $scope.numAZ},
-           {name: "Blob Store", 					qty: 1}, //Not on AWS w/ S3
-           {name: "Cloud Controller Database",	qty: 1},
-           {name: "Cloud Controller", qty: $scope.numAZ},
-           {name: "Clock Global", qty: 1},
-           {name: "Cloud Controller Worker", qty: $scope.numAZ},
-           {name: "Router", qty: $scope.numAZ},
-           {name: "Collector", qty: 1}, //Do we scale this this way?
-           {name: "UAA Database", qty: 1},
-           {name: "UAA", qty: $scope.numAZ},
-           {name: "Login Server", qty: 1},
-           {name: "Apps Manager Database", qty: 1}, //Is this really a VM?
-           {name: "Loggregator", qty: 1},
-           {name: "Loggregator Traffic Controller", qty: 1},
-           {name: "Compilation", qty: 4},
-           {name: "Post-Install Errand", qty: $scope.numAZ},
-           {name: "VCenter", qty: 1},
-      	];
-    };
-     
-    $scope.vms = {}
-    $scope.buildVms(); 
-    
+    $scope.vmLayout = null;
+    $scope.vmTemplate = null;         
     $scope.showTable=false;
     
     $scope.iaasAskSummary = {
@@ -135,8 +104,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     	vcpu: 1
     };
     
-    $scope.vmLayout = null;
-    $scope.vmTemplate = null; 
+ 
     
     $scope.doIaaSAskForVm = function(vm) {
     	$scope.iaasAskSummary.ram += (vm.ram / 1024) * vm.instances;
