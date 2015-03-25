@@ -45,8 +45,8 @@
         <input type="number" ng-model="avgAIDisk"></input>
         
         DEA:
-        <select>
-        	<option ng-repeat="i in deaSize">{{i}}</option>
+        <select ng-model="deaSize" 
+        	ng-options="opt as opt.text for opt in deaSizeOptions">
         </select>
         
         AZs:

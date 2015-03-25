@@ -32,7 +32,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
 
     $scope.avgAIDisk = 1;
     
-    $scope.deaSize = ["Small", "Medium", "Large", "Bad idea"];
+    $scope.deaSizeOptions = [ 
+        {text: "Small",    "size":16 }, 
+        {text: "Medium",   "size":32 },
+        {text: "Large",    "size":64 },
+        {text: "Bad idea", "size":128}
+    ];
+    
+    $scope.deaSize = $scope.deaSizeOptions[0];
     
     $scope.aZRecoveryCapacity = [25, 50, 100];
     
@@ -43,10 +50,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     $scope.aiChooser = { 
     	apps: 1,
     	devs: 1,
-    	steps: 1,
+    	steps: 1
     };
        
-	// This is the app instances formula. Change it here.
+	// This is the app instances formula. for "help me choose"
     $scope.ais = function() {  
     	var totalAis = $scope.aiChooser.apps 
     			* $scope.aiChooser.devs 
@@ -58,7 +65,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     $scope.setAis = function() { 
     	$scope.aiPacks = $scope.aiPackOptions[$scope.ais() - 1];
     }
-    
     
     $scope.deaDef = { 
     	usableRam: 10
