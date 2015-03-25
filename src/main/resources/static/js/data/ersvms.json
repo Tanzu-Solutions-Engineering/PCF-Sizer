@@ -17,8 +17,8 @@
         "ram": 2048,
         "ephemeral_disk": 0,
         "persistent_disk": 128000,
-        "dynamic_ips": 0,
-        "static_ips": 1,
+        "dynamic_ips": 1,
+        "static_ips": 0,
         "singleton": true
     },
     {
@@ -28,9 +28,9 @@
         "ram": 3072,
         "ephemeral_disk": 19456,
         "persistent_disk": 150000,
-        "dynamic_ips": 0,
-        "static_ips": 1,
-        "singleton": true
+        "dynamic_ips": 1,
+        "static_ips": 0,
+        "singleton": false
     },
     {
         "vm": "HAProxy",
@@ -56,18 +56,18 @@
     },
     {
         "vm": "etcd",
-        "instances": 2,
+        "instances": 1,
         "vcpu": 1,
         "ram": 1024,
         "ephemeral_disk": 5120,
         "persistent_disk": 1024,
         "dynamic_ips": 1,
         "static_ips": 0,
-        "singleton": false
+        "singleton": true
     },
     {
         "vm": "Health Manager",
-        "instances": 2,
+        "instances": 1,
         "vcpu": 1,
         "ram": 1024,
         "ephemeral_disk": 5120,
@@ -144,7 +144,7 @@
     },
     {
         "vm": "Collector",
-        "instances": 2,
+        "instances": 1,
         "vcpu": 1,
         "ram": 1024,
         "ephemeral_disk": 5120,
@@ -154,7 +154,7 @@
         "singleton": false
     },
     {
-        "vm": "OAuth2 Server Database (UAA Database)",
+        "vm": "UAA DB",
         "instances": 1,
         "vcpu": 1,
         "ram": 1024,
@@ -165,7 +165,7 @@
         "singleton": true
     },
     {
-        "vm": "OAuth2 Server (UAA)",
+        "vm": "UAA",
         "instances": 2,
         "vcpu": 1,
         "ram": 1024,
@@ -199,7 +199,7 @@
     },
     {
         "vm": "Application Execution (DEA)",
-        "instances": 18,
+        "instances": 2,
         "vcpu": 2,
         "ram": 16384,
         "ephemeral_disk": 35840,
@@ -239,7 +239,7 @@
         "persistent_disk": 0,
         "dynamic_ips": 1,
         "static_ips": 0,
-        "singleton": true
+        "singleton": false
     },
     {
         "vm": "Each Post-Install Errand",
