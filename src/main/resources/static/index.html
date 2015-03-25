@@ -7,7 +7,7 @@
 
 <body ng-app="ShekelApp">
 
-<div ng-controller="ShekelController" id="input">
+<div ng-controller="ShekelSizingController" id="input">
     <h1>Hello Shekel</h1>
 
     <div id="sizing-input">
@@ -82,6 +82,32 @@
     		<tr>
     	</table>
     </div>
+</div>
+
+<div id="foundation-estimator" ng-controller="ShekelFoundationController">
+	<h2>How many PCF Foundations</h2>
+	
+	<p>Can your applications exist within a single security/compliance zone?</p>
+		<select ng-model="singleComplianceZone" >
+			<option>yes</option>
+			<option>no</option>
+		</select>
+	<div ng-show="singleComplianceZone=='no'">
+		<p>How many zones do you need?</p>
+		<input type="number" ng-model="complianceZones">
+	</div> 
+	
+	<p>Do you want a separate foundation for production.</p>
+	<select ng-model="seperateForProd" >
+		<option>yes</option>
+		<option>no</option>
+	</select>
+	
+	<p>How many physical data centers do you need to run in?</p>
+	<input type="number" ng-model="physicalDC"></input>
+	
+	<p>You need {{foundations()}} foundations.</p>
+	
 </div>
 
 

@@ -1,7 +1,7 @@
 "use strict"
 var shekelApp = angular.module('ShekelApp', []);
 
-shekelApp.controller('ShekelController', function($scope, $http) {
+shekelApp.controller('ShekelSizingController', function($scope) {
 
     $scope.aiPackOptions = new Array();         
     
@@ -123,9 +123,21 @@ shekelApp.controller('ShekelController', function($scope, $http) {
            {name: "VCenter", qty: 1},
       	];
     };
-    
-    
+     
     $scope.vms = {}
     $scope.buildVms(); 
 });
 
+shekelApp.controller('ShekelFoundationController', function($scope) {
+	$scope.singleComplianceZone = "yes";
+	$scope.seperateForProd = "yes";
+	$scope.complianceZones = 1;
+	$scope.physicalDC = 1;
+	
+	$scope.foundations = function() { 
+		var multiplier = $scope.seperateForProd == "yes" ? 2 : 1;
+		return $scope.physicalDC * $scope.complianceZones * multiplier; 
+	}
+	
+	
+});
