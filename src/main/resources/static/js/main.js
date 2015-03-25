@@ -33,10 +33,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     $scope.avgAIDisk = 1;
     
     $scope.deaSizeOptions = [ 
-        {text: "Small",    "size":16 }, 
-        {text: "Medium",   "size":32 },
-        {text: "Large",    "size":64 },
-        {text: "Bad idea", "size":128}
+        {"text": "Small (16GB RAM)",    "size":16 }, 
+        {"text": "Medium (32GB RAM)",   "size":32 },
+        {"text": "Large (64GB RAM)",    "size":64 },
+        {"text": "Bad idea (128GB RAM)", "size":128}
     ];
     
     $scope.deaSize = $scope.deaSizeOptions[0];
@@ -66,9 +66,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     	$scope.aiPacks = $scope.aiPackOptions[$scope.ais() - 1];
     }
     
-    $scope.deaDef = { 
-    	usableRam: 10
-    };
+    $scope.deaUsableRam = function() { 
+    	return $scope.deaSize.size - 3;
+    }
     
     $scope.nPlusX = 2;
     
@@ -87,7 +87,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
      */
     $scope.numDeasToRunAIs = function() { 
     	var totalRam = ($scope.aiPacks.value * 50 * $scope.avgRam.value)
-    	var deas = (totalRam / $scope.deaDef.usableRam);
+    	var deas = (totalRam / $scope.deaUsableRam());
     	return $scope.roundUp(deas);
     };
     
@@ -113,7 +113,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
  
     
     $scope.doIaaSAskForVm = function(vm) {
-    	$scope.iaasAskSummary.ram += (vm.ram / 1024) * vm.instances;
+    	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
 		$scope.iaasAskSummary.disk 
 			+= ((vm.persistent_disk + vm.ephemeral_disk) / 1024) * vm.instances;
 		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
@@ -130,6 +130,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     		if ( !vm.singleton ) {
     			if ( "DEA" == vm.vm ) { 
     				vm.instances = $scope.totalDEAs();
+    				vm.ram = $scope.deaSize.size;
     			} else {
     				vm.instances = vm.instances * $scope.numAZ;
     			}
