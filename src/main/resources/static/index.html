@@ -52,10 +52,13 @@
         AZs:
         <input type="number" ng-model="numAZ"></input>
         
-        AZ Recovery
+        AZ Recovery:
         <select>
         	<option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
         </select>
+        
+        N+x factor:
+        <input type="number" ng-model="nPlusX"></input>
     </div>
     
     <p>Calculating using {{deaDef.usableRam}} GB DEA head room.</p>

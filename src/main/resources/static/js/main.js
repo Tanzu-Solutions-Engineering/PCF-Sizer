@@ -28,7 +28,7 @@ shekelApp.controller('ShekelController', function($scope, $http) {
 	    { value: 20 }
 	]; 
     
-    $scope.avgRam = $scope.avgRamOptions[0];
+    $scope.avgRam = $scope.avgRamOptions[1];
 
     $scope.avgAIDisk = 1;
     
@@ -81,13 +81,13 @@ shekelApp.controller('ShekelController', function($scope, $http) {
      */
     $scope.numDeasToRunAIs = function() { 
     	var totalRam = ($scope.aiPacks.value * 50 * $scope.avgRam.value)
-    	var deas = (totalRam / $scope.deaDef.usableRam) + $scope.nPlusX;
+    	var deas = (totalRam / $scope.deaDef.usableRam);
     	return $scope.roundUp(deas);
     };
     
     $scope.deasPerAz = function() { 
     	var azDeas = $scope.numDeasToRunAIs() / $scope.numAZ;
-    	return $scope.roundUp(azDeas);
+    	return $scope.roundUp(azDeas) + $scope.nPlusX;
     };
     
     $scope.totalDEAs = function() { 
