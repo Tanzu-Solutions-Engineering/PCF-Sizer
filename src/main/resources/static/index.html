@@ -17,7 +17,6 @@
 	        AI Packs:
 	        <select ng-model="aiPacks" 
 	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
-	        
 	        </br>
 	        
 	        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">Help me choose</a>
@@ -33,14 +32,17 @@
 	        	<input type="number" ng-model="aiChooser.steps"value="{{aiChooser.steps}}" ></input>
 	        	<br/>
 	        	
-	        	<p>You need {{ais()}} ai packs</p>
-	        	<a href="#" ng-click="setAis()">Set it!</a>
+	        	<span>You need {{ais()}} AI packs. <a href="#" ng-click="setAis()">accept!</a></span>
+	        	<br/>
 	        </div>
         </div>
         
-        RAM:
+        RAM (GB):
         <select ng-model="avgRam"
         	ng-options="opt as opt.value for opt in avgRamOptions"></select>
+        
+        Disk (GB): 
+        <input type="number" ng-model="avgAIDisk"></input>
         
         DEA:
         <select>

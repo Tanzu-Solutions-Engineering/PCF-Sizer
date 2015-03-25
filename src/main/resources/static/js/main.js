@@ -3,18 +3,15 @@ var shekelApp = angular.module('ShekelApp', []);
 
 shekelApp.controller('ShekelController', function($scope, $http) {
 
-    $scope.aiPackOptions = [ 
-	    { label:"1 (50)", value: 1},
-	    { label: "2 (100)", value: 2},
-	    { label: "3 (150)", value: 3},
-	    { label: "4 (200)", value: 4},
-	    { label: "5 (250)", value: 5},
-	    { label: "6 (300)", value: 6},
-	    { label: "7 (350)", value: 7},
-	    { label: "8 (400)", value: 8},
-	    { label: "9 (450)", value: 9},
-	    { label: "10 (500)", value: 10}
-	];                     
+    $scope.aiPackOptions = new Array();         
+    
+    $scope.setAIPacs = function() {
+    	for ( var i = 1; i <= 50; ++i) {
+    		$scope.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
+    	}
+    }
+    
+    $scope.setAIPacs();
                              
     $scope.aiPacks = $scope.aiPackOptions[0];  
     
@@ -33,6 +30,7 @@ shekelApp.controller('ShekelController', function($scope, $http) {
     
     $scope.avgRam = $scope.avgRamOptions[0];
 
+    $scope.avgAIDisk = 1;
     
     $scope.deaSize = ["Small", "Medium", "Large", "Bad idea"];
     
