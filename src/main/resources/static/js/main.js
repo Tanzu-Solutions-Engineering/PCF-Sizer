@@ -136,6 +136,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     };
     
     $scope.vmLayout = null;
+    $scope.vmTemplate = null; 
     
     $scope.doIaaSAskForVm = function(vm) {
     	$scope.iaasAskSummary.ram += (vm.ram / 1024) * vm.instances;
@@ -145,33 +146,34 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     }
 
     $scope.applyTemplate = function(template) { 
+    	$scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
     	$scope.vmLayout = new Array();
         for (var i = 0; i < template.length; i++) {
         	var vm = {};
     		angular.extend(vm, template[i]);
-    		if ( !vm.singleton ) { 
-    			vm.instances = vm.instances *  $scope.numAz
+    		if ( !vm.singleton ) {
+    			if ( "DEA" == vm.vm ) { 
+    				vm.instances = $scope.totalDEAs();
+    			} else {
+    				vm.instances = vm.instances * $scope.numAZ;
+    			}
     		}   
     		$scope.doIaaSAskForVm(vm);
 			$scope.vmLayout.push(vm);
     	}
     };
     
- 
-    
     $scope.loadAzTemplate = function() {
     	$http.get('/js/data/ers_vms_single_az_template.json')
     		.success(function(data) { 
-    			$scope.applyTemplate(data);
+    			$scope.vmTemplate = data;
+    			$scope.applyTemplate($scope.vmTemplate);
     		}).error(function(data) { 
     			alert("Failed to get json template");
     		});
     };
     
 	$scope.loadAzTemplate();
-
-
-    
 });
 
 shekelApp.controller('ShekelFoundationController', function($scope) {
