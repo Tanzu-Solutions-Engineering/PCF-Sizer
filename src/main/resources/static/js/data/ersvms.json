@@ -1,5 +1,5 @@
-
-{ "vm": "vCenter", "instances": 1, "vcpu": 2, "ram": 24000, "ephemeral_disk": 0, "persistent_disk": 128000, "dynamic_ips" 0, "static_ips" 1} , 2,24000,128000,1,Need to prevent this from being duplicated
+[
+	{ "vm": "vCenter", "instances": 1, "vcpu": 2, "ram": 24000, "ephemeral_disk": 0, "persistent_disk": 128000, "dynamic_ips" 0, "static_ips" 1, "singleton": true} ,
 Ops Manager VM,1,1,2048,0,150000,0,1,1,2048,150000,1,
 Ops Manager Director,1,4,3072,19456,20480,0,1,4,3072,39936,1,
 HAProxy,2,1,1024,5120,0,1,1,2,2048,10240,4,
@@ -24,3 +24,4 @@ Compilation,4,2,1024,9216,0,1,0,8,4096,36864,4,
 Each Post-Install Errand,1,1,1024,4096,0,1,0,1,1024,4096,1,
 TOTALS,51,,,,,,,79,362944,1274352,65,
 ,102,,,,,,,158,725888,2548704,130,How much overhead for ESXi
+]
