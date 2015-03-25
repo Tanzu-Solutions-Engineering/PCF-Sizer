@@ -43,7 +43,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     
     $scope.aZRecoveryCapacity = [25, 50, 100];
     
-    $scope.numAZ = 3; 
+    $scope.numAZ = 2; 
     
     $scope.aiHelpMeChoose = false;
     
