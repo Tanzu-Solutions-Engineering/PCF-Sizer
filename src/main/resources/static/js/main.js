@@ -145,6 +145,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
 		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
     }
 
+    //This is the main calculator. We do all the per vm stuff and add the 
+    //constants at the bottom.
     $scope.applyTemplate = function(template) { 
     	$scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
     	$scope.vmLayout = new Array();
@@ -161,6 +163,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     		$scope.doIaaSAskForVm(vm);
 			$scope.vmLayout.push(vm);
     	}
+        $scope.iaasAskSummary.disk += $scope.avgAIDisk * $scope.aiPacks.value * 50;
     };
     
     $scope.loadAzTemplate = function() {
