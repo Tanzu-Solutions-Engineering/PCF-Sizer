@@ -7,8 +7,21 @@ var vmService = shekelApp.factory('vmLayout', function($rootScope) {
 });
 
 var aiService = shekelApp.factory('aiService', function($rootScope) {
-	var aiPacks = {}; 
-	return aiPacks;
+	var aiPacks = {};
+	
+	function setAiPacks(pack) { 
+		aiPacks = pack;
+	}
+	
+	function getAiPacks() { 
+		return aiPacks;
+	}
+	
+	return { 
+		aiPacks: getAiPacks, 
+		setAiPack: setAiPacks
+	}
+	
 });
 
 shekelApp.controller('ShekelVersionController', function($scope, $http) {
@@ -38,12 +51,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
                
     $scope.aiPacks = function(pack) { 
     	if (angular.isDefined(pack)) {
-    		return aiService.aiPacks;
+    		aiService.setAiPack(pack);
     	}
-    	aiService.aiPacks = pack;
+		return aiService.aiPacks();	
     }
     
-    $scope.aiPacks($scope.aiPackOptions[0]);  
+    aiService.setAiPack($scope.aiPackOptions[0]);  
     
     $scope.avgRamOptions = [ 
 	    { value: .5 },
@@ -116,7 +129,11 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
      * DEA Calculator
      */
     $scope.numDeasToRunAIs = function() { 
-    	var totalRam = ($scope.aiPacks().value * 50 * $scope.avgRam.value)
+    	var aipacks = 50;
+    	if (null != $scope.aiPacks()) { 
+    		aipacks = $scope.aiPacks().value * 50;
+    	}
+    	var totalRam = (aipacks * $scope.avgRam.value)
     	var deas = (totalRam / $scope.deaUsableRam());
     	return $scope.roundUp(deas);
     };
@@ -201,7 +218,7 @@ shekelApp.controller('ShekelFoundationController', function($scope) {
 	}
 });
 
-shekelApp.controller('ShekelCostingController', function($scope, vmLayout) {
+shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService) {
 	$scope.gbPerHr = .08; //$
 	$scope.burndownMonths = 36; //months
 	$scope.costPerDay = 100;
@@ -233,4 +250,15 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout) {
 		return $scope.deaFunction("ephemeral_disk", 1024) / 1024;
 	}
 	
+	$scope.aiAvgDisk = function ()  { 
+		return $scope.deaDisk() / aiService.aiPacks().value; 
+	}
+
+	$scope.aiAvgRam = function ()  { 
+		return $scope.deaRam() / aiService.aiPacks().value; 
+	}
+	
+	$scope.aiAvgVcpu = function ()  { 
+		return $scope.deaVcpu() / aiService.aiPacks().value; 
+	}
 });
