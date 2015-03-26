@@ -1,3 +1,8 @@
 #input { 
 	padding: 10px;
 }
+
+.right {
+    position: absolute;
+    right: 0px;
+}
