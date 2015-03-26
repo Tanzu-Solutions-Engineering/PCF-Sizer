@@ -23,13 +23,13 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout)
 
     $scope.aiPackOptions = new Array();         
     
-    $scope.setAIPacs = function() {
+    $scope.setAIPackOptions = function() {
     	for ( var i = 1; i <= 50; ++i) {
     		$scope.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
     	}
     }
     
-    $scope.setAIPacs();
+    $scope.setAIPackOptions();
                              
     $scope.aiPacks = $scope.aiPackOptions[0];  
     
