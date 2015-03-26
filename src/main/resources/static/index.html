@@ -17,7 +17,7 @@
     <div id="sizing-input">
         <h2>Sizing (Single Foundation):</h2>
         
-        <div id="ai-packs">
+        <div id="ai-packs" class=left>
 	        AI Packs:
 	        <select ng-model="aiPacks" 
 	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
@@ -41,40 +41,48 @@
 	        </div>
         </div>
         
-        RAM (GB):
-        <select ng-model="avgRam"
-        	ng-options="opt as opt.value for opt in avgRamOptions"></select>
-        
-        Disk (GB): 
-        <input type="number" ng-model="avgAIDisk"></input>
-        
-        DEA:
-        <select ng-model="deaSize" 
-        	ng-options="opt as opt.text for opt in deaSizeOptions">
-        </select>
-        
-        AZs:
-        <input type="number" ng-model="numAZ"></input>
-        
-        AZ Recovery (Ignored, use n+x factor: tracker #91141454):
-        <select>
-        	<option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
-        </select>
-        
-        N+x factor:
-        <input type="number" ng-model="nPlusX"></input>
+        <div id="not-ai-packs" class=right>
+	        RAM (GB):
+	        <select ng-model="avgRam"
+	        	ng-options="opt as opt.value for opt in avgRamOptions"></select>
+	        
+	        Disk (GB): 
+	        <input type="number" ng-model="avgAIDisk"></input>
+	        
+	        DEA:
+	        <select ng-model="deaSize" 
+	        	ng-options="opt as opt.text for opt in deaSizeOptions">
+	        </select>
+	        
+	        <br>
+	        AZs:
+	        <input type="number" ng-model="numAZ"></input>
+	        
+	        AZ Recovery (Ignored, use n+x factor: tracker #91141454):
+	        <select>
+	        	<option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
+	        </select>
+	        
+	        N+x factor:
+	        <input type="number" ng-model="nPlusX"></input>
+        </div>
     </div>
-    
-    <p>Calculating using {{deaDef.usableRam}} GB DEA head room.</p>
-    <p>Using n+x factor {{nPlusX}}.</p>
-    <p>The foundation has {{numAZ}} availability zones.</p>
- 	<p>Total # of DEA's: {{totalDEAs()}}</p>
-	<p>DEA per AZ: {{deasPerAz()}}</p>
+    <br>
+	
 	<div id="resource-ask">
-		<p>Resource Ask Summary (<a href="#" ng-click="applyTemplate(vmTemplate)">refresh</a>)</p>
-		<p>RAM: {{iaasAskSummary.ram}}</p>
-		<p>Disk GB: {{iaasAskSummary.disk}} </p>
-		<p>VCPU: {{iaasAskSummary.vcpu}}</p>
+		<h3>Resource Ask Summary (<a href="#" ng-click="applyTemplate(vmTemplate)">refresh</a>)</h3>
+	
+	    <ul>
+		    <li>Calculating using {{deaDef.usableRam}} GB DEA head room.</li>
+		    <li>Using n+x factor {{nPlusX}}.</li>
+		    <li>The foundation has {{numAZ}} availability zones.</li>
+		 	<li>Total # of DEA's: {{totalDEAs()}}</li>
+			<li>DEA per AZ: {{deasPerAz()}}</li>
+			<li>RAM: {{iaasAskSummary.ram}}</li>
+			<li>Disk GB: {{iaasAskSummary.disk}} </li>
+			<li>VCPU: {{iaasAskSummary.vcpu}}</li>
+			<li>Physical Cores: {{iaasAskSummary.physicalCores() }}</li>
+		</ul>
 	</div>
 	
     <div id="sizing-output">
@@ -88,7 +96,7 @@
 		    			<td>Qty</td>
 	    			</tr>
 	    		</thead>
-	    		<tr ng-repeat="vm in vmLayout">
+	    		<tr ng-repeat="vm in getVms()">
 	    			<td>{{vm.vm}}</td><td>{{vm.instances}}</td>	    		
 	    		<tr>
 	    	</table>

@@ -1,8 +1,16 @@
-#input { 
+div { 
 	padding: 10px;
+	margin: 10px;
 }
 
 .right {
     position: absolute;
     right: 0px;
+    padding: 10px
+}
+
+.left { 
+	position: absolute;
+	left: 0px;
+	padding:10px
 }

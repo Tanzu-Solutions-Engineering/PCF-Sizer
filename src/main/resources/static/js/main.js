@@ -118,7 +118,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout)
     	return $scope.deasPerAz() * $scope.numAZ;
     }
     
-    $scope.vmTemplate = null;         
+	$scope.getVms = function() { return vmLayout; } 
     $scope.showTable=false;
     
     $scope.iaasAskSummary = {
@@ -195,8 +195,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout) {
 	$scope.rampUpGrowth = .10;
 	$scope.initialPlans = 5;
 	$scope.profitMarginPoints = 0;
-	
-	
+		
 	$scope.deaFunction = function(method, overhead) { 
 		for (var i = 0; i < vmLayout.length; ++i) { 
 			var vm = vmLayout[i];
