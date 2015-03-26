@@ -168,5 +168,11 @@ shekelApp.controller('ShekelFoundationController', function($scope) {
 		}
 		return $scope.physicalDC * $scope.complianceZones * multiplier; 
 	}
+});
 
+shekelApp.controller('ShekelCostingController', function($scope) {
+	$scope.gbPerHr = .08; //$
+	$scope.burndownGoal = 90; //days
+	$scope.costPerDay = 100;
+	
 });
