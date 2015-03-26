@@ -6,6 +6,11 @@ var vmService = shekelApp.factory('vmLayout', function($rootScope) {
 	return vmLayout;
 });
 
+var aiService = shekelApp.factory('aiService', function($rootScope) {
+	var aiPacks = {}; 
+	return aiPacks;
+});
+
 shekelApp.controller('ShekelVersionController', function($scope, $http) {
 
 	$scope.version = null; 
@@ -19,7 +24,7 @@ shekelApp.controller('ShekelVersionController', function($scope, $http) {
 	$scope.getVersion();
 });
 
-shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout) {
+shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout, aiService) {
 
     $scope.aiPackOptions = new Array();         
     
@@ -30,7 +35,15 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout)
     }
     
     $scope.setAIPackOptions();
-                             
+                
+    $scope.aiPacks = function() { 
+    	return aiService.aiPacks;
+    }
+    
+    $scope.aiPacks = function(pack) { 
+    	aiService.aiPacks = pack;
+    }
+    
     $scope.aiPacks = $scope.aiPackOptions[0];  
     
     $scope.avgRamOptions = [ 

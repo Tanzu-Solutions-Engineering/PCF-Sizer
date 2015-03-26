@@ -19,7 +19,7 @@
         
         <div id="ai-packs" class=left>
 	        AI Packs:
-	        <select ng-model="aiPacks" 
+	        <select ng-model="aiPacks" ng-model-options="{ getterSetter: true }"
 	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
 	        </br>
 	        
