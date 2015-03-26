@@ -127,6 +127,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout)
     	vcpu: 1
     };
     
+    $scope.getPhysicalCores = function() { 
+    	return $scope.roundUp($scope.iaasAskSummary.vcpu / 4); 
+    }
+    
     $scope.doIaaSAskForVm = function(vm) {
     	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
 		$scope.iaasAskSummary.disk 
