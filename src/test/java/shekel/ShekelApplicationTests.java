@@ -1,5 +1,7 @@
 package shekel;
 
+import io.pivotal.shekel.ShekelApplication;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;

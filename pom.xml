@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>shekel.ShekelApplication</start-class>
+		<start-class>io.pivotal.shekel.ShekelApplication</start-class>
 		<java.version>1.8</java.version>
 	</properties>
 
