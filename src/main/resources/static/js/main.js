@@ -1,6 +1,11 @@
 "use strict"
 var shekelApp = angular.module('ShekelApp', []);
 
+var vmService = shekelApp.factory('vmLayout', function($rootScope) {
+	var vmLayout = new Array(); 
+	return vmLayout;
+});
+
 shekelApp.controller('ShekelVersionController', function($scope, $http) {
 
 	$scope.version = null; 
@@ -14,7 +19,7 @@ shekelApp.controller('ShekelVersionController', function($scope, $http) {
 	$scope.getVersion();
 });
 
-shekelApp.controller('ShekelSizingController', function($scope, $http) {
+shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout) {
 
     $scope.aiPackOptions = new Array();         
     
@@ -113,7 +118,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     	return $scope.deasPerAz() * $scope.numAZ;
     }
     
-    $scope.vmLayout = null;
     $scope.vmTemplate = null;         
     $scope.showTable=false;
     
@@ -122,8 +126,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     	disk: 1, 
     	vcpu: 1
     };
-    
- 
     
     $scope.doIaaSAskForVm = function(vm) {
     	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
@@ -136,7 +138,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     //constants at the bottom.
     $scope.applyTemplate = function(template) { 
     	$scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
-    	$scope.vmLayout = new Array();
+    	vmLayout.length = 0;
         for (var i = 0; i < template.length; i++) {
         	var vm = {};
     		angular.extend(vm, template[i]);
@@ -149,7 +151,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http) {
     			}
     		}   
     		$scope.doIaaSAskForVm(vm);
-			$scope.vmLayout.push(vm);
+			vmLayout.push(vm);
     	}
         $scope.iaasAskSummary.disk += $scope.avgAIDisk * $scope.aiPacks.value * 50;
     };
@@ -183,9 +185,37 @@ shekelApp.controller('ShekelFoundationController', function($scope) {
 	}
 });
 
-shekelApp.controller('ShekelCostingController', function($scope) {
+shekelApp.controller('ShekelCostingController', function($scope, vmLayout) {
 	$scope.gbPerHr = .08; //$
-	$scope.burndownGoal = 90; //days
+	$scope.burndownMonths = 36; //months
 	$scope.costPerDay = 100;
+	
+	$scope.vcpuPerAI = .20;
+	$scope.rampUpPlans = 5; 
+	$scope.rampUpGrowth = .10;
+	$scope.initialPlans = 5;
+	$scope.profitMarginPoints = 0;
+	
+	
+	$scope.deaFunction = function(method, overhead) { 
+		for (var i = 0; i < vmLayout.length; ++i) { 
+			var vm = vmLayout[i];
+			if ( "DEA" == vm.vm ) {
+				return (vm[method] * vm.instances) - (overhead * vm.instances);
+			}
+		}
+	}
+	$scope.deaVcpu = function() { 
+		return $scope.deaFunction("vcpu", 0);
+	}
+	
+	$scope.deaRam = function() { 
+		return $scope.deaFunction("ram", 3)
+	}
+	
+	$scope.deaDisk = function() {
+		//TODO figure out real DEA Storage Overhead. Estimated here as 1GB.
+		return $scope.deaFunction("ephemeral_disk", 1024) / 1024;
+	}
 	
 });

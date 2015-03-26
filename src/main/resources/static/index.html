@@ -122,7 +122,26 @@
 </div>
 
 <div id="costing" ng-controller="ShekelCostingController" >
-
+	<h2>Costing</h2>
+	
+	<div id="deaAllocations">
+		<h3>IaaS Inputs</h3>
+		<p>Iaas Resources Allocated to Elastic Runtime (DEAs)</p>
+		<span>VCPU: {{deaVcpu()}} Memory: {{deaRam()}} (accounts for overhead) Storage: {{deaDisk()}} </span>
+	</div>
+	
+	<div id="costingInput">
+		<h3>Inputs</h3>
+		%of vCPU/App Instance:<input ng-model="vcpuPerAI"></input>
+		Ramp up Initial Plans:<input ng-model="rampUpPlans"></input>
+		Ramp up % growth per month:<input ng-model="rampUpGrowth"></input>
+		<br/>
+		Number of plans<input ng-model="initialPlans"></input>
+		Burndown Goal (Months):<input ng-model="burndownMonths"></input>
+		GB/Hr Adjustment (Profit Margin / Points):<input ng-model="profitMarginPoints"></input>
+		
+	</div>
+	
 </div>
 </body>
 </html>
