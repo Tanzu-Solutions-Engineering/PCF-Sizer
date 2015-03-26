@@ -35,16 +35,15 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     }
     
     $scope.setAIPackOptions();
-                
-    $scope.aiPacks = function() { 
-    	return aiService.aiPacks;
-    }
-    
+               
     $scope.aiPacks = function(pack) { 
+    	if (angular.isDefined(pack)) {
+    		return aiService.aiPacks;
+    	}
     	aiService.aiPacks = pack;
     }
     
-    $scope.aiPacks = $scope.aiPackOptions[0];  
+    $scope.aiPacks($scope.aiPackOptions[0]);  
     
     $scope.avgRamOptions = [ 
 	    { value: .5 },
@@ -94,7 +93,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     };
         
     $scope.setAis = function() { 
-    	$scope.aiPacks = $scope.aiPackOptions[$scope.ais() - 1];
+    	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
     }
     
     $scope.deaUsableRam = function() { 
@@ -117,7 +116,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
      * DEA Calculator
      */
     $scope.numDeasToRunAIs = function() { 
-    	var totalRam = ($scope.aiPacks.value * 50 * $scope.avgRam.value)
+    	var totalRam = ($scope.aiPacks().value * 50 * $scope.avgRam.value)
     	var deas = (totalRam / $scope.deaUsableRam());
     	return $scope.roundUp(deas);
     };
@@ -170,7 +169,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     		$scope.doIaaSAskForVm(vm);
 			vmLayout.push(vm);
     	}
-        $scope.iaasAskSummary.disk += $scope.avgAIDisk * $scope.aiPacks.value * 50;
+        $scope.iaasAskSummary.disk += $scope.avgAIDisk * $scope.aiPacks().value * 50;
     };
     
     $scope.loadAzTemplate = function() {
