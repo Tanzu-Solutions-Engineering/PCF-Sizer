@@ -251,14 +251,14 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 	
 	$scope.aiAvgDisk = function ()  { 
-		return $scope.deaDisk() / aiService.aiPacks().value; 
+		return $scope.deaDisk() / (aiService.aiPacks().value * 50); 
 	}
 
 	$scope.aiAvgRam = function ()  { 
-		return $scope.deaRam() / aiService.aiPacks().value; 
+		return $scope.deaRam() / (aiService.aiPacks().value * 50); 
 	}
 	
 	$scope.aiAvgVcpu = function ()  { 
-		return $scope.deaVcpu() / aiService.aiPacks().value; 
+		return $scope.deaVcpu() / (aiService.aiPacks().value *50); 
 	}
 });
