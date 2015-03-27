@@ -7,17 +7,15 @@
 
 <body ng-app="ShekelApp">
 
-<div id="version" class="right" ng-controller="ShekelVersionController">
-	<p>build-id={{version}}</p>
-</div>
+<div ng-controller="ShekelVersionController" class="right">build-id={{version}}</dif>
+
+<h1>Hello Shekel</h1>
 
 <div ng-controller="ShekelSizingController" id="input">
-    <h1>Hello Shekel</h1>
-
     <div id="sizing-input">
         <h2>Sizing (Single Foundation):</h2>
         
-        <div id="ai-packs" class=left>
+        <div id="ai-packs" class="left">
 	        AI Packs:
 	        <select ng-model="aiPacks" ng-model-options="{ getterSetter: true }"
 	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
@@ -41,7 +39,7 @@
 	        </div>
         </div>
         
-        <div id="not-ai-packs" class=right>
+        <div id="not-ai-packs" class="right">
 	        RAM (GB):
 	        <select ng-model="avgRam"
 	        	ng-options="opt as opt.value for opt in avgRamOptions"></select>
@@ -58,34 +56,39 @@
 	        AZs:
 	        <input type="number" ng-model="numAZ"></input>
 	        
+	        <!-- 
 	        AZ Recovery (Ignored, use n+x factor: tracker #91141454):
 	        <select>
 	        	<option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
 	        </select>
+	        -->
 	        
 	        N+x factor:
 	        <input type="number" ng-model="nPlusX"></input>
         </div>
-    </div>
-    <br>
-	
-	<div id="resource-ask">
-		<h3>Resource Ask Summary (<a href="#" ng-click="applyTemplate(vmTemplate)">refresh</a>)</h3>
-	
-	    <ul>
-		    <li>Calculating using {{deaDef.usableRam}} GB DEA head room.</li>
-		    <li>Using n+x factor {{nPlusX}}.</li>
-		    <li>The foundation has {{numAZ}} availability zones.</li>
-		 	<li>Total # of DEA's: {{totalDEAs()}}</li>
-			<li>DEA per AZ: {{deasPerAz()}}</li>
-			<li>RAM: {{iaasAskSummary.ram}}</li>
-			<li>Disk GB: {{iaasAskSummary.disk}} </li>
-			<li>VCPU: {{iaasAskSummary.vcpu}}</li>
-			<li>Physical Cores: {{getPhysicalCores() }}</li>
-		</ul>
 	</div>
 	
-    <div id="sizing-output">
+	<br/><br/><br/><br/><br/><br/><br/>
+	
+	<div id="resource-ask class="left">
+		<h3>Resource Ask Summary (<a href="#" ng-click="applyTemplate(vmTemplate)">refresh</a>)</h3>
+	
+		<div id="resource-list" class="left">
+		    <ul>
+			    <li>Calculating using {{deaDef.usableRam}} GB DEA head room.</li>
+			    <li>Using n+x factor {{nPlusX}}.</li>
+			    <li>The foundation has {{numAZ}} availability zones.</li>
+			 	<li>Total # of DEA's: {{totalDEAs()}}</li>
+				<li>DEA per AZ: {{deasPerAz()}}</li>
+				<li>RAM: {{iaasAskSummary.ram}}</li>
+				<li>Disk GB: {{iaasAskSummary.disk}} </li>
+				<li>VCPU: {{iaasAskSummary.vcpu}}</li>
+				<li>Physical Cores: {{getPhysicalCores()}}</li>
+			</ul>
+		</div>
+	</div>
+	
+    <div id="sizing-output" class="right">
     	<a href="#" ng-click="showTable = !showTable">Show all PCF Virtual Machine Detail.</a>
     	<div id="sizing-table" ng-show="showTable">
 	    	<h2>Watcha need (full calculation)</h2>
@@ -103,6 +106,10 @@
     	</div>
     </div>
 </div>
+
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
+
 
 <div id="foundation-estimator" ng-controller="ShekelFoundationController">
 	<h2>How many PCF Foundations</h2>
@@ -126,7 +133,7 @@
 	<p>How many physical data centers do you need to run in?</p>
 	<input type="number" ng-model="physicalDC"></input>
 	
-	<p>You need {{foundations()}} foundations.</p>
+	<p>You need <span class="best-practice">{{foundations()}}</span> foundations.</p>
 </div>
 
 <div id="costing" ng-controller="ShekelCostingController" >
