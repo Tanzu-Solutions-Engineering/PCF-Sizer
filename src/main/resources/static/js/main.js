@@ -261,4 +261,17 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.aiAvgVcpu = function ()  { 
 		return $scope.deaVcpu() / (aiService.aiPacks().value *50); 
 	}
+	
+	$scope.paasCost = 0; 
+	$scope.iaasCost = 0;
+	$scope.opexCost = 0;
+	$scope.forcastLength = 36;
+	
+	$scope.getYearlyTCO = function() { 
+		return ($scope.paasCost + $scope.iaasCost + $scope.opexCost).toFixed(2);
+	}
+	
+	$scope.getMonthlyTCO = function() { 
+		return ($scope.getYearlyTCO() / $scope.forcastLength).toFixed(2); 
+	}
 });

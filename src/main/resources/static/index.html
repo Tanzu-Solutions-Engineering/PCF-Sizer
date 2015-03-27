@@ -151,10 +151,12 @@
 	
 	<div id="costing-input">
 		<h3>Costing Inputs</h3>
-		
+		Forcast Duration (Months) <input ng-model="forcastLength" type="number"></input>
 		PCF Cost: <input ng-model="paasCost" type="number"></input>
 		IaaS Cost: <input ng-model="iaasCost" type="number"></input>
 		Operational Cost: <input ng-model="opexCost" type="number"></input>
+		
+		<p>Total TCO is: ${{getYearlyTCO()}} yearly, ${{getMonthlyTCO()}} monthly</p>
 	</div>
 
 	
