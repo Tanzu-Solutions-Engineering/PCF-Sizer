@@ -274,4 +274,5 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.getMonthlyTCO = function() { 
 		return ($scope.getYearlyTCO() / $scope.forcastLength).toFixed(2); 
 	}
+	
 });
