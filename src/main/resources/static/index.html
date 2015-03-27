@@ -144,14 +144,22 @@
 		<p>Iaas Resources Allocated to Elastic Runtime (DEAs)</p>
 		<span>VCPU: {{deaVcpu()}} Memory: {{deaRam()}} (accounts for overhead) Storage: {{deaDisk()}} </span>
 	</div>
-	
 	<div id="per-instance-allocations"> 
 		<h3>IaaS Resources Per Application Instance</h3>
 		<span>VCPU: {{aiAvgVcpu()}} Memory: {{aiAvgRam()}} Storage: {{aiAvgDisk()}} </span>
 	</div>
 	
+	<div id="costing-input">
+		<h3>Costing Inputs</h3>
+		
+		PCF Cost: <input ng-model="paasCost" type="number"></input>
+		IaaS Cost: <input ng-model="iaasCost" type="number"></input>
+		Operational Cost: <input ng-model="opexCost" type="number"></input>
+	</div>
+
+	
 	<div id="costingInput">
-		<h3>Inputs</h3>
+		<h3>Forecasting Inputs</h3>
 		%of vCPU/App Instance:<input ng-model="vcpuPerAI"></input>
 		Ramp up Initial Plans:<input ng-model="rampUpPlans"></input>
 		Ramp up % growth per month:<input ng-model="rampUpGrowth"></input>
