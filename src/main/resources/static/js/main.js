@@ -163,7 +163,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     $scope.doIaaSAskForVm = function(vm) {
     	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
 		$scope.iaasAskSummary.disk 
-			+= ((vm.persistent_disk + vm.ephemeral_disk) / 1024) * vm.instances;
+			+= (vm.persistent_disk + vm.ephemeral_disk) * vm.instances;
 		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
     }
 
@@ -247,7 +247,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.deaDisk = function() {
 		//TODO figure out real DEA Storage Overhead. Estimated here as 1GB.
-		return $scope.deaFunction("ephemeral_disk", 1024) / 1024;
+		return $scope.deaFunction("ephemeral_disk", 1024);
 	}
 	
 	$scope.aiAvgDisk = function ()  { 
