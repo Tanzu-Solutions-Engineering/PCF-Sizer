@@ -266,13 +266,19 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.iaasCost = 0;
 	$scope.opexCost = 0;
 	$scope.forcastLength = 36;
+	$scope.paasMonthly = "duration";
+	$scope.iaasMonthly = "duration";
+	$scope.opexMonthly = "duration";
 	
-	$scope.getYearlyTCO = function() { 
-		return ($scope.paasCost + $scope.iaasCost + $scope.opexCost).toFixed(2);
+	$scope.getDurationTCO = function() { 
+		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * 12;
+		var iCost = $scope.iaasMonthly == "duration" ? $scope.iaasCost : $scope.iaasCost * 12;
+		var oCost = $scope.opexMonthly == "duration" ? $scope.opexCost : $scope.opexCost * 12;
+		return (pCost + iCost + oCost).toFixed(2);
 	}
 	
 	$scope.getMonthlyTCO = function() { 
-		return ($scope.getYearlyTCO() / $scope.forcastLength).toFixed(2); 
+		return ($scope.getDurationTCO() / $scope.forcastLength).toFixed(2); 
 	}
 	
 });
