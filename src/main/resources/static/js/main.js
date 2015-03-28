@@ -247,7 +247,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.deaDisk = function() {
 		//TODO figure out real DEA Storage Overhead. Estimated here as 1GB.
-		return $scope.deaFunction("ephemeral_disk", 1024);
+		return $scope.deaFunction("ephemeral_disk", 1);
 	}
 	
 	$scope.aiAvgDisk = function ()  { 
