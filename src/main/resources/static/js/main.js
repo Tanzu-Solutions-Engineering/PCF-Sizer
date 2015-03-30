@@ -26,20 +26,23 @@ var aiService = shekelApp.factory('aiService', function($rootScope) {
 
 var planService = shekelApp.factory('planService', function($rootScope) {
 	
-	function makeNewPlan(memQuota, instanceMaxMem, maxRoutes,
-			maxServiceInstances, paidServicePlans, diskQuota, aiMax) { 
+	function makeNewPlan(name, memQuota, instanceMaxMem, maxRoutes,
+			maxServiceInstances, paidServicePlans, diskQuota, aiMax, gbPerHr) { 
 		return { 
+			name: name,
 			memoryQuota: memQuota,
 			maxInstanceMem: instanceMaxMem, 
 			maxRoutes: maxRoutes,
 			maxServiceInstances: maxServiceInstances,
+			paidServicePlans: paidServicePlans,
 			diskQuota: diskQuota,
-			aiMax: aiMax
+			aiMax: aiMax,
+			gbPerHr: gbPerHr
 		};
 	};
 	
 	return {
-		newPlan : makeNewPlan()
+		newPlan : makeNewPlan
 	};
 });
 
@@ -303,22 +306,31 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 
 shekelApp.controller('ShekelPlanController', function($scope, planService) {
 	$scope.showPlanForm=false;
-	$scope.plans = [];
+	$scope.plans = new Array();
+	$scope.paidServicePlanOptions = [
+	    {value: true, label: "yes"}, 
+	    {value: false, label: "no"}
+	];
+	
 	/** 
 	 * Defaults for plan creation, should set to the last plan 
 	 * created to make data entry easy
 	 */
 	$scope.plan = {		
+			name: "new plan",
 			memoryQuota: 10,
 			maxInstanceMem: 2, 
 			maxRoutes: 100,
 			maxServiceInstances: 10,
+			paidServicePlans: $scope.paidServicePlanOptions[0],
 			diskQuota: 1,
-			aiMax: 100
+			aiMax: 100,
+			gbPerHr: .08
 	};
 	$scope.newPlan = function() { 
-		planService.newPlan($scope.plan.memoryQuota, $scope.plan.maxInstanceMem,
-				$scope.plan.maxRoutes, $scope.plan.maxServiceInstances, $scope.plan.diskQuota,
-				$scope.plan.aiMax);
+		$scope.plans.push(planService.newPlan($scope.plan.name, $scope.plan.memoryQuota, 
+				$scope.plan.maxInstanceMem, $scope.plan.maxRoutes, 
+				$scope.plan.maxServiceInstances,$scope.plan.paidServicePlans.value,  
+				$scope.plan.diskQuota, $scope.plan.aiMax, $scope.plan.gbPerHr));
 	}
 });

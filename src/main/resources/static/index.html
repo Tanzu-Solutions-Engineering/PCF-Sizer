@@ -174,16 +174,53 @@
 		GB/Hr Adjustment (Profit Margin / Points):<input ng-model="profitMarginPoints"></input>
 	</div>
 </div>
+<br>
 <div id="plans" ng-controller="ShekelPlanController">
+	<div id="plan-list">
+		<table border="solid">
+		<thead>
+			<tr>
+				<td>Name</td><td>RAM Quota</td>
+				<td>Max Instance RAM</td>
+				<td>Max Routes</td>
+				<td>Max Service Instances</td>
+				<td>Paid Service Plans</td>
+				<td>Disk Quota</td>
+				<td>Max AI's</td>
+				<td>GB/Hour Cost</td>
+			</tr>
+		</thead>
+			<tr ng-repeat="plan in plans">
+				<td>{{plan.name}}</td>
+				<td>{{plan.memoryQuota}}</td>
+				<td>{{plan.maxInstanceMem}}</td>
+				<td>{{plan.maxRoutes}}</td>
+				<td>{{plan.maxServiceInstances}}</td>
+				<td>{{plan.paidServicePlans}}</td>
+				<td>{{plan.diskQuota}}</td>
+				<td>{{plan.aiMax}}</td>
+				<td>{{plan.gbPerHr}}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<br>
 	<a href="#" ng-click="showPlanForm=!showPlanForm">new plan</a>
 	<form id="new-plan-form" ng-show="showPlanForm">
+		Name <input type="text" ng-model="plan.name">
 		RAM Quota<input type="number" ng-model="plan.memoryQuota" value="{{plan.memoryQuota}}">
 		Max RAM/AI<input type="number" ng-model="plan.maxInstanceMem" value="{{plan.maxInstanceMem}}">
 		# Routes<input type="number" ng-model="plan.maxRoutes" value="{{plan.maxRoutes}}">
+		<br>
 		# Service Instances<input type="number" ng-model="plan.maxServiceInstances" 
 			value="{{plan.maxServiceInstances}}">
+		Paid Service Plans: <select ng-model="plan.paidServicePlans" ng-options="opt as opt.label for opt in paidServicePlanOptions"></select>
 		Disk Quota<input type="number" ng-model="plan.diskQuota" value="{{plan.diskQuota}}">
 		# AIs<input type="number" ng-model="plan.aiMax" value="{{plan.aiMax}}">
+		GB/HR Cost<input type="number" ng-model="plan.gbPerHr" value="{{plan.gbPerHr}}">
+		
+		<br>
+		<a href="#" ng-click="newPlan()">submit</a>
 	</form>
 </div>
 </body>
