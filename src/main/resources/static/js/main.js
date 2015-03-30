@@ -317,6 +317,8 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 			aiMax: 100
 	};
 	$scope.newPlan = function() { 
-		planService.newPlan();
+		planService.newPlan($scope.plan.memoryQuota, $scope.plan.maxInstanceMem,
+				$scope.plan.maxRoutes, $scope.plan.maxServiceInstances, $scope.plan.diskQuota,
+				$scope.plan.aiMax);
 	}
 });

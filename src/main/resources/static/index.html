@@ -7,7 +7,7 @@
 
 <body ng-app="ShekelApp">
 
-<div ng-controller="ShekelVersionController" class="right">build-id={{version}}</dif>
+<div ng-controller="ShekelVersionController" >build-id={{version}}</div>
 
 <h1>Hello Shekel</h1>
 
@@ -15,7 +15,7 @@
     <div id="sizing-input">
         <h2>Sizing (Single Foundation):</h2>
         
-        <div id="ai-packs" class="left">
+        <div id="ai-packs" >
 	        AI Packs:
 	        <select ng-model="aiPacks" ng-model-options="{ getterSetter: true }"
 	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
@@ -39,7 +39,7 @@
 	        </div>
         </div>
         
-        <div id="not-ai-packs" class="right">
+        <div id="not-ai-packs" >
 	        RAM (GB):
 	        <select ng-model="avgRam"
 	        	ng-options="opt as opt.value for opt in avgRamOptions"></select>
@@ -67,13 +67,11 @@
 	        <input type="number" ng-model="nPlusX"></input>
         </div>
 	</div>
-	
-	<br/><br/><br/><br/><br/><br/><br/>
-	
-	<div id="resource-ask class="left">
+		
+	<div id="resource-ask >
 		<h3>Resource Ask Summary (<a href="#" ng-click="applyTemplate(vmTemplate)">refresh</a>)</h3>
 	
-		<div id="resource-list" class="left">
+		<div id="resource-list" >
 		    <ul>
 			    <li>Calculating using {{deaDef.usableRam}} GB DEA head room.</li>
 			    <li>Using n+x factor {{nPlusX}}.</li>
@@ -88,7 +86,7 @@
 		</div>
 	</div>
 	
-    <div id="sizing-output" class="right">
+    <div id="sizing-output" >
     	<a href="#" ng-click="showTable = !showTable">Show all PCF Virtual Machine Detail.</a>
     	<div id="sizing-table" ng-show="showTable">
 	    	<h2>Watcha need (full calculation)</h2>
@@ -106,11 +104,6 @@
     	</div>
     </div>
 </div>
-
-<br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/>
-
-
 <div id="foundation-estimator" ng-controller="ShekelFoundationController">
 	<h2>How many PCF Foundations</h2>
 	
@@ -181,7 +174,6 @@
 		GB/Hr Adjustment (Profit Margin / Points):<input ng-model="profitMarginPoints"></input>
 	</div>
 </div>
-<br><br>
 <div id="plans" ng-controller="ShekelPlanController">
 	<a href="#" ng-click="showPlanForm=!showPlanForm">new plan</a>
 	<form id="new-plan-form" ng-show="showPlanForm">
