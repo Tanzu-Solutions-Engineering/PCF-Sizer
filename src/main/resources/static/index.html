@@ -180,7 +180,19 @@
 		Burndown Goal (Months):<input ng-model="burndownMonths"></input>
 		GB/Hr Adjustment (Profit Margin / Points):<input ng-model="profitMarginPoints"></input>
 	</div>
-	
+</div>
+<br><br>
+<div id="plans" ng-controller="ShekelPlanController">
+	<a href="#" ng-click="showPlanForm=!showPlanForm">new plan</a>
+	<form id="new-plan-form" ng-show="showPlanForm">
+		RAM Quota<input type="number" ng-model="plan.memoryQuota" value="{{plan.memoryQuota}}">
+		Max RAM/AI<input type="number" ng-model="plan.maxInstanceMem" value="{{plan.maxInstanceMem}}">
+		# Routes<input type="number" ng-model="plan.maxRoutes" value="{{plan.maxRoutes}}">
+		# Service Instances<input type="number" ng-model="plan.maxServiceInstances" 
+			value="{{plan.maxServiceInstances}}">
+		Disk Quota<input type="number" ng-model="plan.diskQuota" value="{{plan.diskQuota}}">
+		# AIs<input type="number" ng-model="plan.aiMax" value="{{plan.aiMax}}">
+	</form>
 </div>
 </body>
 </html>

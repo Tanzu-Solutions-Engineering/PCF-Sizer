@@ -24,6 +24,25 @@ var aiService = shekelApp.factory('aiService', function($rootScope) {
 	
 });
 
+var planService = shekelApp.factory('planService', function($rootScope) {
+	
+	function makeNewPlan(memQuota, instanceMaxMem, maxRoutes,
+			maxServiceInstances, paidServicePlans, diskQuota, aiMax) { 
+		return { 
+			memoryQuota: memQuota,
+			maxInstanceMem: instanceMaxMem, 
+			maxRoutes: maxRoutes,
+			maxServiceInstances: maxServiceInstances,
+			diskQuota: diskQuota,
+			aiMax: aiMax
+		};
+	};
+	
+	return {
+		newPlan : makeNewPlan()
+	};
+});
+
 shekelApp.controller('ShekelVersionController', function($scope, $http) {
 
 	$scope.version = null; 
@@ -280,5 +299,24 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.getMonthlyTCO = function() { 
 		return ($scope.getDurationTCO() / $scope.forcastLength).toFixed(2); 
 	}
-	
+});
+
+shekelApp.controller('ShekelPlanController', function($scope, planService) {
+	$scope.showPlanForm=false;
+	$scope.plans = [];
+	/** 
+	 * Defaults for plan creation, should set to the last plan 
+	 * created to make data entry easy
+	 */
+	$scope.plan = {		
+			memoryQuota: 10,
+			maxInstanceMem: 2, 
+			maxRoutes: 100,
+			maxServiceInstances: 10,
+			diskQuota: 1,
+			aiMax: 100
+	};
+	$scope.newPlan = function() { 
+		planService.newPlan();
+	}
 });
