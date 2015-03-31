@@ -25,3 +25,6 @@
 		<td>{{plan.consumption}}</td>
 	</tr>
 </table>
+
+<span class="invalid" ng-if="overcommitted()">IaaS is over committed!</span> 
+<span class="valid" ng-if="!overcommitted()">IaaS is not over committed!</span> 
