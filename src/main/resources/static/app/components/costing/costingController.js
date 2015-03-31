@@ -12,14 +12,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.paasMonthly = "duration";
 	$scope.iaasMonthly = "duration";
 	$scope.opexMonthly = "duration";
-	
-	$scope.gbPerHrBreakEven = function() {
-		var daysInTco = $scope.getDurationTCO()/($scope.forecastLength*365);
-		var hoursInTco = daysInTco / 24;
-		return (hoursInTco/$scope.deaRam()).toFixed(2);	
-	}
-	
 		
+	/**
+	 * Closure to enable math against a dea property.
+	 */
 	$scope.deaFunction = function(method, overhead) { 
 		for (var i = 0; i < vmLayout.length; ++i) { 
 			var vm = vmLayout[i];
@@ -54,8 +50,6 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return $scope.deaVcpu() / (aiService.aiPacks().value *50); 
 	}
 	
-
-	
 	$scope.getDurationTCO = function() { 
 		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * 12;
 		var iCost = $scope.iaasMonthly == "duration" ? $scope.iaasCost : $scope.iaasCost * 12;
@@ -66,4 +60,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.getMonthlyTCO = function() { 
 		return ($scope.getDurationTCO() / $scope.forecastLength).toFixed(2); 
 	}
+	
+	$scope.gbPerHrBreakEven = function() {
+		var daysInTco = $scope.getDurationTCO()/($scope.forecastLength*365);
+		var hoursInTco = daysInTco / 24;
+		return (hoursInTco/$scope.deaRam()).toFixed(2);	
+	}
+	
 });
