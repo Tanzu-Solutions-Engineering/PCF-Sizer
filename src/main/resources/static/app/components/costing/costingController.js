@@ -8,6 +8,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.rampUpGrowth = .10;
 	$scope.initialPlans = 5;
 	$scope.profitMarginPoints = 0;
+	
+	$scope.payoffDays = 0;
 		
 	$scope.deaFunction = function(method, overhead) { 
 		for (var i = 0; i < vmLayout.length; ++i) { 
