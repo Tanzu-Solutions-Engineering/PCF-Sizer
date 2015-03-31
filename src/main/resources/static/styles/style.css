@@ -1,6 +1,13 @@
 
-
 .best-practice {
 	color: green;
 	border: solid;	
+}
+
+.invalid { 
+	color: red;
+}
+
+.valid { 
+	color: green;
 }

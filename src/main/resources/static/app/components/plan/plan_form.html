@@ -5,7 +5,10 @@
 	Max RAM/AI<input type="number" ng-model="plan.maxInstanceMem"
 		value="{{plan.maxInstanceMem}}"> 
 	# Routes<input type="number"
-		ng-model="plan.maxRoutes" value="{{plan.maxRoutes}}"> <br>
+		ng-model="plan.maxRoutes" value="{{plan.maxRoutes}}">
+	
+	<br>
+	
 	# Service Instances<input type="number"
 		ng-model="plan.maxServiceInstances"
 		value="{{plan.maxServiceInstances}}"> 
@@ -14,6 +17,8 @@
 		ng-options="opt as opt.label for opt in paidServicePlanOptions"></select>
 	Disk Quota<input type="number" ng-model="plan.diskQuota"
 		value="{{plan.diskQuota}}"> 
+	
+	<br>
 	# AIs<input type="number"
 		ng-model="plan.aiMax" value="{{plan.aiMax}}"> 
 	GB/HR Cost<input
