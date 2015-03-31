@@ -4,7 +4,8 @@
     <script src="/js/main.js"></script>
     <script src="/app/components/plan/planController.js"></script>
     <script src="/app/components/plan/planService.js"></script>
-      <script src="/app/components/version/versionController.js"></script>
+    <script src="/app/components/version/versionController.js"></script>
+    <script src="/app/components/costing/costingController.js"></script>
     
     <link rel="stylesheet" href="styles/style.css">
 </head>
@@ -177,6 +178,10 @@
 	<br>
 	<a href="#" ng-click="showPlanForm=!showPlanForm">new plan</a>
 	<div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
+</div>
+
+<div id="payout">
+	<p>You will have paid for your system in {{payoffDays}} days</p>
 </div>
 </body>
 </html>
