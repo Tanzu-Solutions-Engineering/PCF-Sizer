@@ -24,28 +24,6 @@ var aiService = shekelApp.factory('aiService', function($rootScope) {
 	
 });
 
-var planService = shekelApp.factory('planService', function($rootScope) {
-	
-	function makeNewPlan(name, memQuota, instanceMaxMem, maxRoutes,
-			maxServiceInstances, paidServicePlans, diskQuota, aiMax, gbPerHr) { 
-		return { 
-			name: name,
-			memoryQuota: memQuota,
-			maxInstanceMem: instanceMaxMem, 
-			maxRoutes: maxRoutes,
-			maxServiceInstances: maxServiceInstances,
-			paidServicePlans: paidServicePlans,
-			diskQuota: diskQuota,
-			aiMax: aiMax,
-			gbPerHr: gbPerHr
-		};
-	};
-	
-	return {
-		newPlan : makeNewPlan
-	};
-});
-
 shekelApp.controller('ShekelVersionController', function($scope, $http) {
 
 	$scope.version = null; 
@@ -301,36 +279,5 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.getMonthlyTCO = function() { 
 		return ($scope.getDurationTCO() / $scope.forcastLength).toFixed(2); 
-	}
-});
-
-shekelApp.controller('ShekelPlanController', function($scope, planService) {
-	$scope.showPlanForm=false;
-	$scope.plans = new Array();
-	$scope.paidServicePlanOptions = [
-	    {value: true, label: "yes"}, 
-	    {value: false, label: "no"}
-	];
-	
-	/** 
-	 * Defaults for plan creation, should set to the last plan 
-	 * created to make data entry easy
-	 */
-	$scope.plan = {		
-			name: "new plan",
-			memoryQuota: 10,
-			maxInstanceMem: 2, 
-			maxRoutes: 100,
-			maxServiceInstances: 10,
-			paidServicePlans: $scope.paidServicePlanOptions[0],
-			diskQuota: 1,
-			aiMax: 100,
-			gbPerHr: .08
-	};
-	$scope.newPlan = function() { 
-		$scope.plans.push(planService.newPlan($scope.plan.name, $scope.plan.memoryQuota, 
-				$scope.plan.maxInstanceMem, $scope.plan.maxRoutes, 
-				$scope.plan.maxServiceInstances,$scope.plan.paidServicePlans.value,  
-				$scope.plan.diskQuota, $scope.plan.aiMax, $scope.plan.gbPerHr));
 	}
 });

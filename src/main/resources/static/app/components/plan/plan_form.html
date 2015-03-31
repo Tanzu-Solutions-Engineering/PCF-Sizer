@@ -1,18 +1,24 @@
 <form id="new-plan-form" ng-show="showPlanForm">
-	Name <input type="text" ng-model="plan.name"> RAM Quota<input
+	Name <input type="text" ng-model="plan.name"> 
+	RAM Quota<input
 		type="number" ng-model="plan.memoryQuota" value="{{plan.memoryQuota}}">
 	Max RAM/AI<input type="number" ng-model="plan.maxInstanceMem"
-		value="{{plan.maxInstanceMem}}"> # Routes<input type="number"
+		value="{{plan.maxInstanceMem}}"> 
+	# Routes<input type="number"
 		ng-model="plan.maxRoutes" value="{{plan.maxRoutes}}"> <br>
 	# Service Instances<input type="number"
 		ng-model="plan.maxServiceInstances"
-		value="{{plan.maxServiceInstances}}"> Paid Service Plans: <select
+		value="{{plan.maxServiceInstances}}"> 
+	Paid Service Plans: <select
 		ng-model="plan.paidServicePlans"
 		ng-options="opt as opt.label for opt in paidServicePlanOptions"></select>
 	Disk Quota<input type="number" ng-model="plan.diskQuota"
-		value="{{plan.diskQuota}}"> # AIs<input type="number"
-		ng-model="plan.aiMax" value="{{plan.aiMax}}"> GB/HR Cost<input
+		value="{{plan.diskQuota}}"> 
+	# AIs<input type="number"
+		ng-model="plan.aiMax" value="{{plan.aiMax}}"> 
+	GB/HR Cost<input
 		type="number" ng-model="plan.gbPerHr" value="{{plan.gbPerHr}}">
-
+	IaaS Consumption %<input
+		type="number" ng-model="plan.consumption" value="{{plan.consumption}}">
 	<br> <a href="#" ng-click="newPlan()">submit</a>
 </form>

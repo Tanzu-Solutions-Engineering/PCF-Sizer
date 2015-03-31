@@ -9,6 +9,7 @@
 		<td>Disk Quota</td>
 		<td>Max AI's</td>
 		<td>GB/Hour Cost</td>
+		<td>IaaS Reservation %</td>
 	</tr>
 </thead>
 	<tr ng-repeat="plan in plans">
@@ -21,5 +22,6 @@
 		<td>{{plan.diskQuota}}</td>
 		<td>{{plan.aiMax}}</td>
 		<td>{{plan.gbPerHr}}</td>
+		<td>{{plan.consumption}}</td>
 	</tr>
 </table>
