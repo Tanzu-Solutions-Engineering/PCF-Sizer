@@ -149,7 +149,7 @@
 	
 	<div id="costing-input">
 		<h3>Costing Inputs</h3>
-		Forcast Duration (Months) <input ng-model="forcastLength" type="number">
+		Forcast Duration (Months) <input ng-model="forecastLength" type="number">
 		<div>
 			PCF Cost: <input ng-model="paasCost" type="number">
 			<input type="radio" ng-model="paasMonthly" value="monthly">Monthly
@@ -165,9 +165,9 @@
 			<input type="radio" ng-model="opexMonthly" value="monthly">Monthly
 			<input type="radio" ng-model="opexMonthly" value="duration">Duration
 		</form>
-		<p>Total TCO is: ${{getDurationTCO()}} over {{forcastLength}} months, ${{getMonthlyTCO()}} monthly</p>
+		<p>Total TCO is: ${{getDurationTCO()}} over {{forecastLength}} months, ${{getMonthlyTCO()}} monthly</p>
 		<div id="payout">
-			<p>You will have paid for your system in {{payoffDays}} days</p>
+			<p>You need to charge ${{gbPerHrBreakEven()}} per gigabyte hour to recoup your costs with 100% utilization</p>
 		</div>
 	</div>
 </div>

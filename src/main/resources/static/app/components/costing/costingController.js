@@ -1,15 +1,24 @@
 shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService) {
-	$scope.gbPerHr = .08; //$
-	$scope.burndownMonths = 36; //months
-	$scope.costPerDay = 100;
 	
 	$scope.vcpuPerAI = .20;
 	$scope.rampUpPlans = 5; 
 	$scope.rampUpGrowth = .10;
 	$scope.initialPlans = 5;
 	$scope.profitMarginPoints = 0;
+	$scope.paasCost = 1200000; 
+	$scope.iaasCost = 2000000;
+	$scope.opexCost = 400000;
+	$scope.forecastLength = 36;
+	$scope.paasMonthly = "duration";
+	$scope.iaasMonthly = "duration";
+	$scope.opexMonthly = "duration";
 	
-	$scope.payoffDays = 0;
+	$scope.gbPerHrBreakEven = function() {
+		var daysInTco = $scope.getDurationTCO()/($scope.forecastLength*365);
+		var hoursInTco = daysInTco / 24;
+		return (hoursInTco/$scope.deaRam()).toFixed(2);	
+	}
+	
 		
 	$scope.deaFunction = function(method, overhead) { 
 		for (var i = 0; i < vmLayout.length; ++i) { 
@@ -19,6 +28,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			}
 		}
 	}
+	
 	$scope.deaVcpu = function() { 
 		return $scope.deaFunction("vcpu", 0);
 	}
@@ -44,13 +54,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return $scope.deaVcpu() / (aiService.aiPacks().value *50); 
 	}
 	
-	$scope.paasCost = 0; 
-	$scope.iaasCost = 0;
-	$scope.opexCost = 0;
-	$scope.forcastLength = 36;
-	$scope.paasMonthly = "duration";
-	$scope.iaasMonthly = "duration";
-	$scope.opexMonthly = "duration";
+
 	
 	$scope.getDurationTCO = function() { 
 		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * 12;
@@ -60,6 +64,6 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 	
 	$scope.getMonthlyTCO = function() { 
-		return ($scope.getDurationTCO() / $scope.forcastLength).toFixed(2); 
+		return ($scope.getDurationTCO() / $scope.forecastLength).toFixed(2); 
 	}
 });
