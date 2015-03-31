@@ -4,6 +4,7 @@
     <script src="/js/main.js"></script>
     <script src="/app/components/plan/planController.js"></script>
     <script src="/app/components/plan/planService.js"></script>
+      <script src="/app/components/version/versionController.js"></script>
     
     <link rel="stylesheet" href="styles/style.css">
 </head>
@@ -165,17 +166,10 @@
 		</form>
 		<p>Total TCO is: ${{getDurationTCO()}} over {{forcastLength}} months, ${{getMonthlyTCO()}} monthly</p>
 	</div>
-
-	<div id="costingInput">
-		<h3>Forecasting Inputs</h3>
-		%of vCPU/App Instance:<input ng-model="vcpuPerAI"></input>
-		Ramp up Initial Plans:<input ng-model="rampUpPlans"></input>
-		Ramp up % growth per month:<input ng-model="rampUpGrowth"></input>
-		<br/>
-		Number of plans<input ng-model="initialPlans"></input>
-		Burndown Goal (Months):<input ng-model="burndownMonths"></input>
-		GB/Hr Adjustment (Profit Margin / Points):<input ng-model="profitMarginPoints"></input>
-	</div>
+</div>
+<div id="forecasting-input">
+	<h3>Forecasting Inputs</h3>
+	<div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
 </div>
 <br>
 <div id="plans" ng-controller="ShekelPlanController">
