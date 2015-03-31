@@ -1,0 +1,25 @@
+<table border="solid">
+<thead>
+	<tr>
+		<td>Name</td><td>RAM Quota</td>
+		<td>Max Instance RAM</td>
+		<td>Max Routes</td>
+		<td>Max Service Instances</td>
+		<td>Paid Service Plans</td>
+		<td>Disk Quota</td>
+		<td>Max AI's</td>
+		<td>GB/Hour Cost</td>
+	</tr>
+</thead>
+	<tr ng-repeat="plan in plans">
+		<td>{{plan.name}}</td>
+		<td>{{plan.memoryQuota}}</td>
+		<td>{{plan.maxInstanceMem}}</td>
+		<td>{{plan.maxRoutes}}</td>
+		<td>{{plan.maxServiceInstances}}</td>
+		<td>{{plan.paidServicePlans}}</td>
+		<td>{{plan.diskQuota}}</td>
+		<td>{{plan.aiMax}}</td>
+		<td>{{plan.gbPerHr}}</td>
+	</tr>
+</table>
