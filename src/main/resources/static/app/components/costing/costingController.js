@@ -59,7 +59,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * $scope.forecastLength;
 		var iCost = $scope.iaasMonthly == "duration" ? $scope.iaasCost : $scope.iaasCost * $scope.forecastLength;
 		var oCost = $scope.opexMonthly == "duration" ? $scope.opexCost : $scope.opexCost * $scope.forecastLength;
-		return (pCost + iCost + oCost).toFixed(2);
+		return pCost + iCost + oCost;
 	}
 	
 	$scope.getMonthlyTCO = function() { 
@@ -67,15 +67,15 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 	
 	$scope.gbPerHrBreakEven = function() {
-		var daysInTco = $scope.getDurationTCO()/$scope.forecastLength / 4 / 7;
-		var hoursInTco = daysInTco / 24;
-		return hoursInTco/$scope.deaRam();	
+		var perDay = $scope.getDurationTCO()/($scope.forecastLength / 12) / 365;
+		var perHour = perDay / 24;
+		return perHour/$scope.deaRam();	
 	}
 	
 	$scope.getGbPerHrWithPoints = function() { 
 		if ( 'date' == $scope.forecasting.burndownMode) { 
-			var gbHr = $scope.getDurationTCO() / $scope.forecasting.burndownMonths / $scope.deaRam() / 4 / 7 / 24;
-			$scope.forecasting.profitMarginPoints = gbHr / $scope.gbPerHrBreakEven(); 
+			var gbHr = $scope.getDurationTCO() / ($scope.forecasting.burndownMonths / 12 ) / 365 / 24 / $scope.deaRam();
+			$scope.forecasting.profitMarginPoints =  ((gbHr - $scope.gbPerHrBreakEven() ) / gbHr ) * 100; 
 			return gbHr;
 		}
 		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
@@ -86,8 +86,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		if ( 'date' == $scope.forecasting.burndownMode ) { 
 			return $scope.forecasting.burndownMonths;
 		}
-		var monthlyPay =  $scope.getGbPerHrWithPoints() * 24 * 7 * 4;
-		return $scope.getDurationTCO() / (monthlyPay * $scope.deaRam()); 
+		var monthlyIntakePerGB = ($scope.getGbPerHrWithPoints() * 24 * 365) / 12;
+		var monthlyIntake = monthlyIntakePerGB * $scope.deaRam();
+		var months = $scope.getDurationTCO() / monthlyIntake;
+		$scope.forecasting.burndownMonths = months;
+		return months;
 	};
 	
 	$scope.planService = planService;
