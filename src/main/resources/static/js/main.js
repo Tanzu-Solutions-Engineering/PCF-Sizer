@@ -102,6 +102,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     
     $scope.nPlusX = 2;
     
+    // TODO DRY w/ costing directives
     $scope.roundUp = function(x) {  
     	var totalX;
 	    if (x == Math.round(x)) { 

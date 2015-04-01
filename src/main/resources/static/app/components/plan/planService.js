@@ -42,10 +42,26 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			consumption: .50
 		}
 	}
+	
+	var plans = new Array(); 
+	function getPlans() {
+		return plans;
+	}
+	
+	function addPlan(plan) { 
+		plans.push(plan);
+	}
+	
+	function deletePlan(plan) {
 		
+	}
+	
 	return {
 		newPlan : makeNewPlan,
 		defaultPlan: defaultPlan,
-		paidServicePlanOptions: paidServicePlanOptions
+		paidServicePlanOptions: paidServicePlanOptions,
+		getPlans: getPlans,
+		addPlan: addPlan,
+		deletePlan: deletePlan,
 	};
 });

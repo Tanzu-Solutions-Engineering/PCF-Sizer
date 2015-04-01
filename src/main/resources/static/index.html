@@ -165,16 +165,24 @@
 			<input type="radio" ng-model="opexMonthly" value="monthly">Monthly
 			<input type="radio" ng-model="opexMonthly" value="duration">Duration
 		</form>
-		<p>Total TCO is: $<shkl-money value="{{getDurationTCO()}}"></shkl-money> over {{forecastLength}} months, $<shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly.</p>
+		<p>Total TCO is: $<shkl-money value="{{getDurationTCO()}}"></shkl-money> over
+			<shkl-month value="{{forecastLength}}"></shkl-month> months, 
+			$<shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly.</p>
 		<div id="payout">
-			<p>You need to charge $<shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money> per gigabyte hour to recoup your costs with 100% utilization</p>			
+			<p>
+				You need to charge $<shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money> 
+				per gigabyte hour to recoup your costs with 100% utilization
+			</p>			
 		</div>
 	</div>
 	<div id="forecasting-input">
 		<h3>Forecasting Inputs</h3>
 		<div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
 		<div id="forecasting-payout">
-			<p>With a profit margin of {{points.profitMarginPoints}} you will pay off your fully utalized platform in {{getPayoffMonths()}} months at <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.</p>		
+			<p>
+				With a profit margin of {{points.profitMarginPoints}} you will pay off your fully utalized platform in 
+				<shkl-month value="{{getPayoffMonths()}}"></shkl-month> months at 
+				<shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.</p>		
 		</div>
 	</div>
 	<div id="forecasting-runcard">
