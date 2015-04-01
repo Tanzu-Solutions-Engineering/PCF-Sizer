@@ -174,7 +174,7 @@
 		<h3>Forecasting Inputs</h3>
 		<div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
 		<div id="forecasting-payout">
-			<p>With a profit margin of {{profitMarginPoints}} you will pay off your fully utalized platform in {{getPayoffMonths()}} months.</p>		
+			<p>With a profit margin of {{points.profitMarginPoints}} you will pay off your fully utalized platform in {{getPayoffMonths()}} months at <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.</p>		
 		</div>
 	</div>
 </div>
