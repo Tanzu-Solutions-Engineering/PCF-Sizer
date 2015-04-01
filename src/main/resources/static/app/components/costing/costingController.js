@@ -66,6 +66,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return $scope.getDurationTCO() / $scope.forecastLength; 
 	}
 	
+	/*
+	 * The following calculators assume 100% utilization. See 
+	 * https://www.pivotaltracker.com/story/show/90807616 for 
+	 * future plans around how we ramp up.
+	 */
 	$scope.gbPerHrBreakEven = function() {
 		var perDay = $scope.getDurationTCO()/($scope.forecastLength / 12) / 365;
 		var perHour = perDay / 24;
