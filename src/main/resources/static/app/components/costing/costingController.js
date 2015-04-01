@@ -54,10 +54,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 	
 	$scope.getDurationTCO = function() { 
-		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * 12;
-		var iCost = $scope.iaasMonthly == "duration" ? $scope.iaasCost : $scope.iaasCost * 12;
-		var oCost = $scope.opexMonthly == "duration" ? $scope.opexCost : $scope.opexCost * 12;
-		return pCost + iCost + oCost;
+		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * $scope.forecastLength;
+		var iCost = $scope.iaasMonthly == "duration" ? $scope.iaasCost : $scope.iaasCost * $scope.forecastLength;
+		var oCost = $scope.opexMonthly == "duration" ? $scope.opexCost : $scope.opexCost * $scope.forecastLength;
+		return (pCost + iCost + oCost).toFixed(2);
 	}
 	
 	$scope.getMonthlyTCO = function() { 
@@ -73,7 +73,6 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.getGbPerHrWithPoints = function() { 
 		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
 			parseFloat(($scope.gbPerHrBreakEven() * $scope.points.profitMarginPoints * .01).toFixed(2)) 
-			
 	};
 	
 	$scope.getPayoffMonths = function () { 
