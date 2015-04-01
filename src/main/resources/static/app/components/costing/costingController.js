@@ -2,10 +2,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.vcpuPerAI = .20;
 	$scope.rampUpPlans = 5; 
-	$scope.rampUpGrowth = 10;
 	$scope.initialPlans = 5;
-	$scope.points = { 
-			profitMarginPoints: 10
+	$scope.forecasting = { 
+		profitMarginPoints: 10,
+		rampUpGrowth: 10
 	}
 	$scope.paasCost = 1200000; 
 	$scope.iaasCost = 2000000;
@@ -72,7 +72,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.getGbPerHrWithPoints = function() { 
 		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
-			parseFloat(($scope.gbPerHrBreakEven() * $scope.points.profitMarginPoints * .01).toFixed(2)) 
+			parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2)) 
 	};
 	
 	$scope.getPayoffMonths = function () { 
@@ -82,13 +82,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.planService = planService;
 
-	$scope.runCards = new Array(); 
+	$scope.runCards = []; 
 	
 	$scope.generateRunCard = function(plan) {
 		runCard = new Array();
 		var plansInUse = plan.consumption * $scope.initialPlans; 
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
-			plansInUse = plansInUse + (plansInUse * ($scope.rampUpGrowth * .01));
+			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
 			var ais = plansInUse * plan.aiMax;
 			var revenue = plansInUse * $scope.getGbPerHrWithPoints() * 24*4*7;
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
@@ -105,5 +105,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	//This could be optimised to not generate everything every time.
 	$scope.$watchCollection('planService.getPlans()', function(newPlans, oldPlans) {
 		$scope.buildRunCards(newPlans)
+	});
+	
+	$scope.$watch('forecasting.rampUpGrowth', function(newValue, oldValue) { 
+		$scope.buildRunCards(planService.getPlans())
 	});
 });
