@@ -2,19 +2,20 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.vcpuPerAI = .20;
 	$scope.rampUpPlans = 5; 
-	$scope.initialPlans = 5;
+	$scope.forecastLength = 36;
+
 	$scope.forecasting = { 
 		profitMarginPoints: 10,
-		rampUpGrowth: 10
+		rampUpGrowth: 10,
+		initialPlans: 5,
+		burndownMonths: $scope.forecastLength
 	}
 	$scope.paasCost = 1200000; 
 	$scope.iaasCost = 2000000;
 	$scope.opexCost = 400000;
-	$scope.forecastLength = 36;
 	$scope.paasMonthly = "duration";
 	$scope.iaasMonthly = "duration";
 	$scope.opexMonthly = "duration";
-	$scope.burndownMonths = $scope.forecastLength;
 			
 	/**
 	 * Closure to enable math against a dea property.
@@ -86,7 +87,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.generateRunCard = function(plan) {
 		runCard = new Array();
-		var plansInUse = plan.consumption * $scope.initialPlans; 
+		var plansInUse = plan.consumption * $scope.forecasting.initialPlans; 
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
 			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
 			var ais = plansInUse * plan.aiMax;
@@ -102,12 +103,23 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			$scope.runCards.push({ name:plans[i].name, runCard:$scope.generateRunCard(plans[i]) });
 		}
 	};
-	//This could be optimised to not generate everything every time.
+	//This could be optimized to not generate everything every time.
 	$scope.$watchCollection('planService.getPlans()', function(newPlans, oldPlans) {
 		$scope.buildRunCards(newPlans)
 	});
 	
-	$scope.$watch('forecasting.rampUpGrowth', function(newValue, oldValue) { 
-		$scope.buildRunCards(planService.getPlans())
+	/**
+	 * Watch all forecasting inputs to update the rate cards.
+	 */
+	[
+	 'forecasting.rampUpGrowth', 
+	 'forecasting.initialPlans', 
+	 'forecasting.profitMarginPoints',
+	 'forecasting.burndownMonths'
+	 ].forEach(function(e,l,a) {
+		$scope.$watch(e, function(newValue, oldValue) { 
+			$scope.buildRunCards(planService.getPlans())
+		});
 	});
+
 });
