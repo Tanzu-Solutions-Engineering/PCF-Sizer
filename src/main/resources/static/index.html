@@ -170,7 +170,7 @@
 			<shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly.</p>
 		<div id="payout">
 			<p>
-				You need to charge $<shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money> 
+				You need to charge <shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money> 
 				per gigabyte hour to recoup your costs with 100% utilization
 			</p>			
 		</div>
@@ -179,11 +179,18 @@
 		<h3>Forecasting Inputs</h3>
 		<div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
 		<div id="forecasting-payout">
-			<p>
+			<p ng-show="'gbhr'==forecasting.burndownMode">
 				With a profit margin of {{forecasting.profitMarginPoints}} and a rampup 
 				of {{forecasting.rampUpGrowth}}% per month you will pay off your platform in 
 				<shkl-month value="{{getPayoffMonths()}}"></shkl-month> months at 
-				<shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.</p>		
+				<shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.
+			</p>
+			<p ng-show="'date'==forecasting.burndownMode">
+				With a profit margin of {{forecasting.profitMarginPoints}} and a rampup 
+				of {{forecasting.rampUpGrowth}}% per month you will pay off your platform in 
+				<shkl-month value="{{getPayoffMonths()}}"></shkl-month> months at 
+				<shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.
+			</p>	
 		</div>
 	</div>
 	<div id="forecasting-runcard">

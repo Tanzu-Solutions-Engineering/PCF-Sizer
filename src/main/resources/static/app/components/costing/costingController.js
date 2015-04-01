@@ -8,7 +8,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		profitMarginPoints: 10,
 		rampUpGrowth: 10,
 		initialPlans: 5,
-		burndownMonths: $scope.forecastLength
+		burndownMonths: $scope.forecastLength,
+		burndownMode: "gbhr"
 	}
 	$scope.paasCost = 1200000; 
 	$scope.iaasCost = 2000000;
@@ -66,17 +67,25 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 	
 	$scope.gbPerHrBreakEven = function() {
-		var daysInTco = $scope.getDurationTCO()/($scope.forecastLength) / 4 / 7;
+		var daysInTco = $scope.getDurationTCO()/$scope.forecastLength / 4 / 7;
 		var hoursInTco = daysInTco / 24;
 		return hoursInTco/$scope.deaRam();	
 	}
 	
 	$scope.getGbPerHrWithPoints = function() { 
+		if ( 'date' == $scope.forecasting.burndownMode) { 
+			var gbHr = $scope.getDurationTCO() / $scope.forecasting.burndownMonths / $scope.deaRam() / 4 / 7 / 24;
+			$scope.forecasting.profitMarginPoints = gbHr / $scope.gbPerHrBreakEven(); 
+			return gbHr;
+		}
 		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
 			parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2)) 
 	};
 	
-	$scope.getPayoffMonths = function () { 
+	$scope.getPayoffMonths = function () {
+		if ( 'date' == $scope.forecasting.burndownMode ) { 
+			return $scope.forecasting.burndownMonths;
+		}
 		var monthlyPay =  $scope.getGbPerHrWithPoints() * 24 * 7 * 4;
 		return $scope.getDurationTCO() / (monthlyPay * $scope.deaRam()); 
 	};

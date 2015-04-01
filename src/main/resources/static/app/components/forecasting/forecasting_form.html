@@ -4,3 +4,7 @@ Ramp up % growth per month:<input type="number" ng-model="forecasting.rampUpGrow
 <br/>
 Burndown Goal (Months):<input type="number" ng-model="forecasting.burndownMonths">
 GB/Hr Adjustment (Profit Margin / Points): <input type="number" ng-model="forecasting.profitMarginPoints">
+<p>Burndown Mode allows you to select a break even date based GB/HR pricing, or by providing a GB/HR to provide the break even date</p>
+Burndown Mode:<input type="radio" ng-model="forecasting.burndownMode" value="gbhr">GB/HR
+			<input type="radio" ng-model="forecasting.burndownMode" value="date">Months
+			
