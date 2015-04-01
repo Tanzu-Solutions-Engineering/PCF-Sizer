@@ -90,17 +90,20 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
 			plansInUse = plansInUse + (plansInUse * ($scope.rampUpGrowth * .01));
 			var ais = plansInUse * plan.aiMax;
-			var revenue = plansInUse * plan.gbPerHr * 24*4*7;
+			var revenue = plansInUse * $scope.getGbPerHrWithPoints() * 24*4*7;
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
 		}
 		return runCard;
 	}
 	
+	$scope.buildRunCards = function(plans) {
+		$scope.runCards = new Array();
+		for ( var i = 0; i < plans.length; ++i ) { 
+			$scope.runCards.push({ name:plans[i].name, runCard:$scope.generateRunCard(plans[i]) });
+		}
+	};
 	//This could be optimised to not generate everything every time.
 	$scope.$watchCollection('planService.getPlans()', function(newPlans, oldPlans) {
-		$scope.runCards = new Array();
-		for ( var i = 0; i < newPlans.length; ++i ) { 
-			$scope.runCards.push({ name:newPlans[i].name, runCard:$scope.generateRunCard(newPlans[i]) });
-		}
+		$scope.buildRunCards(newPlans)
 	});
 });
