@@ -6,7 +6,7 @@
     <script src="/app/components/plan/planService.js"></script>
     <script src="/app/components/version/versionController.js"></script>
     <script src="/app/components/costing/costingController.js"></script>
-    
+    <script src="/app/components/costing/costingDirectives.js"></script>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
@@ -165,16 +165,20 @@
 			<input type="radio" ng-model="opexMonthly" value="monthly">Monthly
 			<input type="radio" ng-model="opexMonthly" value="duration">Duration
 		</form>
-		<p>Total TCO is: ${{getDurationTCO()}} over {{forecastLength}} months, ${{getMonthlyTCO()}} monthly</p>
+		<p>Total TCO is: $<shkl-money value="{{getDurationTCO()}}"></shkl-money> over {{forecastLength}} months, $<shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly</p>
 		<div id="payout">
-			<p>You need to charge ${{gbPerHrBreakEven()}} per gigabyte hour to recoup your costs with 100% utilization</p>
+			<p>You need to charge $<shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money> per gigabyte hour to recoup your costs with 100% utilization</p>			
+		</div>
+	</div>
+	<div id="forecasting-input">
+		<h3>Forecasting Inputs</h3>
+		<div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
+		<div id="forecasting-payout">
+			<p>With a profit margin of {{profitMarginPoints}} you will pay off your fully utalized platform in {{getPayoffMonths()}} months.</p>		
 		</div>
 	</div>
 </div>
-<div id="forecasting-input">
-	<h3>Forecasting Inputs</h3>
-	<div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
-</div>
+
 <br>
 <div id="plans" ng-controller="ShekelPlanController">
 	<div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
