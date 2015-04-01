@@ -1,5 +1,5 @@
 <section>
-	<div id="plan-run-card" ng-repeat="plan in planService.getPlans()">
+	<div id="plan-run-card" ng-repeat="plan in runCards">
 		<h4>{{plan.name}}</h4>
 		<table>
 		<thead>
@@ -10,6 +10,12 @@
 				<td>Rolling Revenue</td>
 			</tr>
 		</thead>
+		<tr ng-repeat="row in plan.runCard">
+			<td><shkl-number value="{{row.month}}"></shkl-number></td>
+			<td><shkl-number value="{{row.plansInUse}}"></shkl-number></td>
+			<td><shkl-number value="{{row.ais}}"></shkl-number></td>
+			<td>$<shkl-money value="{{row.revenue}}"></shkl-money></td>
+		</tr>
 		</table>
 	</div>
 </section>
