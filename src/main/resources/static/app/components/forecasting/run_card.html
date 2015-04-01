@@ -1,11 +1,16 @@
-<table>
-<thead>
-	<tr>
-		<td>Month</td>
-		<td>Plans</td>
-		<td>AI's</td>
-		<td>Rolling Revenue</td>
-	</tr>
-</thead>
-
-</table>
+<section>
+	<div id="plan-run-card" ng-repeat="plan in planService.getPlans()">
+		<h4>{{plan.name}}</h4>
+		<table>
+		<thead>
+			<tr>
+				<td>Month</td>
+				<td>Plans</td>
+				<td>AI's</td>
+				<td>Rolling Revenue</td>
+			</tr>
+		</thead>
+		</table>
+	</div>
+</section>
+<br><br><br>

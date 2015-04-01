@@ -15,3 +15,14 @@
 table, th, td {
 	border: solid 1px;
 }
+
+section {
+    width: 100%;
+    padding: 10px;
+    height: 100px;
+}
+
+#plan-run-card { 
+    background: grey;
+    float: left;
+}

@@ -1,8 +1,8 @@
-shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService) {
+shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService, planService) {
 	
 	$scope.vcpuPerAI = .20;
 	$scope.rampUpPlans = 5; 
-	$scope.rampUpGrowth = .10;
+	$scope.rampUpGrowth = 10;
 	$scope.initialPlans = 5;
 	$scope.points = { 
 			profitMarginPoints: 10
@@ -15,7 +15,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.iaasMonthly = "duration";
 	$scope.opexMonthly = "duration";
 	$scope.burndownMonths = $scope.forecastLength;
-		
+			
 	/**
 	 * Closure to enable math against a dea property.
 	 */
@@ -79,4 +79,12 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		var monthlyPay =  $scope.getGbPerHrWithPoints() * 24 * 7 * 4;
 		return $scope.getDurationTCO() / (monthlyPay * $scope.deaRam()); 
 	};
+	
+	$scope.planService = planService;
+	
+	$scope.generateRunCard = function(plan) {
+		runCard = new Array($scope.forecastLength);
+		
+		return runCard;
+	}
 });
