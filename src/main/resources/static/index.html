@@ -177,6 +177,10 @@
 			<p>With a profit margin of {{points.profitMarginPoints}} you will pay off your fully utalized platform in {{getPayoffMonths()}} months at <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.</p>		
 		</div>
 	</div>
+	<div id="forecasting-runcard">
+		<h3>Run Card</h3>
+		<div id="runcard-table" ng-include="'/app/components/forecasting/run_card.html'"></div>
+	</div>
 </div>
 
 <br>

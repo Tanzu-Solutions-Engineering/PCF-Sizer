@@ -11,3 +11,7 @@
 .valid { 
 	color: green;
 }
+
+table, th, td {
+	border: solid 1px;
+}
