@@ -122,7 +122,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 	//This could be optimized to not generate everything every time.
 	$scope.$watchCollection('planService.getPlans()', function(newPlans, oldPlans) {
-		$scope.buildRunCards(newPlans)
+		$scope.buildRunCards(newPlans);
+		for ( var i = 0; i < planService.getPlans().length; ++i) {
+			var expr = 'planService.getPlans()[' + i + ']';
+			$scope.$watch(expr, function(newPlan, oldPlan) {
+				$scope.buildRunCards(planService.getPlans());
+			}, true);
+		}
 	});
 	
 	/**
