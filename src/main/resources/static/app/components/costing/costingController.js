@@ -114,12 +114,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		runCard = new Array();
 		var plansInUse = plan.consumption * $scope.forecasting.initialPlans; 
 		
+		var gbHr = $scope.getGbPerHrWithPoints();
 		plan.monthlyBill = $scope.calculateMonthly(plan)
-
+		plan.gbPerHr = gbHr;
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
 			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
 			var ais = plansInUse * plan.aiMax;
-			var revenue = plansInUse * $scope.getGbPerHrWithPoints() * 24*4*7;
+			var revenue = plansInUse * gbHr * 24*4*7;
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
 		}
 		return runCard;

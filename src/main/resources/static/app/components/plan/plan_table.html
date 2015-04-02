@@ -27,7 +27,7 @@
 		</td>
 		<td><input type="number" ng-model="plan.diskQuota"></td>
 		<td><input type="number" ng-model="plan.aiMax"></td>
-		<td><input type="number" ng-model="plan.gbPerHr"></td>
+		<td><shkl-money value="{{plan.gbPerHr}}"></shkl-money></td>
 		<td><input type="number" ng-model="plan.consumption"></td>
 		<td><shkl-money value="{{plan.monthlyBill}}"></shkl-money></td>
 	</tr>
