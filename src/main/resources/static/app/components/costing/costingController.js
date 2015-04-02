@@ -104,17 +104,24 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 
 	$scope.runCards = []; 
 	
+	$scope.calculateMonthly = function(plan) {
+		var monthlyBill = ((365/12) * 24 * ($scope.forecasting.hoursInOperation / 100)) 
+			* ((plan.memoryQuota/plan.aiMax) * (plan.aiMax * ($scope.forecasting.aiDeployed / 100))) 
+			* $scope.getGbPerHrWithPoints();
+		return monthlyBill;
+	}
 	$scope.generateRunCard = function(plan) {
 		runCard = new Array();
 		var plansInUse = plan.consumption * $scope.forecasting.initialPlans; 
+		
+		plan.monthlyBill = $scope.calculateMonthly(plan)
+
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
 			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
 			var ais = plansInUse * plan.aiMax;
 			var revenue = plansInUse * $scope.getGbPerHrWithPoints() * 24*4*7;
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
 		}
-		plan.monthlyBill = ((365/12) * 24 * $scope.forecasting.hoursInOperation / 100) * ((plan.memoryQuota/plan.aiMax) 
-				* (plan.aiMax * $scope.forecasting.aiDeployed/100)) * $scope.getGbPerHrWithPoints();
 		return runCard;
 	}
 	
