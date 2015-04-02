@@ -13,16 +13,21 @@
 	</tr>
 </thead>
 	<tr ng-repeat="plan in plans">
-		<td>{{plan.name}}</td>
-		<td>{{plan.memoryQuota}}</td>
-		<td>{{plan.maxInstanceMem}}</td>
-		<td>{{plan.maxRoutes}}</td>
-		<td>{{plan.maxServiceInstances}}</td>
-		<td>{{plan.paidServicePlans}}</td>
-		<td>{{plan.diskQuota}}</td>
-		<td>{{plan.aiMax}}</td>
-		<td>{{plan.gbPerHr}}</td>
-		<td>{{plan.consumption}}</td>
+		<td><input type="text" ng-model="plan.name"></td>
+		<td><input type="number" ng-model="plan.memoryQuota"></td>
+		<td><input type="number" ng-model="plan.maxInstanceMem"></td>
+		<td><input type="number" ng-model="plan.maxRoutes"></td>
+		<td><input type="number" ng-model="plan.maxServiceInstances"></td>
+		<td>
+			<select ng-model="plan.paidServicePlans">
+				<option value="true">true</option>
+				<option value="false">false</option>
+			</select>
+		</td>
+		<td><input type="number" ng-model="plan.diskQuota"></td>
+		<td><input type="number" ng-model="plan.aiMax"></td>
+		<td><input type="number" ng-model="plan.gbPerHr"></td>
+		<td><input type="number" ng-model="plan.consumption"></td>
 	</tr>
 </table>
 
