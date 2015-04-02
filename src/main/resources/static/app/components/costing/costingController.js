@@ -9,7 +9,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		rampUpGrowth: 10,
 		initialPlans: 5,
 		burndownMonths: $scope.forecastLength,
-		burndownMode: "gbhr"
+		burndownMode: "gbhr",
+		hoursInOperation: 100,
+		aiDeployed: 100
 	}
 	$scope.paasCost = 1200000; 
 	$scope.iaasCost = 2000000;
@@ -111,6 +113,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			var revenue = plansInUse * $scope.getGbPerHrWithPoints() * 24*4*7;
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
 		}
+		plan.monthlyBill = ((365/12) * 24 * $scope.forecasting.hoursInOperation) * ((plan.memoryQuota/plan.aiMax) 
+				* (plan.aiMax * $scope.forecasting.aiDeployed/100)) * $scope.getGbPerHrWithPoints();
 		return runCard;
 	}
 	
