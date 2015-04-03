@@ -30,16 +30,16 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 	
 	function defaultPlan() {
 		return {		
-			name: "new plan",
-			memoryQuota: 10,
+			name: "Medium",
+			memoryQuota: 16,
 			maxInstanceMem: 2, 
-			maxRoutes: 100,
-			maxServiceInstances: 10,
+			maxRoutes: 16,
+			maxServiceInstances: 32,
 			paidServicePlans: this.paidServicePlanOptions()[0],
-			diskQuota: 1,
-			aiMax: 100,
-			gbPerHr: .08,
-			consumption: .50,
+			diskQuota: 32,
+			aiMax: 8,
+			gbPerHr: 0,
+			consumption: 1,
 			monthlyBill: 0
 		}
 	}

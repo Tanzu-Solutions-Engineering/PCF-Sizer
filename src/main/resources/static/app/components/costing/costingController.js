@@ -13,9 +13,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		hoursInOperation: 100,
 		aiDeployed: 100
 	}
-	$scope.paasCost = 150000; 
+	$scope.paasCost = 200000; 
 	$scope.iaasCost = 500000;
-	$scope.opexCost = 400000;
+	$scope.opexCost = 1000000;
 	$scope.paasMonthly = "duration";
 	$scope.iaasMonthly = "duration";
 	$scope.opexMonthly = "duration";
@@ -88,7 +88,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
 			parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2)) 
 	};
-	
+	//100% utilization.
 	$scope.getPayoffMonths = function () {
 		if ( 'date' == $scope.forecasting.burndownMode ) { 
 			return $scope.forecasting.burndownMonths;
@@ -119,12 +119,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		plan.gbPerHr = gbHr;
 		var lastMonthRevenue = 0;
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
-			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
 			var ais = plansInUse * plan.aiMax;
 			var revenue =  lastMonthRevenue + (plansInUse * plan.monthlyBill);
-			lastMonthRevenue = revenue;
-
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
+			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
+			lastMonthRevenue = revenue;
 		}
 		return runCard;
 	}
