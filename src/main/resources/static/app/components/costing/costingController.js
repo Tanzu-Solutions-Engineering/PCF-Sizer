@@ -13,8 +13,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		hoursInOperation: 100,
 		aiDeployed: 100
 	}
-	$scope.paasCost = 1200000; 
-	$scope.iaasCost = 2000000;
+	$scope.paasCost = 150000; 
+	$scope.iaasCost = 500000;
 	$scope.opexCost = 400000;
 	$scope.paasMonthly = "duration";
 	$scope.iaasMonthly = "duration";
@@ -120,7 +120,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
 			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
 			var ais = plansInUse * plan.aiMax;
-			var revenue = plansInUse * gbHr * 24*4*7;
+			var revenue = plansInUse * plan.monthlyBill;
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
 		}
 		return runCard;
@@ -156,5 +156,21 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			$scope.buildRunCards(planService.getPlans())
 		});
 	});
+	
+	$scope.calculatePayoffWithPlans = function() { 
+		var month = 0;
+		var tco = $scope.getDurationTCO();
+		for (; month < $scope.forecastLength ; ++month) {
+			var sum = 0;
+			for(var i = 0; i < $scope.runCards.length; ++i ) {
+				sum += $scope.runCards[i].runCard[month].revenue
+				if ( sum > tco ) { 
+					return month;
+				}
+			}
+		}
+		return -1;
+	};
+	
 
 });
