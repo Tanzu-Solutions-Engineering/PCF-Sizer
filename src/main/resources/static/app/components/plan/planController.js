@@ -29,6 +29,6 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 	};
 	
 	$scope.deletePlan = function(plan) { 
-		alert("Deleting");
+		planService.deletePlan(plan);
 	}
 });

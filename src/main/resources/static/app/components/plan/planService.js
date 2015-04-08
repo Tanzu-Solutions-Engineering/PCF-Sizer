@@ -39,7 +39,7 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			diskQuota: 32,
 			aiMax: 8,
 			gbPerHr: 0,
-			consumption: 10,
+			consumption: 1,
 			monthlyBill: 0
 		}
 	}
@@ -54,7 +54,12 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 	}
 	
 	function deletePlan(plan) {
-		
+		for( var i = 0; i < plans.length; ++i ) {
+			if ( plans[i] == plan ) { 
+				plans.splice(i, 1);
+				return;
+			}
+		}
 	}
 	
 	return {
