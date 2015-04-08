@@ -174,5 +174,14 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return -1;
 	};
 	
+	$scope.totalProfit = function () { 
+		var lastMonthTotal = 0; 
+		$scope.runCards.forEach(function(runCard) {
+			lastMonthTotal += runCard.runCard[$scope.forecastLength -1 ].revenue; 
+		});
+		return lastMonthTotal - $scope.getDurationTCO();
+		
+	}
+	
 
 });
