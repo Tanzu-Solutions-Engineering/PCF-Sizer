@@ -42,22 +42,9 @@
 		<div id="resource-list"  ng-include="'app/components/sizing/resource-list.html'"></div>
 	</div>
 	
-    <div id="sizing-output" >
+    <div id="sizing-output">
     	<a href="#" ng-click="showTable = !showTable">Show all PCF Virtual Machine Detail.</a>
-    	<div id="sizing-table" ng-show="showTable">
-	    	<h2>Watcha need (full calculation)</h2>
-	    	<table>
-	    		<thead>
-	    			<tr>
-		    			<td>VM</td>
-		    			<td>Qty</td>
-	    			</tr>
-	    		</thead>
-	    		<tr ng-repeat="vm in getVms()">
-	    			<td>{{vm.vm}}</td><td>{{vm.instances}}</td>	    		
-	    		<tr>
-	    	</table>
-    	</div>
+    	<div id="vm-detail" ng-show="showTable" ng-include="'app/components/sizing/vm-detail.html'"></div>
     </div>
 </div>
 <div id="foundation-estimator" ng-controller="ShekelFoundationController">
