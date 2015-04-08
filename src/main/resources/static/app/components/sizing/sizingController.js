@@ -48,10 +48,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         numAZ: 2,
     	nPlusX: 2,    
     }
-    
 
-    
-    
     $scope.aZRecoveryCapacity = [25, 50, 100];
     
     $scope.aiHelpMeChoose = false;
