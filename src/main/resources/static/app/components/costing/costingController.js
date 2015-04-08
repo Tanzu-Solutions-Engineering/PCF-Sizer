@@ -112,7 +112,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 	$scope.generateRunCard = function(plan) {
 		runCard = new Array();
-		var plansInUse = plan.consumption * $scope.forecasting.initialPlans; 
+		var plansInUse = (plan.consumption / 100) * $scope.forecasting.initialPlans; 
 		
 		var gbHr = $scope.getGbPerHrWithPoints();
 		plan.monthlyBill = $scope.calculateMonthly(plan)

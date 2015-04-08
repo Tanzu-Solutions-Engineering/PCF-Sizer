@@ -25,6 +25,6 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 		planService.getPlans().forEach(function(plan) {
 			iaasCommit += plan.consumption; 
 		});
-		return iaasCommit > 1.0;
+		return iaasCommit > 100;
 	};
 });

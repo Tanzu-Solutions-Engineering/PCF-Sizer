@@ -39,7 +39,7 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			diskQuota: 32,
 			aiMax: 8,
 			gbPerHr: 0,
-			consumption: 1,
+			consumption: 10,
 			monthlyBill: 0
 		}
 	}
