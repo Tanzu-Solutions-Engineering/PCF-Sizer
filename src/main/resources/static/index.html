@@ -39,19 +39,7 @@
 	<div id="resource-ask" >
 		<h3>Resource Ask Summary (<a href="#" ng-click="applyTemplate(vmTemplate)">refresh</a>)</h3>
 	
-		<div id="resource-list" >
-		    <ul>
-			    <li>Calculating using {{deaDef.usableRam}} GB DEA head room.</li>
-			    <li>Using n+x factor {{nPlusX}}.</li>
-			    <li>The foundation has {{numAZ}} availability zones.</li>
-			 	<li>Total # of DEA's: {{totalDEAs()}}</li>
-				<li>DEA per AZ: {{deasPerAz()}}</li>
-				<li>RAM: {{iaasAskSummary.ram}}</li>
-				<li>Disk GB: {{iaasAskSummary.disk}} </li>
-				<li>VCPU: {{iaasAskSummary.vcpu}}</li>
-				<li>Physical Cores: {{getPhysicalCores()}}</li>
-			</ul>
-		</div>
+		<div id="resource-list"  ng-include="'app/components/sizing/resource-list.html'"></div>
 	</div>
 	
     <div id="sizing-output" >
