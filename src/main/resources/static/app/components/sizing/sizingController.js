@@ -33,23 +33,26 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	    { value: 10 },
 	    { value: 20 }
 	]; 
-    
-    $scope.avgRam = $scope.avgRamOptions[1];
 
-    $scope.avgAIDisk = 1;
-    
     $scope.deaSizeOptions = [ 
-        {"text": "Small (16GB RAM)",    "size":16 }, 
-        {"text": "Medium (32GB RAM)",   "size":32 },
-        {"text": "Large (64GB RAM)",    "size":64 },
-        {"text": "Bad idea (128GB RAM)", "size":128}
-    ];
+	     {"text": "Small (16GB RAM)",    "size":16 }, 
+	     {"text": "Medium (32GB RAM)",   "size":32 },
+	     {"text": "Large (64GB RAM)",    "size":64 },
+	     {"text": "Bad idea (128GB RAM)", "size":128}
+	 ];
     
-    $scope.deaSize = $scope.deaSizeOptions[0];
+    $scope.platform = {
+    	avgRam: $scope.avgRamOptions[1],
+    	avgAIDisk: 1,
+    	deaSize: $scope.deaSizeOptions[0],
+        numAZ: 2,
+    	nPlusX: 2,    
+    }
+    
+
+    
     
     $scope.aZRecoveryCapacity = [25, 50, 100];
-    
-    $scope.numAZ = 2; 
     
     $scope.aiHelpMeChoose = false;
     
@@ -73,10 +76,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     }
     
     $scope.deaUsableRam = function() { 
-    	return $scope.deaSize.size - 3;
+    	return $scope.platform.deaSize.size - 3;
     }
     
-    $scope.nPlusX = 2;
     
     // TODO DRY w/ costing directives
     $scope.roundUp = function(x) {  
@@ -97,18 +99,18 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	if (null != $scope.aiPacks()) { 
     		aipacks = $scope.aiPacks().value * 50;
     	}
-    	var totalRam = (aipacks * $scope.avgRam.value)
+    	var totalRam = (aipacks * $scope.platform.avgRam.value)
     	var deas = (totalRam / $scope.deaUsableRam());
     	return $scope.roundUp(deas);
     };
     
     $scope.deasPerAz = function() { 
-    	var azDeas = $scope.numDeasToRunAIs() / $scope.numAZ;
-    	return $scope.roundUp(azDeas) + $scope.nPlusX;
+    	var azDeas = $scope.numDeasToRunAIs() / $scope.platform.numAZ;
+    	return $scope.roundUp(azDeas) + $scope.platform.nPlusX;
     };
     
     $scope.totalDEAs = function() { 
-    	return $scope.deasPerAz() * $scope.numAZ;
+    	return $scope.deasPerAz() * $scope.platform.numAZ;
     }
     
 	$scope.getVms = function() { return vmLayout; } 
@@ -142,15 +144,15 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     		if ( !vm.singleton ) {
     			if ( "DEA" == vm.vm ) { 
     				vm.instances = $scope.totalDEAs();
-    				vm.ram = $scope.deaSize.size;
+    				vm.ram = $scope.platform.deaSize.size;
     			} else {
-    				vm.instances = vm.instances * $scope.numAZ;
+    				vm.instances = vm.instances * $scope.platform.numAZ;
     			}
     		}   
     		$scope.doIaaSAskForVm(vm);
 			vmLayout.push(vm);
     	}
-        $scope.iaasAskSummary.disk += $scope.avgAIDisk * $scope.aiPacks().value * 50;
+        $scope.iaasAskSummary.disk += $scope.platform.avgAIDisk * $scope.aiPacks().value * 50;
     };
     
     $scope.loadAzTemplate = function() {

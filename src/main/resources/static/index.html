@@ -30,50 +30,10 @@
 	        <br>
 	        
 	        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">Help me choose</a>
-	        
-	        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose">
-	        	How many apps you got? 
-	        	<input type="number" ng-model="aiChooser.apps" >
-	        	<br/>
-	        	How many folks on your dev teams (avg)?
-	        	<input type="number" ng-model="aiChooser.devs" value="{{aiChooser.devs}}">
-	        	<br/>
-	        	How many steps in your pipeline
-	        	<input type="number" ng-model="aiChooser.steps"value="{{aiChooser.steps}}" >
-	        	<br>
-	        	
-	        	<span>You need {{ais()}} AI packs. <a href="#" ng-click="setAis()">accept!</a></span>
-	        	<br>
-	        </div>
+	        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose" ng-include="'app/components/sizing/ai-chooser.html'"></div>
         </div>
         
-        <div id="not-ai-packs" >
-	        RAM (GB):
-	        <select ng-model="avgRam"
-	        	ng-options="opt as opt.value for opt in avgRamOptions"></select>
-	        
-	        Disk (GB): 
-	        <input type="number" ng-model="avgAIDisk"></input>
-	        
-	        DEA:
-	        <select ng-model="deaSize" 
-	        	ng-options="opt as opt.text for opt in deaSizeOptions">
-	        </select>
-	        
-	        <br>
-	        AZs:
-	        <input type="number" ng-model="numAZ"></input>
-	        
-	        <!-- 
-	        AZ Recovery (Ignored, use n+x factor: tracker #91141454):
-	        <select>
-	        	<option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
-	        </select>
-	        -->
-	        
-	        N+x factor:
-	        <input type="number" ng-model="nPlusX"></input>
-        </div>
+        <div id="platform-properties"  ng-include="'app/components/sizing/platform-form.html'"></div>
 	</div>
 		
 	<div id="resource-ask" >

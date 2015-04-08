@@ -1,0 +1,12 @@
+	How many apps you got? 
+	<input type="number" ng-model="aiChooser.apps" >
+	<br/>
+	How many folks on your dev teams (avg)?
+	<input type="number" ng-model="aiChooser.devs" value="{{aiChooser.devs}}">
+	<br/>
+	How many steps in your pipeline
+	<input type="number" ng-model="aiChooser.steps"value="{{aiChooser.steps}}" >
+	<br>
+	
+	<span>You need {{ais()}} AI packs. <a href="#" ng-click="setAis()">accept!</a></span>
+	<br>
