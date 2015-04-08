@@ -27,4 +27,8 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 		});
 		return iaasCommit > 100;
 	};
+	
+	$scope.deletePlan = function(plan) { 
+		alert("Deleting");
+	}
 });

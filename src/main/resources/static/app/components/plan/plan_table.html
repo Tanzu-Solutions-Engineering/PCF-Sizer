@@ -11,6 +11,7 @@
 		<td>GB/Hour Cost</td>
 		<td>IaaS Reservation %</td>
 		<td>Monthly Bill</td>
+		<td>Delete</td>
 	</tr>
 </thead>
 	<tr ng-repeat="plan in plans">
@@ -30,6 +31,7 @@
 		<td><shkl-money value="{{plan.gbPerHr}}"></shkl-money></td>
 		<td><input type="number" ng-model="plan.consumption"></td>
 		<td><shkl-money value="{{plan.monthlyBill}}"></shkl-money></td>
+		<td><a href="#" ng-click="deletePlan(plan)">delete</a></td>
 	</tr>
 </table>
 
