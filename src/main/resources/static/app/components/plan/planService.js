@@ -1,6 +1,3 @@
-/**
- * 
- */
 "use strict"
 var planService = shekelApp.factory('planService', function($rootScope) {
 	
