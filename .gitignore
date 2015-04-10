@@ -6,3 +6,6 @@
 .settings/
 /bin/
 .springBeans
+src/main/resources/static/node_modules/
+src/main/resources/static/.yo-rc.json
+
