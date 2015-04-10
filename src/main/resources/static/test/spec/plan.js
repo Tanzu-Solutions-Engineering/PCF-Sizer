@@ -22,9 +22,9 @@
             };
         }));
 
+        beforeEach(function() {createController()});
 
         describe('defaults', function() {
-            beforeEach(function() {createController()});
 
             it('should start with a default plan', function () {
                 expect($rootScope.plan).toBeDefined();
@@ -40,9 +40,6 @@
         });
 
         describe('iaas overcomitted', function() {
-            beforeEach(function() {
-                createController();
-            })
 
             it('should be true when there is too much consumption', function() {
                 spyOn(planService, 'getPlans').and.returnValue([{consumption:101}]);
@@ -58,6 +55,15 @@
                 spyOn(planService, 'getPlans').and.returnValue([{consumption:50}]);
                 expect($rootScope.overcommitted()).toBe(false);
             })
+        });
+
+        describe('iaas new plan', function()  {
+
+            it('should add a new plan', function() {
+                spyOn(planService, 'newPlan');
+                $rootScope.newPlan();
+                expect(planService.newPlan).toHaveBeenCalled();
+            });
         });
     });
 })();
