@@ -4,22 +4,27 @@
 
     describe('ShekelPlanController', function() {
 
-        var $rootScope, createController;
+        var $rootScope, createController, planService;
 
         beforeEach(module('ShekelApp'));
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             var $controller = $injector.get('$controller');
-
+            planService = $injector.get('planService');
             createController = function () {
-                return $controller('ShekelPlanController', {'$scope': $rootScope});
+                return $controller('ShekelPlanController',
+                    {
+                        '$scope': $rootScope,
+                        planService: planService
+                    }
+                );
             };
         }));
 
 
         describe('defaults', function() {
-            beforeEach(function() { createController() });
+            beforeEach(function() {createController()});
 
             it('should start with a default plan', function () {
                 expect($rootScope.plan).toBeDefined();
@@ -34,5 +39,25 @@
             })
         });
 
+        describe('iaas overcomitted', function() {
+            beforeEach(function() {
+                createController();
+            })
+
+            it('should be true when there is too much consumption', function() {
+                spyOn(planService, 'getPlans').and.returnValue([{consumption:101}]);
+                expect($rootScope.overcommitted()).toBe(true);
+            });
+
+            it('should be false when there is no consumption', function() {
+                spyOn(planService, 'getPlans').and.returnValue([{consumption:0}]);
+                expect($rootScope.overcommitted()).toBe(false);
+            });
+
+            it('should be false when there is some consumption', function() {
+                spyOn(planService, 'getPlans').and.returnValue([{consumption:50}]);
+                expect($rootScope.overcommitted()).toBe(false);
+            })
+        });
     });
 })();
