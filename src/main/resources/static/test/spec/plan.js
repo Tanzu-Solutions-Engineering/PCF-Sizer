@@ -5,7 +5,7 @@
     describe('ShekelPlanController', function() {
 
         var $rootScope, createController, planService;
-
+        
         beforeEach(module('ShekelApp'));
 
         beforeEach(inject(function($injector) {
@@ -25,6 +25,7 @@
         beforeEach(function() {createController()});
 
         describe('defaults', function() {
+            beforeEach(function() { createController() });
 
             it('should start with a default plan', function () {
                 expect($rootScope.plan).toBeDefined();
@@ -64,6 +65,7 @@
                 $rootScope.newPlan();
                 expect(planService.newPlan).toHaveBeenCalled();
             });
+
         });
     });
 })();
