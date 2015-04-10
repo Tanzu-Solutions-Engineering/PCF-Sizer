@@ -42,6 +42,10 @@
 		<div id="resource-list"  ng-include="'app/components/sizing/resource-list.html'"></div>
 	</div>
 	
+	<div id="warning" >
+		<h3><font color="red" size="3">The IaaS Requirements provided by this tool are for CF only,  Any additional PCF Service Tiles will require separate sizing exercise</font> </h3>
+	</div>
+	
     <div id="sizing-output">
     	<a href="#" ng-click="showTable = !showTable">Show all PCF Virtual Machine Detail.</a>
     	<div id="vm-detail" ng-show="showTable" ng-include="'app/components/sizing/vm-detail.html'"></div>
