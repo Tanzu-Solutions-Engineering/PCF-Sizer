@@ -33,7 +33,6 @@
 
         describe('should tell me the version', function () {
             it('should call the backend', function () {
-
 				$httpBackend.expectGET('/buildnumber');
 				createController();
 				$httpBackend.flush();
