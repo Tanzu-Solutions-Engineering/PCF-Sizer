@@ -1,5 +1,6 @@
 "use strict"
 
+
 shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout, aiService) {
 
     $scope.aiPackOptions = new Array();         
@@ -35,18 +36,26 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	]; 
 
     $scope.deaSizeOptions = [ 
-	     {"text": "Small (16GB RAM)",    "size":16 }, 
-	     {"text": "Medium (32GB RAM)",   "size":32 },
-	     {"text": "Large (64GB RAM)",    "size":64 },
-	     {"text": "Bad idea (128GB RAM)", "size":128}
+	     {"text": "Small (16GB RAM)",    "size":16, "ephem_disk":32 }, 
+	     {"text": "Medium (32GB RAM)",   "size":32, "ephem_disk":64  },
+	     {"text": "Large (64GB RAM)",    "size":64, "ephem_disk":128  },
+	     {"text": "Bad idea (128GB RAM)", "size":128, "ephem_disk":256 }
 	 ];
+    
+    $scope.avgAIDiskOptions = [ 
+        { value: .5  },
+	    { value: 1  },
+	    { value: 2  },
+	    { value: 4  },
+	    { value: 8  }
+    ];
     
     $scope.platform = {
     	avgRam: $scope.avgRamOptions[1],
-    	avgAIDisk: 1,
+    	avgAIDisk:  $scope.avgAIDiskOptions[1],
     	deaSize: $scope.deaSizeOptions[0],
         numAZ: 2,
-    	nPlusX: 2,    
+    	nPlusX: 1,    
     }
 
     $scope.aZRecoveryCapacity = [25, 50, 100];
@@ -76,6 +85,11 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	return $scope.platform.deaSize.size - 3;
     }
     
+    $scope.deaUsableStg = function() { 
+    	return $scope.platform.deaSize.ephem_disk - $scope.platform.deaSize.size - 4;
+    	
+    }
+    
     
     // TODO DRY w/ costing directives
     $scope.roundUp = function(x) {  
@@ -96,8 +110,29 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	if (null != $scope.aiPacks()) { 
     		aipacks = $scope.aiPacks().value * 50;
     	}
-    	var totalRam = (aipacks * $scope.platform.avgRam.value)
-    	var deas = (totalRam / $scope.deaUsableRam());
+    	
+
+    	var totalRam = (aipacks * $scope.platform.avgRam.value);
+    	var totalStg = (aipacks * $scope.platform.avgAIDisk.value);
+    	    	
+    	var deasRam = (totalRam / $scope.deaUsableRam());
+    	var deasStg = (totalStg / $scope.deaUsableStg());
+    	console.log("deaStg=",deasStg);
+    	console.log("deaRam=",deasRam);
+
+    		//Conditional Limit DEA per Stg or Mem
+    		if (deasRam > deasStg || deasRam == deasStg) {
+    			var deas = deasRam;
+    			console.log("RAM")
+    		}
+    		else {
+    			var deas = deasStg;
+    			console.log("STG")
+    		}
+    		
+    	//var deas = (totalRam / $scope.deaUsableRam());
+
+    	
     	return $scope.roundUp(deas);
     };
     
@@ -149,7 +184,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     		$scope.doIaaSAskForVm(vm);
 			vmLayout.push(vm);
     	}
-        $scope.iaasAskSummary.disk += $scope.platform.avgAIDisk * $scope.aiPacks().value * 50;
+        $scope.iaasAskSummary.disk += $scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50;
     };
     
     $scope.loadAzTemplate = function() {

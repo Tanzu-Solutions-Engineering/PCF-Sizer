@@ -1,9 +1,13 @@
-RAM (GB):
+Avg Ai RAM (GB):
 <select ng-model="platform.avgRam"
 	ng-options="opt as opt.value for opt in avgRamOptions"></select>
 
-Disk (GB):
-<input type="number" ng-model="platform.avgAIDisk"></input>
+Avg AI STG (GB):
+<select ng-model="platform.avgAIDisk"
+	ng-options="opt as opt.value for opt in avgAIDiskOptions"></select>
+    <!--MG Comment 
+    	<input type="number" ng-model="platform.avgAIDisk"></input> 
+    -->
 
 DEA:
 <select ng-model="platform.deaSize"
