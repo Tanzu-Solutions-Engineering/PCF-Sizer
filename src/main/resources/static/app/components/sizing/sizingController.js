@@ -117,20 +117,19 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	    	
     	var deasRam = (totalRam / $scope.deaUsableRam());
     	var deasStg = (totalStg / $scope.deaUsableStg());
-    	console.log("deaStg=",deasStg);
-    	console.log("deaRam=",deasRam);
+
 
     		//Conditional Limit DEA per Stg or Mem
     		if (deasRam > deasStg || deasRam == deasStg) {
     			var deas = deasRam;
-    			console.log("RAM")
+    			//console.log("deaRam=",deasRam);
+    			//console.log("RAM")
     		}
     		else {
     			var deas = deasStg;
-    			console.log("STG")
+    			//console.log("deaStg=",deasStg);
+    			//console.log("STG")
     		}
-    		
-    	//var deas = (totalRam / $scope.deaUsableRam());
 
     	
     	return $scope.roundUp(deas);
