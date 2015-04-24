@@ -134,7 +134,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			$scope.runCards.push({ name:plans[i].name, runCard:$scope.generateRunCard(plans[i]) });
 		}
 	};
-	
+
 	//This could be optimized to not generate everything every time.
 	$scope.$watchCollection('planService.getPlans()', function(newPlans, oldPlans) {
 		$scope.buildRunCards(newPlans);
@@ -183,6 +183,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return lastMonthTotal - $scope.getDurationTCO();
 		
 	}
+
+    // function
+        // it should iterate through all the months
+            // it should iterate through the run cards
+                // it should tally vcpu, memory and storage.
+                // it should compare each of the above to the iaas amount available
+                // iff one of those fields is greater it should mark the run cards metadata.
 	
 
 });
