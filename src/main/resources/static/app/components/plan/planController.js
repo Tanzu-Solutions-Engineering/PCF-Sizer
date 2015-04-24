@@ -19,6 +19,7 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 				$scope.plan.diskQuota, $scope.plan.aiMax, $scope.plan.gbPerHr,
 				$scope.plan.consumption));
 	};
+
 	
 	$scope.overcommitted = function() {
 		var iaasCommit = 0;
