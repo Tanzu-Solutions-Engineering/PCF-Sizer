@@ -134,6 +134,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			$scope.runCards.push({ name:plans[i].name, runCard:$scope.generateRunCard(plans[i]) });
 		}
 	};
+	
 	//This could be optimized to not generate everything every time.
 	$scope.$watchCollection('planService.getPlans()', function(newPlans, oldPlans) {
 		$scope.buildRunCards(newPlans);
