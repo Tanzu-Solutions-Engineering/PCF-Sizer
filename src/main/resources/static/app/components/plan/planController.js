@@ -20,7 +20,7 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 				$scope.plan.consumption));
 	};
 
-	
+
 	$scope.overcommitted = function() {
 		var iaasCommit = 0;
 		planService.getPlans().forEach(function(plan) {

@@ -110,10 +110,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			* $scope.getGbPerHrWithPoints();
 		return monthlyBill;
 	}
+
 	$scope.generateRunCard = function(plan) {
 		runCard = new Array();
-		var plansInUse = (plan.consumption / 100) * $scope.forecasting.initialPlans; 
-		
+		var plansInUse = (plan.consumption / 100) * $scope.forecasting.initialPlans;
 		var gbHr = $scope.getGbPerHrWithPoints();
 		plan.monthlyBill = $scope.calculateMonthly(plan)
 		plan.gbPerHr = gbHr;
@@ -131,7 +131,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.buildRunCards = function(plans) {
 		$scope.runCards = new Array();
 		for ( var i = 0; i < plans.length; ++i ) { 
-			$scope.runCards.push({ name:plans[i].name, runCard:$scope.generateRunCard(plans[i]) });
+			$scope.runCards.push({ plan:plans[i], name:plans[i].name, runCard:$scope.generateRunCard(plans[i])});
 		}
 	};
 
@@ -184,12 +184,19 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		
 	}
 
-    // function
-        // it should iterate through all the months
-            // it should iterate through the run cards
-                // it should tally vcpu, memory and storage.
-                // it should compare each of the above to the iaas amount available
-                // iff one of those fields is greater it should mark the run cards metadata.
-	
+    /*
+    This function checks each runcard over each month for over consumption of the IaaS
+     */
+    $scope.markupRuncard = function() {
+        for (var i =0; i < $scope.forecasting.burndownMonths; i++ ) {
+            var consumedRam = 0;
+            $scope.runCards.forEach(function(runCard) {
+                consumedRam += runCard.runCard[i].ais * runCard.plan.maxInstanceMem;
+                if (consumedRam > $scope.deaRam()) {
+                    runCard.runCard[i].oversubscribed = "RAM";
+                }
+            });
+        }
+    };
 
 });
