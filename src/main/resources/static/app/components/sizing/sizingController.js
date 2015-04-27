@@ -1,5 +1,4 @@
-"use strict"
-
+"use strict";
 
 shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout, aiService) {
 
@@ -56,7 +55,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	deaSize: $scope.deaSizeOptions[0],
         numAZ: 2,
     	nPlusX: 1,    
-    }
+    };
 
     $scope.aZRecoveryCapacity = [25, 50, 100];
     
@@ -79,18 +78,17 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         
     $scope.setAis = function() { 
     	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
-    }
+    };
     
     $scope.deaUsableRam = function() { 
     	return $scope.platform.deaSize.size - 3;
-    }
+    };
     
     $scope.deaUsableStg = function() { 
     	return $scope.platform.deaSize.ephem_disk - $scope.platform.deaSize.size - 4;
     	
-    }
-    
-    
+    };
+
     // TODO DRY w/ costing directives
     $scope.roundUp = function(x) {  
     	var totalX;
@@ -122,13 +120,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     		//Conditional Limit DEA per Stg or Mem
     		if (deasRam > deasStg || deasRam == deasStg) {
     			var deas = deasRam;
-    			//console.log("deaRam=",deasRam);
-    			//console.log("RAM")
     		}
     		else {
     			var deas = deasStg;
-    			//console.log("deaStg=",deasStg);
-    			//console.log("STG")
     		}
 
     	
@@ -176,6 +170,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     			if ( "DEA" == vm.vm ) { 
     				vm.instances = $scope.totalDEAs();
     				vm.ram = $scope.platform.deaSize.size;
+					vm.ephemeral_disk = $scope.platform.deaSize.ephem_disk;
     			} else {
     				vm.instances = vm.instances * $scope.platform.numAZ;
     			}
