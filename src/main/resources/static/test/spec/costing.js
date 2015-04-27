@@ -63,9 +63,21 @@
             it('should run out of ais in the first month', function() {
                 $rootScope.markupRuncard();
                 expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("AI");
+
             });
         });
 
+        describe('Disk consumption', function() {
+            beforeEach(function() {
+                $rootScope.deaDisk = function() { return 0;};
+                $rootScope.aiAvgDisk = function() { return 1;};
+            });
+
+            it('should run out of disk in the first month', function() {
+                $rootScope.markupRuncard();
+                expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("Disk");
+            })
+        });
 
         describe('IaaS RAM consumption', function() {
 

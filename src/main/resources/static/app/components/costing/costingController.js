@@ -192,11 +192,12 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
         for (var i =0; i < $scope.forecastLength; i++ ) {
             var consumedRam = 0;
             var consumedVCPU = 0;
-            var consumedAIs = 0;
+            var consumedDisk = 0;
             $scope.runCards.forEach(function(runCard) {
                 var runCardForMonth = runCard.runCard[i];
                 consumedRam += runCardForMonth.ais * runCard.plan.maxInstanceMem;
                 consumedVCPU += runCardForMonth.ais * $scope.aiAvgVcpu();
+                consumedDisk += runCardForMonth.ais * $scope.aiAvgDisk();
                 runCardForMonth.oversubscribed = new Array();
                 if (consumedRam > $scope.deaRam()) {
                     runCardForMonth.oversubscribed.push("RAM");
@@ -206,6 +207,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
                 }
                 if (runCardForMonth.ais > aiService.aiPacks().value * 50) {
                     runCardForMonth.oversubscribed.push("AI");
+                }
+                if ( consumedDisk > $scope.deaDisk() ) {
+                    runCardForMonth.oversubscribed.push("Disk");
                 }
             });
         }
