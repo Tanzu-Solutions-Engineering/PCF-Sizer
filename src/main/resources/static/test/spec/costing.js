@@ -24,7 +24,7 @@
         }));
 
         beforeEach(function() {
-            aiService.getAiPacks = function() { return { label: "0", value: 0} };
+            aiService.aiPacks = function() { return { label: "0", value: 0} };
         });
 
         beforeEach( function () {
@@ -70,7 +70,7 @@
         describe('IaaS RAM consumption', function() {
 
             beforeEach(function() {
-                aiService.getAiPacks = function() { return { label: "0", value: 100000} };
+                aiService.aiPacks = function() { return { label: "0", value: 100000} };
             });
 
             it('should run out of memory in the first month', function() {

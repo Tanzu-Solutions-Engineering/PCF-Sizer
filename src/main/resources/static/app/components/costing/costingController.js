@@ -205,7 +205,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
                 if ( consumedVCPU > $scope.deaVcpu()) {
                     runCardForMonth.oversubscribed.push("VCPU");
                 }
-                if (runCardForMonth.ais > aiService.getAiPacks().value * 50) {
+                if (runCardForMonth.ais > aiService.aiPacks().value * 50) {
                     runCardForMonth.oversubscribed.push("AI");
                 }
                 
