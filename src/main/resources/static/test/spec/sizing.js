@@ -32,7 +32,7 @@
         describe('Test for AI Average Ram Value > 0', function () {
             it('AI Avg Ram must have a Valid integer > 0', function () {
 				createController();
-				expect($rootScope.platform.avgRam.value).toBeGreaterThan(0);
+				expect($rootScope.platform.avgRam.value).toBeGreaterThan(1);
 
             });
             
