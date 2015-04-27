@@ -8,4 +8,4 @@
 .springBeans
 src/main/resources/static/node_modules/
 src/main/resources/static/.yo-rc.json
-
+src/main/resources/static/shekeltest-results.xml
