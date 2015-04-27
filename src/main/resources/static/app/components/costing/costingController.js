@@ -1,3 +1,4 @@
+"use strict";
 shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService, planService) {
 	
 	$scope.rampUpPlans = 5;
@@ -11,7 +12,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		burndownMode: "gbhr",
 		hoursInOperation: 100,
 		aiDeployed: 100
-	}
+	};
 	$scope.paasCost = 200000; 
 	$scope.iaasCost = 500000;
 	$scope.opexCost = 1000000;
@@ -111,7 +112,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 
 	$scope.generateRunCard = function(plan) {
-		runCard = new Array();
+		var runCard = new Array();
 		var plansInUse = (plan.consumption / 100) * $scope.forecasting.initialPlans;
 		var gbHr = $scope.getGbPerHrWithPoints();
 		plan.monthlyBill = $scope.calculateMonthly(plan)
