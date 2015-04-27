@@ -62,11 +62,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		var iCost = $scope.iaasMonthly == "duration" ? $scope.iaasCost : $scope.iaasCost * $scope.forecastLength;
 		var oCost = $scope.opexMonthly == "duration" ? $scope.opexCost : $scope.opexCost * $scope.forecastLength;
 		return pCost + iCost + oCost;
-	}
+	};
 	
 	$scope.getMonthlyTCO = function() { 
 		return $scope.getDurationTCO() / $scope.forecastLength; 
-	}
+	};
 	
 	/*
 	 * The following calculators assume 100% utilization. See 
@@ -88,6 +88,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
 			parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2)) 
 	};
+
 	//100% utilization.
 	$scope.getPayoffMonths = function () {
 		if ( 'date' == $scope.forecasting.burndownMode ) { 
@@ -109,7 +110,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			* ((plan.memoryQuota/plan.aiMax) * (plan.aiMax * ($scope.forecasting.aiDeployed / 100))) 
 			* $scope.getGbPerHrWithPoints();
 		return monthlyBill;
-	}
+	};
 
 	$scope.generateRunCard = function(plan) {
 		var runCard = new Array();
@@ -126,7 +127,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			lastMonthRevenue = revenue;
 		}
 		return runCard;
-	}
+	};
 	
 	$scope.buildRunCards = function(plans) {
 		$scope.runCards = new Array();
