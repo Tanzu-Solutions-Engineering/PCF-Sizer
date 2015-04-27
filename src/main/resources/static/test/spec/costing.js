@@ -35,7 +35,7 @@
             it('should run out of memory in the first month', function() {
                 $rootScope.deaRam = function() { return 0; };
                 $rootScope.markupRuncard();
-                expect($rootScope.runCards[0].runCard[0].oversubscribed).toBe("RAM");
+                expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("RAM");
             });
 
             it('should run out of memory in the 5th month', function() {
@@ -46,7 +46,7 @@
                 }
                 $rootScope.markupRuncard();
                 expect($rootScope.runCards[0].runCard[4].oversubscribed).toBeUndefined();
-                expect($rootScope.runCards[0].runCard[5].oversubscribed).toBe("RAM");
+                expect($rootScope.runCards[0].runCard[5].oversubscribed).toContain("RAM");
             });
         });
     });
