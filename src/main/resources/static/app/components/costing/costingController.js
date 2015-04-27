@@ -189,7 +189,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
     This function checks each runcard over each month for over consumption of the IaaS
      */
     $scope.markupRuncard = function() {
-        for (var i =0; i < $scope.forecasting.burndownMonths; i++ ) {
+        for (var i =0; i < $scope.forecastLength; i++ ) {
             var consumedRam = 0;
             $scope.runCards.forEach(function(runCard) {
                 consumedRam += runCard.runCard[i].ais * runCard.plan.maxInstanceMem;

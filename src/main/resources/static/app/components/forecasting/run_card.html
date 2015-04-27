@@ -16,7 +16,7 @@
 			<td><shkl-number value="{{row.plansInUse}}"></shkl-number></td>
 			<td><shkl-number value="{{row.ais}}"></shkl-number></td>
 			<td><shkl-money value="{{row.revenue}}"></shkl-money></td>
-			<td><span ng-show="row.oversubscribed != null">Over subscribed!</span></td>
+			<td><span ng-show="row.oversubscribed != null">{{row.oversubscribed}}</span></td>
 		</tr>
 		</table>
 	</div>
