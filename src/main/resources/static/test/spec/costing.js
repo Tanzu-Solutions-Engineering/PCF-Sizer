@@ -4,7 +4,7 @@
 
     describe('ShekelCostingController', function() {
 
-        var $rootScope, createController, planService;
+        var $rootScope, createController, planService, aiService;
 
         beforeEach(module('ShekelApp'));
 
@@ -13,21 +13,33 @@
 
             var $controller = $injector.get('$controller');
             planService = $injector.get('planService');
-
+            aiService = $injector.get('aiService');
             createController = function() {
-                return $controller('ShekelCostingController', {'$scope': $rootScope})
-            }
+                return $controller('ShekelCostingController',
+                    {
+                        '$scope': $rootScope,
+                        'aiService': aiService
+                    });
+            };
         }));
 
+        beforeEach(function() {
+            aiService.getAiPacks = function() { return { label: "0", value: 0} };
+        });
+
+        beforeEach( function () {
+            createController()
+        });
+
+        beforeEach(function() {
+            planService.getPlans().length = 0;
+            planService.getPlans().push(planService.defaultPlan());
+            $rootScope.buildRunCards(planService.getPlans());
+        });
+
         describe('IaaS CPU consumption', function() {
-            beforeEach(function () {
-                createController()
-            });
 
             beforeEach(function () {
-                planService.getPlans().length = 0;
-                planService.getPlans().push(planService.defaultPlan());
-                $rootScope.buildRunCards(planService.getPlans());
                 $rootScope.aiAvgVcpu = function( ) { return 0.2; };
             });
 
@@ -46,15 +58,19 @@
             });
         });
 
-        describe('IaaS RAM consumption', function() {
-            beforeEach( function () {
-                createController()
+        describe('AI Consumption', function() {
+
+            it('should run out of ais in the first month', function() {
+                $rootScope.markupRuncard();
+                expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("AI");
             });
+        });
+
+
+        describe('IaaS RAM consumption', function() {
 
             beforeEach(function() {
-                planService.getPlans().length = 0;
-                planService.getPlans().push(planService.defaultPlan());
-                $rootScope.buildRunCards(planService.getPlans());
+                aiService.getAiPacks = function() { return { label: "0", value: 100000} };
             });
 
             it('should run out of memory in the first month', function() {

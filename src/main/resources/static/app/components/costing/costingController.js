@@ -1,7 +1,6 @@
 shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService, planService) {
 	
-	$scope.vcpuPerAI = .20;
-	$scope.rampUpPlans = 5; 
+	$scope.rampUpPlans = 5;
 	$scope.forecastLength = 36;
 
 	$scope.forecasting = { 
@@ -30,32 +29,32 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 				return (vm[method] * vm.instances) - (overhead * vm.instances);
 			}
 		}
-	}
+	};
 	
 	$scope.deaVcpu = function() { 
 		return $scope.deaFunction("vcpu", 0);
-	}
+	};
 	
 	$scope.deaRam = function() { 
 		return $scope.deaFunction("ram", 3)
-	}
+	};
 	
 	$scope.deaDisk = function() {
 		//TODO figure out real DEA Storage Overhead. Estimated here as 1GB.
 		return $scope.deaFunction("ephemeral_disk", 1);
-	}
+	};
 	
 	$scope.aiAvgDisk = function ()  { 
 		return $scope.deaDisk() / (aiService.aiPacks().value * 50); 
-	}
+	};
 
 	$scope.aiAvgRam = function ()  { 
 		return $scope.deaRam() / (aiService.aiPacks().value * 50); 
-	}
+	};
 	
 	$scope.aiAvgVcpu = function ()  { 
 		return $scope.deaVcpu() / (aiService.aiPacks().value *50); 
-	}
+	};
 	
 	$scope.getDurationTCO = function() { 
 		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * $scope.forecastLength;
@@ -194,6 +193,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
         for (var i =0; i < $scope.forecastLength; i++ ) {
             var consumedRam = 0;
             var consumedVCPU = 0;
+            var consumedAIs = 0;
             $scope.runCards.forEach(function(runCard) {
                 var runCardForMonth = runCard.runCard[i];
                 consumedRam += runCardForMonth.ais * runCard.plan.maxInstanceMem;
@@ -205,6 +205,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
                 if ( consumedVCPU > $scope.deaVcpu()) {
                     runCardForMonth.oversubscribed.push("VCPU");
                 }
+                if (runCardForMonth.ais > aiService.getAiPacks().value * 50) {
+                    runCardForMonth.oversubscribed.push("AI");
+                }
+                
+                console.log("Consumed RAM = " + consumedRam);
+                console.log("Consumed VCPU = " + consumedVCPU);
+                console.log("Consumed AI's = " + runCardForMonth.ais);
             });
         }
     };
