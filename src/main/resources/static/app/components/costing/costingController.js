@@ -133,6 +133,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		for ( var i = 0; i < plans.length; ++i ) { 
 			$scope.runCards.push({ plan:plans[i], name:plans[i].name, runCard:$scope.generateRunCard(plans[i])});
 		}
+		$scope.markupRuncard();
 	};
 
 	//This could be optimized to not generate everything every time.
@@ -156,7 +157,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	 'forecasting.burndownMonths'
 	 ].forEach(function(e,l,a) {
 		$scope.$watch(e, function(newValue, oldValue) { 
-			$scope.buildRunCards(planService.getPlans())
+			$scope.buildRunCards(planService.getPlans());
 		});
 	});
 	
@@ -194,6 +195,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
                 consumedRam += runCard.runCard[i].ais * runCard.plan.maxInstanceMem;
                 if (consumedRam > $scope.deaRam()) {
                     runCard.runCard[i].oversubscribed = "RAM";
+                    console.log("Month " + i + " is oversubscribed at " + consumedRam);
                 }
             });
         }

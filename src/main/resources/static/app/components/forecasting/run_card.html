@@ -8,6 +8,7 @@
 				<td>Plans</td>
 				<td>AI's</td>
 				<td>Rolling Revenue</td>
+				<td>Overcommit</td>
 			</tr>
 		</thead>
 		<tr ng-repeat="row in plan.runCard">
@@ -15,6 +16,7 @@
 			<td><shkl-number value="{{row.plansInUse}}"></shkl-number></td>
 			<td><shkl-number value="{{row.ais}}"></shkl-number></td>
 			<td><shkl-money value="{{row.revenue}}"></shkl-money></td>
+			<td><span ng-show="row.oversubscribed != null">Over subscribed!</span></td>
 		</tr>
 		</table>
 	</div>
