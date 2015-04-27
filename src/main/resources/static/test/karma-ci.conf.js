@@ -57,7 +57,7 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: true,
-    reporters: ['super-dots', 'junit'],
+    reporters: ['super-dots','junit'],
     junitReporter: {
     		  outputFile: 'shekeltest-results.xml'
     		},
