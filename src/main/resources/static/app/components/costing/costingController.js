@@ -182,14 +182,12 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		});
 		return lastMonthTotal - $scope.getDurationTCO();
 		
-	}
+	};
 
     /*
     This function checks each runcard over each month for over consumption of the IaaS
      */
     $scope.markupRuncard = function() {
-    	console.log("RAM available to DEA is " + $scope.deaRam());
-		console.log("vCPU available to DEA is " + $scope.deaVcpu());
         for (var i =0; i < $scope.forecastLength; i++ ) {
             var consumedRam = 0;
             var consumedVCPU = 0;
@@ -208,10 +206,6 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
                 if (runCardForMonth.ais > aiService.aiPacks().value * 50) {
                     runCardForMonth.oversubscribed.push("AI");
                 }
-                
-                console.log("Consumed RAM = " + consumedRam);
-                console.log("Consumed VCPU = " + consumedVCPU);
-                console.log("Consumed AI's = " + runCardForMonth.ais);
             });
         }
     };
