@@ -189,14 +189,21 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
     This function checks each runcard over each month for over consumption of the IaaS
      */
     $scope.markupRuncard = function() {
-    	console.log("RAM avaliable to DEA is " + $scope.deaRam());
+    	console.log("RAM available to DEA is " + $scope.deaRam());
+		console.log("vCPU available to DEA is " + $scope.deaVcpu());
         for (var i =0; i < $scope.forecastLength; i++ ) {
             var consumedRam = 0;
+            var consumedVCPU = 0;
             $scope.runCards.forEach(function(runCard) {
-                consumedRam += runCard.runCard[i].ais * runCard.plan.maxInstanceMem;
+                var runCardForMonth = runCard.runCard[i];
+                consumedRam += runCardForMonth.ais * runCard.plan.maxInstanceMem;
+                consumedVCPU += runCardForMonth.ais * $scope.aiAvgVcpu();
+                runCardForMonth.oversubscribed = new Array();
                 if (consumedRam > $scope.deaRam()) {
-                    runCard.runCard[i].oversubscribed = ["RAM"];
-                    console.log("Month " + i + " is oversubscribed at " + consumedRam);
+                    runCardForMonth.oversubscribed.push("RAM");
+                }
+                if ( consumedVCPU > $scope.deaVcpu()) {
+                    runCardForMonth.oversubscribed.push("VCPU");
                 }
             });
         }
