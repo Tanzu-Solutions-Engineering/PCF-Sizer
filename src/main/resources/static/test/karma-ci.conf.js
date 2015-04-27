@@ -23,7 +23,7 @@ module.exports = function(config) {
 			'js/main.js',
 			'app/**/*.js',
 			'test/spec/**/*.js',
-			'test/mock/**/*.js'
+			//'test/mock/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -50,15 +50,17 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
-      'karma-chrome-launcher',
       'karma-super-dots-reporter',
       'karma-junit-reporter'
     ],
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false,
-    
+    singleRun: true,
+    reporters: ['super-dots', 'junit'],
+    junitReporter: {
+    		  outputFile: 'shekeltest-results.xml'
+    		},
     
     colors: true,
 
