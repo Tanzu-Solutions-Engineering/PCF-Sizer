@@ -103,7 +103,7 @@
         "instances": 2,
         "vcpu": 1,
         "ram": 4,
-        "ephemeral_disk": 10,
+        "ephemeral_disk": 20,
         "persistent_disk": 0,
         "dynamic_ips": 1,
         "static_ips": 0,
@@ -197,7 +197,18 @@
         "static_ips": 1,
         "singleton": true
     },
-        {
+    {
+        "vm": "MySQL Proxy",
+        "instances": 2,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 1,
+        "dynamic_ips": 1,
+        "static_ips": 1,
+        "singleton": true
+    },
+    {
         "vm": "MySQL Server",
         "instances": 1,
         "vcpu": 2,
@@ -231,6 +242,17 @@
         "singleton": true
     },
     {
+        "vm": "Doppler",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 0,
+        "dynamic_ips": 1,
+        "static_ips": 1,
+        "singleton": true
+    },
+    {
         "vm": "App Log Aggregator Traffic Controller (Loggregator Traffic Controller)",
         "instances": 1,
         "vcpu": 1,
@@ -243,10 +265,10 @@
     },
     {
         "vm": "Compilation",
-        "instances": 4,
+        "instances": 3,
         "vcpu": 2,
         "ram": 1,
-        "ephemeral_disk": 6,
+        "ephemeral_disk": 20,
         "persistent_disk": 0,
         "dynamic_ips": 1,
         "static_ips": 0,
