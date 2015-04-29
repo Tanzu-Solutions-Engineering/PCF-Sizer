@@ -35,6 +35,12 @@ p.rmargin {
     margin-left: 50px;
 }
 
+p.rmargin2 {
+	text-indent: 0px;
+    margin-right: 500px;
+    margin-left: 75px;
+}
+
 section {
     width: 100%;
 }
