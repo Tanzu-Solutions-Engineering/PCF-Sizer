@@ -1,12 +1,40 @@
-	How many apps you got? 
-	<input type="number" ng-model="aiChooser.apps" >
-	<br/>
-	How many folks on your dev teams (avg)?
-	<input type="number" ng-model="aiChooser.devs" value="{{aiChooser.devs}}">
-	<br/>
-	How many steps in your pipeline
-	<input type="number" ng-model="aiChooser.steps"value="{{aiChooser.steps}}" >
-	<br>
-	
-	<span>You need {{ais()}} AI packs. <a href="#" ng-click="setAis()">accept!</a></span>
-	<br>
+<head>
+	<style>
+		table, td, th {
+    		border: 1px solid blue;
+	}
+
+	th {
+    	background-color: blue;
+   		color: white;
+	}
+	</style>
+</head>
+
+<body>
+ 	<table>
+  	<caption>Help Me Choose...How Many AI Packs?</caption>
+  		<tr>
+    		<th>Foundation App Characteristics</th>
+    		<th>Value</th> 
+  		</tr>  
+  		<tr>
+    		<td>How many apps will you run?</td>
+    		<td><input type="number" ng-model="aiChooser.apps" ></td> 
+  		</tr>
+  		<tr>
+    		<td>How many folks on your dev teams per app (avg)?</td>
+    		<td><input type="number" ng-model="aiChooser.devs" value="{{aiChooser.devs}}"></td> 
+  		</tr>
+  		<tr>
+    		<td>How many steps in your CI pipeline?</td>
+    		<td><input type="number" ng-model="aiChooser.steps" value="{{aiChooser.steps}}"></td> 
+  		</tr>
+ 	</table>
+</body>
+
+<br>
+
+<span>Recommended # of (50) AI packs = <b><font color=blue>{{ais()}}</font></b>.<br></span>
+
+	<a href="#" ng-click="setAis()">Accept AI Recommendation!</a><br>

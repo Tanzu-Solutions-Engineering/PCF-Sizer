@@ -1,21 +1,27 @@
-Avg Ai RAM (GB):
+Avg Mem per AI  (GB):
 <select ng-model="platform.avgRam"
 	ng-options="opt as opt.value for opt in avgRamOptions"></select>
+<br>
 
-Avg AI STG (GB):
+Avg Storage per AI (GB):
 <select ng-model="platform.avgAIDisk"
 	ng-options="opt as opt.value for opt in avgAIDiskOptions"></select>
-    <!--MG Comment 
-    	<input type="number" ng-model="platform.avgAIDisk"></input> 
-    -->
+<br><br>
 
-DEA:
+
+DEA Mem Size:
 <select ng-model="platform.deaSize"
 	ng-options="opt as opt.text for opt in deaSizeOptions">
 </select>
-
 <br>
-AZs:
+
+DEA Ephemeral Storage Size:
+<select ng-model="platform.deaSizeDisk"
+	ng-options="opt as opt.text for opt in deaSizeOptionsDisk">
+</select>
+<br><br>
+
+# of AZs:
 <input type="number" ng-model="platform.numAZ"></input>
 
 <!-- 
@@ -25,5 +31,12 @@ AZ Recovery (Ignored, use n+x factor: tracker #91141454):
 </select>
 -->
 
-N+x factor:
+N+x factor per AZ:
 <input type="number" ng-model="platform.nPlusX"></input>
+
+<br>
+
+# of PCF Post Errand jobs (i.e. Push Console):
+<select ng-model="platform.pcfErrandJobs"
+	ng-options="opt as opt.value for opt in pcfErrandJobsOptions"></select>
+<br><br>

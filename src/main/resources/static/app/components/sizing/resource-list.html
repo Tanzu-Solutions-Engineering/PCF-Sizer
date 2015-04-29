@@ -1,13 +1,43 @@
-
-<ul>
-	<li>Calculating using {{deaDef.usableRam}} GB DEA head room.</li>
-	<li>Using n+x factor {{platform.nPlusX}}.</li>
-	<li>The foundation has {{platform.numAZ}} availability zones.</li>
-	<li>Total # of DEA's: {{totalDEAs()}}</li>
-	<li>DEA per AZ: {{deasPerAz()}}</li>
-	<li>RAM: {{iaasAskSummary.ram}}</li>
-	<li>Disk GB: {{iaasAskSummary.disk}}</li>
-	<li>VCPU: {{iaasAskSummary.vcpu}}</li>
-	<li>Physical Cores: {{getPhysicalCores()}}</li>
-	
-</ul>
+<table>
+  	<caption><b>Resource Min Requirements Summary</b></caption>
+		<tr>
+    		<td>Using AZ n+x factor</td>
+    		<td>{{platform.nPlusX}}</td>
+  		</tr>  
+  		<tr>
+    		<td>Using foundation AZ #</td>
+    		<td>{{platform.numAZ}}</td>
+  		</tr> 
+  		<tr>
+    		<td>DEA Memory 'Use-Able' (GB)</td>
+    		<td>{{deaUsableRam()}}</td>
+  		</tr>  
+  		<tr>
+    		<td>DEA Storage 'Use-Able' (GB)</td>
+    		<td>{{deaUsableStg()}}</td>
+  		</tr>  
+  		<tr>
+    		<td>DEA # Total</td>
+    		<td>{{totalDEAs()}}</td>
+  		</tr>  
+  		<tr>
+    		<td>DEA # per AZ</td>
+    		<td>{{deasPerAz()}}</td>
+  		</tr>  
+  		<tr>
+    		<td>Foundation Memory (GB)</td>
+    		<td>{{iaasAskSummary.ram}}</td>
+  		</tr>  
+  		<tr>
+    		<td>Foundation Storage (GB)</td>
+    		<td>{{iaasAskSummary.disk}}</td>
+  		</tr>  
+  		<tr>
+    		<td>Foundation vCPU # </td>
+    		<td>{{iaasAskSummary.vcpu}}</td>
+  		</tr>  
+  		<tr>
+    		<td>Foundation Physical Cores # </td>
+    		<td>{{getPhysicalCores()}}</td>
+  		</tr>  
+</table>

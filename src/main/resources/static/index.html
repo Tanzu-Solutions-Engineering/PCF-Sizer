@@ -15,9 +15,11 @@
 
 <body ng-app="ShekelApp">
 
-<div ng-controller="ShekelVersionController" >build-id={{version}}</div>
 
-<h1>Hello Shekel</h1>
+<h1>Welcome to Shekel <span style="color:blue;font-size: 10pt""><sup>PCF Sizing & Costing Tool:     <span ng-controller="ShekelVersionController" >build-id={{version}}</span></sup></span></h1>
+	<div id="warning" >
+		<h3><font color="red" size="3">The IaaS Requirements provided by this tool are for PCF Elastic Runtime only, <br> Any additional PCF Service Tiles will require separate sizing exercise!</font> </h3>
+	</div>
 
 <div ng-controller="ShekelSizingController" id="input">
     <div id="sizing-input">
@@ -29,25 +31,26 @@
 	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
 	        <br>
 	        
-	        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">Help me choose</a>
-	        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose" ng-include="'app/components/sizing/ai-chooser.html'"></div>
+	        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">(Help Me Choose)</a>
+	        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose" ng-include="'app/components/sizing/ai-chooser.html'"></div>   
+	        
         </div>
+        
+        <br>
         
         <div id="platform-properties"  ng-include="'app/components/sizing/platform-form.html'"></div>
 	</div>
+		<br>
 		
 	<div id="resource-ask" >
-		<h3>Resource Ask Summary (<a href="#" ng-click="applyTemplate(vmTemplate)">refresh</a>)</h3>
-	
 		<div id="resource-list"  ng-include="'app/components/sizing/resource-list.html'"></div>
+		<a href="#" ng-click="applyTemplate(vmTemplate)">(Refresh Table)</a>
 	</div>
 	
-	<div id="warning" >
-		<h3><font color="red" size="3">The IaaS Requirements provided by this tool are for CF only,  Any additional PCF Service Tiles will require separate sizing exercise</font> </h3>
-	</div>
+	<br>
 	
     <div id="sizing-output">
-    	<a href="#" ng-click="showTable = !showTable">Show all PCF Virtual Machine Detail.</a>
+    	<a href="#" ng-click="showTable = !showTable">(Show all PCF Virtual Machine Details)</a>
     	<div id="vm-detail" ng-show="showTable" ng-include="'app/components/sizing/vm-detail.html'"></div>
     </div>
 </div>

@@ -35,11 +35,17 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	]; 
 
     $scope.deaSizeOptions = [ 
-	     {"text": "Small (16GB RAM)",    "size":16, "ephem_disk":32 }, 
-	     {"text": "Medium (32GB RAM)",   "size":32, "ephem_disk":64  },
-	     {"text": "Large (64GB RAM)",    "size":64, "ephem_disk":128  },
-	     {"text": "Bad idea (128GB RAM)", "size":128, "ephem_disk":256 }
+	     {"text": "Small (16GB RAM)",    "size":16}, 
+	     {"text": "Medium (32GB RAM)",   "size":32},
+	     {"text": "Large (64GB RAM)",    "size":64},
+	     {"text": "Bad idea (128GB RAM)", "size":128}
 	 ];
+    
+    $scope.deaSizeOptionsDisk =  [ 
+         {"text": "Small (32GB RAM)",    "size":32}, 
+         {"text": "Medium (64GB RAM)",   "size":64},
+         {"text": "Large (128GB RAM)",    "size":128}
+    ];
     
     $scope.avgAIDiskOptions = [ 
         { value: .5  },
@@ -49,12 +55,28 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	    { value: 8  }
     ];
     
+    $scope.pcfErrandJobsOptions = [ 
+        { value: 0  },                           	
+        { value: 1  },
+        { value: 2  },
+        { value: 3  },
+        { value: 4  },
+        { value: 5  },
+        { value: 6  },
+        { value: 7  },
+        { value: 8  },
+        { value: 9  },
+        { value: 10  }
+    ];
+    
     $scope.platform = {
     	avgRam: $scope.avgRamOptions[1],
-    	avgAIDisk:  $scope.avgAIDiskOptions[1],
+    	avgAIDisk:  $scope.avgAIDiskOptions[0],
     	deaSize: $scope.deaSizeOptions[0],
+    	deaSizeDisk: $scope.deaSizeOptionsDisk[0],
         numAZ: 2,
-    	nPlusX: 1,    
+    	nPlusX: 1,
+    	pcfErrandJobs: $scope.pcfErrandJobsOptions[0],
     };
 
     $scope.aZRecoveryCapacity = [25, 50, 100];
@@ -85,8 +107,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     };
     
     $scope.deaUsableStg = function() { 
-    	return $scope.platform.deaSize.ephem_disk - $scope.platform.deaSize.size - 4;
-    	
+    	return $scope.platform.deaSizeDisk.size - $scope.platform.deaSize.size - 4;
+    
     };
 
     // TODO DRY w/ costing directives
@@ -159,7 +181,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     }
 
     //This is the main calculator. We do all the per vm stuff and add the 
-    //constants at the bottom.
+    //constants at the bottom.  <--iaasAskSummary-->
+    
     $scope.applyTemplate = function(template) { 
     	$scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
     	vmLayout.length = 0;
@@ -170,11 +193,15 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     			if ( "DEA" == vm.vm ) { 
     				vm.instances = $scope.totalDEAs();
     				vm.ram = $scope.platform.deaSize.size;
-					vm.ephemeral_disk = $scope.platform.deaSize.ephem_disk;
-    			} else {
+					vm.ephemeral_disk = $scope.platform.deaSizeDisk.size;
+    			} 
+    			else {
     				vm.instances = vm.instances * $scope.platform.numAZ;
     			}
     		}   
+			if ( "Errand" == vm.vm ){
+			    vm.instances = $scope.platform.pcfErrandJobs.value;
+			}
     		$scope.doIaaSAskForVm(vm);
 			vmLayout.push(vm);
     	}

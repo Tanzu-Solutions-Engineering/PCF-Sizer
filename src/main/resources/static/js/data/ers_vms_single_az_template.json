@@ -30,21 +30,10 @@
         "persistent_disk": 20,
         "dynamic_ips": 1,
         "static_ips": 0,
-        "singleton": false
+        "singleton": true
     },
     {
-        "vm": "HAProxy",
-        "instances": 2,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 0,
-        "dynamic_ips": 1,
-        "static_ips": 1,
-        "singleton": false
-    },
-    {
-        "vm": "Message Bus (NATS)",
+        "vm": "NATS - Message Bus",
         "instances": 2,
         "vcpu": 1,
         "ram": 1,
@@ -66,18 +55,7 @@
         "singleton": true
     },
     {
-        "vm": "Health Manager",
-        "instances": 1,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 0,
-        "dynamic_ips": 1,
-        "static_ips": 0,
-        "singleton": false
-    },
-    {
-        "vm": "Blob Store (NFS Server)",
+        "vm": "NFS Server || Blob Store",
         "instances": 1,
         "vcpu": 1,
         "ram": 1,
@@ -99,11 +77,66 @@
         "singleton": true
     },
     {
+        "vm": "UAA Database",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 8,
+        "dynamic_ips": 1,
+        "static_ips": 1,
+        "singleton": true
+    },
+    {
+        "vm": "Console Database",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 1,
+        "dynamic_ips": 1,
+        "static_ips": 1,
+        "singleton": true
+    },
+    {
         "vm": "Cloud Controller",
         "instances": 2,
         "vcpu": 1,
         "ram": 4,
         "ephemeral_disk": 20,
+        "persistent_disk": 0,
+        "dynamic_ips": 1,
+        "static_ips": 0,
+        "singleton": false
+    },
+    {
+        "vm": "HAProxy",
+        "instances": 2,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 0,
+        "dynamic_ips": 1,
+        "static_ips": 1,
+        "singleton": false
+    },
+    {
+        "vm": "Router",
+        "instances": 2,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 0,
+        "dynamic_ips": 1,
+        "static_ips": 1,
+        "singleton": false
+    },
+    {
+        "vm": "Health Manager",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
         "persistent_disk": 0,
         "dynamic_ips": 1,
         "static_ips": 0,
@@ -132,17 +165,6 @@
         "singleton": false
     },
     {
-        "vm": "Router",
-        "instances": 2,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 0,
-        "dynamic_ips": 1,
-        "static_ips": 1,
-        "singleton": false
-    },
-    {
         "vm": "Collector",
         "instances": 1,
         "vcpu": 1,
@@ -152,17 +174,6 @@
         "dynamic_ips": 1,
         "static_ips": 0,
         "singleton": false
-    },
-    {
-        "vm": "UAA DB",
-        "instances": 1,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 8,
-        "dynamic_ips": 1,
-        "static_ips": 1,
-        "singleton": true
     },
     {
         "vm": "UAA",
@@ -176,7 +187,7 @@
         "singleton": false
     },
     {
-        "vm": "Login Server (SAML Login)",
+        "vm": "Login || (SAML Login)",
         "instances": 2,
         "vcpu": 1,
         "ram": 1,
@@ -185,17 +196,6 @@
         "dynamic_ips": 1,
         "static_ips": 0,
         "singleton": false
-    },
-    {
-        "vm": "Apps Manager Database",
-        "instances": 1,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 1,
-        "dynamic_ips": 1,
-        "static_ips": 1,
-        "singleton": true
     },
     {
         "vm": "MySQL Proxy",
@@ -231,7 +231,7 @@
         "singleton": false
     },
     {
-        "vm": "App Log Aggregator (Loggregator Server)",
+        "vm": "Doppler Server",
         "instances": 1,
         "vcpu": 1,
         "ram": 1,
@@ -239,10 +239,10 @@
         "persistent_disk": 0,
         "dynamic_ips": 1,
         "static_ips": 1,
-        "singleton": true
+        "singleton": false
     },
     {
-        "vm": "Doppler",
+        "vm": "Loggregator Traffic Controller",
         "instances": 1,
         "vcpu": 1,
         "ram": 1,
@@ -250,22 +250,11 @@
         "persistent_disk": 0,
         "dynamic_ips": 1,
         "static_ips": 1,
-        "singleton": true
-    },
-    {
-        "vm": "App Log Aggregator Traffic Controller (Loggregator Traffic Controller)",
-        "instances": 1,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 0,
-        "dynamic_ips": 1,
-        "static_ips": 1,
-        "singleton": true
+        "singleton": false
     },
     {
         "vm": "Compilation",
-        "instances": 3,
+        "instances": 4,
         "vcpu": 2,
         "ram": 1,
         "ephemeral_disk": 20,
@@ -275,7 +264,7 @@
         "singleton": true
     },
     {
-        "vm": "Each Post-Install Errand",
+        "vm": "Errand",
         "instances": 1,
         "vcpu": 1,
         "ram": 1,
