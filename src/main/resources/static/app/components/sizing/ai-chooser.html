@@ -1,17 +1,4 @@
-<head>
-	<style>
-		table, td, th {
-    		border: 1px solid blue;
-	}
-
-	th {
-    	background-color: blue;
-   		color: white;
-	}
-	</style>
-</head>
-
-<body>
+<br>
  	<table>
   	<caption>Help Me Choose...How Many AI Packs?</caption>
   		<tr>
@@ -31,10 +18,10 @@
     		<td><input type="number" ng-model="aiChooser.steps" value="{{aiChooser.steps}}"></td> 
   		</tr>
  	</table>
-</body>
+
 
 <br>
 
-<span>Recommended # of (50) AI packs = <b><font color=blue>{{ais()}}</font></b>.<br></span>
+<span><p>Recommended # of (50) AI packs = <span class="best-practice" >{{ais()}}</span>.<br></p></span>
 
-	<a href="#" ng-click="setAis()">Accept AI Recommendation!</a><br>
+	<a href="#" ng-click="setAis()"><p>Accept AI Recommendation!</p></a><br>

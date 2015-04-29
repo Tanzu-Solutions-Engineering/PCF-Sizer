@@ -4,7 +4,21 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.rampUpPlans = 5;
 	$scope.forecastLength = 36;
 
+	$scope.vcpuPerAIOptions = [ 
+	        {"text": "1:1", "ratio":1}, 
+	        {"text": "2:1", "ratio":2}, 
+	        {"text": "3:1", "ratio":3}, 
+	        {"text": "4:1", "ratio":4},
+	        {"text": "5:1", "ratio":5}, 
+	        {"text": "6:1", "ratio":6}, 
+	        {"text": "7:1", "ratio":7}, 
+	        {"text": "8:1", "ratio":8},
+	        {"text": "9:1", "ratio":9}, 
+	        {"text": "10:1", "ratio":10} 
+	      ];
+	
 	$scope.forecasting = { 
+		vcpuPerAI: $scope.vcpuPerAIOptions[4],
 		profitMarginPoints: 10,
 		rampUpGrowth: 10,
 		initialPlans: 5,
@@ -14,11 +28,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		aiDeployed: 100
 	};
 	$scope.paasCost = 200000; 
-	$scope.iaasCost = 500000;
-	$scope.opexCost = 1000000;
+	$scope.iaasCost = 200000;
+	$scope.opexCost = 10000;
 	$scope.paasMonthly = "duration";
 	$scope.iaasMonthly = "duration";
-	$scope.opexMonthly = "duration";
+	$scope.opexMonthly = "monthly";
 			
 	/**
 	 * Closure to enable math against a dea property.
@@ -27,7 +41,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		for (var i = 0; i < vmLayout.length; ++i) { 
 			var vm = vmLayout[i];
 			if ( "DEA" == vm.vm ) {
-				return (vm[method] * vm.instances) - (overhead * vm.instances);
+				if ( "ephemeral_disk" == method ){
+					// Factor in SWAP partition on DEA Ephemeral Disk
+					return (vm[method] * vm.instances) - (vm.ram * vm.instances) - (overhead * vm.instances);
+				}
+				else{
+					return (vm[method] * vm.instances) - (overhead * vm.instances);
+				}
 			}
 		}
 	};
@@ -41,8 +61,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 	
 	$scope.deaDisk = function() {
-		//TODO figure out real DEA Storage Overhead. Estimated here as 1GB.
-		return $scope.deaFunction("ephemeral_disk", 1);
+		//Factor in 4 GB Used Space in /var/vcap/data
+		return $scope.deaFunction("ephemeral_disk", 4);
 	};
 	
 	$scope.aiAvgDisk = function ()  { 
@@ -54,7 +74,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 	
 	$scope.aiAvgVcpu = function ()  { 
-		return $scope.deaVcpu() / (aiService.aiPacks().value *50); 
+		return $scope.deaVcpu() / (aiService.aiPacks().value * 50); 
 	};
 	
 	$scope.getDurationTCO = function() { 
@@ -72,9 +92,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	 * The following calculators assume 100% utilization. See 
 	 * https://www.pivotaltracker.com/story/show/90807616 for 
 	 * future plans around how we ramp up.
+	 * MG:  var gbPerHrBreakEven represents the cost to deliver GB/Hour assuming 100% utilization
 	 */
 	$scope.gbPerHrBreakEven = function() {
-		var perDay = $scope.getDurationTCO()/($scope.forecastLength / 12) / 365;
+		var perDay = ($scope.getMonthlyTCO() * 12) / 365;
 		var perHour = perDay / 24;
 		return perHour/$scope.deaRam();	
 	}

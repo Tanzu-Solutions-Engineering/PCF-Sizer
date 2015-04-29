@@ -69,6 +69,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         { value: 10  }
     ];
     
+    $scope.iaasCPUtoCoreRatioOptions = [ 
+        {"text": "2:1", "ratio":2}, 
+        {"text": "4:1", "ratio":4},
+        {"text": "8:1", "ratio":8}
+    ];
+    
     $scope.platform = {
     	avgRam: $scope.avgRamOptions[1],
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
@@ -77,6 +83,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         numAZ: 2,
     	nPlusX: 1,
     	pcfErrandJobs: $scope.pcfErrandJobsOptions[0],
+    	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1],
     };
 
     $scope.aZRecoveryCapacity = [25, 50, 100];
@@ -169,14 +176,15 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	vcpu: 1
     };
     
+    
     $scope.getPhysicalCores = function() { 
-    	return $scope.roundUp($scope.iaasAskSummary.vcpu / 4); 
+    	return $scope.roundUp($scope.iaasAskSummary.vcpu / $scope.platform.iaasCPUtoCoreRatio.ratio); 
     }
     
     $scope.doIaaSAskForVm = function(vm) {
     	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
 		$scope.iaasAskSummary.disk 
-			+= (vm.persistent_disk + vm.ephemeral_disk) * vm.instances;
+			+= (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
 		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
     }
 

@@ -21,9 +21,10 @@ DEA Ephemeral Storage Size:
 </select>
 <br><br>
 
-# of AZs:
+AZs # of:
 <input type="number" ng-model="platform.numAZ"></input>
 
+<br>
 <!-- 
 AZ Recovery (Ignored, use n+x factor: tracker #91141454):
 <select>
@@ -31,12 +32,18 @@ AZ Recovery (Ignored, use n+x factor: tracker #91141454):
 </select>
 -->
 
-N+x factor per AZ:
+AZ DEA N+1 Factor:
 <input type="number" ng-model="platform.nPlusX"></input>
 
-<br>
+<br><br>
 
-# of PCF Post Errand jobs (i.e. Push Console):
+IAAS vCPU to Core Consolidation Ratio:
+<select ng-model="platform.iaasCPUtoCoreRatio"
+	ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions"></select>
+<br><br>
+
+PCF Post Errand jobs (i.e. Push Console) #:
 <select ng-model="platform.pcfErrandJobs"
 	ng-options="opt as opt.value for opt in pcfErrandJobsOptions"></select>
 <br><br>
+

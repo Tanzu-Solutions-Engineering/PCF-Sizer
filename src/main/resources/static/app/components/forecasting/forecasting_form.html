@@ -1,19 +1,18 @@
-%of vCPU/App Instance:<input type="number" ng-model="vcpuPerAI">
+Ratio of AI to vCPU:
+<!--  <input type="number" ng-model="vcpuPerAI"> -->
+<select type="number" ng-model="forecasting.vcpuPerAI"
+	ng-options="opt as opt.text for opt in vcpuPerAIOptions"></select>
 <br>
-
 Ramp up Initial Plans:<input type="number" ng-model="forecasting.initialPlans">
 <br>
 Ramp up growth per month %<input type="number" ng-model="forecasting.rampUpGrowth">
 <br>
-
-Plan Utilization, Hours in Operation %<input type="number" ng-model="forecasting.hoursInOperation">
+Plan Utilization, AI Hours in Operation %<input type="number" ng-model="forecasting.hoursInOperation">
 <br>
-
-Plan Utilization, App instances deployed %<input type="number" ng-model="forecasting.aiDeployed">
+Plan Utilization, AIs deployed %<input type="number" ng-model="forecasting.aiDeployed">
 <br/>
 Burndown Goal (Months):<input type="number" ng-model="forecasting.burndownMonths">
 <br>
-
 GB/Hr Adjustment (Profit Margin / Points): <input type="number" ng-model="forecasting.profitMarginPoints">
 <p>Burndown Mode allows you to select a break even date based GB/HR pricing, or by providing a GB/HR to provide the break even date</p>
 Burndown Mode:<input type="radio" ng-model="forecasting.burndownMode" value="gbhr">GB/HR

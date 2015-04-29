@@ -12,8 +12,27 @@
 	color: green;
 }
 
+.showback { 
+	color: blue;
+}
+
 table, th, td {
-	border: solid 1px;
+    		border: 1px solid blue;
+	}
+
+th {
+    	background-color: blue;
+   		color: white;
+	}
+	
+p {
+    text-indent: 50px;
+}
+
+p.rmargin {
+	text-indent: 0px;
+    margin-right: 500px;
+    margin-left: 50px;
 }
 
 section {

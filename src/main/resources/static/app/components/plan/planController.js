@@ -6,6 +6,11 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 	$scope.showPlanForm=false;
 	$scope.paidServicePlanOptions = planService.paidServicePlanOptions();
 
+	$scope.costModelTypeOptions = [ 
+	               	        {"text": "Billable"}, 
+	               	        {"text": "Free"}
+	               	      ];
+	
 	$scope.plans = planService.getPlans();
 	/** 
 	 * Defaults for plan creation input hints

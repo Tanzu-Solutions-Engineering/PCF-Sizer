@@ -1,13 +1,5 @@
 <table>
   	<caption><b>Resource Min Requirements Summary</b></caption>
-		<tr>
-    		<td>Using AZ n+x factor</td>
-    		<td>{{platform.nPlusX}}</td>
-  		</tr>  
-  		<tr>
-    		<td>Using foundation AZ #</td>
-    		<td>{{platform.numAZ}}</td>
-  		</tr> 
   		<tr>
     		<td>DEA Memory 'Use-Able' (GB)</td>
     		<td>{{deaUsableRam()}}</td>
@@ -37,7 +29,7 @@
     		<td>{{iaasAskSummary.vcpu}}</td>
   		</tr>  
   		<tr>
-    		<td>Foundation Physical Cores # </td>
+    		<td>Foundation Physical Cores (2GHz or >) # </td>
     		<td>{{getPhysicalCores()}}</td>
   		</tr>  
 </table>
