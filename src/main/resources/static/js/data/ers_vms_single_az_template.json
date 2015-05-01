@@ -232,7 +232,7 @@
     },
     {
         "vm": "Doppler Server",
-        "instances": 1,
+        "instances": 2,
         "vcpu": 1,
         "ram": 1,
         "ephemeral_disk": 2,
@@ -243,7 +243,7 @@
     },
     {
         "vm": "Loggregator Traffic Controller",
-        "instances": 1,
+        "instances": 2,
         "vcpu": 1,
         "ram": 1,
         "ephemeral_disk": 2,

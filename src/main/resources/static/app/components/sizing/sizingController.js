@@ -42,9 +42,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	 ];
     
     $scope.deaSizeOptionsDisk =  [ 
-         {"text": "Small (32GB RAM)",    "size":32}, 
-         {"text": "Medium (64GB RAM)",   "size":64},
-         {"text": "Large (128GB RAM)",    "size":128}
+         {"text": "Small (32GB)",    "size":32}, 
+         {"text": "Medium (64GB)",   "size":64},
+         {"text": "Large (128GB)",    "size":128}
     ];
     
     $scope.avgAIDiskOptions = [ 
