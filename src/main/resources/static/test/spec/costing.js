@@ -91,15 +91,15 @@
                 expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("RAM");
             });
 
-            it('should run out of memory in the 5th month', function() {
+            it('should run out of memory in the 26th month with default data', function() {
                 $rootScope.deaRam = function() { return 10; };
                 var card = $rootScope.runCards[0];
-                for (var i = 0; i < 6; ++i) {
+                for (var i = 0; i < 25; ++i) {
                     card.runCard[i].ais = i + 1;
                 }
                 $rootScope.markupRuncard();
-                expect($rootScope.runCards[0].runCard[4].oversubscribed.length).toBe(0);
-                expect($rootScope.runCards[0].runCard[5].oversubscribed).toContain("RAM");
+                expect($rootScope.runCards[0].runCard[23].oversubscribed.length).toBe(1);
+                expect($rootScope.runCards[0].runCard[24].oversubscribed).toContain("RAM");
             });
         });
     });
