@@ -100,16 +100,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		return perHour/$scope.deaRam();	
 	}
 	
-	$scope.getGbPerHrWithPoints = function() { 
-		//if ( 'date' == $scope.forecasting.burndownMode) { 
-			//var gbHr = $scope.getDurationTCO() / ($scope.forecasting.burndownMonths / 12 ) / 365 / 24 / $scope.deaRam();
-			//$scope.forecasting.profitMarginPoints =  ((gbHr - $scope.gbPerHrBreakEven() ) / gbHr ) * 100; 
-			//return gbHr;
-		//}
-		//else {
-			return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
-			parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2)) 
-		//}
+	$scope.getGbPerHrWithPoints = function() {
+		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
+		parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2))
 	};
 
 	//100% utilization.
@@ -188,9 +181,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.generateRunCard = function(plan) {
 		var runCard = new Array();
 		var plansInUse = (plan.consumption / 100) * $scope.forecasting.initialPlans;
-		var gbHr = $scope.getGbPerHrWithPoints();
 		plan.monthlyBill = $scope.calculateMonthly(plan)
-		plan.gbPerHr = gbHr;
 		var lastMonthRevenue = 0;
 		var runcostModelType = plan.costModelType.value;
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {

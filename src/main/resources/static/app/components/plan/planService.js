@@ -20,15 +20,11 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			paidServicePlans: paidServicePlans,
 			diskQuota: diskQuota,
 			aiMax: aiMax,
-			gbPerHr: gbPerHr,
 			consumption: consumption,
 			costModelTypeValue: this.costModelTypeOptions()[0],
 			costModelType: function(option) {
 				if (angular.isDefined(option)) {
 					this.costModelTypeValue = option;
-					if( "Free" == option.value ) { 
-						this.gbPerHr = 0;
-					}
 				}
 				return this.costModelTypeValue;
 			}
@@ -53,7 +49,6 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			paidServicePlans: this.paidServicePlanOptions()[0],
 			diskQuota: 16,
 			aiMax: 4,
-			gbPerHr: 0,
 			consumption: 25,
 			monthlyBill: 0,
 			costModelTypeValue: this.costModelTypeOptions()[0],
