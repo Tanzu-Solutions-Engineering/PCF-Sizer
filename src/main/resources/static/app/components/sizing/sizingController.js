@@ -206,6 +206,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     			else {
     				vm.instances = vm.instances * $scope.platform.numAZ;
     			}
+
+
+
     		}   
 			if ( "Errand" == vm.vm ){
 			    vm.instances = $scope.platform.pcfErrandJobs.value;

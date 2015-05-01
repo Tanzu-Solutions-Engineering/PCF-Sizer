@@ -12,8 +12,7 @@
 	# Service Instances<input type="number"
 		ng-model="plan.maxServiceInstances"
 		value="{{plan.maxServiceInstances}}"> 
-	Paid Service Plans: <select
-		ng-model="plan.paidServicePlans"
+	Paid Service Plans: <select ng-model="plan.paidServicePlans"
 		ng-options="opt as opt.label for opt in paidServicePlanOptions"></select>
 	Disk Quota<input type="number" ng-model="plan.diskQuota"
 		value="{{plan.diskQuota}}"> 

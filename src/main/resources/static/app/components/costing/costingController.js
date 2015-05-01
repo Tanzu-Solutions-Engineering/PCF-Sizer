@@ -170,9 +170,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.runCards = []; 
 	
 	$scope.calculateMonthly = function(plan) {
-		var monthlyBill = ((365/12) * 24 * ($scope.forecasting.hoursInOperation / 100)) 
-			* ((plan.memoryQuota/plan.aiMax) * (plan.aiMax * ($scope.forecasting.aiDeployed / 100))) 
-			* $scope.getGbPerHrWithPoints();
+		if ("Free" == plan.costModelTypeValue.value) {
+			return 0;
+		}
+		var monthlyBill = $scope.calculateBaseMonthly(plan) * $scope.getGbPerHrWithPoints();
 		return monthlyBill;
 	};
 	

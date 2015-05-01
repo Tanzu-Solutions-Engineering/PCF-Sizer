@@ -1,6 +1,13 @@
 "use strict"
 var planService = shekelApp.factory('planService', function($rootScope) {
-	
+
+	function costModelTypeOptions() {
+		return [
+			{value: "Billable", label: "Billable"},
+			{value: "Free", label: "Free"}
+		];
+	};
+
 	function makeNewPlan(name, memQuota, instanceMaxMem, maxRoutes,
 			maxServiceInstances, paidServicePlans, diskQuota, aiMax, gbPerHr,
 			consumption, costModelType) { 
@@ -15,7 +22,16 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			aiMax: aiMax,
 			gbPerHr: gbPerHr,
 			consumption: consumption,
-			costModelType: this.costModelTypeOptions()[0]
+			costModelTypeValue: this.costModelTypeOptions()[0],
+			costModelType: function(option) {
+				if (angular.isDefined(option)) {
+					this.costModelTypeValue = option;
+					if( "Free" == option.value ) { 
+						this.gbPerHr = 0;
+					}
+				}
+				return this.costModelTypeValue;
+			}
 		};
 	};
 	
@@ -25,19 +41,13 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 	        {value: false, label: "no"}
 		];
 	};
-	
-	function costModelTypeOptions() { 
-		return [
-		    {value: "Billable", label: "Billable"}, 
-	        {value: "Free", label: "Free"}
-		];
-	};
-	
+
+	//TODO This repition with the above should be refactored somehow...
 	function defaultPlan() {
-		return {		
+		return {
 			name: "Small Plan",
 			memoryQuota: 8,
-			maxInstanceMem: 2, 
+			maxInstanceMem: 2,
 			maxRoutes: 16,
 			maxServiceInstances: 16,
 			paidServicePlans: this.paidServicePlanOptions()[0],
@@ -46,7 +56,8 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			gbPerHr: 0,
 			consumption: 25,
 			monthlyBill: 0,
-			costModelType: this.costModelTypeOptions()[0]
+			costModelTypeValue: this.costModelTypeOptions()[0],
+			costModelType: function() { return this.costModelTypeValue; }
 		}
 	};
 	

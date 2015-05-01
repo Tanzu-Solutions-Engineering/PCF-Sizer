@@ -33,7 +33,8 @@
 		<td><input type="number" ng-model="plan.consumption"></td>
 		<td><shkl-money value="{{plan.monthlyBill}}"></shkl-money></td>
 		<td>
-			<select ng-model="plan.costModelType" ng-options="opt as opt.label for opt in costModelTypeOptions"></select>
+			<select ng-model="plan.costModelType" ng-model-options="{ getterSetter: true }"
+				ng-options="opt as opt.label for opt in costModelTypeOptions"></select>
 		</td>
 		<td><a href="#" ng-click="deletePlan(plan)">delete</a></td>
 	</tr>
