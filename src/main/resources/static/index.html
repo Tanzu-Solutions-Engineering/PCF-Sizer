@@ -177,21 +177,20 @@
 		<div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
 		<div id="forecasting-payout">
 			<p>
-				With a profit margin of {{forecasting.profitMarginPoints}}% you will
-				pay off your (100% utilized from day 1) platform in 
-				<shkl-month value="{{getPayoffMonths()}}"></shkl-month> months at 
-				<shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> gb/hr.
+				You will pay off your PCF Foundation in 
+				<shkl-month value="{{getPayoffMonths()}}"></shkl-month> months using a price of  
+				<span class="best-practice"> <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> </span> gb/hr.
 			</p>
 			<p>
-				With your expected rampup and plans you'll be profitable in {{calculatePayoffWithPlans()}} months.
+				With your expected rampup and plans you'll be profitable in ~ {{calculatePayoffWithPlans()}} months.
 			</p>
 			<p>
-				You will have made <shkl-money value="{{totalProfit()}}"></shkl-money> at the end of {{forecastLength}} months.
+				You will have an Estimated Profit/Loss of: <shkl-money value="{{totalProfit()}}"></shkl-money> at the end of {{forecastLength}} months.
 			</p>
 		</div>
 	</div>
 	<div id="forecasting-runcard">
-		<h3><p>Run Card</p></h3>
+		<h3><p>Plans</p></h3>
 		<div id="plans" ng-controller="ShekelPlanController">
 			<div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
 			<br>
@@ -199,6 +198,7 @@
 			<div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
 		</div>
 		<br>
+		<h3><p>Plan Run Cards</p></h3>
 		<div id="runcard-table" ng-include="'/app/components/forecasting/run_card.html'"></div>
 	</div>
 </div>

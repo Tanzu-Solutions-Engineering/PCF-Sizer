@@ -6,10 +6,7 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 	$scope.showPlanForm=false;
 	$scope.paidServicePlanOptions = planService.paidServicePlanOptions();
 
-	$scope.costModelTypeOptions = [ 
-	               	        {"text": "Billable"}, 
-	               	        {"text": "Free"}
-	               	      ];
+	$scope.costModelTypeOptions = planService.costModelTypeOptions();
 	
 	$scope.plans = planService.getPlans();
 	/** 
@@ -22,7 +19,7 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 				$scope.plan.maxInstanceMem, $scope.plan.maxRoutes, 
 				$scope.plan.maxServiceInstances,$scope.plan.paidServicePlans.value,  
 				$scope.plan.diskQuota, $scope.plan.aiMax, $scope.plan.gbPerHr,
-				$scope.plan.consumption));
+				$scope.plan.consumption, $scope.plan.costModelType));
 	};
 
 

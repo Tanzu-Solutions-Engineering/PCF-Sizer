@@ -1,8 +1,8 @@
 Ratio of AI to vCPU:
-<!--  <input type="number" ng-model="vcpuPerAI"> -->
+<!--  MG Don't Think We need // <input type="number" ng-model="vcpuPerAI"> 
 <select type="number" ng-model="forecasting.vcpuPerAI"
 	ng-options="opt as opt.text for opt in vcpuPerAIOptions"></select>
-<br>
+<br> -->
 Ramp up Initial Plans:<input type="number" ng-model="forecasting.initialPlans">
 <br>
 Ramp up growth per month %<input type="number" ng-model="forecasting.rampUpGrowth">
@@ -12,13 +12,17 @@ Plan Utilization, AI Hours in Operation %<input type="number" ng-model="forecast
 Plan Utilization, AIs deployed %<input type="number" ng-model="forecasting.aiDeployed">
 <br><br>
 
+
+<!--  Setup BurnDown Selector -->
 <p class="rmargin"><span><b>BurnDown Mode</b> allows you to select a method for Shekel to predict a GB/Hour price to reach a target Burndown Date.  <br></span>
 				   <p class="rmargin2"><span>Selecting <font color="blue" >BurnDown</font>: will set your Burndown Goal in Months = Forecast Duration, and will adjust Profit Margin in tandem with Plan Rolling Revenue Forecast to Recover Costs<br><br></span>
 				   <span>Selecting <font color="blue" >Month</font>: will allow you to set the target month you wish to recover costs (Burndown Goal), and will adjust Profit Margin in tandem with Plan Rolling Revenue Forecast to Produce Profits<br></span>
 				 </p>
 				</p>
-<p>Burndown Target Mode:<input type="radio" ng-model="forecasting.burndownMode" value="gbhr">BurnDown
+<p><b>Burndown Target Mode</b>:<input type="radio" ng-model="forecasting.burndownMode" value="gbhr">BurnDown
 			<input type="radio" ng-model="forecasting.burndownMode" value="date">Month</p>
+			
+			
 <p class="rmargin" >Cost Model: Burndown Goal (Months):<input type="number" ng-model="forecasting.burndownMonths"><br>
 Cost Model: GB/Hr Adjustment (Profit Margin / Points): <input type="number" ng-model="forecasting.profitMarginPoints"></p>
 

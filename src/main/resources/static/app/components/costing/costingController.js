@@ -19,9 +19,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.forecasting = { 
 		vcpuPerAI: $scope.vcpuPerAIOptions[4],
-		profitMarginPoints: 10,
-		rampUpGrowth: 10,
-		initialPlans: 5,
+		profitMarginPoints: 0,
+		rampUpGrowth: 5,
+		initialPlans: 3,
 		burndownMonths: $scope.forecastLength,
 		burndownMode: "gbhr",
 		hoursInOperation: 100,
@@ -42,7 +42,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			var vm = vmLayout[i];
 			if ( "DEA" == vm.vm ) {
 				if ( "ephemeral_disk" == method ){
-					// Factor in SWAP partition on DEA Ephemeral Disk
+					// MG Factor in SWAP partition on DEA Ephemeral Disk
 					return (vm[method] * vm.instances) - (vm.ram * vm.instances) - (overhead * vm.instances);
 				}
 				else{
@@ -61,7 +61,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 	
 	$scope.deaDisk = function() {
-		//Factor in 4 GB Used Space in /var/vcap/data
+		//MG Factor in 4 GB Used Space in /var/vcap/data
 		return $scope.deaFunction("ephemeral_disk", 4);
 	};
 	
@@ -101,13 +101,15 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	}
 	
 	$scope.getGbPerHrWithPoints = function() { 
-		if ( 'date' == $scope.forecasting.burndownMode) { 
-			var gbHr = $scope.getDurationTCO() / ($scope.forecasting.burndownMonths / 12 ) / 365 / 24 / $scope.deaRam();
-			$scope.forecasting.profitMarginPoints =  ((gbHr - $scope.gbPerHrBreakEven() ) / gbHr ) * 100; 
-			return gbHr;
-		}
-		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
+		//if ( 'date' == $scope.forecasting.burndownMode) { 
+			//var gbHr = $scope.getDurationTCO() / ($scope.forecasting.burndownMonths / 12 ) / 365 / 24 / $scope.deaRam();
+			//$scope.forecasting.profitMarginPoints =  ((gbHr - $scope.gbPerHrBreakEven() ) / gbHr ) * 100; 
+			//return gbHr;
+		//}
+		//else {
+			return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
 			parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2)) 
+		//}
 	};
 
 	//100% utilization.
@@ -115,13 +117,54 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		if ( 'date' == $scope.forecasting.burndownMode ) { 
 			return $scope.forecasting.burndownMonths;
 		}
-		var monthlyIntakePerGB = ($scope.getGbPerHrWithPoints() * 24 * 365) / 12;
-		var monthlyIntake = monthlyIntakePerGB * $scope.deaRam();
-		var months = $scope.getDurationTCO() / monthlyIntake;
-		$scope.forecasting.burndownMonths = months;
-		return months;
+		else {
+			$scope.forecasting.burndownMonths = $scope.forecastLength;
+			return $scope.forecastLength;
+		}
 	};
 	
+	
+	//Forecast Adjustment Points
+	$scope.getForecastAdjustment = function () {
+				if ( 'gbhr' == $scope.forecasting.burndownMode || 'date' == $scope.forecasting.burndownMode ) {
+				var baseRevenueFromRunCards = $scope.getBaseRevenueFromRunCards();
+				var totalRevenueShortFall = $scope.getDurationTCO() - baseRevenueFromRunCards;
+				var burnDownAdjustmentPoints = (totalRevenueShortFall / baseRevenueFromRunCards) * 100;
+				if ( isFinite(burnDownAdjustmentPoints) && totalRevenueShortFall > 0 ) {
+						var trAdjust = $scope.forecasting.profitMarginPoints = burnDownAdjustmentPoints + 0.5;	
+					}
+				else {
+						var trAdjust = $scope.forecasting.profitMarginPoints = 0;	
+					}
+				//MG console.log("MGLOG baseRevenueFromRunCards=" + baseRevenueFromRunCards);
+				//MG console.log("MGLOG totalRevenueShortFall=" + totalRevenueShortFall);
+				//MG console.log("MGLOG adjustval=" + trAdjust);
+				return trAdjust
+				}
+	}
+	
+	//Get the Projected Base Revenue From Existing Rate Cards
+	$scope.getBaseRevenueFromRunCards = function () {
+		if ( $scope.runCards.length < 1 ) {
+			return 0;
+		}
+		else {
+			var trRunCards = 0;
+			$scope.runCards.forEach(function(runCard){
+				var trBaseMonthly = $scope.calculateBaseMonthly(runCard.plan);
+				for (var i =0; i < $scope.forecasting.burndownMonths; i++ ) {
+					// MG console.log(runCard);
+					if (runCard.runCard[i].costModelType == "Billable"){
+						var trRunCardIterationRevenue = runCard.runCard[i].plansInUse * trBaseMonthly;
+						trRunCards += trRunCardIterationRevenue;
+					}
+				}
+			});
+		}
+		return trRunCards;
+	}
+
+			
 	$scope.planService = planService;
 
 	$scope.runCards = []; 
@@ -132,6 +175,14 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			* $scope.getGbPerHrWithPoints();
 		return monthlyBill;
 	};
+	
+	//Necessary to help forecast adjustment
+	$scope.calculateBaseMonthly = function(plan) {
+		var monthlyBill = ((365/12) * 24 * ($scope.forecasting.hoursInOperation / 100)) 
+			* ((plan.memoryQuota/plan.aiMax) * (plan.aiMax * ($scope.forecasting.aiDeployed / 100))) 
+			* $scope.gbPerHrBreakEven();
+		return monthlyBill;
+	};
 
 	$scope.generateRunCard = function(plan) {
 		var runCard = new Array();
@@ -140,10 +191,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		plan.monthlyBill = $scope.calculateMonthly(plan)
 		plan.gbPerHr = gbHr;
 		var lastMonthRevenue = 0;
+		var runcostModelType = plan.costModelType.value;
 		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
 			var ais = plansInUse * plan.aiMax;
 			var revenue =  lastMonthRevenue + (plansInUse * plan.monthlyBill);
-			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue});
+			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue, costModelType: runcostModelType});
 			plansInUse = plansInUse + (plansInUse * ($scope.forecasting.rampUpGrowth * .01));
 			lastMonthRevenue = revenue;
 		}
@@ -156,6 +208,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			$scope.runCards.push({ plan:plans[i], name:plans[i].name, runCard:$scope.generateRunCard(plans[i])});
 		}
 		$scope.markupRuncard();
+		$scope.getForecastAdjustment();
+		$scope.markupRuncard();
+		
+		
 	};
 
 	//This could be optimized to not generate everything every time.
@@ -174,9 +230,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	 */
 	[
 	 'forecasting.rampUpGrowth', 
-	 'forecasting.initialPlans', 
-	 'forecasting.profitMarginPoints',
-	 'forecasting.burndownMonths'
+	 'forecasting.initialPlans',
+	 'forecasting.burndownMonths',
+	 'forcasting.burndownMode',
+	 'forcasting.costModelType'
 	 ].forEach(function(e,l,a) {
 		$scope.$watch(e, function(newValue, oldValue) { 
 			$scope.buildRunCards(planService.getPlans());
@@ -189,7 +246,10 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		for (; month < $scope.forecastLength ; ++month) {
 			var sum = 0;
 			for(var i = 0; i < $scope.runCards.length; ++i ) {
-				sum += $scope.runCards[i].runCard[month].revenue
+				
+					if ($scope.runCards[i].plan.costModelType.value == "Billable"){
+					sum += $scope.runCards[i].runCard[month].revenue
+						}
 				if ( sum > tco ) { 
 					return month;
 				}
@@ -208,32 +268,45 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 
     /*
-    This function checks each runcard over each month for over consumption of the IaaS
+    This function checks each Runcard over each month for over consumption of the IaaS
      */
     $scope.markupRuncard = function() {
         for (var i =0; i < $scope.forecastLength; i++ ) {
-            var consumedRam = 0;
-            var consumedVCPU = 0;
-            var consumedDisk = 0;
-            $scope.runCards.forEach(function(runCard) {
-                var runCardForMonth = runCard.runCard[i];
-                consumedRam += runCardForMonth.ais * runCard.plan.maxInstanceMem;
-                consumedVCPU += runCardForMonth.ais * $scope.aiAvgVcpu();
-                consumedDisk += runCardForMonth.ais * $scope.aiAvgDisk();
-                runCardForMonth.oversubscribed = new Array();
-                if (consumedRam > $scope.deaRam()) {
-                    runCardForMonth.oversubscribed.push("RAM");
-                }
-                if ( consumedVCPU > $scope.deaVcpu()) {
-                    runCardForMonth.oversubscribed.push("VCPU");
-                }
-                if (runCardForMonth.ais > aiService.aiPacks().value * 50) {
-                    runCardForMonth.oversubscribed.push("AI");
-                }
-                if ( consumedDisk > $scope.deaDisk() ) {
-                    runCardForMonth.oversubscribed.push("Disk");
-                }
-            });
+		            
+        			var consumedRam = 0;
+		            var consumedVCPU = 0;
+		            var consumedDisk = 0;
+            
+		            $scope.runCards.forEach(function(runCard) {
+		                var runCardForMonth = runCard.runCard[i];
+		                var runCardIaasReservation = runCard.plan.consumption;
+		                var runHasIaaS = true;
+		                consumedRam = runCardForMonth.ais * runCard.plan.maxInstanceMem;
+		                consumedVCPU = runCardForMonth.ais * $scope.aiAvgVcpu();
+		                consumedDisk = runCardForMonth.ais * $scope.aiAvgDisk();
+		                runCardForMonth.oversubscribed = new Array();
+		                if (consumedRam >= ($scope.deaRam() * ( runCardIaasReservation * .01))) {
+		                    runCardForMonth.oversubscribed.push("RAM");
+		                    runHasIaaS = false;
+		                }
+		                if ( consumedVCPU >= ($scope.deaVcpu() * ( runCardIaasReservation * .01))) {
+		                	runCardForMonth.oversubscribed.push("VCPU");
+		                    runHasIaaS = false;
+		                }
+		                if (runCardForMonth.ais >= (aiService.aiPacks().value * 50) * (runCardIaasReservation * .01)) {
+		                    runCardForMonth.oversubscribed.push("AI");
+		                    runHasIaaS = false;
+		                }
+		                if ( consumedDisk > ( $scope.deaDisk() * ( runCardIaasReservation * .01))) {
+		                    runCardForMonth.oversubscribed.push("Disk");
+		                    runHasIaaS = false;
+		                }
+		                if ( runHasIaaS == true ) {
+		                    runCardForMonth.oversubscribed.push("IaaS Available");
+		                }
+		                
+		            });
+            
         }
     };
 

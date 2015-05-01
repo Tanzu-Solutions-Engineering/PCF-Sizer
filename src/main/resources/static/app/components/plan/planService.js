@@ -3,7 +3,7 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 	
 	function makeNewPlan(name, memQuota, instanceMaxMem, maxRoutes,
 			maxServiceInstances, paidServicePlans, diskQuota, aiMax, gbPerHr,
-			consumption) { 
+			consumption, costModelType) { 
 		return { 
 			name: name,
 			memoryQuota: memQuota,
@@ -14,7 +14,8 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			diskQuota: diskQuota,
 			aiMax: aiMax,
 			gbPerHr: gbPerHr,
-			consumption: consumption
+			consumption: consumption,
+			costModelType: this.costModelTypeOptions()[0]
 		};
 	};
 	
@@ -23,28 +24,49 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 	        {value: true, label: "yes"}, 
 	        {value: false, label: "no"}
 		];
-	}
+	};
+	
+	function costModelTypeOptions() { 
+		return [
+		    {value: "Billable", label: "Billable"}, 
+	        {value: "Free", label: "Free"}
+		];
+	};
 	
 	function defaultPlan() {
 		return {		
-			name: "Medium",
-			memoryQuota: 16,
+			name: "Small Plan",
+			memoryQuota: 8,
 			maxInstanceMem: 2, 
 			maxRoutes: 16,
-			maxServiceInstances: 32,
+			maxServiceInstances: 16,
 			paidServicePlans: this.paidServicePlanOptions()[0],
-			diskQuota: 32,
-			aiMax: 8,
+			diskQuota: 16,
+			aiMax: 4,
 			gbPerHr: 0,
-			consumption: 1,
-			monthlyBill: 0
+			consumption: 25,
+			monthlyBill: 0,
+			costModelType: this.costModelTypeOptions()[0]
 		}
-	}
+	};
 	
 	var plans = new Array(); 
+	
 	function getPlans() {
 		return plans;
 	}
+	
+
+	function getBillablePlans() {
+		var billPlans = new Array();
+		for( var i = 0; i < plans.length; ++i ) {
+			if (plans[i].costModelType.value == "Billable") {
+				billPlans.push(plans[i])
+			}
+		}
+		return billPlans;
+	}
+
 	
 	function addPlan(plan) { 
 		plans.push(plan);
@@ -63,8 +85,10 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 		newPlan : makeNewPlan,
 		defaultPlan: defaultPlan,
 		paidServicePlanOptions: paidServicePlanOptions,
+		costModelTypeOptions: costModelTypeOptions,
 		getPlans: getPlans,
 		addPlan: addPlan,
 		deletePlan: deletePlan,
+		getBillablePlans: getBillablePlans
 	};
 });
