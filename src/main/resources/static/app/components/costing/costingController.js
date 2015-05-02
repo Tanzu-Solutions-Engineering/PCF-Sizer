@@ -146,7 +146,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			$scope.runCards.forEach(function(runCard){
 				var trBaseMonthly = $scope.calculateBaseMonthly(runCard.plan);
 				for (var i =0; i < $scope.forecasting.burndownMonths; i++ ) {
-					console.log(runCard);
+					//console.log(runCard);
 					if (runCard.runCard[i].costModelType == "Billable"){
 						var trRunCardIterationRevenue = runCard.runCard[i].plansInUse * trBaseMonthly;
 						trRunCards += trRunCardIterationRevenue;
