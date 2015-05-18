@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" class="js flexbox flexboxlegacy csscolumns fontface">
 <head>
 	<title>CloudFoundry Sizing and Costing Tool</title>
 	<link rel="stylesheet" href="/js/pivotal-ui/pivotal-ui.css" type="text/css">
@@ -16,47 +16,50 @@
 
 </head>
 
-<body ng-app="ShekelApp">
+<div ng-app="ShekelApp">
 
-<span class="type-brand-1" ng-controller="ShekelVersionController" >build-id={{version}}</span>
 <h1 class="type-brand-1" >Welcome to Shekel PCF Sizing & Costing Tool:</h1>
 	<div id="warning" >
 		<h3><font color="red" size="3">The IaaS Requirements provided by this tool are for PCF Elastic Runtime only, <br> Any additional PCF Service Tiles will require separate sizing exercise!</font> </h3>
 	</div>
 
-<div ng-controller="ShekelSizingController" id="input">
-    <div id="sizing-input">
-        <h2>Sizing: (Single Foundation)</h2>
-        
-        <div id="ai-packs" >
-	        AI Packs:
-	        <select ng-model="aiPacks" ng-model-options="{ getterSetter: true }"
-	        	ng-options="opt as opt.label for opt in aiPackOptions"></select>
-	        <br>
-	        
-	        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">(Help Me Choose Menu)</a>
-	        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose" ng-include="'app/components/sizing/ai-chooser.html'"></div>   
-	        
-        </div>
-        
-        <br>
-        
-        <div id="platform-properties"  ng-include="'app/components/sizing/platform-form.html'"></div>
-	</div>
-		<br>
-		
-	<div id="resource-ask" >
-	    <a href="#" ng-click="applyTemplate(vmTemplate)"><p>(Refresh All Tables)</p></a>
-	    <div id="resource-list"  ng-include="'app/components/sizing/resource-list.html'"></div>
-	</div>
-	
-	<br>
-	
-    <div id="sizing-output">
-        <a href="#" ng-click="showTable = !showTable"><p>(Show PCF Foundation Details)</p></a>
-    	<div id="vm-detail" ng-show="showTable" ng-include="'app/components/sizing/vm-detail.html'"></div>
-    </div>
-</div>
+<div class="container-fluid pan row grid-show">
+	<div class="app-nav col-md-4">
+		<div class="phl">
+			<h1 class="type-neutral-2 man mtm txt-c"><span class="em-max">Shekel</span></h1>
+			<span class="type-brand-1" ng-controller="ShekelVersionController" >build-id={{version}}</span>
+		</div>
 
+		<ul class="list-group mtl em-alt">
+			<li class="list-group-item">Sizing</li>
+			<li class="list-group-item">Costing</li>
+			<li class="list-group-item">Forecasting</li>
+
+		</ul>
+	</div>
+
+
+	<div class="main-container bg-neutral-10" ng-controller="ShekelSizingController" id="input">
+		<div class="pane bg-neutral-11 col-lg-20">
+			<div id="sizing-input">
+				<div id="platform-properties"  ng-include="'app/components/sizing/platform-form.html'"></div>
+			</div>
+				<br>
+
+			<div id="resource-ask" >
+				<a href="#" ng-click="applyTemplate(vmTemplate)"><p>(Refresh All Tables)</p></a>
+				<div id="resource-list"  ng-include="'app/components/sizing/resource-list.html'"></div>
+			</div>
+
+			<br>
+
+			<div id="sizing-output">
+				<a href="#" ng-click="showTable = !showTable"><p>(Show PCF Foundation Details)</p></a>
+				<div id="vm-detail" ng-show="showTable" ng-include="'app/components/sizing/vm-detail.html'"></div>
+			</div>
+		</div>
+	</div>
+
+</div>
 </body>
 </html>

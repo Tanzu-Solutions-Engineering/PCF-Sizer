@@ -1,49 +1,83 @@
-Avg Mem per AI  (GB):
-<select ng-model="platform.avgRam"
-	ng-options="opt as opt.value for opt in avgRamOptions"></select>
-<br>
+<div class="col-md-10">
+    <form role="form" class="styleguide-form form-inline">
+        <h3>Application Size Estimates</h3>
 
-Avg Storage per AI (GB):
-<select ng-model="platform.avgAIDisk"
-	ng-options="opt as opt.value for opt in avgAIDiskOptions"></select>
-<br><br>
+        <label for="aiPacks">AI Packs</label>
+        <select class="form-control" id="aiPacks" ng-model="aiPacks" ng-model-options="{ getterSetter: true }"
+                ng-options="opt as opt.label for opt in aiPackOptions"></select>
 
+        <a href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">Help Me Choose #AIs</a>
+        <br>
 
-DEA Mem Size:
-<select ng-model="platform.deaSize"
-	ng-options="opt as opt.text for opt in deaSizeOptions">
-</select>
-<br>
+        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose"
+             ng-include="'app/components/sizing/ai-chooser.html'"></div>
 
-DEA Ephemeral Storage Size:
-<select ng-model="platform.deaSizeDisk"
-	ng-options="opt as opt.text for opt in deaSizeOptionsDisk">
-</select>
-<br><br>
+        <div class="form-group">
+            <label for="aiAvgRam">AI Average RAM (GB)</label>
+            <select class="form-control" id="aiAvgRam" ng-model="platform.avgRam"
+                    ng-options="opt as opt.value for opt in avgRamOptions"></select>
+        </div>
+        <br>
 
-AZs # of:
-<input type="number" ng-model="platform.numAZ"></input>
+        <div class="form-group">
+            <label for="aiAvgStorage">AI Average Storage (GB)</label>
+            <select class="form-control" id="aiAvgStorage" ng-model="platform.avgAIDisk"
+                    ng-options="opt as opt.value for opt in avgAIDiskOptions"></select>
+        </div>
+        <br>
 
-<br>
-<!-- 
-AZ Recovery (Ignored, use n+x factor: tracker #91141454):
-<select>
-	<option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
-</select>
--->
+        <div class="form-group">
+            <label for="deaMemSize">DEA Mem Size</label>
+            <select class="form-control" id="deaMemSize" ng-model="platform.deaSize"
+                    ng-options="opt as opt.text for opt in deaSizeOptions">
+            </select>
+        </div>
+        <br>
 
-AZ DEA N+1 Factor:
-<input type="number" ng-model="platform.nPlusX"></input>
+        <div class="form-group">
+            <label for="deaEphemStorage">DEA Ephemeral Storage Size</label>
+            <select class="form-control" id="deaEphemStorage" ng-model="platform.deaSizeDisk"
+                    ng-options="opt as opt.text for opt in deaSizeOptionsDisk">
+            </select>
+        </div>
+    </form>
 
-<br><br>
+    <form role="form" class="styleguide-form form-inline">
+        <h3>Availability Options</h3>
 
-IAAS vCPU to Core Consolidation Ratio:
-<select ng-model="platform.iaasCPUtoCoreRatio"
-	ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions"></select>
-<br><br>
+        <div class="form-group">
+            <label for="azNumber">Availability Zones</label>
+            <input class="form-control" type="number" id="azNumber" ng-model="platform.numAZ"></input>
+        </div>
+        <br>
+        <!--
+        AZ Recovery (Ignored, use n+x factor: tracker #91141454):
+        <select>
+            <option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
+        </select>
+        -->
+        <div class="form-group">
+            <label for="nPlusOne">AZ DEA N+1 Factor</label>
+            <input class="form-control" id="nPlusOne" type="number" ng-model="platform.nPlusX"></input>
+        </div>
+    </form>
 
-PCF Post Errand jobs (i.e. Push Console) #:
-<select ng-model="platform.pcfErrandJobs"
-	ng-options="opt as opt.value for opt in pcfErrandJobsOptions"></select>
-<br><br>
+    <form role="form" class="styleguide-form form-inline">
+        <h3>Stuff I don't know how to name</h3>
+        <div class="form-group">
+            <label for="cpuConsolidation">IAAS vCPU to Core Consolidation Ratio </label>
+            <select class="form-control" id="cpuConsolidation" ng-model="platform.iaasCPUtoCoreRatio"
+                    ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions"></select>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="errands">PCF Post Errand jobs (i.e. Push Console) #</label>
+            <select class="form-control" id="errands" ng-model="platform.pcfErrandJobs"
+                    ng-options="opt as opt.value for opt in pcfErrandJobsOptions"></select>
+
+        </div>
+    </form>
+</div>
+
 
