@@ -1,0 +1,47 @@
+<div>
+    <div role="form" class="form-horizontal">
+        <h3>Application Size Estimates</h3>
+
+        <div class="form-group form-inline">
+            <label class="col-md-13" for="aiPacks">AI Packs
+                <a class="small" href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">HelpMe Choose #AIs</a>
+            </label>
+            <select class="form-control col-md-6" id="aiPacks" ng-model="aiPacks"
+                    ng-model-options="{ getterSetter: true }"
+                    ng-options="opt as opt.label for opt in aiPackOptions"></select>
+
+            <div id="ai-help-me-choose" ng-show="aiHelpMeChoose"
+                 ng-include="'app/components/sizing/ai-chooser.html'"></div>
+        </div>
+
+        <div class="form-group form-inline">
+            <label class="col-md-13" for="aiAvgRam">AI Average RAM (GB)</label>
+
+            <select class="form-control col-md-6" id="aiAvgRam" ng-model="platform.avgRam"
+                    ng-options="opt as opt.value for opt in avgRamOptions"></select>
+        </div>
+
+
+        <div class="form-group form-inline">
+            <label class="col-md-13" for="aiAvgStorage">AI Average Storage (GB)</label>
+            <select class="form-control col-md-6" id="aiAvgStorage" ng-model="platform.avgAIDisk"
+                    ng-options="opt as opt.value for opt in avgAIDiskOptions"></select>
+        </div>
+
+        <div class="form-group form-inline">
+            <label class="col-md-13" for="deaMemSize">DEA Mem Size</label>
+            <select class="form-control col-md-6" id="deaMemSize" ng-model="platform.deaSize"
+                    ng-options="opt as opt.text for opt in deaSizeOptions">
+            </select>
+        </div>
+
+        <div class="form-group form-inline">
+            <label class="col-md-13" for="deaEphemStorage">DEA Ephemeral Storage Size</label>
+            <select class="form-control col-md-6" id="deaEphemStorage" ng-model="platform.deaSizeDisk"
+                    ng-options="opt as opt.text for opt in deaSizeOptionsDisk">
+            </select>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,16 @@
+<div>
+<h3>VM Requirement Details (v1.4)</h3>
+
+<table class="table table-light table-scrollable-body">
+	<thead>
+		<tr>
+			<th>VM</th>
+			<th>Qty</th>
+		</tr>
+	</thead>
+	<tr ng-repeat="vm in getVms()">
+		<td>{{vm.vm}}</td>
+		<td>{{vm.instances}}</td>
+	<tr>
+</table>
+</div>

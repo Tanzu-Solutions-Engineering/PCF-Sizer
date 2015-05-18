@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>CloudFoundry Sizing and Costing Tool</title>
+    <link rel="stylesheet" href="/js/pivotal-ui/pivotal-ui.css" type="text/css">
+    <script src="/js/pivotal-ui/pivotal-ui.js"></script>
+
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/app/components/sizing/sizingController.js"></script>
+    <script src="/app/components/plan/planController.js"></script>
+    <script src="/app/components/plan/planService.js"></script>
+    <script src="/app/components/version/versionController.js"></script>
+    <script src="/app/components/costing/costingController.js"></script>
+    <script src="/app/components/costing/costingDirectives.js"></script>
+
+</head>
+
+<div ng-app="ShekelApp">
+    <div class="alert alert-warning alert-dismissable" id="warning">
+        <button class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        The IaaS Requirements provided by this tool are for PCF Elastic Runtime only.
+        Any additional PCF Service Tiles will require separate sizing exercise!
+    </div>
+
+    <div class="container-fluid pan row grid-show">
+        <div class="app-nav tab-highlight col-md-4">
+            <div class="phl">
+                <h1 class="type-neutral-2 man mtm txt-c"><span class="em-max">Shekel</span></h1>
+            </div>
+
+            <ul class="list-group mtl em-alt">
+                <li class="list-group-item">Sizing</li>
+                <li class="list-group-item">Costing</li>
+                <li class="list-group-item">Forecasting</li>
+            </ul>
+        </div>
+
+
+        <div class="main-container bg-neutral-10 " ng-controller="ShekelSizingController" id="input">
+            <div class="pane bg-neutral-11 col-lg-20">
+                <div id="sizing">
+                    <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a>
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div ng-include="'app/components/sizing/ai-form.html'"></div>
+                        </div>
+                        <div class="col-md-10">
+                            <div ng-include="'app/components/sizing/resource-list.html'"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="az-properties" ng-include="'app/components/sizing/az-form.html'"></div>
+
+                        </div>
+                        <div class="col-md-10">
+                            <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="costing"></div>
+                <div id="forecasting"></div>
+                <div id="foundations"></div>
+            </div>
+        </div>
+    </div>
+    <p class="txr-r" ng-controller="ShekelVersionController">build-id={{version}}</p>
+</div>
+</body>
+
+</html>
