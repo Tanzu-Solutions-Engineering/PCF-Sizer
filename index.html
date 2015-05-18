@@ -40,7 +40,10 @@
 
 
         <div class="main-container bg-neutral-10 " ng-controller="ShekelSizingController" id="input">
+
             <div class="pane bg-neutral-11 col-lg-20">
+                <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a>
+
                 <div class="row">
                     <div class="col-md-10">
                         <div ng-include="'app/components/sizing/ai-form.html'"></div>
@@ -58,12 +61,6 @@
                         <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <a href="#" ng-click="applyTemplate(vmTemplate)"><p>(Refresh All Tables)</p></a>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
