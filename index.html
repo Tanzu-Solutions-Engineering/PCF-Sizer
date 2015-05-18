@@ -17,9 +17,6 @@
 </head>
 
 <div ng-app="ShekelApp">
-
-    <h1 class="type-brand-1">Welcome to Shekel PCF Sizing & Costing Tool:</h1>
-
     <div class="alert alert-warning alert-dismissable" id="warning">
         <button class="close" data-dismiss="alert">
             <i class="fa fa-times"></i>
@@ -45,24 +42,26 @@
         <div class="main-container bg-neutral-10 " ng-controller="ShekelSizingController" id="input">
             <div class="pane bg-neutral-11 col-lg-20">
                 <div class="row">
-                    <div id="sizing-input">
-                        <div id="platform-properties" ng-include="'app/components/sizing/ai-form.html'"></div>
+                    <div class="col-md-10">
+                        <div ng-include="'app/components/sizing/ai-form.html'"></div>
                     </div>
-                    <div id="resource-ask">
-                        <div id="resource-list" ng-include="'app/components/sizing/resource-list.html'"></div>
+                    <div class="col-md-10">
+                        <div ng-include="'app/components/sizing/resource-list.html'"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="availabilityOptions">
-                        <div id="platform-properties" ng-include="'app/components/sizing/az-form.html'"></div>
+                    <div class="col-md-10">
+                        <div id="az-properties" ng-include="'app/components/sizing/az-form.html'"></div>
 
                     </div>
-                    <div id="sizing-output">
+                    <div class="col-md-10">
                         <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <a href="#" ng-click="applyTemplate(vmTemplate)"><p>(Refresh All Tables)</p></a>
+                    <div class="col-md-10">
+                        <a href="#" ng-click="applyTemplate(vmTemplate)"><p>(Refresh All Tables)</p></a>
+                    </div>
                 </div>
 
             </div>
