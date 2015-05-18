@@ -41,43 +41,6 @@
             </select>
         </div>
     </form>
-
-    <form role="form" class="styleguide-form form-inline">
-        <h3>Availability Options</h3>
-
-        <div class="form-group">
-            <label for="azNumber">Availability Zones</label>
-            <input class="form-control" type="number" id="azNumber" ng-model="platform.numAZ"></input>
-        </div>
-        <br>
-        <!--
-        AZ Recovery (Ignored, use n+x factor: tracker #91141454):
-        <select>
-            <option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
-        </select>
-        -->
-        <div class="form-group">
-            <label for="nPlusOne">AZ DEA N+1 Factor</label>
-            <input class="form-control" id="nPlusOne" type="number" ng-model="platform.nPlusX"></input>
-        </div>
-    </form>
-
-    <form role="form" class="styleguide-form form-inline">
-        <h3>Stuff I don't know how to name</h3>
-        <div class="form-group">
-            <label for="cpuConsolidation">IAAS vCPU to Core Consolidation Ratio </label>
-            <select class="form-control" id="cpuConsolidation" ng-model="platform.iaasCPUtoCoreRatio"
-                    ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions"></select>
-        </div>
-        <br>
-
-        <div class="form-group">
-            <label for="errands">PCF Post Errand jobs (i.e. Push Console) #</label>
-            <select class="form-control" id="errands" ng-model="platform.pcfErrandJobs"
-                    ng-options="opt as opt.value for opt in pcfErrandJobsOptions"></select>
-
-        </div>
-    </form>
 </div>
 
 

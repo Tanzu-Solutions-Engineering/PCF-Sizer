@@ -168,8 +168,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     }
     
 	$scope.getVms = function() { return vmLayout; } 
-    $scope.showTable=false;
-    
+
     $scope.iaasAskSummary = {
     	ram: 1,
     	disk: 1, 
