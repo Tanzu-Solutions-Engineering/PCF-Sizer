@@ -45,19 +45,15 @@
                     <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a>
 
                     <div class="row">
+
                         <div class="col-md-10">
                             <div ng-include="'app/components/sizing/ai-form.html'"></div>
-                        </div>
-                        <div class="col-md-10">
-                            <div ng-include="'app/components/sizing/resource-list.html'"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10">
                             <div id="az-properties" ng-include="'app/components/sizing/az-form.html'"></div>
-
                         </div>
+
                         <div class="col-md-10">
+                            <div ng-include="'app/components/sizing/misc-iaas-form.html'"></div>
+                            <div ng-include="'app/components/sizing/resource-list.html'"></div>
                             <div ng-include="'app/components/sizing/dea-detail.html'"></div>
                         </div>
                     </div>
