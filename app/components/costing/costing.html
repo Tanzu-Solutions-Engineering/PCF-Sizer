@@ -1,34 +1,32 @@
-<div id="costing" ng-controller="ShekelCostingController" >
-    <h2>Costing: (Single Foundation)</h2>
+<div id="costing" ng-controller="ShekelCostingController">
+    <div class="row">
+        <h3>Usable DEA Resources</h3>
+        <div class="form-group">
+            <label for="deaVcpu">vCPU</label>
+            <span id="deaVcpu">{{deaVcpu()}}</span>
+        </div>
 
-    <div id="deaAllocations">
-        <h3><p>IaaS Inputs from Sizing</p></h3>
-        <table width="300">
-            <caption>Iaas Resources 'Use-Able' to Elastic Runtime AIs from DEAs (Factoring Overhead)</caption>
-            <tr>
-                <td>vCPU #</td>
-                <td>{{deaVcpu()}}</td>
-            </tr>
-            <tr>
-                <td>Memory (GB)</th>
-                <td>{{deaRam()}}</td>
-            </tr>
-            <tr>
-                <td>Storage (GB)</td>
-                <td>{{deaDisk()}}</td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <label for="deaRAM">Memory (GB)</label>
+            <span id="deaRAM">{{deaRam()}}</span>
+        </div>
+        <div class="form-group">
+            <label for="deaRAM">Storage (GB)</label>
+            <span id="deaRAM">{{deaDisk()}}</span>
+        </div>
     </div>
     <br>
+
     <div id="per-instance-allocations">
         <table width="300">
-            <caption>Avg Available IaaS Resources Per AI</caption>
+            <h3>Avg Available IaaS Resources Per AI</h3>
             <tr>
                 <td>vCPU % per AI</td>
                 <td>{{aiAvgVcpu()}}</td>
             </tr>
             <tr>
-                <td>Memory (GB)</th>
+                <td>Memory (GB)
+                </th>
                 <td>{{aiAvgRam()}}</td>
             </tr>
             <tr>
@@ -39,8 +37,9 @@
     </div>
 
     <div id="costing-input">
-        <h3><p>Costing Inputs</p></h3>
+        <h3>Costing Inputs</h3>
         Forecast Duration (Months) <input ng-model="forecastLength" type="number">
+
         <div>
             PCF Cost: <input ng-model="paasCost" type="number">
             <input type="radio" ng-model="paasMonthly" value="monthly">Monthly
@@ -57,6 +56,7 @@
             <input type="radio" ng-model="opexMonthly" value="duration">Duration
         </form>
         <br>
+
         <div id="tco">
             <table width="300">
                 <caption>TCO for Foundation</caption>
@@ -65,12 +65,17 @@
                     <th>Cost</th>
                 </tr>
                 <tr>
-                    <td>Duration</th>
-                    <td><shkl-money value="{{getDurationTCO()}}"></shkl-money></td>
+                    <td>Duration
+                    </th>
+                    <td>
+                        <shkl-money value="{{getDurationTCO()}}"></shkl-money>
+                    </td>
                 </tr>
                 <tr>
                     <td>Monthly</td>
-                    <td><shkl-money value="{{getMonthlyTCO()}}"></shkl-money></td>
+                    <td>
+                        <shkl-money value="{{getMonthlyTCO()}}"></shkl-money>
+                    </td>
                 </tr>
             </table>
 
@@ -79,28 +84,34 @@
                 <shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly.</a>  -->
         </div>
         <br>
+
         <div id="payout">
-            <p class="rmargin">
-                <span> Assuming all <span class="showback">{{deaRam()}}</span>(GB) of Available DEA Memory is consumed by AIs for the <span class="showback"><shkl-month value="{{forecastLength}}"></shkl-month></span> month forecast duration, </span>
+            <p>
+                <span> Assuming all <span class="showback">{{deaRam()}}</span>(GB) of Available DEA Memory is consumed by AIs for the <span
+                        class="showback"><shkl-month value="{{forecastLength}}"></shkl-month></span> month forecast duration, </span>
                 <span> <span class="showback"><shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money></span> per GB/hour is your cost to deliver per AI. </span>
             </p>
         </div>
     </div>
     <div id="forecasting-input">
-        <h3><p>DEA IaaS Capacity Forecasting Inputs</p>
-        </h3>
+        <h3>DEA IaaS Capacity Forecasting Inputs</h3>
+
         <div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
         <div id="forecasting-payout">
             <p>
                 You will pay off your PCF Foundation in
-                <shkl-month value="{{getPayoffMonths()}}"></shkl-month> months using a price of
+                <shkl-month value="{{getPayoffMonths()}}"></shkl-month>
+                months using a price of
                 <span class="best-practice"> <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> </span> gb/hr.
             </p>
             <p>
                 With your expected rampup and plans you'll be profitable in ~ {{calculatePayoffWithPlans()}} months.
             </p>
+
             <p>
-                You will have an Estimated Profit/Loss of: <shkl-money value="{{totalProfit()}}"></shkl-money> at the end of {{forecastLength}} months.
+                You will have an Estimated Profit/Loss of:
+                <shkl-money value="{{totalProfit()}}"></shkl-money>
+                at the end of {{forecastLength}} months.
             </p>
         </div>
     </div>
@@ -110,9 +121,11 @@
             <div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
             <br>
             <a href="#" ng-click="showPlanForm=!showPlanForm">(New Plan Menu)</a>
+
             <div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
         </div>
         <br>
+
         <h3><p>Plan Run Cards</p></h3>
         <div id="runcard-table" ng-include="'/app/components/forecasting/run_card.html'"></div>
     </div>
