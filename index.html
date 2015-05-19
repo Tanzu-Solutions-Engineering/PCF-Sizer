@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
     <title>CloudFoundry Sizing and Costing Tool</title>
-    <link rel="stylesheet" href="/js/pivotal-ui/pivotal-ui.css" type="text/css">
+    <link rel="stylesheet" href="/js/pivotal-ui/pivotal-ui.css">
     <script src="/js/pivotal-ui/pivotal-ui.js"></script>
 
     <script src="/js/angular.min.js"></script>
@@ -28,21 +28,20 @@
     <div class="tab-responsive">
         <div class="col-md-4">
 
-            <div class="phl">
-                <h1 class="txt-c"><span class="em-max">Shekel</span></h1>
-            </div>
+            <h1 class="type-neutral-2 man mtm txt-c"><span class="em-max">Shekel</span></h1>
+
             <div class="row">
-                <ul class="nav hidden-xs" style="list-style-type: none;">
-                    <li class="list-group-item active">
+                <ul class="nav hidden-xs">
+                    <li class="active">
                         <a data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
                     </li>
-                    <li class="list-group-item">
+                    <li>
                         <a data-toggle="tab" href="#tab-responsive-costing">Costing</a>
                     </li>
-                    <li class="list-group-item">
+                    <li>
                         <a data-toggle="tab" href="#tab-responsive-forecasting">Forecasting</a>
                     </li>
-                    <li class="list-group-item">
+                    <li>
                         <a data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
                     </li>
 
@@ -54,9 +53,9 @@
     </div>
 
 
-    <div class="main-container bg-neutral-10 " ng-controller="ShekelSizingController" id="input">
+    <div class="bg-neutral-10" ng-controller="ShekelSizingController" id="input">
         <div class="pane bg-neutral-11 col-lg-20">
-            <ul class="tab-content" style="list-style-type: none;">
+            <ul class="tab-content list-unstyled" >
                 <li class="active" id="sizing">
                     <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
                 </li>
