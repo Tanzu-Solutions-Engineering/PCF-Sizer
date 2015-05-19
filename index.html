@@ -55,22 +55,26 @@
 
     <div class="bg-neutral-10" ng-controller="ShekelSizingController" id="input">
         <div class="pane bg-neutral-11 col-lg-20">
-            <ul class="tab-content list-unstyled" >
+            <ul class="tab-content list-unstyled">
                 <li class="active" id="sizing">
                     <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
                 </li>
-
                 <li class="tab-pane active fade in" id="tab-responsive-sizing">
                     <div ng-include="'app/components/sizing/sizing.html'"></div>
                 </li>
+
                 <li>
                     <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
                 </li>
-                <li class="tab-pane fade" id="tab-responsive-costing">Costing</li>
+                <li class="tab-pane fade" id="tab-responsive-costing">
+                    <div ng-include="'app/components/costing/costing.html'"></div>
+                </li>
+
                 <li>
                     <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-forecasting">Forecasting</a>
                 </li>
                 <li class="tab-pane fade" id="tab-responsive-forecasting">Forecasting</li>
+
                 <li>
                     <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
                 </li>
