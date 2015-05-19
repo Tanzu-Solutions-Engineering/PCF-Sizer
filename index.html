@@ -25,50 +25,76 @@
         Any additional PCF Service Tiles will require separate sizing exercise!
     </div>
 
-    <div class="container-fluid pan row grid-show">
-        <div class="app-nav tab-highlight col-md-4">
+        <div class="app-nav tab-responsive col-md-4">
             <div class="phl">
                 <h1 class="type-neutral-2 man mtm txt-c"><span class="em-max">Shekel</span></h1>
             </div>
 
-            <ul class="list-group mtl em-alt">
-                <li class="list-group-item">Sizing</li>
-                <li class="list-group-item">Costing</li>
-                <li class="list-group-item">Forecasting</li>
-            </ul>
+            <div class="row">
+                <ul class="list-group mtl em-alt nav hidden-xs" style="list-style-type: none;">
+                    <li class="list-group-item active">
+                        <a data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a data-toggle="tab" href="#tab-responsive-costing">Costing</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a data-toggle="tab" href="#tab-responsive-forecasting">Forecasting</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
 
 
         <div class="main-container bg-neutral-10 " ng-controller="ShekelSizingController" id="input">
             <div class="pane bg-neutral-11 col-lg-20">
-                <div id="sizing">
-                    <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a>
+                <ul class="tab-content" style="list-style-type: none;">
+                    <li class="active" id="sizing">
+                        <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
+                    </li>
 
-                    <div class="row">
+                    <li class="tab-pane active fade in" id="tab-responsive-sizing">
+                        <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a>
 
-                        <div class="col-md-10">
-                            <div ng-include="'app/components/sizing/ai-form.html'"></div>
-                            <div id="az-properties" ng-include="'app/components/sizing/az-form.html'"></div>
+                        <div class="row">
+
+                            <div class="col-md-10">
+                                <div ng-include="'app/components/sizing/ai-form.html'"></div>
+                                <div id="az-properties" ng-include="'app/components/sizing/az-form.html'"></div>
+                            </div>
+
+                            <div class="col-md-10">
+                                <div ng-include="'app/components/sizing/misc-iaas-form.html'"></div>
+                                <div ng-include="'app/components/sizing/resource-list.html'"></div>
+                                <div ng-include="'app/components/sizing/dea-detail.html'"></div>
+                            </div>
                         </div>
-
-                        <div class="col-md-10">
-                            <div ng-include="'app/components/sizing/misc-iaas-form.html'"></div>
-                            <div ng-include="'app/components/sizing/resource-list.html'"></div>
-                            <div ng-include="'app/components/sizing/dea-detail.html'"></div>
+                        <div class="row col-lg-20">
+                            <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
                         </div>
-                    </div>
-                    <div class="row col-lg-20">
-                        <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
-                    </div>
-                </div>
-                <div id="costing"></div>
-                <div id="forecasting"></div>
-                <div id="foundations"></div>
+                    </li>
+                    <li>
+                        <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
+                    </li>
+                    <li class="tab-pane fade" id="tab-responsive-costing">Costing</li>
+                    <li>
+                        <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-forecasting">Forecasting</a>
+                    </li>
+                    <li class="tab-pane fade" id="tab-responsive-forecasting">Forecasting</li>
+                    <li>
+                        <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
+                    </li>
+                    <li class="tab-pane fade" id="tab-responsive-foundations">Foundations</li>
+
+                </ul>
             </div>
         </div>
     </div>
     <p class="txr-r" ng-controller="ShekelVersionController">build-id={{version}}</p>
-</div>
 </body>
 
 </html>
