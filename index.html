@@ -61,24 +61,7 @@
                 </li>
 
                 <li class="tab-pane active fade in" id="tab-responsive-sizing">
-                    <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a>
-
-                    <div class="row">
-
-                        <div class="col-md-10">
-                            <div ng-include="'app/components/sizing/ai-form.html'"></div>
-                            <div id="az-properties" ng-include="'app/components/sizing/az-form.html'"></div>
-                        </div>
-
-                        <div class="col-md-10">
-                            <div ng-include="'app/components/sizing/misc-iaas-form.html'"></div>
-                            <div ng-include="'app/components/sizing/resource-list.html'"></div>
-                            <div ng-include="'app/components/sizing/dea-detail.html'"></div>
-                        </div>
-                    </div>
-                    <div class="row col-lg-20">
-                        <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
-                    </div>
+                    <div ng-include="'app/components/sizing/sizing.html'"></div>
                 </li>
                 <li>
                     <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
