@@ -11,24 +11,27 @@
         </div>
 
 
-        <div class="row"><div ng-include="'/app/components/costing/tco.html'"></div></div>
-
-        <div id="payout">
-            <p>
-                <span> Assuming all <span class="showback">{{deaRam()}}</span>(GB) of Available DEA Memory is consumed by AIs for the <span
-                        class="showback"><shkl-month value="{{forecastLength}}"></shkl-month></span> month forecast duration, </span>
-                <span> <span class="showback"><shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money></span> per GB/hour is your cost to deliver per AI. </span>
-            </p>
-        </div>
+    </div>
+    <div class="row">
+        <div ng-include="'/app/components/costing/tco.html'"></div>
     </div>
 
+    <div class="row">
+        <h3>Payoff Summary</h3>
+        <p>
+            Assuming all {{deaRam()}}(GB) of Available DEA Memory is consumed by AIs for the
+            <shkl-month value="{{forecastLength}}"></shkl-month>
+            month forecast duration,
+            <shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money>
+            per GB/hour is your cost to deliver per AI.
+        </p>
+    </div>
     <div id="row" ng-include="'/app/components/costing/costing-summary.html'"></div>
 
     <div id="forecasting-runcard">
         <h3><p>Plans</p></h3>
         <div id="plans" ng-controller="ShekelPlanController">
             <div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
-            <br>
             <a href="#" ng-click="showPlanForm=!showPlanForm">(New Plan Menu)</a>
 
             <div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
