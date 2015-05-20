@@ -2,109 +2,126 @@
     <div class="row">
         <h3>Usable DEA Resources</h3>
 
-        <div class="col-md-5">
-            <shkl-form-group label="vCPU" value="{{deaVcpu()}}"></shkl-form-group>
-            <shkl-form-group label="Memory (GB)" value="{{deaRam()}}"></shkl-form-group>
-            <shkl-form-group label="Storage (GB)" value="{{deaDisk()}}"></shkl-form-group>
+        <div class="row">
+            <div class="col-md-5">
+                <shkl-form-group label="vCPU" value="{{deaVcpu()}}"></shkl-form-group>
+                <shkl-form-group label="Memory (GB)" value="{{deaRam()}}"></shkl-form-group>
+                <shkl-form-group label="Storage (GB)" value="{{deaDisk()}}"></shkl-form-group>
+            </div>
+            <div class="col-md-5">
+                <shkl-form-group label="vCPU % per AI" value="{{aiAvgVcpu()}}"></shkl-form-group>
+                <shkl-form-group label="Memory (GB)" value="{{aiAvgRam()}}"></shkl-form-group>
+                <shkl-form-group label="Storage (GB)" value=" {{aiAvgDisk()}}" did></shkl-form-group>
+            </div>
         </div>
-        <div class="col-md-5">
-            <shkl-form-group label="vCPU % per AI" value="{{aiAvgVcpu()}}"></shkl-form-group>
-            <shkl-form-group label="Memory (GB)" value="{{aiAvgRam()}}"></shkl-form-group>
-            <shkl-form-group label="Storage (GB)" value=" {{aiAvgDisk()}}"did ></shkl-form-group>
+
+
+        <div class="row">
+            <div class="col-md-10">
+                <h3>Costing Inputs</h3>
+
+                <div class="row">
+                    <shkl-num-input-form-group label="Forecast Duration (Months)"
+                                               ng-model="forecastLength"></shkl-num-input-form-group>
+                </div>
+
+                <div>
+                    <shkl-num-input-form-group label="PCF Cost" ng-model="paasCost"></shkl-num-input-form-group>
+
+                    <input type="radio" ng-model="paasMonthly" value="monthly">Monthly
+                    <input type="radio" ng-model="paasMonthly" value="duration">Duration
+                </div>
+
+
+                <div>
+                    <shkl-num-input-form-group label="IaaS Cost" ng-model="iaasCost"></shkl-num-input-form-group>
+
+                    <input type="radio" ng-model="iaasMonthly" value="monthly">Monthly
+                    <input type="radio" ng-model="iaasMonthly" value="duration">Duration
+                </div>
+
+
+                <div>
+                    <shkl-num-input-form-group label="Operational Cost" ng-model="opexCost"></shkl-num-input-form-group>
+
+                    <input type="radio" ng-model="opexMonthly" value="monthly">Monthly
+                    <input type="radio" ng-model="opexMonthly" value="duration">Duration
+                </div>
+            </div>
+
         </div>
 
-        <div id="costing-input">
-            <h3>Costing Inputs</h3>
-            Forecast Duration (Months) <input ng-model="forecastLength" type="number">
+        <div id="tco">
+            <table width="300">
+                <caption>TCO for Foundation</caption>
+                <tr>
+                    <th>Cost Type</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>Duration
+                    </th>
+                    <td>
+                        <shkl-money value="{{getDurationTCO()}}"></shkl-money>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Monthly</td>
+                    <td>
+                        <shkl-money value="{{getMonthlyTCO()}}"></shkl-money>
+                    </td>
+                </tr>
+            </table>
 
-            <div>
-                PCF Cost: <input ng-model="paasCost" type="number">
-                <input type="radio" ng-model="paasMonthly" value="monthly">Monthly
-                <input type="radio" ng-model="paasMonthly" value="duration">Duration
-            </div>
-            <div>
-                IaaS Cost: <input ng-model="iaasCost" type="number">
-                <input type="radio" ng-model="iaasMonthly" value="monthly">Monthly
-                <input type="radio" ng-model="iaasMonthly" value="duration">Duration
-            </div>
-            <form>
-                Operational Cost: <input ng-model="opexCost" type="number">
-                <input type="radio" ng-model="opexMonthly" value="monthly">Monthly
-                <input type="radio" ng-model="opexMonthly" value="duration">Duration
-            </form>
-            <br>
+            <!-- MG Commented Out <a>Total TCO is: <shkl-money value="{{getDurationTCO()}}"></shkl-money> over
+                <shkl-month value="{{forecastLength}}"></shkl-month> months,
+                <shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly.</a>  -->
+        </div>
+        <br>
 
-            <div id="tco">
-                <table width="300">
-                    <caption>TCO for Foundation</caption>
-                    <tr>
-                        <th>Cost Type</th>
-                        <th>Cost</th>
-                    </tr>
-                    <tr>
-                        <td>Duration
-                        </th>
-                        <td>
-                            <shkl-money value="{{getDurationTCO()}}"></shkl-money>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Monthly</td>
-                        <td>
-                            <shkl-money value="{{getMonthlyTCO()}}"></shkl-money>
-                        </td>
-                    </tr>
-                </table>
-
-                <!-- MG Commented Out <a>Total TCO is: <shkl-money value="{{getDurationTCO()}}"></shkl-money> over
-                    <shkl-month value="{{forecastLength}}"></shkl-month> months,
-                    <shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly.</a>  -->
-            </div>
-            <br>
-
-            <div id="payout">
-                <p>
+        <div id="payout">
+            <p>
                 <span> Assuming all <span class="showback">{{deaRam()}}</span>(GB) of Available DEA Memory is consumed by AIs for the <span
                         class="showback"><shkl-month value="{{forecastLength}}"></shkl-month></span> month forecast duration, </span>
-                    <span> <span class="showback"><shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money></span> per GB/hour is your cost to deliver per AI. </span>
-                </p>
-            </div>
-        </div>
-        <div id="forecasting-input">
-            <h3>DEA IaaS Capacity Forecasting Inputs</h3>
-
-            <div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
-            <div id="forecasting-payout">
-                <p>
-                    You will pay off your PCF Foundation in
-                    <shkl-month value="{{getPayoffMonths()}}"></shkl-month>
-                    months using a price of
-                    <span class="best-practice"> <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> </span>
-                    gb/hr.
-                </p>
-                <p>
-                    With your expected rampup and plans you'll be profitable in ~ {{calculatePayoffWithPlans()}} months.
-                </p>
-
-                <p>
-                    You will have an Estimated Profit/Loss of:
-                    <shkl-money value="{{totalProfit()}}"></shkl-money>
-                    at the end of {{forecastLength}} months.
-                </p>
-            </div>
-        </div>
-        <div id="forecasting-runcard">
-            <h3><p>Plans</p></h3>
-            <div id="plans" ng-controller="ShekelPlanController">
-                <div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
-                <br>
-                <a href="#" ng-click="showPlanForm=!showPlanForm">(New Plan Menu)</a>
-
-                <div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
-            </div>
-            <br>
-
-            <h3><p>Plan Run Cards</p></h3>
-            <div id="runcard-table" ng-include="'/app/components/forecasting/run_card.html'"></div>
+                <span> <span class="showback"><shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money></span> per GB/hour is your cost to deliver per AI. </span>
+            </p>
         </div>
     </div>
+    <div id="forecasting-input">
+        <h3>DEA IaaS Capacity Forecasting Inputs</h3>
+
+        <div id="costing-form" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
+        <div id="forecasting-payout">
+            <p>
+                You will pay off your PCF Foundation in
+                <shkl-month value="{{getPayoffMonths()}}"></shkl-month>
+                months using a price of
+                <span class="best-practice"> <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money> </span>
+                gb/hr.
+            </p>
+            <p>
+                With your expected rampup and plans you'll be profitable in ~ {{calculatePayoffWithPlans()}} months.
+            </p>
+
+            <p>
+                You will have an Estimated Profit/Loss of:
+                <shkl-money value="{{totalProfit()}}"></shkl-money>
+                at the end of {{forecastLength}} months.
+            </p>
+        </div>
+    </div>
+    <div id="forecasting-runcard">
+        <h3><p>Plans</p></h3>
+        <div id="plans" ng-controller="ShekelPlanController">
+            <div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
+            <br>
+            <a href="#" ng-click="showPlanForm=!showPlanForm">(New Plan Menu)</a>
+
+            <div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
+        </div>
+        <br>
+
+        <h3><p>Plan Run Cards</p></h3>
+        <div id="runcard-table" ng-include="'/app/components/forecasting/run_card.html'"></div>
+    </div>
+</div>
