@@ -21,7 +21,7 @@
 		<td><input type="number" ng-model="plan.maxRoutes"></td>
 		<td><input type="number" ng-model="plan.maxServiceInstances"></td>
 		<td>
-			<select ng-model="plan.paidServicePlans">
+			<select ng-model="plan.paidServicePlans" ng-init="plan.paidServicePlans=plan.paidServicePlans">
 				<option value="true">true</option>
 				<option value="false">false</option>
 			</select>
@@ -31,8 +31,8 @@
 		<td><input type="number" ng-model="plan.consumption"></td>
 		<td><shkl-money value="{{plan.monthlyBill}}"></shkl-money></td>
 		<td>
-			<select ng-model="plan.costModelType" ng-model-options="{ getterSetter: true }"
-				ng-options="opt as opt.label for opt in costModelTypeOptions"></select>
+			<select ng-model="plan.costModelType" ng-options="opt.value for opt in costModelTypeOptions" 
+				ng-model-options="{ getterSetter: true }" ng-init="plan.costModelType=costModelTypeOptions[0]"> </select>
 		</td>
 		<td><a href="#" ng-click="deletePlan(plan)">delete</a></td>
 	</tr>

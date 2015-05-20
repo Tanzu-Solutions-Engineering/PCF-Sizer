@@ -163,7 +163,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.runCards = []; 
 	
 	$scope.calculateMonthly = function(plan) {
-		if ("Free" == plan.costModelTypeValue.value) {
+		//console.log("ShekelCostingController:MGLOG:" + plan.costModelType.value)
+		if ("Free" == plan.costModelType.value) {
 			return 0;
 		}
 		var monthlyBill = $scope.calculateBaseMonthly(plan) * $scope.getGbPerHrWithPoints();

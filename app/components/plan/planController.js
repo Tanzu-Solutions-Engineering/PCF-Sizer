@@ -7,6 +7,7 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 	$scope.paidServicePlanOptions = planService.paidServicePlanOptions();
 
 	$scope.costModelTypeOptions = planService.costModelTypeOptions();
+	$scope.costModelTypeOption = planService.costModelTypeOptions()[0];
 	
 	$scope.plans = planService.getPlans();
 	/** 
@@ -19,7 +20,7 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 				$scope.plan.maxInstanceMem, $scope.plan.maxRoutes, 
 				$scope.plan.maxServiceInstances,$scope.plan.paidServicePlans.value,  
 				$scope.plan.diskQuota, $scope.plan.aiMax, $scope.plan.gbPerHr,
-				$scope.plan.consumption, $scope.plan.costModelType));
+				$scope.plan.consumption, planService.costModelTypeOptions()[0]));
 	};
 
 
