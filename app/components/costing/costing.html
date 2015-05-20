@@ -13,18 +13,10 @@
 
     </div>
     <div class="row">
-        <div ng-include="'/app/components/costing/tco.html'"></div>
-    </div>
+        <div class="col-md-10" ng-include="'/app/components/costing/payoff-summary.html'"></div>
+        <div class="col-md-10" ng-include="'/app/components/costing/tco.html'"></div>
 
-    <div class="row">
-        <h3>Payoff Summary</h3>
-        <p>
-            Assuming all {{deaRam()}}(GB) of Available DEA Memory is consumed by AIs for the
-            <shkl-month value="{{forecastLength}}"></shkl-month>
-            month forecast duration,
-            <shkl-money value="{{gbPerHrBreakEven()}}"></shkl-money>
-            per GB/hour is your cost to deliver per AI.
-        </p>
+
     </div>
     <div id="row" ng-include="'/app/components/costing/costing-summary.html'"></div>
 
