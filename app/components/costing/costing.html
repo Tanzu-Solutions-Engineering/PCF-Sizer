@@ -1,6 +1,6 @@
 <div id="costing" ng-controller="ShekelCostingController">
     <div class="row">
-        <h3>Usable DEA Resources</h3>
+        <h3>DEA Resource Summary</h3>
 
         <div class="row">
             <div class="col-md-5">
@@ -11,73 +11,16 @@
             <div class="col-md-5">
                 <shkl-form-group label="vCPU % per AI" value="{{aiAvgVcpu()}}"></shkl-form-group>
                 <shkl-form-group label="Memory (GB)" value="{{aiAvgRam()}}"></shkl-form-group>
-                <shkl-form-group label="Storage (GB)" value=" {{aiAvgDisk()}}" did></shkl-form-group>
+                <shkl-form-group label="Storage (GB)" value=" {{aiAvgDisk()}}"></shkl-form-group>
             </div>
         </div>
 
 
         <div class="row">
-            <div class="col-md-10">
-                <h3>Costing Inputs</h3>
-
-                <div class="row">
-                    <shkl-num-input-form-group label="Forecast Duration (Months)"
-                                               ng-model="forecastLength"></shkl-num-input-form-group>
-                </div>
-
-                <div>
-                    <shkl-num-input-form-group label="PCF Cost" ng-model="paasCost"></shkl-num-input-form-group>
-
-                    <input type="radio" ng-model="paasMonthly" value="monthly">Monthly
-                    <input type="radio" ng-model="paasMonthly" value="duration">Duration
-                </div>
-
-
-                <div>
-                    <shkl-num-input-form-group label="IaaS Cost" ng-model="iaasCost"></shkl-num-input-form-group>
-
-                    <input type="radio" ng-model="iaasMonthly" value="monthly">Monthly
-                    <input type="radio" ng-model="iaasMonthly" value="duration">Duration
-                </div>
-
-
-                <div>
-                    <shkl-num-input-form-group label="Operational Cost" ng-model="opexCost"></shkl-num-input-form-group>
-
-                    <input type="radio" ng-model="opexMonthly" value="monthly">Monthly
-                    <input type="radio" ng-model="opexMonthly" value="duration">Duration
-                </div>
-            </div>
-
+            <div class="col-md-10" ng-include="'/app/components/costing/costing-input.html'"></div>
         </div>
 
-        <div id="tco">
-            <table width="300">
-                <caption>TCO for Foundation</caption>
-                <tr>
-                    <th>Cost Type</th>
-                    <th>Cost</th>
-                </tr>
-                <tr>
-                    <td>Duration
-                    </th>
-                    <td>
-                        <shkl-money value="{{getDurationTCO()}}"></shkl-money>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Monthly</td>
-                    <td>
-                        <shkl-money value="{{getMonthlyTCO()}}"></shkl-money>
-                    </td>
-                </tr>
-            </table>
-
-            <!-- MG Commented Out <a>Total TCO is: <shkl-money value="{{getDurationTCO()}}"></shkl-money> over
-                <shkl-month value="{{forecastLength}}"></shkl-month> months,
-                <shkl-money value="{{getMonthlyTCO()}}"></shkl-money> monthly.</a>  -->
-        </div>
-        <br>
+        <div class="row" ><div class="col-md-10" ng-include="'/app/components/costing/tco.html'"</div></div>
 
         <div id="payout">
             <p>

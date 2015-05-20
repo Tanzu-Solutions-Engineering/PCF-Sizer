@@ -1,0 +1,20 @@
+<h3>Costing Inputs</h3>
+<div class="row">
+    <shkl-num-input-form-group label="Forecast Duration (Months)"
+                               ng-model="forecastLength"></shkl-num-input-form-group>
+</div>
+<div class="row">
+    <shkl-num-input-form-group label="PCF Cost" ng-model="paasCost"></shkl-num-input-form-group>
+    <input type="radio" ng-model="paasMonthly" value="monthly">Monthly
+    <input type="radio" ng-model="paasMonthly" value="duration">Duration
+</div>
+<div class="row">
+    <shkl-num-input-form-group label="IaaS Cost" ng-model="iaasCost"></shkl-num-input-form-group>
+    <input type="radio" ng-model="iaasMonthly" value="monthly">Monthly
+    <input type="radio" ng-model="iaasMonthly" value="duration">Duration
+</div>
+<div class="row">
+    <shkl-num-input-form-group label="Operational Cost" ng-model="opexCost"></shkl-num-input-form-group>
+    <input type="radio" ng-model="opexMonthly" value="monthly">Monthly
+    <input type="radio" ng-model="opexMonthly" value="duration">Duration
+</div>
