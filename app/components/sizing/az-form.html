@@ -2,20 +2,7 @@
     <form role="form" class="form-horizontal">
         <h3>Availability Options</h3>
 
-        <div class="form-group form-inline">
-            <label class="col-md-13" for="azNumber">Availability Zones</label>
-            <input class="form-control col-md-6" type="number" id="azNumber" ng-model="platform.numAZ">
-        </div>
-        <br>
-        <!--
-        AZ Recovery (Ignored, use n+x factor: tracker #91141454):
-        <select>
-            <option ng-repeat="i in aZRecoveryCapacity">{{i}}%</option>
-        </select>
-        -->
-        <div class="form-group form-inline">
-            <label class="col-md-13" for="nPlusOne">AZ DEA N+1 Factor</label>
-            <input class="form-control col-md-6" id="nPlusOne" type="number" ng-model="platform.nPlusX">
-        </div>
+        <shkl-num-input-form-group label="Availability Zone" ng-model="platform.numAZ"></shkl-num-input-form-group>
+        <shkl-num-input-form-group label="AZ DEA N+1 Factor" ng-model="platform.nPlusX"></shkl-num-input-form-group>
     </form>
 </div>

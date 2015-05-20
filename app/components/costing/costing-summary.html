@@ -1,0 +1,15 @@
+<div id="forecasting-payout" class="row">
+    <p>
+        You will pay off your PCF Foundation in <shkl-month value="{{getPayoffMonths()}}"></shkl-month>
+        months using a price of <shkl-money value="{{getGbPerHrWithPoints()}}"></shkl-money>
+        gb/hr.
+    </p>
+    <p>
+        With your expected rampup and plans you'll be profitable in ~ {{calculatePayoffWithPlans()}} months.
+    </p>
+
+    <p>
+        You will have an Estimated Profit/Loss of <shkl-money value="{{totalProfit()}}"></shkl-money> at the end of
+        {{forecastLength}} months.
+    </p>
+</div>
