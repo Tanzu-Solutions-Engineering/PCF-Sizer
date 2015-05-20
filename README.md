@@ -1,6 +1,8 @@
 #Getting Started
 #Overview
-For now we're using a simple spring boot ws project to serve static content. 
+We use a node app to hand out static content ([app.js](https://github.com/pivotalservices/shekel/blob/master/app.js)). 
+Fire it up (`node app.js`) and browse to http://localhost:3000, bask in the warm glow that is Shekel.
+
 ##Testing
 We're using jasmine and karma. Get those installed via NPM. 
 
@@ -16,18 +18,17 @@ npm install -g karma
 npm install -g karma-jasmine --save-dev
 npm install -g karma-phantomjs-launcher
 ```
-
-Tests are located in `shekel/src/main/resources/static/test/spec`. 
+Tests are located in `test/spec`. 
 
 To run them we use `karma`. 
 
 Assuming you're on a mac, and it acts like mine: 
 
 ```
-cd ~/git/shekel/src/main/resources/static
+cd ~/git/shekel
 /usr/local/lib/node_modules/karma/bin/karma start test/karma.conf.js
 ``` 
 
 That should get you going. If you can't find karma run `npm -g list` and make sure it's installed. 
-
+Coverage is lackluster, help us make it better if you like. 
 
