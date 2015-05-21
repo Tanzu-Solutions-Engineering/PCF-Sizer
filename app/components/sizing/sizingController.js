@@ -229,4 +229,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     };
     
 	$scope.loadAzTemplate();
+	
+	$scope.dropDownTriggerSizing = function () {
+		console.log("ShekelSizingController:MGLOG:" + "Triggered Sizing Data Refresh");
+		$scope.applyTemplate($scope.vmTemplate)		
+	};
 });

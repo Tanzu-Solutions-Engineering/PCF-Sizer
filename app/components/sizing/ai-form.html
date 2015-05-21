@@ -7,7 +7,8 @@
         </label>
         <select class="form-control col-md-6" id="aiPacks" ng-model="aiPacks"
                 ng-model-options="{ getterSetter: true }"
-                ng-options="opt as opt.label for opt in aiPackOptions"></select>
+                ng-options="opt as opt.label for opt in aiPackOptions" ng-change="dropDownTriggerSizing()">
+        </select>
 
         <div id="ai-help-me-choose" ng-show="aiHelpMeChoose"
              ng-include="'app/components/sizing/ai-chooser.html'"></div>
@@ -17,34 +18,37 @@
         <label class="col-md-13" for="aiAvgRam">AI Average RAM (GB)</label>
 
         <select class="form-control col-md-6" id="aiAvgRam" ng-model="platform.avgRam"
-                ng-options="opt as opt.value for opt in avgRamOptions"></select>
+                ng-options="opt as opt.value for opt in avgRamOptions" ng-change="dropDownTriggerSizing()">
+        </select>
     </div>
 
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="aiAvgStorage">AI Average Storage (GB)</label>
         <select class="form-control col-md-6" id="aiAvgStorage" ng-model="platform.avgAIDisk"
-                ng-options="opt as opt.value for opt in avgAIDiskOptions"></select>
+                ng-options="opt as opt.value for opt in avgAIDiskOptions" ng-change="dropDownTriggerSizing()">
+        </select>
     </div>
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="deaMemSize">DEA Mem Size</label>
         <select class="form-control col-md-6" id="deaMemSize" ng-model="platform.deaSize"
-                ng-options="opt as opt.text for opt in deaSizeOptions">
+                ng-options="opt as opt.text for opt in deaSizeOptions" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="deaEphemStorage">DEA Ephemeral Storage Size</label>
         <select class="form-control col-md-6" id="deaEphemStorage" ng-model="platform.deaSizeDisk"
-                ng-options="opt as opt.text for opt in deaSizeOptionsDisk">
+                ng-options="opt as opt.text for opt in deaSizeOptionsDisk" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="errands">Errand jobs (i.e. Push Console)</label>
         <select class="form-control col-md-6" id="errands" ng-model="platform.pcfErrandJobs"
-                ng-options="opt as opt.value for opt in pcfErrandJobsOptions"></select>
+                ng-options="opt as opt.value for opt in pcfErrandJobsOptions" ng-change="dropDownTriggerSizing()">
+        </select>
     </div>
 
 </div>
