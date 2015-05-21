@@ -32,7 +32,7 @@
 		<td><shkl-money value="{{plan.monthlyBill}}"></shkl-money></td>
 		<td>
 			<select ng-model="plan.costModelType" ng-options="opt.value for opt in costModelTypeOptions" 
-				ng-model-options="{ getterSetter: true }" ng-init="plan.costModelType=costModelTypeOptions[0]"> </select>
+				ng-model-options="{ getterSetter: true }" ng-init="plan.costModelType=costModelTypeOptions[0]" ng-change="dropDownTriggerRuncard()"> </select>
 		</td>
 		<td><a href="#" ng-click="deletePlan(plan)">delete</a></td>
 	</tr>

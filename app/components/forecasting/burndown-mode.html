@@ -3,9 +3,9 @@
 
     <div class="form-group form-inline row">
         <label class="col-md-13" for="burndownModeSelector">Burndown Target Mode</label>
-        <select class="col-md-5 form-control" id="burndownModeSelector">
-            <option ng-model="forecasting.burndownMode" value="gbhr">BurnDown</option>
-            <option ng-model="forecasting.burndownMode" value="date">Month</option>
+        <select class="col-md-5 form-control" ng-model="forecasting.burndownMode" id="burndownModeSelector" ng-change="dropDownTriggerRuncard()">
+            <option value="gbhr">BurnDown</option>
+            <option value="date">Month</option>
         </select>
     </div>
 
@@ -24,13 +24,13 @@
 
         <p>
             Selecting <font color="blue">BurnDown</font>: will set your Burndown Goal in Months = Forecast
-            Duration, and will adjust Profit Margin in tandem with Plan Rolling Revenue Forecast to Recover Costs
+            Duration, and will adjust Profit Margin in tandem with Plan Rolling Revenue Forecast to Recover Costs.
         </p>
 
         <p>
             Selecting <font color="blue">Month</font>: will allow you to set the target month you wish to
             recover costs (Burndown Goal), and will adjust Profit Margin in tandem with Plan Rolling Revenue Forecast
-            to Produce Profits
+            to Profit &/or Loss after the Burndown Goal Month has been reached.
         </p>
     </div>
 </div>

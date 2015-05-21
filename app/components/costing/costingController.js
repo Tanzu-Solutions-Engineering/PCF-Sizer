@@ -224,14 +224,17 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	[
 	 'forecasting.rampUpGrowth', 
 	 'forecasting.initialPlans',
-	 'forecasting.burndownMonths',
-	 'forcasting.burndownMode',
-	 'forcasting.costModelType'
-	 ].forEach(function(e,l,a) {
+	 'forecasting.burndownMonths'
+	].forEach(function(e,l,a) {
 		$scope.$watch(e, function(newValue, oldValue) { 
 			$scope.buildRunCards(planService.getPlans());
 		});
 	});
+	
+	$scope.dropDownTriggerRuncard = function() {
+		console.log("ShekelCostingController:MGLOG:" + "Triggered RunCard Rebuild");
+		$scope.buildRunCards(planService.getPlans());
+	};
 	
 	$scope.calculatePayoffWithPlans = function() { 
 		var month = 0;
