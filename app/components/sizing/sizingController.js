@@ -55,7 +55,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	    { value: 8  }
     ];
     
-    $scope.pcfErrandJobsOptions = [ 
+    $scope.pcfCompilationJobsOptions = [ 
         { value: 0  },                           	
         { value: 1  },
         { value: 2  },
@@ -82,7 +82,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	deaSizeDisk: $scope.deaSizeOptionsDisk[0],
         numAZ: 2,
     	nPlusX: 1,
-    	pcfErrandJobs: $scope.pcfErrandJobsOptions[0],
+    	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
     	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1],
     };
 
@@ -209,8 +209,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 
 
     		}   
-			if ( "Errand" == vm.vm ){
-			    vm.instances = $scope.platform.pcfErrandJobs.value;
+			if ( "Compilation" == vm.vm ){
+			    vm.instances = $scope.platform.pcfCompilationJobs.value;
 			}
     		$scope.doIaaSAskForVm(vm);
 			vmLayout.push(vm);
@@ -229,6 +229,18 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     };
     
 	$scope.loadAzTemplate();
+	
+	//Watch for Non ng-select input changes
+	[
+	 'platform.numAZ',
+	 'platform.nPlusX'
+	].forEach(function(e,l,a) {
+		$scope.$watch(e, function() { 
+			if ($scope.vmTemplate !== undefined) {
+				$scope.dropDownTriggerSizing();
+			};
+		});
+	});
 	
 	$scope.dropDownTriggerSizing = function () {
 		console.log("ShekelSizingController:MGLOG:" + "Triggered Sizing Data Refresh");

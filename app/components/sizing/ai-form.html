@@ -45,9 +45,9 @@
     </div>
 
     <div class="form-group form-inline">
-        <label class="col-md-13" for="errands">Errand jobs (i.e. Push Console)</label>
-        <select class="form-control col-md-6" id="errands" ng-model="platform.pcfErrandJobs"
-                ng-options="opt as opt.value for opt in pcfErrandJobsOptions" ng-change="dropDownTriggerSizing()">
+        <label class="col-md-13" for="compilation">Compilation Jobs (Ephemeral VMs)</label>
+        <select class="form-control col-md-6" id="compilation" ng-model="platform.pcfCompilationJobs"
+                ng-options="opt as opt.value for opt in pcfCompilationJobsOptions" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
 
