@@ -236,14 +236,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	 'platform.nPlusX'
 	].forEach(function(e,l,a) {
 		$scope.$watch(e, function() { 
-			if ($scope.vmTemplate !== undefined) {
-				$scope.dropDownTriggerSizing();
-			};
+				$scope.dropDownTriggerSizing()
 		});
 	});
 	
 	$scope.dropDownTriggerSizing = function () {
-		console.log("ShekelSizingController:MGLOG:" + "Triggered Sizing Data Refresh");
-		$scope.applyTemplate($scope.vmTemplate)		
+		if ($scope.vmTemplate !== undefined) {
+			console.log("ShekelSizingController:MGLOG:" + "Triggered Sizing Data Refresh");
+			$scope.applyTemplate($scope.vmTemplate)		
+		};
 	};
 });
