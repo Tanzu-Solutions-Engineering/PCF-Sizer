@@ -1,8 +1,10 @@
 <h3>Costing Inputs</h3>
-<div class="form-group form-horizontal">
-    <shkl-num-input-form-group label="Forecast Duration (Months)"
-                               ng-model="forecastLength"></shkl-num-input-form-group>
+
+<div class="form-group form-inline row">
+    <label class="col-md-9" for="forecastDuration">Forecast Duration (Months)</label>
+    <input class="form-control" id="forecastDuration" type="number" ng-model="forecastLength">
 </div>
+
 
 <shkl-monthly-costing-input label="PCF Cost" input-model="paasCost"
                             select-model="paasMonthly"></shkl-monthly-costing-input>
