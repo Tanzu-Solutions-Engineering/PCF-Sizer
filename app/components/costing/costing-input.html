@@ -4,8 +4,15 @@
                                ng-model="forecastLength"></shkl-num-input-form-group>
 </div>
 
-<shkl-monthly-costing-input label="PCF Cost" labelModel="paasCost"
-                            selectModel="paasMonthly"></shkl-monthly-costing-input>
+<shkl-monthly-costing-input label="PCF Cost" input-model="paasCost"
+                            select-model="paasMonthly"></shkl-monthly-costing-input>
+
+<shkl-monthly-costing-input label="IaaS Cost" input-model="iaasCost"
+                            select-model="iaasMonthly"></shkl-monthly-costing-input>
+
+<shkl-monthly-costing-input label="Operational Cost" input-model="opexCost"
+                            select-model="opexMonthly"></shkl-monthly-costing-input>
+
 
 <div class="form-group form-horizontal">
     <shkl-num-input-form-group label="PCF Cost" ng-model="paasCost"></shkl-num-input-form-group>
