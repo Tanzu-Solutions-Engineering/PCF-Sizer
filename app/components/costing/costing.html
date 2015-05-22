@@ -6,7 +6,6 @@
         </div>
 
         <div class="row">
-            <div class="col-md-10" ng-include="'/app/components/forecasting/burndown-mode.html'"></div>
             <div class="col-md-10" ng-include="'/app/components/costing/costing-input.html'"></div>
         </div>
 
@@ -16,18 +15,4 @@
         <div class="col-md-10" ng-include="'/app/components/costing/tco.html'"></div>
     </div>
     <div id="row" ng-include="'/app/components/costing/costing-summary.html'"></div>
-
-    <div id="forecasting-runcard">
-        <h3><p>Plans</p></h3>
-        <div id="plans" ng-controller="ShekelPlanController">
-            <div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
-            <a href="#" ng-click="showPlanForm=!showPlanForm">(New Plan Menu)</a>
-
-            <div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
-        </div>
-        <br>
-
-        <h3><p>Plan Run Cards</p></h3>
-        <div id="runcard-table" ng-include="'/app/components/forecasting/run_card.html'"></div>
-    </div>
 </div>
