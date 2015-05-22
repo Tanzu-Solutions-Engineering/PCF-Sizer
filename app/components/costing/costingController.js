@@ -2,7 +2,6 @@
 shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService, planService) {
 	
 	$scope.rampUpPlans = 5;
-	$scope.forecastLength = 36;
 
 	$scope.vcpuPerAIOptions = [ 
 	        {"text": "1:1", "ratio":1}, 
@@ -22,17 +21,19 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		profitMarginPoints: 0,
 		rampUpGrowth: 5,
 		initialPlans: 3,
-		burndownMonths: $scope.forecastLength,
+		burndownMonths: 36,
 		burndownMode: "gbhr",
 		hoursInOperation: 100,
-		aiDeployed: 100
+		aiDeployed: 100,
+		forecastLength: 36,
+        paasCost : 200000,
+        iaasCost : 200000,
+        opexCost : 10000,
+        paasMonthly : "duration",
+        iaasMonthly : "duration",
+        opexMonthly : "monthly"
 	};
-	$scope.paasCost = 200000; 
-	$scope.iaasCost = 200000;
-	$scope.opexCost = 10000;
-	$scope.paasMonthly = "duration";
-	$scope.iaasMonthly = "duration";
-	$scope.opexMonthly = "monthly";
+
 			
 	/**
 	 * Closure to enable math against a dea property.
@@ -78,14 +79,17 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 	
 	$scope.getDurationTCO = function() { 
-		var pCost = $scope.paasMonthly == "duration" ? $scope.paasCost : $scope.paasCost * $scope.forecastLength;
-		var iCost = $scope.iaasMonthly == "duration" ? $scope.iaasCost : $scope.iaasCost * $scope.forecastLength;
-		var oCost = $scope.opexMonthly == "duration" ? $scope.opexCost : $scope.opexCost * $scope.forecastLength;
+		var pCost = $scope.forecasting.paasMonthly == "duration" ? $scope.forecasting.paasCost
+			: $scope.forecasting.paasCost * $scope.forecasting.forecastLength;
+		var iCost = $scope.forecasting.iaasMonthly == "duration" ? $scope.forecasting.iaasCost
+			: $scope.forecasting.iaasCost * $scope.forecasting.forecastLength;
+		var oCost = $scope.forecasting.opexMonthly == "duration" ? $scope.forecasting.opexCost
+			: $scope.forecasting.opexCost * $scope.forecasting.forecastLength;
 		return pCost + iCost + oCost;
 	};
 	
 	$scope.getMonthlyTCO = function() { 
-		return $scope.getDurationTCO() / $scope.forecastLength; 
+		return $scope.getDurationTCO() / $scope.forecasting.forecastLength;
 	};
 	
 	/*
@@ -111,8 +115,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			return $scope.forecasting.burndownMonths;
 		}
 		else {
-			$scope.forecasting.burndownMonths = $scope.forecastLength;
-			return $scope.forecastLength;
+			$scope.forecasting.burndownMonths = $scope.forecasting.forecastLength;
+			return $scope.forecasting.forecastLength;
 		}
 	};
 	
@@ -185,7 +189,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		plan.monthlyBill = $scope.calculateMonthly(plan)
 		var lastMonthRevenue = 0;
 		var runcostModelType = plan.costModelType.value;
-		for ( var i = 1; i <= $scope.forecastLength; ++i ) {
+		for ( var i = 1; i <= $scope.forecasting.forecastLength; ++i ) {
 			var ais = plansInUse * plan.aiMax;
 			var revenue =  lastMonthRevenue + (plansInUse * plan.monthlyBill);
 			runCard.push({month: i, plansInUse: plansInUse, ais: ais, revenue: revenue, costModelType: runcostModelType});
@@ -239,7 +243,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.calculatePayoffWithPlans = function() { 
 		var month = 0;
 		var tco = $scope.getDurationTCO();
-		for (; month < $scope.forecastLength ; ++month) {
+		for (; month < $scope.forecasting.forecastLength ; ++month) {
 			var sum = 0;
 			for(var i = 0; i < $scope.runCards.length; ++i ) {
 				
@@ -257,7 +261,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.totalProfit = function () { 
 		var lastMonthTotal = 0; 
 		$scope.runCards.forEach(function(runCard) {
-			lastMonthTotal += runCard.runCard[$scope.forecastLength -1 ].revenue; 
+			lastMonthTotal += runCard.runCard[$scope.forecasting.forecastLength -1 ].revenue;
 		});
 		return lastMonthTotal - $scope.getDurationTCO();
 		
@@ -267,7 +271,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
     This function checks each Runcard over each month for over consumption of the IaaS
      */
     $scope.markupRuncard = function() {
-        for (var i =0; i < $scope.forecastLength; i++ ) {
+        for (var i =0; i < $scope.forecasting.forecastLength; i++ ) {
 		            
         			var consumedRam = 0;
 		            var consumedVCPU = 0;

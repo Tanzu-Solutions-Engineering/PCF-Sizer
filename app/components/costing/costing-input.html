@@ -2,15 +2,15 @@
 
 <div class="form-group form-inline row">
     <label class="col-md-9" for="forecastDuration">Forecast Duration (Months)</label>
-    <input class="form-control" id="forecastDuration" type="number" ng-model="forecastLength">
+    <input class="form-control" id="forecastDuration" type="number" ng-model="forecasting.forecastLength">
 </div>
 
 
-<shkl-monthly-costing-input label="PCF Cost" input-model="paasCost"
-                            select-model="paasMonthly"></shkl-monthly-costing-input>
+<shkl-monthly-costing-input label="PCF Cost" input-model="forecasting.paasCost"
+                            select-model="forecasting.paasMonthly"></shkl-monthly-costing-input>
 
-<shkl-monthly-costing-input label="IaaS Cost" input-model="iaasCost"
-                            select-model="iaasMonthly"></shkl-monthly-costing-input>
+<shkl-monthly-costing-input label="IaaS Cost" input-model="forecasting.iaasCost"
+                            select-model="forecasting.iaasMonthly"></shkl-monthly-costing-input>
 
-<shkl-monthly-costing-input label="Operational Cost" input-model="opexCost"
-                            select-model="opexMonthly"></shkl-monthly-costing-input>
+<shkl-monthly-costing-input label="Operational Cost" input-model="forecasting.opexCost"
+                            select-model="forecasting.opexMonthly"></shkl-monthly-costing-input>
