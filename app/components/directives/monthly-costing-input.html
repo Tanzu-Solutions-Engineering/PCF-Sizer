@@ -1,0 +1,9 @@
+<div>
+    <label class="col-md-13" for="{{id}}">{{label}}</label>
+    <input class="form-control col-md-6" id="{{id}}" type="number" ng-model="labelModel">
+    <label class="sr-only" for="{{id + '_select'}}">Monthly or duration forecasting.</label>
+    <select id="{{id + '_select'}}" class="col-md-6 form-control" id="iaasMonthlySelector">
+        <option ng-model="selectModel" value="monthly">Monthly</option>
+        <option ng-model="selectModel" value="duration">Duration</option>
+    </select>
+</div>

@@ -1,12 +1,16 @@
 <h3>Costing Inputs</h3>
-<div>
+<div class="form-group form-horizontal">
     <shkl-num-input-form-group label="Forecast Duration (Months)"
                                ng-model="forecastLength"></shkl-num-input-form-group>
 </div>
-<div>
+
+<shkl-monthly-costing-input label="PCF Cost" labelModel="paasCost"
+                            selectModel="paasMonthly"></shkl-monthly-costing-input>
+
+<div class="form-group form-horizontal">
     <shkl-num-input-form-group label="PCF Cost" ng-model="paasCost"></shkl-num-input-form-group>
 
-    <select class="col-md-5 form-control" id="paasMonthlySelector">
+    <select class="form-control" id="paasMonthlySelector">
         <option ng-model="paasMonthly" value="duration">Monthly</option>
         <option ng-model="paasMonthly" value="monthly">Duration</option>
     </select>
