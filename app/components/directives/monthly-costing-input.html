@@ -2,8 +2,8 @@
     <label class="col-md-4" for="{{id}}">{{label}}</label>
     <input class="form-control col-md-6" id="{{id}}" type="number" ng-model="inputModel">
     <label class="sr-only" for="{{id + '_select'}}">Monthly or duration forecasting.</label>
-    <select id="{{id + '_select'}}" class="form-control">
-        <option ng-model="selectModel" value="monthly">Monthly</option>
-        <option ng-model="selectModel" value="duration">Duration</option>
+    <select id="{{id + '_select'}}" ng-model='selectModel' class="form-control">
+        <option value="monthly">Monthly</option>
+        <option value="duration">Duration</option>
     </select>
 </div>
