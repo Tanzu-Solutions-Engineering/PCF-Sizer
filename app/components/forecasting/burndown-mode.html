@@ -1,36 +1,38 @@
+<h3>Burndown</h3>
+
 <div class="row">
-    <h3>Burndown Mode</h3>
-
-    <div class="form-group form-inline row">
-        <label class="col-md-13" for="burndownModeSelector">Burndown Target Mode</label>
-        <select class="col-md-5 form-control" ng-model="forecasting.burndownMode" id="burndownModeSelector" ng-change="dropDownTriggerRuncard()">
-            <option value="gbhr">BurnDown</option>
-            <option value="date">Month</option>
-        </select>
-    </div>
-
-    <div class="row">
-        <shkl-num-input-form-group label="Cost Model: Burndown Goal (Months)"
-                                   ng-model="forecasting.burndownMonths"></shkl-num-input-form-group>
-
-        <shkl-num-input-form-group label="Cost Model: GB/Hr Adjustment (Profit Margin / Points)"
-                                   ng-model="forecasting.profitMarginPoints"></shkl-num-input-form-group>
-
-    </div>
-    <div class="row">
+    <div class="col-md-10">
         <p>
             <b>BurnDown Mode</b> allows you to select a method for Shekel to predict a GB/Hour price to reach a
             target Burndown Date.
 
         <p>
-            Selecting <font color="blue">BurnDown</font>: will set your Burndown Goal in Months = Forecast
+            Selecting <span class="type-accent-1">BurnDown</span>: will set your Burndown Goal in Months = Forecast
             Duration, and will adjust Profit Margin in tandem with Plan Rolling Revenue Forecast to Recover Costs.
         </p>
 
         <p>
-            Selecting <font color="blue">Month</font>: will allow you to set the target month you wish to
+            Selecting <span class="type-accent-1">Month</span>: will allow you to set the target month you wish to
             recover costs (Burndown Goal), and will adjust Profit Margin in tandem with Plan Rolling Revenue Forecast
             to Profit &/or Loss after the Burndown Goal Month has been reached.
         </p>
     </div>
+
+    <div class="col-md-10">
+        <div class="form-group form-inline ">
+            <label class="col-md-13" for="burndownModeSelector">Burndown Target Mode</label>
+            <select class="col-md-5 form-control" ng-model="forecasting.burndownMode" id="burndownModeSelector"
+                    ng-change="dropDownTriggerRuncard()">
+                <option value="gbhr">BurnDown</option>
+                <option value="date">Month</option>
+            </select>
+        </div>
+
+        <shkl-num-input-form-group label="Cost Model: Burndown Goal (Months)"
+                                   ng-model="forecasting.burndownMonths"></shkl-num-input-form-group>
+
+        <shkl-num-input-form-group label="Cost Model: GB/Hr Adjustment (Profit Margin / Points)"
+                                   ng-model="forecasting.profitMarginPoints"></shkl-num-input-form-group>
+    </div>
 </div>
+

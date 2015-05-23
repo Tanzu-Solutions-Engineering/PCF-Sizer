@@ -1,42 +1,66 @@
-<table>
-<thead>
-	<tr>
-		<td>Name</td><td>RAM Quota</td>
-		<td>Max Instance RAM</td>
-		<td>Max Routes</td>
-		<td>Max Service Instances</td>
-		<td>Paid Service Plans</td>
-		<td>Disk Quota</td>
-		<td>Max AI's</td>
-		<td>IaaS Reservation %</td>
-		<td>Monthly Bill</td>
-		<td>Cost Model</td>
-		<td>Delete Plan</td>
-	</tr>
-</thead>
-	<tr ng-repeat="plan in plans">
-		<td><input type="text" ng-model="plan.name"></td>
-		<td><input type="number" ng-model="plan.memoryQuota"></td>
-		<td><input type="number" ng-model="plan.maxInstanceMem"></td>
-		<td><input type="number" ng-model="plan.maxRoutes"></td>
-		<td><input type="number" ng-model="plan.maxServiceInstances"></td>
-		<td>
-			<select ng-model="plan.paidServicePlans" ng-init="plan.paidServicePlans=plan.paidServicePlans">
-				<option value="true">true</option>
-				<option value="false">false</option>
-			</select>
-		</td>
-		<td><input type="number" ng-model="plan.diskQuota"></td>
-		<td><input type="number" ng-model="plan.aiMax"></td>
-		<td><input type="number" ng-model="plan.consumption"></td>
-		<td><shkl-money value="{{plan.monthlyBill}}"></shkl-money></td>
-		<td>
-			<select ng-model="plan.costModelType" ng-options="opt.value for opt in costModelTypeOptions" 
-				ng-model-options="{ getterSetter: true }" ng-init="plan.costModelType=costModelTypeOptions[0]" ng-change="dropDownTriggerRuncard()"> </select>
-		</td>
-		<td><a href="#" ng-click="deletePlan(plan)">delete</a></td>
-	</tr>
-</table>
+<h3>Plans</h3>
+<form role="form">
+    <div class="row" ng-repeat="plan in plans">
+        <div class="col-md-5">
+            <shkl-input-form-group1 label="Name" id="planName" type="text"
+                                    ng-model="plan.name"></shkl-input-form-group1>
+            <shkl-input-form-group1 label="Org RAM" id="orgRam" type="number"
+                                    ng-model="plan.memoryQuota"></shkl-input-form-group1>
 
-<span class="invalid" ng-if="overcommitted()">IaaS Plan Reservations > 100%!!!</span> 
+            <shkl-input-form-group1 label="Max Instance RAM" id="instanceRam" type="number"
+                                    ng-model="plan.maxInstanceMem"></shkl-input-form-group1>
+
+        </div>
+        <div class="col-md-5">
+
+            <shkl-input-form-group1 label="Routers" id="routes" type="number"
+                                    ng-model="plan.maxRoutes"></shkl-input-form-group1>
+
+            <shkl-input-form-group1 label="Service Instances" id="serviceInstances" type="number"
+                                    ng-model="plan.maxServiceInstances"></shkl-input-form-group1>
+
+            <label for="paidServicePlans">Paid Service Plans</label>
+            <select id="paidServicePlans" class="form-control" ng-model="plan.paidServicePlans"
+                    ng-init="plan.paidServicePlans=plan.paidServicePlans">
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+
+        </div>
+        <div class="col-md-5">
+
+            <shkl-input-form-group1 label="Disk Quota" id="diskQuota" type="number"
+                                    ng-model="plan.diskQuota"></shkl-input-form-group1>
+
+            <shkl-input-form-group1 label="AIs" id="aiMax" type="number"
+                                    ng-model="plan.aiMax"></shkl-input-form-group1>
+
+            <shkl-input-form-group1 label="Iaas Reservation %" id="consumption" type="number"
+                                    ng-model="plan.consumption">
+            </shkl-input-form-group1>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="monthlyBill">Monthly Bill</label>
+                <shkl-money class="form-control" readonly id="monthlyBill" value="{{plan.monthlyBill}}"></shkl-money>
+
+            </div>
+            <div class="form-group">
+                <label for="costModelType">Plan Type</label>
+                <select id="costModelType" class="form-control" ng-model="plan.costModelType"
+                        ng-options="opt.value for opt in costModelTypeOptions"
+                        ng-model-options="{ getterSetter: true }" ng-init="plan.costModelType=costModelTypeOptions[0]"
+                        ng-change="dropDownTriggerRuncard()"> </select>
+
+            </div>
+            <div class="form-group">
+                <button href="#" class="btn btn-danger" ng-click="deletePlan(plan)">Delete Plan</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<span class="invalid" ng-if="overcommitted()">IaaS Plan Reservations > 100%!!!</span>
 <span class="valid" ng-if="!overcommitted()">IaaS Plan Reservations < 100%</span> 
