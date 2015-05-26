@@ -1,6 +1,6 @@
 <div id="plans" ng-controller="ShekelPlanController">
     <div class="row">
-        <div ng-include="'/app/components/forecasting/burndown-mode.html'"></div>
+        <div ng-controller="ShekelCostingController" ng-include="'/app/components/forecasting/burndown-mode.html'"></div>
     </div>
 
     <div class="row">

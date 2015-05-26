@@ -10,11 +10,6 @@ shekelApp.controller('ShekelPlanController', function($scope, planService) {
 	$scope.costModelTypeOptions = planService.costModelTypeOptions();
 	$scope.costModelTypeOption = planService.costModelTypeOptions()[0];
 	
-	$scope.burndownModeOptions = [
-	                  	        {"text": "BurnDown", "value": "gbhr"}, 
-	                  	        {"text": "Month", "value": "date"}                       
-	                  	      ];
-	
 
 	
 	$scope.plans = planService.getPlans();

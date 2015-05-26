@@ -16,14 +16,18 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	        {"text": "10:1", "ratio":10} 
 	      ];
 	
+	$scope.burndownModeOptions = [
+		    {"text": "BurnDown", "value": "gbhr"}, 
+		    {"text": "Month", "value": "date"}                       
+		  ];	
 	
 	$scope.forecasting = { 
 		vcpuPerAI: $scope.vcpuPerAIOptions[4],
 		profitMarginPoints: 0,
 		rampUpGrowth: 5,
 		initialPlans: 3,
-		//burndownMonths: 36,
-		//burndownMode: $scope.burndownModeOptions[0],
+		burndownMonths: 36,
+		burndownMode: $scope.burndownModeOptions[0],
 		hoursInOperation: 100,
 		aiDeployed: 100,
 		forecastLength: 36,
@@ -112,7 +116,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 
 	//100% utilization.
 	$scope.getPayoffMonths = function () {
-		if ( 'date' == $scope.forecasting.burndownMode ) { 
+		if ( 'date' == $scope.forecasting.burndownMode.value ) { 
 			return $scope.forecasting.burndownMonths;
 		}
 		else {
@@ -124,20 +128,17 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	//Forecast Adjustment Points
 	$scope.getForecastAdjustment = function () {
-				if ( 'gbhr' == $scope.forecasting.burndownMode || 'date' == $scope.forecasting.burndownMode ) {
-				var baseRevenueFromRunCards = $scope.getBaseRevenueFromRunCards();
-				var totalRevenueShortFall = $scope.getDurationTCO() - baseRevenueFromRunCards;
-				var burnDownAdjustmentPoints = (totalRevenueShortFall / baseRevenueFromRunCards) * 100;
-				if ( isFinite(burnDownAdjustmentPoints) && totalRevenueShortFall > 0 ) {
+				if ( 'gbhr' == $scope.forecasting.burndownMode.value || 'date' == $scope.forecasting.burndownMode.value ) {
+					var baseRevenueFromRunCards = $scope.getBaseRevenueFromRunCards();
+					var totalRevenueShortFall = $scope.getDurationTCO() - baseRevenueFromRunCards;
+					var burnDownAdjustmentPoints = (totalRevenueShortFall / baseRevenueFromRunCards) * 100;
+					if ( isFinite(burnDownAdjustmentPoints) && totalRevenueShortFall > 0 ) {
 						var trAdjust = $scope.forecasting.profitMarginPoints = burnDownAdjustmentPoints + 0.5;	
-					}
-				else {
+						}
+					else {
 						var trAdjust = $scope.forecasting.profitMarginPoints = 0;	
-					}
-				//MG console.log("MGLOG baseRevenueFromRunCards=" + baseRevenueFromRunCards);
-				//MG console.log("MGLOG totalRevenueShortFall=" + totalRevenueShortFall);
-				//MG console.log("MGLOG adjustval=" + trAdjust);
-				return trAdjust
+						}
+					return trAdjust
 				}
 	}
 	
@@ -238,6 +239,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.dropDownTriggerRuncard = function() {
 		console.log("ShekelCostingController:MGLOG:" + "Triggered RunCard Rebuild");
+		if ( 'gbhr' == $scope.forecasting.burndownMode.value ) {
+			$scope.forecasting.burndownMonths = $scope.forecasting.forecastLength
+		};
 		$scope.buildRunCards(planService.getPlans());
 	};
 	
