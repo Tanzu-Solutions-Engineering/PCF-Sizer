@@ -125,6 +125,14 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		}
 	};
 	
+	$scope.getBurnDownModeIsTrue = function () {
+		if ( 'gbhr' == $scope.forecasting.burndownMode.value ) {
+			return true
+		}
+		else {
+			return false
+		}
+	};
 	
 	//Forecast Adjustment Points
 	$scope.getForecastAdjustment = function () {

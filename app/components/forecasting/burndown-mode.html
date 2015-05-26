@@ -26,12 +26,21 @@
             		ng-change="dropDownTriggerRuncard()">
             </select>
         </div>
-
-        <shkl-num-input-form-group label="Cost Model: Burndown Goal (Months)"
-                                   ng-model="forecasting.burndownMonths"></shkl-num-input-form-group>
-
-        <shkl-num-input-form-group label="Cost Model: GB/Hr Adjustment (Profit Margin / Points)"
-                                   ng-model="forecasting.profitMarginPoints"></shkl-num-input-form-group>
+	</div>
+    
+    <div class="col-md-10">	    
+    	<div class="form-group form-inline ">
+        	<label class="col-md-13">Cost Model: Burndown Goal (Months)</label>
+        	<input class="col-md-5 form-control" type="text" ng-model="forecasting.burndownMonths" ng-readonly="getBurnDownModeIsTrue()">
+        </div>                          
+	</div>
+	
+    <div class="col-md-10">	
+    	<div class="form-group form-inline ">
+         	<label class="col-md-13">Cost Model: Adjustment (Profit Margin / Points)</label>
+         	<input class="col-md-5 form-control" type="text" ng-model="forecasting.profitMarginPoints" ng-readonly="true">
+     	</div>
     </div>
 </div>
+
 
