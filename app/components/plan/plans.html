@@ -1,4 +1,4 @@
-<div id="plans" ng-controller="ShekelPlanController">
+<div ng-controller="ShekelPlanController">
     <div class="row">
         <div ng-controller="ShekelCostingController" ng-include="'/app/components/forecasting/burndown-mode.html'"></div>
     </div>
@@ -7,10 +7,7 @@
         <div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
     </div>
     <div id="plan-list" ng-include="'/app/components/plan/plan_table.html'"></div>
-
-    <div class="row">
-        <h3>Plan Run Cards</h3>
-    </div>
-
-    <div id="runcard-table" ng-include="'/app/components/forecasting/run_card.html'"></div>
+</div>
+<div class="row" ng-controller="ShekelCostingController">
+    <div ng-include="'/app/components/forecasting/run_card.html'"></div>
 </div>
