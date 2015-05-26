@@ -21,10 +21,9 @@
     <div class="col-md-10">
         <div class="form-group form-inline ">
             <label class="col-md-13" for="burndownModeSelector">Burndown Target Mode</label>
-            <select class="col-md-5 form-control" ng-model="forecasting.burndownMode" id="burndownModeSelector"
-                    ng-change="dropDownTriggerRuncard()">
-                <option value="gbhr">BurnDown</option>
-                <option value="date">Month</option>
+            <select class="col-md-5 form-control" ng-model="forecasting.burndownMode" id="burndownModeSelector" 
+            		ng-options="opt.text for opt in burndownModeOptions" ng-init="forecasting.burndownMode=burndownModeOptions[0]" 
+            		ng-model-options="{ getterSetter: true }" ng-change="dropDownTriggerRuncard()">
             </select>
         </div>
 

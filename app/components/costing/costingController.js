@@ -16,13 +16,14 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	        {"text": "10:1", "ratio":10} 
 	      ];
 	
+	
 	$scope.forecasting = { 
 		vcpuPerAI: $scope.vcpuPerAIOptions[4],
 		profitMarginPoints: 0,
 		rampUpGrowth: 5,
 		initialPlans: 3,
-		burndownMonths: 36,
-		burndownMode: "gbhr",
+		//burndownMonths: 36,
+		//burndownMode: $scope.burndownModeOptions[0],
 		hoursInOperation: 100,
 		aiDeployed: 100,
 		forecastLength: 36,
