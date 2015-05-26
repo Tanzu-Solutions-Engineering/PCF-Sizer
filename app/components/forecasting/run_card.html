@@ -1,24 +1,30 @@
-<section>
-	<div id="plan-run-card" ng-repeat="plan in runCards">
-		<h4>{{plan.name}}</h4>
-		<table>
-		<thead>
-			<tr>
-				<td>Month</td>
-				<td>Plans</td>
-				<td>AI's</td>
-				<td>Rolling Revenue</td>
-				<td>Overcommit</td>
-			</tr>
-		</thead>
-		<tr ng-repeat="row in plan.runCard">
-			<td><shkl-month value="{{row.month}}"></shkl-number></td>
-			<td><shkl-number value="{{row.plansInUse}}"></shkl-number></td>
-			<td><shkl-number value="{{row.ais}}"></shkl-number></td>
-			<td><shkl-money value="{{row.revenue}}"></shkl-money></td>
-			<td><span ng-show="row.oversubscribed != null">{{row.oversubscribed}}</span></td>
-		</tr>
-		</table>
-	</div>
-</section>
-<br><br><br>
+<h3>Run Cards</h3>
+<div ng-repeat="plan in runCards">
+    <h4>{{plan.name}}</h4>
+    <table class="table table-light table-striped">
+        <thead>
+        <tr>
+            <td>Month</td>
+            <td>Plans</td>
+            <td>AI's</td>
+            <td>Rolling Revenue</td>
+            <td>Overcomitted</td>
+        </tr>
+        </thead>
+        <tr ng-repeat="row in plan.runCard">
+            <td>
+                <shkl-month value="{{row.month}}"></shkl-number>
+            </td>
+            <td>
+                <shkl-number value="{{row.plansInUse}}"></shkl-number>
+            </td>
+            <td>
+                <shkl-number value="{{row.ais}}"></shkl-number>
+            </td>
+            <td>
+                <shkl-money value="{{row.revenue}}"></shkl-money>
+            </td>
+            <td><span ng-show="row.oversubscribed != null">{{row.oversubscribed}}</span></td>
+        </tr>
+    </table>
+</div>
