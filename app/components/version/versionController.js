@@ -1,6 +1,6 @@
 shekelApp.controller('ShekelVersionController', function($scope, $http) {
 
-	$scope.version = null; 
+	$scope.version = $scope.getVersion(); 
 	
 	$scope.getVersion = function() {
 		$http.get('/buildnumber').success(function(data) {

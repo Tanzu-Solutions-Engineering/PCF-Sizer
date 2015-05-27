@@ -239,7 +239,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	[
 	 'forecasting.rampUpGrowth', 
 	 'forecasting.initialPlans',
-	 'forecasting.burndownMonths'
+	 'forecasting.burndownMonths',
+	 'forecasting.paasMonthly',
+	 'forecasting.iaasMonthly',
+	 'forecasting.opexMonthly',
+	 'forecasting.forecastLength'
 	].forEach(function(e,l,a) {
 		$scope.$watch(e, function(newValue, oldValue) { 
 			$scope.buildRunCards(planService.getPlans());
