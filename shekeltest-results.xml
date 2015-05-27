@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="PhantomJS 1.9.8 (Mac OS X)" package="" timestamp="2015-05-27T07:11:53" id="0" hostname="MG-iMac-27-2015.local" tests="17" errors="0" failures="1" time="0.037">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
+    </properties>
+    <testcase name="should run out of CPU in the first month" time="0.008" classname="PhantomJS 1.9.8 (Mac OS X).ShekelCostingController IaaS CPU consumption"/>
+    <testcase name="should be out of CPU and RAM in the first Month" time="0.003" classname="PhantomJS 1.9.8 (Mac OS X).ShekelCostingController IaaS CPU consumption"/>
+    <testcase name="should run out of ais in the first month" time="0.002" classname="PhantomJS 1.9.8 (Mac OS X).ShekelCostingController AI Consumption"/>
+    <testcase name="should run out of disk in the first month" time="0.002" classname="PhantomJS 1.9.8 (Mac OS X).ShekelCostingController Disk consumption"/>
+    <testcase name="should run out of memory in the first month" time="0.001" classname="PhantomJS 1.9.8 (Mac OS X).ShekelCostingController IaaS RAM consumption"/>
+    <testcase name="should run out of memory in the 26th month with default data" time="0.002" classname="PhantomJS 1.9.8 (Mac OS X).ShekelCostingController IaaS RAM consumption"/>
+    <testcase name="should start with a default plan" time="0.001" classname="PhantomJS 1.9.8 (Mac OS X).ShekelPlanController defaults"/>
+    <testcase name="should not have any plans defined" time="0" classname="PhantomJS 1.9.8 (Mac OS X).ShekelPlanController defaults"/>
+    <testcase name="should have the plan form hidden" time="0.001" classname="PhantomJS 1.9.8 (Mac OS X).ShekelPlanController defaults"/>
+    <testcase name="should be true when there is too much consumption" time="0.004" classname="PhantomJS 1.9.8 (Mac OS X).ShekelPlanController iaas overcomitted"/>
+    <testcase name="should be false when there is no consumption" time="0.001" classname="PhantomJS 1.9.8 (Mac OS X).ShekelPlanController iaas overcomitted"/>
+    <testcase name="should be false when there is some consumption" time="0.001" classname="PhantomJS 1.9.8 (Mac OS X).ShekelPlanController iaas overcomitted"/>
+    <testcase name="should add a new plan" time="0.003" classname="PhantomJS 1.9.8 (Mac OS X).ShekelPlanController iaas new plan"/>
+    <testcase name="Should not be null value" time="0.003" classname="PhantomJS 1.9.8 (Mac OS X).sizingController Test for Value in AI Pack Options"/>
+    <testcase name="AI Avg Ram must have a Valid integer &gt; 0" time="0.002" classname="PhantomJS 1.9.8 (Mac OS X).sizingController Test for AI Average Ram Value &gt; 0"/>
+    <testcase name="AI Avg Stg must have a Valid integer &gt; 0" time="0.001" classname="PhantomJS 1.9.8 (Mac OS X).sizingController Test for AI Average Stg Value &gt; 0"/>
+    <testcase name="should call the backend" time="0.002" classname="PhantomJS 1.9.8 (Mac OS X).VersionController should tell me the version">
+      <failure type="">TypeError: &apos;undefined&apos; is not a function (evaluating &apos;$scope.getVersion()&apos;)
+    at /gitroot/shekel/app/components/version/versionController.js:3
+    at e (/gitroot/shekel/js/angular.min.js:36)
+    at /gitroot/shekel/js/angular.min.js:36
+    at /gitroot/shekel/js/angular.min.js:76
+    at /gitroot/shekel/test/spec/version.js:25
+    at /gitroot/shekel/test/spec/version.js:37
+</failure>
+      <failure type="">Error: Unsatisfied requests: GET /buildnumber
+    at /gitroot/shekel/js/angular-mocks.js:1559
+    at /gitroot/shekel/test/spec/version.js:30
+</failure>
+    </testcase>
+    <system-out><![CDATA[
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>
