@@ -8,6 +8,13 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 		];
 	};
 	
+	function paidServicePlanOptions() { 
+		return [
+	        {value: true, label: "Yes"}, 
+	        {value: false, label: "No"}
+		];
+	};
+
 	function makeNewPlan(name, memQuota, instanceMaxMem, maxRoutes,
 			maxServiceInstances, paidServicePlans, diskQuota, aiMax, gbPerHr,
 			consumption, costModelType) { 
@@ -17,7 +24,7 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 			maxInstanceMem: instanceMaxMem, 
 			maxRoutes: maxRoutes,
 			maxServiceInstances: maxServiceInstances,
-			paidServicePlans: paidServicePlans,
+			paidServicePlans: this.paidServicePlanOptions()[0],
 			diskQuota: diskQuota,
 			aiMax: aiMax,
 			consumption: consumption,
@@ -31,23 +38,16 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 		};
 	};
 	
-	function paidServicePlanOptions() { 
-		return [
-	        {value: true, label: "yes"}, 
-	        {value: false, label: "no"}
-		];
-	};
 
 	//TODO This repetition with the above should be re-factored somehow...
 	function defaultPlan() {
-		//console.log('planService:MGLOG:Should set costModelType to:' + this.costModelTypeOptions()[0].value);
 		return {
 			name: "Small Plan",
 			memoryQuota: 8,
 			maxInstanceMem: 2,
 			maxRoutes: 16,
 			maxServiceInstances: 16,
-			paidServicePlans: this.paidServicePlanOptions()[0],
+			paidServicePlans: true,
 			diskQuota: 16,
 			aiMax: 4,
 			consumption: 25,
@@ -74,7 +74,6 @@ var planService = shekelApp.factory('planService', function($rootScope) {
 		}
 		return billPlans;
 	}
-
 	
 	function addPlan(plan) { 
 		plans.push(plan);

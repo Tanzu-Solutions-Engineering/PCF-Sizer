@@ -1,4 +1,4 @@
-<h3>New Plan</h3>
+<h3>New Plan Form</h3>
 <form role="form">
     <div class="row">
         <div class="col-md-10">
@@ -16,14 +16,11 @@
             <label for="routes"># Routes</label>
             <input id="routes" class="form-control" type="number" ng-model="plan.maxRoutes" value="{{plan.maxRoutes}}">
 
-            <label for="serviceInstances"># Service Instances</label>
-            <input id="serviceInstances" class="form-control" type="number" ng-model="plan.maxServiceInstances"
-                   value="{{plan.maxServiceInstances}}">
         </div>
         <div class="col-md-10">
-            <label for="paidServices"> Paid Service Plans:</label>
+           <!-- <label for="paidServices"> Paid Service Plans:</label>
             <select id="paidServices" class="form-control" ng-model="plan.paidServicePlans"
-                    ng-options="opt as opt.label for opt in paidServicePlanOptions"></select>
+                    ng-options="opt as opt.value for opt in paidServicePlanOptions" ng-init="plan.paidServicePlans=paidServicePlanOptions[0]"></select> -->
 
             <label for="diskQuota">Disk Quota</label>
             <input id="diskQuota" type="number" class="form-control" ng-model="plan.diskQuota"
@@ -35,6 +32,10 @@
             <label for="consumption"> IaaS Consumption %</label>
             <input id="consumption" type="number" class="form-control" ng-model="plan.consumption"
                    value="{{plan.consumption}}">
+                   
+            <label for="serviceInstances"># Service Instances</label>
+            <input id="serviceInstances" class="form-control" type="number" ng-model="plan.maxServiceInstances"
+                   value="{{plan.maxServiceInstances}}">
         </div>
     </div>
     <div>

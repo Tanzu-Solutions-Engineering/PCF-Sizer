@@ -19,9 +19,9 @@
             <shkl-input-form-group1 label="Service Instances" id="serviceInstances" type="number"
                                     ng-model="plan.maxServiceInstances"></shkl-input-form-group1>
 
-            <label for="paidServicePlans">Paid Service Plans</label>
+            <label for="paidServicePlans">Allow Paid Service Plans</label>
             <select id="paidServicePlans" class="form-control" ng-model="plan.paidServicePlans"
-                    ng-init="plan.paidServicePlans=plan.paidServicePlans">
+                    ng-options="opt as opt.label for opt in paidServicePlanOptions" ng-init="plan.paidServicePlans=paidServicePlanOptions[0]">
                 <option value="true">true</option>
                 <option value="false">false</option>
             </select>

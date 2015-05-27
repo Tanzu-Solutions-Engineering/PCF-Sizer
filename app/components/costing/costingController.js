@@ -111,7 +111,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	
 	$scope.getGbPerHrWithPoints = function() {
 		return parseFloat($scope.gbPerHrBreakEven().toFixed(2)) +
-		parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints * .01).toFixed(2))
+		parseFloat(($scope.gbPerHrBreakEven() * $scope.forecasting.profitMarginPoints).toFixed(2))
 	};
 
 	//100% utilization.
@@ -139,9 +139,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 				if ( 'gbhr' == $scope.forecasting.burndownMode.value || 'date' == $scope.forecasting.burndownMode.value ) {
 					var baseRevenueFromRunCards = $scope.getBaseRevenueFromRunCards();
 					var totalRevenueShortFall = $scope.getDurationTCO() - baseRevenueFromRunCards;
-					var burnDownAdjustmentPoints = (totalRevenueShortFall / baseRevenueFromRunCards) * 100;
+					var burnDownAdjustmentPoints = (totalRevenueShortFall / baseRevenueFromRunCards);
 					if ( isFinite(burnDownAdjustmentPoints) && totalRevenueShortFall > 0 ) {
-						var trAdjust = $scope.forecasting.profitMarginPoints = burnDownAdjustmentPoints + 0.5;	
+						var trAdjust = $scope.forecasting.profitMarginPoints = burnDownAdjustmentPoints;	
 						}
 					else {
 						var trAdjust = $scope.forecasting.profitMarginPoints = 0;	
@@ -160,7 +160,6 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 			$scope.runCards.forEach(function(runCard){
 				var trBaseMonthly = $scope.calculateBaseMonthly(runCard.plan);
 				for (var i =0; i < $scope.forecasting.burndownMonths; i++ ) {
-					//console.log(runCard);
 					if (runCard.runCard[i].costModelType == "Billable"){
 						var trRunCardIterationRevenue = runCard.runCard[i].plansInUse * trBaseMonthly;
 						trRunCards += trRunCardIterationRevenue;
@@ -177,11 +176,15 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	$scope.runCards = []; 
 	
 	$scope.calculateMonthly = function(plan) {
-		//console.log("ShekelCostingController:MGLOG:" + plan.costModelType.value)
-		if ("Free" == plan.costModelType.value) {
+		if ("Free" == plan.costModelType.value ) {
 			return 0;
 		}
-		var monthlyBill = $scope.calculateBaseMonthly(plan) * $scope.getGbPerHrWithPoints();
+		if ( $scope.forecasting.profitMarginPoints > 0 ) {
+			var monthlyBill = $scope.calculateBaseMonthly(plan) * $scope.forecasting.profitMarginPoints;
+		}
+		else {
+			var monthlyBill = $scope.calculateBaseMonthly(plan);
+		}
 		return monthlyBill;
 	};
 	
@@ -214,11 +217,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		for ( var i = 0; i < plans.length; ++i ) { 
 			$scope.runCards.push({ plan:plans[i], name:plans[i].name, runCard:$scope.generateRunCard(plans[i])});
 		}
-		$scope.markupRuncard();
 		$scope.getForecastAdjustment();
 		$scope.markupRuncard();
-		
-		
+		$scope.markupPlans ();
 	};
 
 	//This could be optimized to not generate everything every time.
@@ -246,7 +247,7 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	});
 	
 	$scope.dropDownTriggerRuncard = function() {
-		console.log("ShekelCostingController:MGLOG:" + "Triggered RunCard Rebuild");	
+		//console.log("ShekelCostingController:MGLOG:" + "Triggered RunCard Rebuild");	
 		
 		if ( 'gbhr' == $scope.forecasting.burndownMode.value ) {
 			$scope.forecasting.burndownMonths = $scope.forecasting.forecastLength;
@@ -291,6 +292,8 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
         			var consumedRam = 0;
 		            var consumedVCPU = 0;
 		            var consumedDisk = 0;
+		            var rollingRevenueAdjust = 0;
+
             
 		            $scope.runCards.forEach(function(runCard) {
 		                var runCardForMonth = runCard.runCard[i];
@@ -299,6 +302,15 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		                consumedRam = runCardForMonth.ais * runCard.plan.maxInstanceMem;
 		                consumedVCPU = runCardForMonth.ais * $scope.aiAvgVcpu();
 		                consumedDisk = runCardForMonth.ais * $scope.aiAvgDisk();
+		                //Adjust RunCard if profitMarginPoints > 0
+		                if ($scope.forecasting.profitMarginPoints > 0 ){
+		                	var h = i-1;
+		                	runCardForMonth.revenue =  ((runCardForMonth.ais * (runCard.plan.memoryQuota/runCard.plan.aiMax)) * 
+		                								((365/12) * 24 * ($scope.forecasting.hoursInOperation / 100))) * $scope.getGbPerHrWithPoints();
+		                	if (h >= 0) {
+		                		runCardForMonth.revenue = runCardForMonth.revenue + runCard.runCard[h].revenue;
+		                	}
+		                }
 		                runCardForMonth.oversubscribed = new Array();
 		                if (consumedRam >= ($scope.deaRam() * ( runCardIaasReservation * .01))) {
 		                    runCardForMonth.oversubscribed.push("RAM");
@@ -323,6 +335,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		            });
             
         }
+    };
+    
+    $scope.markupPlans = function() {
+    	var markupPlans = planService.getPlans();
+    	for(var i = 0; i < markupPlans.length; ++i ) {
+    		markupPlans[i].monthlyBill = $scope.calculateBaseMonthly(markupPlans[i]) * $scope.forecasting.profitMarginPoints;
+    	}
     };
 
 });

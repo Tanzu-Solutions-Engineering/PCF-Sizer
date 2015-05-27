@@ -1,7 +1,13 @@
 <div ng-controller="ShekelPlanController">
+
     <div class="row">
         <div  ng-include="'/app/components/forecasting/burndown-mode.html'"></div>
     </div>
+    
+    <div class="row">
+  			<div class="col-md-10" ng-include="'/app/components/forecasting/forecasting_form.html'"></div>
+  			<div class="col-md-10" ng-include="'/app/components/costing/costing-summary.html'"></div>
+	</div>
 
     <div  class="row">
         <div id="plan-form" ng-include="'/app/components/plan/plan_form.html'"></div>
