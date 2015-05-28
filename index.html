@@ -16,8 +16,8 @@
     <script src="/app/components/directives/formgroupDirective.js"></script>
 
 </head>
-
-<div ng-app="ShekelApp">
+<body ng-app="ShekelApp">
+<div>
     <div class="alert alert-warning alert-dismissable" id="warning">
         <button class="close" data-dismiss="alert">
             <i class="fa fa-times"></i>
@@ -87,7 +87,7 @@
         </div>
     </div>
 </div>
-<p class="txr-r" ng-controller="ShekelVersionController">build-id={{version}}</p>
+<div ng-controller="ShekelVersionController">build-id={{version}}</div>
 </body>
 
 </html>
