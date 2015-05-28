@@ -1,0 +1,27 @@
+<div id="foundation-estimator" ng-controller="ShekelFoundationController">
+    <h3>Foundation Estimation</h3>
+
+    <div class="form-group">
+        <label for="securityZones">Can your applications exist within a single security/compliance zone?</label>
+        <select id="securityZones" class="form-control" ng-model="singleComplianceZone">
+            <option>yes</option>
+            <option>no</option>
+        </select>
+    </div>
+    <div class="form-group" ng-show="singleComplianceZone=='no'">
+        <label for="complianceZones">How many zones do you need?</label>
+        <input class="form-control" id="complianceZones" type="number" ng-model="complianceZones">
+    </div>
+    <div class="form-group">
+        <label for="productionFoundation">Do you want a separate foundation for production.</label>
+        <select class="form-control" id="productionFoundation" ng-model="seperateForProd">
+            <option>yes</option>
+            <option>no</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="physicalDC">How many physical data centers do you need to run in?</label>
+        <input  class="form-control" id="physicalDC" type="number" ng-model="physicalDC"></input>
+    </div>
+    <p>Shekel reccomends <span class="em-high">{{foundations()}}</span> foundations.</p>
+</div>

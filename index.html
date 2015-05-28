@@ -43,9 +43,9 @@
                     <li>
                         <a data-toggle="tab" href="#tab-responsive-plans">Plans</a>
                     </li>
-     <!--              <li>
+                    <li>
                         <a data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
-                    </li> -->   
+                    </li>
                 </ul>
 
             </div>
@@ -80,8 +80,9 @@
                 <li>
                     <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
                 </li>
-                <li class="tab-pane fade" id="tab-responsive-foundations">Foundations</li>
-
+                <li class="tab-pane fade" id="tab-responsive-foundations">
+                    <div ng-include="'/app/components/foundation/foundations.html'"></div>
+                </li>
             </ul>
         </div>
     </div>
