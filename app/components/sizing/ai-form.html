@@ -3,14 +3,15 @@
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="aiPacks">AI Packs
-            <a class="small" href="#" ng-click="aiHelpMeChoose = !aiHelpMeChoose">HelpMe Choose #AIs</a>
+            <a class="small" href="#" ng-click="chooser.aiHelpMeChoose = !chooser.aiHelpMeChoose">
+                HelpMe Choose #AIs</a>
         </label>
         <select class="form-control col-md-6" id="aiPacks" ng-model="aiPacks"
                 ng-model-options="{ getterSetter: true }"
                 ng-options="opt as opt.label for opt in aiPackOptions" ng-change="dropDownTriggerSizing()">
         </select>
 
-        <div id="ai-help-me-choose" ng-show="aiHelpMeChoose"
+        <div id="ai-help-me-choose" ng-show="chooser.aiHelpMeChoose"
              ng-include="'app/components/sizing/ai-chooser.html'"></div>
     </div>
 
