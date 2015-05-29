@@ -21,25 +21,28 @@
     <div class="col-md-10">
         <div class="form-group form-inline ">
             <label class="col-md-13" for="burndownModeSelector">Burndown Target Mode</label>
-            <select class="col-md-5 form-control" ng-model="forecasting.burndownMode" id="burndownModeSelector" 
-            		ng-options="opt.text for opt in burndownModeOptions" ng-init="forecasting.burndownMode=burndownModeOptions[0]" 
-            		ng-change="dropDownTriggerRuncard()">
+            <select class="col-md-5 form-control" ng-model="forecasting.burndownMode" id="burndownModeSelector"
+                    ng-options="opt.text for opt in burndownModeOptions"
+                    ng-init="forecasting.burndownMode=burndownModeOptions[0]"
+                    ng-change="dropDownTriggerRuncard()">
             </select>
         </div>
-	</div>
-    
-    <div class="col-md-10">	    
-    	<div class="form-group form-inline ">
-        	<label class="col-md-13">Cost Model: Burndown Goal (Months)</label>
-        	<input class="col-md-5 form-control" type="number" ng-model="forecasting.burndownMonths" ng-readonly="getBurnDownModeIsTrue()">
-        </div>                          
-	</div>
-	
-    <div class="col-md-10">	
-    	<div class="form-group form-inline ">
-         	<label class="col-md-13">Cost Model: Adjustment (Profit Margin / Points)</label>
-         	<input class="col-md-5 form-control" type="number" ng-model="forecasting.profitMarginPoints" ng-readonly="true">
-     	</div>
+    </div>
+
+    <div class="col-md-10">
+        <div class="form-group form-inline ">
+            <label for="burndownGoal" class="col-md-13">Cost Model: Burndown Goal (Months)</label>
+            <input id="burndownGoal" class="col-md-5 form-control" type="number" ng-model="forecasting.burndownMonths"
+                   ng-readonly="getBurnDownModeIsTrue()">
+        </div>
+    </div>
+
+    <div class="col-md-10">
+        <div class="form-group form-inline ">
+            <label class="col-md-13">Cost Model: Adjustment (Profit Margin / Points)</label>
+            <input class="col-md-5 form-control" type="number" ng-model="forecasting.profitMarginPoints"
+                   ng-readonly="true">
+        </div>
     </div>
 </div>
 
