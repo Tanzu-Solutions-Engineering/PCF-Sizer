@@ -31,9 +31,9 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 		hoursInOperation: 100,
 		aiDeployed: 100,
 		forecastLength: 36,
-        paasCost : 200000,
-        iaasCost : 200000,
-        opexCost : 10000,
+        paasCost : 0,
+        iaasCost : 0,
+        opexCost : 0,
         paasMonthly : "duration",
         iaasMonthly : "duration",
         opexMonthly : "monthly"
