@@ -1,4 +1,8 @@
 "use strict"
+$(window).load(function () {
+	$('#myModal').modal('show');
+});
+
 var shekelApp = angular.module('ShekelApp', []);
 
 var vmService = shekelApp.factory('vmLayout', function($rootScope) {
