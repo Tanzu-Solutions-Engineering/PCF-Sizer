@@ -5,7 +5,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     $scope.aiPackOptions = new Array();         
     
     $scope.setAIPackOptions = function() {
-    	for ( var i = 1; i <= 50; ++i) {
+    	for ( var i = 1; i <= 300; ++i) {
     		$scope.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
     	}
     }
