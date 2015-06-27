@@ -7,12 +7,15 @@
 
 
 <div class="row">
-    <shkl-monthly-costing-input label="PCF Cost" input-model="forecasting.paasCost"
-                                select-model="forecasting.paasMonthly"></shkl-monthly-costing-input>
+    <a id="costing-pcfcost-tooltip" href="#" data-toggle="tooltip" data-placement="left" title="{{getToolTip('costing_pcf_costs')}}">
+    <shkl-monthly-costing-input label="PCF Cost" class="link-text" input-model="forecasting.paasCost"
+                                select-model="forecasting.paasMonthly"></shkl-monthly-costing-input></a>
 
-    <shkl-monthly-costing-input label="IaaS Cost" input-model="forecasting.iaasCost"
-                                select-model="forecasting.iaasMonthly"></shkl-monthly-costing-input>
+    <a id="costing-iaascost-tooltip" href="#" data-toggle="tooltip" data-placement="left" title="{{getToolTip('costing_iaas_costs')}}">
+    <shkl-monthly-costing-input label="IaaS Cost" class="link-text" input-model="forecasting.iaasCost"
+                                select-model="forecasting.iaasMonthly"></shkl-monthly-costing-input></a>
 
-    <shkl-monthly-costing-input label="Opex Cost" input-model="forecasting.opexCost"
-                                select-model="forecasting.opexMonthly"></shkl-monthly-costing-input>
+    <a id="costing-opexcost-tooltip" href="#" data-toggle="tooltip" data-placement="left" title="{{getToolTip('costing_opex_costs')}}">
+    <shkl-monthly-costing-input label="Opex Cost" class="link-text" input-model="forecasting.opexCost"
+                                select-model="forecasting.opexMonthly"></shkl-monthly-costing-input></a>
 </div>

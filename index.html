@@ -14,6 +14,7 @@
     <script src="/app/components/costing/costingController.js"></script>
     <script src="/app/components/costing/costingDirectives.js"></script>
     <script src="/app/components/directives/formgroupDirective.js"></script>
+    <script src="/app/components/tooltips/tooltipsController.js"></script>
 
 </head>
 <body class="bg-dark-1" ng-app="ShekelApp">
@@ -55,36 +56,38 @@
 
     <div ng-include="'/app/components/legal/splash.html'"></div>
 
-    <div class="bg-neutral-10" ng-controller="ShekelSizingController" id="input">
+    <div ng-controller="ShekelSizingController" id="input" class="bg-neutral-10">
         <div ng-controller="ShekelCostingController" id="main-app" class="pane bg-neutral-11 col-md-21">
-            <ul class="tab-content list-unstyled">
-                <li class="active" id="sizing">
-                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
-                </li>
-                <li class="tab-pane active fade in" id="tab-responsive-sizing">
-                    <div ng-include="'/app/components/sizing/sizing.html'"></div>
-                </li>
-
-                <li>
-                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
-                </li>
-                <li class="tab-pane fade" id="tab-responsive-costing">
-                    <div ng-include="'/app/components/costing/costing.html'"></div>
-                </li>
-
-                <li>
-                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-plans">plans</a>
-                </li>
-                <li class="tab-pane fade" id="tab-responsive-plans">
-                    <div ng-include="'/app/components/plan/plans.html'"></div>
-                </li>
-                <li>
-                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
-                </li>
-                <li class="tab-pane fade" id="tab-responsive-foundations">
-                    <div ng-include="'/app/components/foundation/foundations.html'"></div>
-                </li>
-            </ul>
+           <div ng-controller="ShekelToolTipsController" id="tootltips">
+	            <ul class="tab-content list-unstyled">
+	                <li class="active" id="sizing">
+	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
+	                </li>
+	                <li class="tab-pane active fade in" id="tab-responsive-sizing">
+	                    <div ng-include="'/app/components/sizing/sizing.html'"></div>
+	                </li>
+	
+	                <li>
+	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
+	                </li>
+	                <li class="tab-pane fade" id="tab-responsive-costing">
+	                    <div ng-include="'/app/components/costing/costing.html'"></div>
+	                </li>
+	
+	                <li>
+	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-plans">plans</a>
+	                </li>
+	                <li class="tab-pane fade" id="tab-responsive-plans">
+	                    <div ng-include="'/app/components/plan/plans.html'"></div>
+	                </li>
+	                <li>
+	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
+	                </li>
+	                <li class="tab-pane fade" id="tab-responsive-foundations">
+	                    <div ng-include="'/app/components/foundation/foundations.html'"></div>
+	                </li>
+	            </ul>
+	        </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,22 @@
+[
+    {
+        "tipId": "burndown_description",
+        "msg": "This Page will allow you to create 'Plans' and Set a PCF Cost Burndown Target"
+    },
+    {
+        "tipId": "plan_description",
+        "msg": "Plans are a way for you to estimate what size and quantity of PCF tenant(s) your PCF foundation will Host"
+    },
+    {
+        "tipId": "costing_pcf_costs",
+        "msg": "PCF Costs represent your 'Estimated' Pivotal License Costs for your Foundation"
+    },
+    {
+        "tipId": "costing_iaas_costs",
+        "msg": "IaaS Costs represent your 'Estimated' vSphere, AWS, vCloud Airm, or Openstack infrastructure Costs for your Foundation"
+    },
+    {
+        "tipId": "costing_opex_costs",
+        "msg": "Opex Costs represent your other variable costs for your Foundation like: FTEs, DataCenter Costs, Support, etc..."
+    }
+]

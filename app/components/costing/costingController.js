@@ -39,7 +39,11 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
         opexMonthly : "monthly"
 	};
 
-			
+	  $scope.roundto2 = function(x) {  
+	    	var totalX;
+		    totalX = Math.round(x * 100) / 100;
+		    return totalX;
+	    }			
 	/**
 	 * Closure to enable math against a dea property.
 	 */
@@ -72,15 +76,15 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 	
 	$scope.aiAvgDisk = function ()  { 
-		return $scope.deaDisk() / (aiService.aiPacks().value * 50); 
+		return $scope.roundto2($scope.deaDisk() / (aiService.aiPacks().value * 50)); 
 	};
 
 	$scope.aiAvgRam = function ()  { 
-		return $scope.deaRam() / (aiService.aiPacks().value * 50); 
+		return $scope.roundto2($scope.deaRam() / (aiService.aiPacks().value * 50)); 
 	};
 	
 	$scope.aiAvgVcpu = function ()  { 
-		return $scope.deaVcpu() / (aiService.aiPacks().value * 50); 
+		return $scope.roundto2($scope.deaVcpu() / (aiService.aiPacks().value * 50)); 
 	};
 	
 	$scope.getDurationTCO = function() { 

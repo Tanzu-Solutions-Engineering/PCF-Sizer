@@ -6403,7 +6403,12 @@ a.label:hover, a.label:focus {
   text-decoration: none;
   cursor: pointer;
 }
-
+.label-shekel {
+	background-color: white;
+	color: gray;
+	font-size: 150%;
+	text-align: left;
+}
 .label-default {
   background-color: #999999;
 }

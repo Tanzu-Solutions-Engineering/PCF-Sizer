@@ -224,9 +224,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     			$scope.vmTemplate = data;
     			$scope.applyTemplate($scope.vmTemplate);
     		}).error(function(data) { 
-    			alert("Failed to get json template");
+    			alert("Failed to get PCF AZ Template json template");
     		});
     };
+    
     
 	$scope.loadAzTemplate();
 	
@@ -246,4 +247,5 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 			$scope.applyTemplate($scope.vmTemplate)		
 		};
 	};
+	
 });
