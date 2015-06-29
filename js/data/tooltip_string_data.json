@@ -18,5 +18,21 @@
     {
         "tipId": "costing_opex_costs",
         "msg": "Opex Costs represent your other variable costs for your Foundation like: FTEs, DataCenter Costs, Support, etc..."
+    },
+    {
+        "tipId": "tco_duration",
+        "msg": "This value represents your total cost of ownership for the Forecast Duration & Cost values entered above (PCF + IaaS + Opex)"
+    },
+    {
+        "tipId": "tco_monthly",
+        "msg": "This value represents your TCO in a per month view (TCO / Forecast Duration)"
+    },
+    {
+        "tipId": "tco_base_gbhr",
+        "msg": "This value is the 'base' GB/Hour cost.  It assumes that all resources are 100% utilzed in your foundation and is the basis for the estimated cost in the 'Plans' section.  Do not use this value without consulting the 'Plans' section"
+    },
+    {
+        "tipId": "cost_summary_gbhr",
+        "msg": "This value is the estimated cost after calculating your ramp up plans.  Assuming you are not at 100% utilization on day 1, plans will allow you to predict consumption.   It is a more accurate value that the 'Base GB/Hour' in the 'Costing' section after plans have been entered"
     }
 ]
