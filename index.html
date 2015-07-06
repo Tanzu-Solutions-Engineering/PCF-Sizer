@@ -69,7 +69,14 @@
     <div ng-controller="ShekelSizingController" id="input" class="bg-neutral-10">
         <div ng-controller="ShekelCostingController" id="main-app" class="pane bg-neutral-11 col-md-21">
            <div ng-controller="ShekelToolTipsController" id="tootltips">
-	            <div><h2>PCF Sizing & Cost Estimation Tool</h2></div>
+	            <div id="header">
+                    <div class="col-md-16">
+                        <h2>PCF Sizing & Cost Estimation Tool</h2>
+                    </div>
+                    <div class="col-md-5">
+                        <span>Need Help? Drop us an <a href="mailto:shekel@pivotal.io">email</a></span>
+                    </div>
+                </div>
 	            <ul class="tab-content list-unstyled">
 	                <li class="active" id="sizing">
 	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
