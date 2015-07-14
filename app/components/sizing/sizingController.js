@@ -19,8 +19,18 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 		return aiService.aiPacks();	
     }
     
-    aiService.setAiPack($scope.aiPackOptions[0]);  
-    
+    aiService.setAiPack($scope.aiPackOptions[0]);
+
+	/**
+	 * When adding a new ERS version, ADD IT TO THE TOP OF THE LIST as the
+	 * code defaults to index 0, which should always return the latest
+	 * version
+	 */
+	$scope.ersVersionOptions = [
+		{value: 1.5},
+		{value: 1.4}
+	];
+
     $scope.avgRamOptions = [ 
 	    { value: .5 },
 	    { value: 1  },
@@ -76,6 +86,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     ];
     
     $scope.platform = {
+		ersVersion: $scope.ersVersionOptions[0],
     	avgRam: $scope.avgRamOptions[1],
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
     	deaSize: $scope.deaSizeOptions[0],
@@ -219,7 +230,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     };
     
     $scope.loadAzTemplate = function() {
-    	$http.get('/js/data/ers_vms_single_az_template.json')
+    	$http.get('/ersjson/' + $scope.platform.ersVersion.value)
     		.success(function(data) { 
     			$scope.vmTemplate = data;
     			$scope.applyTemplate($scope.vmTemplate);

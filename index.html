@@ -69,7 +69,7 @@
     <div ng-controller="ShekelSizingController" id="input" class="bg-neutral-10">
         <div ng-controller="ShekelCostingController" id="main-app" class="pane bg-neutral-11 col-md-21">
            <div ng-controller="ShekelToolTipsController" id="tootltips">
-	            <div id="header">
+	            <div id="header" class="row">
                     <div class="col-md-16">
                         <h2>PCF Sizing & Cost Estimation Tool</h2>
                     </div>
@@ -77,7 +77,16 @@
                         <span>Need Help? Drop us an <a href="mailto:shekel@pivotal.io">email</a></span>
                     </div>
                 </div>
-	            <ul class="tab-content list-unstyled">
+               <div class="row col-md-16">
+                   <div class="form-group form-inline">
+                       <label class="col-md-13" for="versionselect">PCF Version</label>
+                       <select class="form-control col-md-6" id="versionselect" ng-model="platform.ersVersion"
+                               ng-options="opt as opt.value for opt in ersVersionOptions" ng-change="loadAzTemplate()">
+                       </select>
+                   </div>
+               </div>
+
+               <ul class="tab-content list-unstyled">
 	                <li class="active" id="sizing">
 	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
 	                </li>

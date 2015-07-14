@@ -10,4 +10,9 @@ app.get('/buildnumber', function(req, res) {
     res.send(vcapApplication);
 });
 
+app.get('/ersjson/:version', function(req, res){
+    //TODO Is this safe?
+    res.redirect('/js/data/ers_vms_single_az_template-' + req.param('version') + '.json')
+});
+
 app.listen(process.env.PORT || 3000);
