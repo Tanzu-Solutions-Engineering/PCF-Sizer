@@ -1,19 +1,23 @@
 <div>
-    <h3>Resource Min Requirements Summary</h3>
+    <h3>Summary of Resource Requirements(Min)</h3>
 
     <div class="panel panel-alt panel-empty">
         <table class="table table-light">
             <tr>
-                <td>Foundation Memory (GB)</td>
+                <td>Total Memory (GB)</td>
                 <td>{{iaasAskSummary.ram}}</td>
             </tr>
             <tr>
-                <td>Foundation Storage (GB)</td>
+                <td>Total Storage (GB)</td>
                 <td>{{iaasAskSummary.disk}}</td>
             </tr>
             <tr>
-                <td>Foundation vCPU #</td>
+                <td>Total vCPU #</td>
                 <td>{{iaasAskSummary.vcpu}}</td>
+            </tr>
+            <tr>
+                <td>Total IPs #</td>
+                <td>{{iaasAskSummary.ip}}</td>
             </tr>
             <tr>
                 <td>Foundation Physical Cores (2GHz or >) #</td>
@@ -21,4 +25,5 @@
             </tr>
         </table>
     </div>
+
 </div>

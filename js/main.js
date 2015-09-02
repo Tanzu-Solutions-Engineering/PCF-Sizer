@@ -1,6 +1,6 @@
 "use strict"
 
-var shekelApp = angular.module('ShekelApp', []);
+var shekelApp = angular.module('ShekelApp', ['ui.grid', 'ui.grid.pagination', 'ui.grid.edit', 'ui.grid.resizeColumns','ui.grid.exporter', 'ui.grid.selection']);
 
 var vmService = shekelApp.factory('vmLayout', function ($rootScope) {
     var vmLayout = new Array();
@@ -40,4 +40,3 @@ shekelApp.controller('ShekelFoundationController', function ($scope) {
         return $scope.physicalDC * $scope.complianceZones * multiplier;
     }
 });
-

@@ -7,6 +7,7 @@
 
     <script src="/js/angular.min.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/app/components/requirements/requirementsController.js"></script>
     <script src="/app/components/sizing/sizingController.js"></script>
     <script src="/app/components/plan/planController.js"></script>
     <script src="/app/components/plan/planService.js"></script>
@@ -15,6 +16,14 @@
     <script src="/app/components/costing/costingDirectives.js"></script>
     <script src="/app/components/directives/formgroupDirective.js"></script>
     <script src="/app/components/tooltips/tooltipsController.js"></script>
+
+    <link rel="styleSheet" href="/js/angular-ui-grid/ui-grid.min.css"/>
+    <link rel="stylesheet" href="/css/shekel-grid.css">
+
+    <script src="/js/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -34,8 +43,7 @@
         <button class="close" data-dismiss="alert">
             <i class="fa fa-times"></i>
         </button>
-        The IaaS Requirements provided by this tool are for PCF Elastic Runtime only.
-        Any additional PCF Service Tiles will require separate sizing exercise!
+        The IaaS Requirements listing and sizing calculations are best estimations based on your inputs. For further clarifications refer to the product documentation and reach out to Pivotal Field Engineers or Support.
     </div>
 
     <div class="tab-responsive">
@@ -45,8 +53,12 @@
             <div id="app-nav" class="row">
                 <ul class="nav hidden-xs">
                     <li class="active">
+                        <a data-toggle="tab" href="#tab-responsive-requirements">Requirements</a>
+                    </li>
+                    <li>
                         <a data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
                     </li>
+
                     <li>
                         <a data-toggle="tab" href="#tab-responsive-costing">Costing</a>
                     </li>
@@ -57,6 +69,10 @@
                     <li>
                         <a data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
                     </li>
+
+                  <li>
+                      <a data-toggle="tab" href="#tab-responsive-readme">Readme</a>
+                  </li>
                 </ul>
 
             </div>
@@ -69,15 +85,17 @@
     <div ng-controller="ShekelSizingController" id="input" class="bg-neutral-10">
         <div ng-controller="ShekelCostingController" id="main-app" class="pane bg-neutral-11 col-md-21">
            <div ng-controller="ShekelToolTipsController" id="tootltips">
+             <div ng-controller="ShekelRequirementsController" id="requirements">
+
 	            <div id="header" class="row">
                     <div class="col-md-16">
                         <h2>PCF Sizing & Cost Estimation Tool</h2>
                     </div>
                     <div class="col-md-5">
-                        <span>Need Help? Drop us an <a href="mailto:shekel@pivotal.io">email</a></span>
+                        <span>Need Help? Drop us an <a href="mailto:rajesh.jain@pivotal.io">email</a></span>
                     </div>
                 </div>
-               <div class="row col-md-16">
+               <div class="row col-md-32">
                    <div class="form-group form-inline">
                        <label class="col-md-13" for="versionselect">PCF Version</label>
                        <select class="form-control col-md-6" id="versionselect" ng-model="platform.ersVersion"
@@ -85,36 +103,50 @@
                        </select>
                    </div>
                </div>
+               <div class="row col-md-32">
 
-               <ul class="tab-content list-unstyled">
-	                <li class="active" id="sizing">
-	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
-	                </li>
-	                <li class="tab-pane active fade in" id="tab-responsive-sizing">
-	                    <div ng-include="'/app/components/sizing/sizing.html'"></div>
-	                </li>
-	
-	                <li>
-	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
-	                </li>
-	                <li class="tab-pane fade" id="tab-responsive-costing">
-	                    <div ng-include="'/app/components/costing/costing.html'"></div>
-	                </li>
-	
-	                <li>
-	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-plans">plans</a>
-	                </li>
-	                <li class="tab-pane fade" id="tab-responsive-plans">
-	                    <div ng-include="'/app/components/plan/plans.html'"></div>
-	                </li>
-	                <li>
-	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
-	                </li>
-	                <li class="tab-pane fade" id="tab-responsive-foundations">
-	                    <div ng-include="'/app/components/foundation/foundations.html'"></div>
-	                </li>
-	            </ul>
-	        </div>
+                   <ul class="tab-content list-unstyled">
+                     <li class="active" id="requirements">
+                         <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-requirements">Requirements</a>
+                     </li>
+                     <li class="tab-pane active fade in" id="tab-responsive-requirements">
+                         <div ng-include="'/app/components/requirements/requirements.html'"></div>
+                     </li>
+
+    	                <li  id="sizing">
+    	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
+    	                </li>
+    	                <li class="tab-pane fade" id="tab-responsive-sizing">
+    	                    <div ng-include="'/app/components/sizing/sizing.html'"></div>
+    	                </li>
+
+    	                <li>
+    	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
+    	                </li>
+    	                <li class="tab-pane fade" id="tab-responsive-costing">
+    	                    <div ng-include="'/app/components/costing/costing.html'"></div>
+    	                </li>
+
+    	                <li>
+    	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-plans">plans</a>
+    	                </li>
+    	                <li class="tab-pane fade" id="tab-responsive-plans">
+    	                    <div ng-include="'/app/components/plan/plans.html'"></div>
+    	                </li>
+    	                <li>
+    	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
+    	                </li>
+    	                <li class="tab-pane fade" id="tab-responsive-foundations">
+    	                    <div ng-include="'/app/components/foundation/foundations.html'"></div>
+    	                </li>
+
+                      <li class="tab-pane fade" id="tab-responsive-readme">
+                          <div ng-include="'/app/readme.html'"></div>
+                      </li>
+    	            </ul>
+                </div>
+	           </div>
+          </div>
         </div>
     </div>
 </div>

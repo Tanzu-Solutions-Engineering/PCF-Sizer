@@ -1,0 +1,37 @@
+<div class="form-group form-inline">
+  <table class="table table-striped">
+  <thead><tr>
+    <th></th>
+    <th>Service Name</th>
+    <th>Version</th>
+    <th>Service Plan</th>
+    <th>Balance across AZ</th>
+  </tr></thead>
+  <tbody>
+
+    <tr ng-repeat="service in services">
+    <td>
+      <input type='checkbox' ng-change='selectService(service.id)' ng-model="serviceSelection[service.id].selected"
+           ng-true-value="'true'" ng-false-value="'false'">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </input>
+    </td>
+    <td>{{service.name}}</td>
+    <td>
+        <select class="form-control col-md-6" ng-model="serviceSelection[service.id].version"
+                ng-options="opt for opt in service.version" ng-change="selectServiceVersion(service.id)">
+        </select>
+    </td>
+    <td>
+        <select class="form-control col-md-6"  ng-model="serviceSelection[service.id].plan"
+                ng-options="opt for opt in service.plan" ng-change="selectServicePlan(service.id)">
+        </select>
+    </td>
+    <td><input type='checkbox' ng-change='azService(service.id)' ng-model="serviceSelection[service.id].AZ"
+      ng-true-value="'yes'" ng-false-value="'no'">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </input>
+  </td>
+  </tr></tbody>
+</table>
+</div>

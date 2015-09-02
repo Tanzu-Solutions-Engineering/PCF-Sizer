@@ -13,6 +13,17 @@
         <div ng-include="'app/components/sizing/dea-detail.html'"></div>
     </div>
 </div>
+
 <div class="row col-md-20">
-    <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
+  <h3><a href="#" ng-click="showServices = ! showServices">Select Services for Platform</a></h3>
+  <div class="check-element animate-show" ng-show="showServices">
+    <div ng-include="'app/components/sizing/services.html'"></div>
+  </div>
+</div>
+
+<div class="row col-md-20">
+  <h3><a href="#" ng-click="showDetails = ! showDetails">Details of the IaaS Resource Requirements (Min)</a></h4>
+     <div ng-show="showDetails">
+         <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
+   </div>
 </div>
