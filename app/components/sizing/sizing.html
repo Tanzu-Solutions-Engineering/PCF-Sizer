@@ -1,8 +1,16 @@
 <!-- <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a> -->
 
-<div class="row">
 
+<div class="row">
     <div class="col-md-10">
+        <div class="row">
+            <div class="form-group form-inline">
+                <label class="col-md-13">PCF Version</label>
+                <select class="form-control col-md-6 input-sm" id="versionselect" ng-model="platform.ersVersion"
+                        ng-options="opt as opt.value for opt in ersVersionOptions" ng-change="loadAzTemplate()">
+                </select>
+            </div>
+        </div>
         <div ng-include="'app/components/sizing/ai-form.html'"></div>
         <div ng-include="'app/components/sizing/az-form.html'"></div>
     </div>
