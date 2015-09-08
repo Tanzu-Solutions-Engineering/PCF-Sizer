@@ -15,4 +15,8 @@ app.get('/ersjson/:version', function(req, res){
     res.redirect('/js/data/ers_vms_single_az_template-' + req.param('version') + '.json')
 });
 
+app.get('/services/:service/versions', vunction(req, res){
+    res.send('[]')
+});
+
 app.listen(process.env.PORT || 3000);
