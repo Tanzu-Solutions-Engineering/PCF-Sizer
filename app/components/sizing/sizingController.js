@@ -338,9 +338,6 @@ $scope.applyServiceTemplate = function(template) {
 };
 
 $scope.getServiceVms = function(id) {
-
-  console.log("ShekelSizingController:MGLOG:" + "Template[i] ::" + $scope.serviceVmLayout.size);
-  console.dir($scope.serviceVmLayout);
   return $scope.serviceVmLayout.get(id);
 };
 

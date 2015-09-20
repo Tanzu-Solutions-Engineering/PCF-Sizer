@@ -51,6 +51,14 @@ app.get('/requirements/:version', function(req, res){
     //TODO Is this safe?
     res.redirect('/js/data/requirements-' + req.param('version') + '.json')
 });
+
+app.get('/requirements/:name/:version', function(req, res){
+    //TODO Is this safe?
+    console.log(req.param);
+    //res.redirect('/js/data/requirements-' + req.param('version') + '.json')
+    res.redirect('/js/data/requirements-' + req.param('name') +  '-' + req.param('version') + '.json')
+});
+
 app.get('/servicejson/:service/:version/:plan', function(req, res){
     //TODO Is this safe?
     console.log(req.params)
