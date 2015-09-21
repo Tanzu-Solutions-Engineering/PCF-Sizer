@@ -15,7 +15,6 @@
 
                   <select class="form-control col-md-6" ng-model="template.selectedOption"
                         ng-disabled="type =='customer'"
-                        name="mytemplate" id="mytemplate"
                         ng-options="option.name for option in template.availableOptions track by option.id"
                         ng-change="dropDownTriggerTemplate()">
                   </select>
@@ -47,9 +46,8 @@
         </div>
         <div class="col-md-10">
           <div>
-              <h3>Summary of Resource Requirements(Min)</h3>
-
-              <div class="panel panel-alt panel-empty">
+              <h3>Summary of Resource Requirements(Min) based on Template</h3>
+              <span class="help-block">This sizing is based on the template selected with minimal resource requirements. For accurate sizing and estimation select the Sizing Option from Left Menu.</span>              <div class="panel panel-alt panel-empty">
                   <table class="table table-light">
                       <tr>
                           <td>Total Memory (GB)</td>

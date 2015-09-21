@@ -9,15 +9,15 @@ shekelApp.controller('ShekelRequirementsController', ['$scope','uiGridConstants'
       {name: "vSphere + ER + MySQL", id:'2'},
       {name: "vSphere + ER + MySQL + RabbitMQ", id:'3'},
       {name: "vSphere + ER + MySQL + RabbitMQ + Redis", id:'4'},
-      {name: "vSphere + ER + MySQL + RabbitMQ + Redis", id:'5'},
-      {name: "vSphere + ER + MySQL + RabbitMQ + Redis + Spring Cloud Services", id:'6'},
-      {name: "vSphere + ER + MySQL + RabbitMQ + Redis + Spring Cloud Services + Mobile Services", id:'7'}
+      {name: "vSphere + ER + MySQL + RabbitMQ + Redis + Spring Cloud Services", id:'5'},
+      {name: "vSphere + ER + MySQL + RabbitMQ + Redis + Spring Cloud Services + Mobile Services", id:'6'}
     ],
     selectedOption: {id: '1', name: "vSphere + ER"}
   };
 
-   $scope.type = undefined;
+   $scope.type = "template";
    $scope.selectedCustomer = undefined;
+
    $scope.customer = {
     availableOptions: [
       {name: "FORD", id:'1', password:"FORD"},
@@ -35,10 +35,14 @@ shekelApp.controller('ShekelRequirementsController', ['$scope','uiGridConstants'
 
 
   $scope.dropDownTriggerTemplate = function () {
+    console.log("ShekelRequirementsController:MGLOG:" + $scope.template.selectedOption.id );
+    $scope.loadRequirements("template-" + $scope.template.selectedOption.id) ;
 	};
 
   $scope.dropDownTriggerCustomer = function () {
+    console.log("ShekelRequirementsController:MGLOG:" + $scope.customer.selectedOption.name );
 	};
+
   var data = [];
 
 $scope.requirementsData = {

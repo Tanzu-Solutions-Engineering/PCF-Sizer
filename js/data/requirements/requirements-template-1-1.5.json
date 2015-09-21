@@ -1,6 +1,6 @@
 {
  "sizing":
-   {"totalRam":100, "totalStg": 1000, "totalvCPU": 100, "totalIP" : 150, "totalCores" : 200 }
+   {"totalRam":148, "totalStg": 1074, "totalvCPU": 61, "totalIP" : 64, "totalCores" : 16 }
  ,
  "requirements": [
         {

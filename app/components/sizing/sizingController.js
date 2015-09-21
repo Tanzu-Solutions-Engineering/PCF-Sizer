@@ -268,17 +268,21 @@ $scope.serviceVmLayout = new Map();
 $scope.vmServiceTemplate = new Map();
 
 $scope.services = [
-  {id:0, name:"MySql", version:["1.4","1.5"] , plan:["100mb-dev","10GB-Prod"] , "AZ":"yes" },
-  {id:1, name:"RabbitMQ", version:["1.4"] , plan:["Prod"] , "AZ":"yes" },
-  {id:2, name:"Redis", version:["1.4.7"] , plan:["Shared-VM","Dedicated-VM"] , "AZ":"yes" }
+  {id:0, name:"MySql", version:["1.4","1.5"] , plan:["100mb-dev","10GB-Prod"] , "AZ":"no" },
+  {id:1, name:"RabbitMQ", version:["1.4"] , plan:["Prod"] , "AZ":"no" },
+  {id:2, name:"Redis", version:["1.4.7"] , plan:["Shared-VM","Dedicated-VM"] , "AZ":"no" },
+  {id:3, name:"SpringCloud", version:["1.0"] , plan:["Prod"] , "AZ":"no" }
+
 ];
 
 $scope.selectDefaultService = function() {
   console.log("ShekelSizingController:MGLOG:" + "Triggered selectDefaultService");
   $scope.serviceSelection = [
-    {selected:false, id:0, name:"MySql", version:"1.5", plan:"100mb-dev", "AZ":"yes"},
-    {selected:false, id:1, name:"RabbitMQ", version:"1.4", plan:"Prod" , "AZ":"yes" },
-    {selected:false, id:2, name:"Redis", version:"1.4.7", plan:"Shared-VM" , "AZ":"yes" }
+    {selected:false, id:0, name:"MySql", version:"1.5", plan:"100mb-dev", "AZ":"no"},
+    {selected:false, id:1, name:"RabbitMQ", version:"1.4", plan:"Prod" , "AZ":"no" },
+    {selected:false, id:2, name:"Redis", version:"1.4.7", plan:"Shared-VM" , "AZ":"no" },
+    {selected:false, id:3, name:"SpringCloud", version:"1.0" , plan:"Prod" , "AZ":"no" }
+
   ];
 };
 $scope.selectDefaultService();
