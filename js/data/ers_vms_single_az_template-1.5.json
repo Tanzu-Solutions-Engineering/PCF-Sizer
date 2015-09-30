@@ -56,7 +56,7 @@
     },
     {
         "vm": "etcd",
-        "instances": 4,
+        "instances": 1,
         "vcpu": 1,
         "ram": 1,
         "ephemeral_disk": 2,
