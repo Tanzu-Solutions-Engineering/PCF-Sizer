@@ -45,7 +45,7 @@
     },
     {
         "vm": "consul",
-        "instances": 4,
+        "instances": 3,
         "vcpu": 1,
         "ram": 1,
         "ephemeral_disk": 2,
