@@ -1,0 +1,385 @@
+{
+ "sizing":
+ {"totalRam":186, "totalStg": 1568, "totalvCPU": 78, "totalIP" : 86, "totalCores" : 20 }
+ ,
+ "requirements": [
+        {
+            "Id":1,
+            "Title": "Review Proof Points with Customer",
+            "Tasks": "Review Proof points and Establish Success Criteria",
+            "Labels": "poc-kickoff",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":2,
+            "Title": "Determine support for Availability Zones",
+            "Tasks": "Support for AZs could require hardware or vSphere reconfiguration",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":3,
+            "Title": "vSphere Admin Account",
+            "Tasks": "Admin Account for Datacenter",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":4,
+            "Title": "vSphere Network",
+            "Tasks": "Internal network with enough IP address space (Estimation Calculator)",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":5,
+            "Title": "vSphere Storage and Compute",
+            "Tasks": "Determine the vSphere Storage and Compute resource requirements. A Datacenter with 60GB of RAM, 28 vCPU and 120GB of storage. This is the minimal install for OpsMgr and Elastic Runtime. No services included",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":6,
+            "Title": "vSphere Cluster Configuration",
+            "Tasks": "A common deployment topology in vSphere environments is to have multiple clusters. A cluster for mgmt and a cluster for workload",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":7,
+            "Title": "vSphere Cluster Configuration",
+            "Tasks": "Verify that there is a VMware vCenter Server configured for the Management Cluster with one or two VMware vSphere ESXi hosts and with the necessary features such as VMware vSphere High Availability (HA), VMware vSphere Distributed Resource Scheduler (DRS)",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":8,
+            "Title": "vSphere Cluster Configuration",
+            "Tasks": "Verify that the management cluster is configured with the shared storage. Local storage on each ESXi host will not work",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":9,
+            "Title": "vSphere NTP Service",
+            "Tasks": "Verify the NTP service is configured and running on each ESXi host. Failure to verify NTP can result in failed Ops Mgr and stemcelll deployments",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":10,
+            "Title": "vSphere Management Cluster",
+            "Tasks": "Verify that the management cluster is not running any production or pre-production workloads and is dedicated exclusively for this engagement. (Optional)",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":11,
+            "Title": "Firewall Rules",
+            "Tasks": "Verify firewall rules for vCenter and ESXi hosts. The following are needed, Pivotal Operations Manager needs access to vCenter and each ESXi host on port 443, 902 and 903.",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":12,
+            "Title": "Ops Manager Capacity",
+            "Tasks": "Minimum Ops Manager VM capacity - 2 vCPUs, 4GB memory, 30GB disk space (Thick Provisioned, Eager Zeroed), 1 vNICs",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":14,
+            "Title": "Minimum IP allocation",
+            "Tasks": "Determine IP address space (Estimation Calculator)",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":15,
+            "Title": "vSphere Network",
+            "Tasks": "Switches are vSphere distributed or standard switches, Switches are not Cisco Nexus 1000 and Network is not NSX",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":16,
+            "Title": "Sizing for Elastic Runtime",
+            "Tasks": "Determine sizing for Elastic Runtime (Sizing Calculator)",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":16,
+            "Title": "vSphere service account",
+            "Tasks": "A vSphere user account is required to install Pivotal CF. The account must have these privileges propagated from vCenter. It will not work from the Datacenter or Cluster level.",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":17,
+            "Title": "SSL certificates",
+            "Tasks": "Customer can use signed or self-signed certs",
+            "Labels": "pre-engagement",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":18,
+            "Title": "External Load Balancer",
+            "Tasks": "Determine if you are using External Load Balancer or PCF HA-Proxy",
+            "Labels": "iaas-configuration",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":19,
+            "Title": "DNS wildcard entries",
+            "Tasks": "Wildcard entries are required for routing to work correctly. Alternative is to create entries for each application in DNS pointing at Router",
+            "Labels": "iaas-configuration",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":20,
+            "Title": "Create/Configure iaas clusters",
+            "Tasks": "Create/Configure iaas clusters",
+            "Labels": "iaas-configuration",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":21,
+            "Title": "VLAN and NAT setup",
+            "Tasks": "VLAN and NAT setup",
+            "Labels": "iaas-configuration",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":22,
+            "Title": "Configure Routing rules",
+            "Tasks": "Configure communication from pcf out and back into pcf subnet and load balancer traffic into pcf",
+            "Labels": "iaas-configuration",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":23,
+            "Title": "Download binaries for pivotalcf",
+            "Tasks": "Download binaries for pivotalcf using customer account and move it to jumpbox (optional)",
+            "Labels": "install-pivotalcf",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":24,
+            "Title": "Install ops-manager for iaas",
+            "Tasks": "Upload the Ops Manager OVA file to vSphere",
+            "Labels": "install-pivotalcf, per-env",
+            "Environments": "vSphere"
+        },
+        {
+            "Id":25,
+            "Title": "PCF Tiles",
+            "Tasks": "Define with client which tiles they want",
+            "Labels": "install-pivotalone-services",
+            "Environments": "All"
+        },
+        {
+            "Id":26,
+            "Title": "PCF Tiles",
+            "Tasks": "Download binaries for selected tiles",
+            "Labels": "install-pivotalone-services",
+            "Environments": "All"
+        },
+        {
+            "Id":27,
+            "Title": "PCF Tiles",
+            "Tasks": "Install binaries for selected tiles",
+            "Labels": "install-pivotalone-services",
+            "Environments": "All"
+        },
+        {
+            "Id":28,
+            "Title": "BuildPacks",
+            "Tasks": "Explore external buildpack support",
+            "Labels": "buildpack",
+            "Environments": "All"
+        },
+        {
+            "Id":29,
+            "Title": "BuildPacks",
+            "Tasks": "Explore system supported buildpacks",
+            "Labels": "buildpack",
+            "Environments": "All"
+        },
+        {
+            "Id":30,
+            "Title": "BuildPacks",
+            "Tasks": "Explore interest in offline buildpack",
+            "Labels": "buildpack",
+            "Environments": "All"
+        },
+        {
+            "Id":31,
+            "Title": "LDAP/SAML",
+            "Tasks": "Define integrations with ldap or saml",
+            "Labels": "security-authentication",
+            "Environments": "All"
+        },
+        {
+              "Id":32,
+              "Title": "ERS with LDAP/SAML",
+              "Tasks": "Configure elastic runtime with ldap or saml",
+              "Labels": "security-authentication",
+              "Environments": "All"
+        },
+        {
+              "Id":33,
+              "Title": "User ACL",
+              "Tasks": "Validate user profiles and access",
+              "Labels": "security-authentication",
+              "Environments": "All"
+        },
+        {
+              "Id":34,
+              "Title": "Custom or User Defined Service Brokers",
+              "Tasks": "Explore custom service brokers or UPS",
+              "Labels": "service-broker",
+              "Environments": "All"
+        },
+        {
+              "Id":35,
+              "Title": "User, Orgs and Spaces",
+              "Tasks": "Provisioning users to roles in spaces and orgs",
+              "Labels": "user-management",
+              "Environments": "All"
+        },
+        {
+              "Id":36,
+              "Title": "Create Orgs and Spaces",
+              "Tasks": "Structuring of orgs and spaces",
+              "Labels": "user-management",
+              "Environments": "All"
+        },
+        {
+                "Id":37,
+                "Title": "Discuss app candidates",
+                "Tasks": "Identify Application candidates",
+                "Labels": "application-push",
+                "Environments": "All"
+        },
+        {
+                "Id":38,
+                "Title": "Discuss app candidates",
+                "Tasks": "Show best practices and structure for apps on PivotalCF",
+                "Labels": "application-push",
+                "Environments": "All"
+        },
+        {
+                "Id":39,
+                "Title": "Logging and Monitoring",
+                "Tasks": "Splunk or elk stack, etc to log VM activity in PCF env",
+                "Labels": "logging",
+                "Environments": "All"
+        },
+        {
+                "Id":40,
+                "Title": "APM",
+                "Tasks": "Integrating with APM tools",
+                "Labels": "monitoring",
+                "Environments": "All"
+        },
+        {
+                "Id":41,
+                "Title": "APM",
+                "Tasks": "Ops metrics statistics or jmx",
+                "Labels": "monitoring",
+                "Environments": "All"
+        },
+        {
+                "Id":41,
+                "Title": "CI/CD",
+                "Tasks": "demo CI/CD and show best practices",
+                "Labels": "continuous-delivery-process",
+                "Environments": "All"
+        },
+        {
+                "Id":42,
+                "Title": "CI/CD",
+                "Tasks": "Integrate with CI/CD pipelines",
+                "Labels": "continuous-delivery-process",
+                "Environments": "All"
+        },
+        {
+                "Id":43,
+                "Title": "CI/CD",
+                "Tasks": "Explore current CI/CD process",
+                "Labels": "continuous-delivery-process",
+                "Environments": "All"
+        },
+        {
+                "Id":44,
+                "Title": "CI/CD",
+                "Tasks": "Define with CI/CD process with CF",
+                "Labels": "continuous-delivery-process",
+                "Environments": "All"
+        },
+        {
+                "Id":45,
+                "Title": "CI/CD",
+                "Tasks": "Define with CI/CD process with CF",
+                "Labels": "continuous-delivery-process",
+                "Environments": "All"
+        },
+        {
+                "Id":46,
+                "Title": "Customer Training",
+                "Tasks": "Build day 1 and 2 training agenda",
+                "Labels": "developer-training",
+                "Environments": "All"
+        },
+        {
+                "Id":47,
+                "Title": "Customer Training",
+                "Tasks": "Plan and Organize training",
+                "Labels": "developer-training",
+                "Environments": "All"
+        },
+        {
+                "Id":48,
+                "Title": "Customer Training",
+                "Tasks": "Conduct day 1 and 2 training",
+                "Labels": "developer-training",
+                "Environments": "All"
+        },
+        {
+                "Id":49,
+                "Title": "Upgrade and Patch",
+                "Tasks": "Define upgrade tile and service process",
+                "Labels": "patch-management",
+                "Environments": "All"
+        },
+        {
+                "Id":50,
+                "Title": "Support Process",
+                "Tasks": "Walk through support process",
+                "Labels": "support",
+                "Environments": "All"
+        },
+        {
+                "Id":51,
+                "Title": "Backup",
+                "Tasks": "Implement automated backups",
+                "Labels": "backup",
+                "Environments": "All"
+        },
+        {
+                "Id":52,
+                "Title": "Backup",
+                "Tasks": "Illustrate automated backups and restore",
+                "Labels": "backup",
+                "Environments": "All"
+        },
+        {
+                "Id":53,
+                "Title": "Launch",
+                "Tasks": "Handover to customer for Launch and Usage",
+                "Labels": "launch",
+                "Environments": "All"
+        }
+  ]
+}

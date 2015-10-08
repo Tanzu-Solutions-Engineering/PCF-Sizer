@@ -1,0 +1,83 @@
+<div id="requirements" ng-controller="ShekelRequirementsController">
+    <br>
+
+    <div class="row">
+        <div class="col-md-10">
+          <div id="sizingSummary">
+            <h3>Select Requirements</h3>
+              <div id="requirementsSelect" role="form" class="form-horizontal">
+                <div class="radio" >
+                  <label class="col-md-13">
+                    <input type="radio"  name="req" ng-model="type" value="template"/>
+                    Select Template
+                  </label>
+                  <span class="glyphicon glyphicon-pencil"></span>
+
+                  <select class="form-control col-md-6" ng-model="template.selectedOption"
+                        ng-disabled="type =='customer'"
+                        ng-options="option.name for option in template.availableOptions track by option.id"
+                        ng-change="dropDownTriggerTemplate()">
+                  </select>
+                </div>
+                <hr>
+                <tt> OR </tt><br/>
+                <span class="glyphicon glyphicon-pencil"></span>
+
+                <div class="radio col-md-12">
+                  <label>
+                    <input type="radio"  name="req" ng-model="type" value="customer"/>
+                      Select Customer Requirements
+                  </label>
+                </div>
+                <span class="glyphicon glyphicon-pencil"></span>
+                <div class="col-md-6">
+                  <input ng-disabled="type =='template'" type="text" placeholder="Customer..." ng-model="customer.selectedOption.name"
+                      typeahead="option.name for option in customer.availableOptions | filter:$viewValue | limitTo:8"
+                      class="form-control "
+                      ng-change="dropDownTriggerCustomer()">
+                </div>
+                <div class="col-md-6">
+                  <input ng-disabled="type =='template'" placeholder="Password..." type="password" ng-model="customer.selectedOption.password"
+                      class="form-control"
+                      ng-change="dropDownTriggerCustomer()">
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div>
+              <h3>Summary of Resource Requirements(Min) based on Template</h3>
+              <span class="help-block">This sizing is based on the template selected with minimal resource requirements. For accurate sizing and estimation select the Sizing Option from Left Menu.</span>              <div class="panel panel-alt panel-empty">
+                  <table class="table table-light">
+                      <tr>
+                          <td>Total Memory (GB)</td>
+                          <td>{{sizingData.totalRam}}</td>
+                      </tr>
+                      <tr>
+                          <td>Total Storage (GB)</td>
+                          <td>{{sizingData.totalStg}}</td>
+                      </tr>
+                      <tr>
+                          <td>Total vCPU #</td>
+                          <td>{{sizingData.totalvCPU}}</td>
+                      </tr>
+                      <tr>
+                          <td>Total IPs #</td>
+                          <td>{{sizingData.totalIP}}</td>
+                      </tr>
+                      <tr>
+                          <td>Foundation Physical Cores (2GHz or >) #</td>
+                          <td>{{sizingData.totalCores}}</td>
+                      </tr>
+                  </table>
+              </div>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div id="requirementsGrid" ui-grid="requirementsData" class="grid" ui-grid-pagination ui-grid-exporter ui-grid-selection ui-grid-edit ui-grid-resize-columns ui-grid-move-columns></div>
+    </div>
+
+</div>

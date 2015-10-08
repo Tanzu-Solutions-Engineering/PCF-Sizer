@@ -1,0 +1,46 @@
+[
+    {
+        "vm": "Service broker",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 4,
+        "persistent_disk": 1,
+        "dynamic_ips": 0,
+        "static_ips": 1,
+        "singleton": true
+    },
+    {
+        "vm": "Broker Registrar",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 0,
+        "dynamic_ips": 1,
+        "static_ips": 0,
+        "singleton": true
+    },
+    {
+        "vm": "Broker De-Registrar",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 0,
+        "dynamic_ips": 1,
+        "static_ips": 0,
+        "singleton": true
+    },
+    {
+        "vm": "Compilation",
+        "instances": 2,
+        "vcpu": 2,
+        "ram": 1,
+        "ephemeral_disk": 4,
+        "persistent_disk": 0,
+        "dynamic_ips": 1,
+        "static_ips": 0,
+        "singleton": true
+    }
+]

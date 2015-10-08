@@ -1,24 +1,61 @@
 <div>
-<h3>VM Requirement Details</h3>
+	<h3>Foundation VMs</h3>
 
-<table class="table table-light table-scrollable-body">
-	<thead>
+	<table class="table table-light table-scrollable-body">
+		<thead>
+			<tr>
+				<th>VM</th>
+				<th>Qty</th>
+	            <th>RAM</th>
+	            <th>vCPU</th>
+							<th>Static IPs</th>
+							<th>Dynamic IPs</th>
+	            <th>Total RAM</th>
+	            <th>Total vCPU</th>
+							<th>Total IPs</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="vm in getVms()">
+			<td>{{vm.vm}}</td>
+			<td>{{vm.instances}}</td>
+	        <td>{{vm.ram}}</td>
+	        <td>{{vm.vcpu}}</td>
+					<td>{{vm.static_ips}}</td>
+					<td>{{vm.dynamic_ips}}</td>
+	        <td>{{vm.ram * vm.instances}}</td>
+	        <td>{{vm.vcpu * vm.instances}}</td>
+					<td>{{(vm.static_ips + vm.dynamic_ips) * vm.instances}}</td>
 		<tr>
-			<th>VM</th>
-			<th>Qty</th>
-            <th>RAM</th>
-            <th>vCPU</th>
-            <th>Total RAM</th>
-            <th>Total vCPU</th>
-		</tr>
-	</thead>
-	<tr ng-repeat="vm in getVms()">
-		<td>{{vm.vm}}</td>
-		<td>{{vm.instances}}</td>
-        <td>{{vm.ram}}</td>
-        <td>{{vm.vcpu}}</td>
-        <td>{{vm.ram * vm.instances}}</td>
-        <td>{{vm.vcpu * vm.instances}}</td>
-	<tr>
-</table>
+	</table>
+
+	<h3>Service VMs</h3>
+	<div ng-repeat="service in getSelectedServices()">
+		<h4>{{service.name}}</h4>
+		<table class="table table-light table-scrollable-body">
+			<thead>
+				<tr>
+					<th>VM</th>
+					<th>Qty</th>
+		            <th>RAM</th>
+		            <th>vCPU</th>
+								<th>Static IPs</th>
+								<th>Dynamic IPs</th>
+		            <th>Total RAM</th>
+		            <th>Total vCPU</th>
+								<th>Total IPs</th>
+				</tr>
+			</thead>
+			<tr ng-repeat="vm in getServiceVms(service.id)">
+				<td>{{vm.vm}}</td>
+				<td>{{vm.instances}}</td>
+		        <td>{{vm.ram}}</td>
+		        <td>{{vm.vcpu}}</td>
+						<td>{{vm.static_ips}}</td>
+						<td>{{vm.dynamic_ips}}</td>
+		        <td>{{vm.ram * vm.instances}}</td>
+		        <td>{{vm.vcpu * vm.instances}}</td>
+						<td>{{(vm.static_ips + vm.dynamic_ips) * vm.instances}}</td>
+			<tr>
+		</table>
+	</div>
 </div>
