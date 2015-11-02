@@ -44,6 +44,17 @@
         "singleton": false
     },
     {
+        "vm": "consul",
+        "instances": 3,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 1,
+        "dynamic_ips": 1,
+        "static_ips": 1,
+        "singleton": false
+    },
+    {
         "vm": "etcd",
         "instances": 1,
         "vcpu": 1,
@@ -53,6 +64,39 @@
         "dynamic_ips": 1,
         "static_ips": 0,
         "singleton": true
+    },
+    {
+        "vm": "Diego Database Partition",
+        "instances": 1,
+        "vcpu": 1,
+        "ram": 1,
+        "ephemeral_disk": 2,
+        "persistent_disk": 1,
+        "dynamic_ips": 1,
+        "static_ips": 0,
+        "singleton": true
+    },
+    {
+      "vm": "Diego Brain",
+      "instances": 2,
+      "vcpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 4,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "singleton": true
+    },
+    {
+      "vm": "Diego Cell",
+      "instances": 2,
+      "vcpu": 2,
+      "ram": 16,
+      "ephemeral_disk": 64,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "singleton": false
     },
     {
         "vm": "NFS Server || Blob Store",
@@ -187,22 +231,11 @@
         "singleton": false
     },
     {
-        "vm": "Login || (SAML Login)",
-        "instances": 2,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 0,
-        "dynamic_ips": 1,
-        "static_ips": 0,
-        "singleton": false
-    },
-    {
         "vm": "MySQL Proxy",
         "instances": 2,
         "vcpu": 1,
         "ram": 1,
-        "ephemeral_disk": 2,
+        "ephemeral_disk": 4,
         "persistent_disk": 1,
         "dynamic_ips": 1,
         "static_ips": 1,

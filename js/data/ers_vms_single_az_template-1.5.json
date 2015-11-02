@@ -184,7 +184,7 @@
         "persistent_disk": 0,
         "dynamic_ips": 1,
         "static_ips": 0,
-        "singleton": false
+        "singleton": true
     },
     {
         "vm": "UAA",

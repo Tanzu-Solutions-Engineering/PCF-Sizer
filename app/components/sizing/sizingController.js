@@ -8,7 +8,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	for ( var i = 1; i <= 300; ++i) {
     		$scope.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
     	}
-    }
+    };
     
     $scope.setAIPackOptions();
                
@@ -17,7 +17,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     		aiService.setAiPack(pack);
     	}
 		return aiService.aiPacks();	
-    }
+    };
     
     aiService.setAiPack($scope.aiPackOptions[0]);
 
@@ -27,6 +27,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	 * version
 	 */
 	$scope.ersVersionOptions = [
+        {value: 1.6},
 		{value: 1.5},
 		{value: 1.4}
 	];
@@ -91,8 +92,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	avgRam: $scope.avgRamOptions[1],
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
     	deaSize: $scope.deaSizeOptions[0],
-    	deaSizeDisk: $scope.deaSizeOptionsDisk[0],
-        numAZ: 2,
+    	deaSizeDisk: $scope.deaSizeOptionsDisk[1],
+        numAZ: 3,
     	nPlusX: 1,
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
     	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1],
@@ -120,11 +121,15 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     $scope.setAis = function() { 
     	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
     };
-    
-    $scope.deaUsableRam = function() { 
+
+    //This function needs no update for diego as we use the same
+    //logic for determining cell size
+    $scope.deaUsableRam = function() {
     	return $scope.platform.deaSize.size - 3;
     };
-    
+
+    //This function gets no update for diego as we use the same
+    //logic for determining cell size. TODO Is that the correct thing to do.
     $scope.deaUsableStg = function() { 
     	return $scope.platform.deaSizeDisk.size - $scope.platform.deaSize.size - 4;
     
@@ -139,7 +144,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 			totalX = parseInt(x) +1;
 		}
 	    return totalX;
-    }
+    };
     
     /**
      * DEA Calculator
@@ -157,17 +162,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	var deasRam = (totalRam / $scope.deaUsableRam());
     	var deasStg = (totalStg / $scope.deaUsableStg());
 
-
-    		//Conditional Limit DEA per Stg or Mem
-    		if (deasRam > deasStg || deasRam == deasStg) {
-    			var deas = deasRam;
-    		}
-    		else {
-    			var deas = deasStg;
-    		}
-
-    	
-    	return $scope.roundUp(deas);
+    	return $scope.roundUp(Math.max(deasRam, deasStg));
     };
     
     $scope.deasPerAz = function() { 
@@ -177,9 +172,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     
     $scope.totalDEAs = function() { 
     	return $scope.deasPerAz() * $scope.platform.numAZ;
-    }
+    };
     
-	$scope.getVms = function() { return vmLayout; } 
+	$scope.getVms = function() { return vmLayout; };
 
     $scope.iaasAskSummary = {
     	ram: 1,
@@ -190,18 +185,19 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     
     $scope.getPhysicalCores = function() { 
     	return $scope.roundUp($scope.iaasAskSummary.vcpu / $scope.platform.iaasCPUtoCoreRatio.ratio); 
-    }
+    };
     
     $scope.doIaaSAskForVm = function(vm) {
     	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
 		$scope.iaasAskSummary.disk 
 			+= (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
 		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
-    }
+    };
 
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
-    
+    //For diego we use all the dea logic but update cells. I expect we want something
+    //finer grained as diego can run both...
     $scope.applyTemplate = function(template) { 
     	$scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
     	vmLayout.length = 0;
@@ -209,17 +205,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         	var vm = {};
     		angular.extend(vm, template[i]);
     		if ( !vm.singleton ) {
-    			if ( "DEA" == vm.vm ) { 
+    			if ( ("DEA" == vm.vm && $scope.platform.ersVersion.value < 1.6)
+                 || ("Diego Cell" == vm.vm && $scope.platform.ersVersion.value >= 1.6)) {
     				vm.instances = $scope.totalDEAs();
     				vm.ram = $scope.platform.deaSize.size;
 					vm.ephemeral_disk = $scope.platform.deaSizeDisk.size;
-    			} 
-    			else {
+    			} else {
     				vm.instances = vm.instances * $scope.platform.numAZ;
     			}
-
-
-
     		}   
 			if ( "Compilation" == vm.vm ){
 			    vm.instances = $scope.platform.pcfCompilationJobs.value;
@@ -255,9 +248,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	
 	$scope.dropDownTriggerSizing = function () {
 		if ($scope.vmTemplate !== undefined) {
-			console.log("ShekelSizingController:MGLOG:" + "Triggered Sizing Data Refresh");
-			$scope.applyTemplate($scope.vmTemplate)		
-		};
+			$scope.applyTemplate($scope.vmTemplate)
+		}
 	};
 	
 });

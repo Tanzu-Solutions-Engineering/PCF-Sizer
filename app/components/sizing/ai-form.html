@@ -32,14 +32,14 @@
     </div>
 
     <div class="form-group form-inline">
-        <label class="col-md-13" for="deaMemSize">DEA Mem Size</label>
+        <label class="col-md-13" for="deaMemSize">DEA/Cell Mem Size</label>
         <select class="form-control col-md-6" id="deaMemSize" ng-model="platform.deaSize"
                 ng-options="opt as opt.text for opt in deaSizeOptions" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
 
     <div class="form-group form-inline">
-        <label class="col-md-13" for="deaEphemStorage">DEA Ephemeral Storage Size</label>
+        <label class="col-md-13" for="deaEphemStorage">DEA/Cell Ephemeral Storage Size</label>
         <select class="form-control col-md-6" id="deaEphemStorage" ng-model="platform.deaSizeDisk"
                 ng-options="opt as opt.text for opt in deaSizeOptionsDisk" ng-change="dropDownTriggerSizing()">
         </select>

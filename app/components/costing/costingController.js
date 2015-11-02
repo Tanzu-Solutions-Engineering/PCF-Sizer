@@ -39,20 +39,20 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
         opexMonthly : "monthly"
 	};
 
-	  $scope.roundto2 = function(x) {  
-	    	var totalX;
-		    totalX = Math.round(x * 100) / 100;
-		    return totalX;
-	    }			
+  	$scope.roundto2 = function(x) {
+		var totalX;
+		totalX = Math.round(x * 100) / 100;
+		return totalX;
+	};
+
 	/**
 	 * Closure to enable math against a dea property.
 	 */
 	$scope.deaFunction = function(method, overhead) { 
 		for (var i = 0; i < vmLayout.length; ++i) { 
 			var vm = vmLayout[i];
-			if ( "DEA" == vm.vm ) {
+			if ( "DEA" == vm.vm || "Diego Cell" == vm.vm) {
 				if ( "ephemeral_disk" == method ){
-					// MG Factor in SWAP partition on DEA Ephemeral Disk
 					return (vm[method] * vm.instances) - (vm.ram * vm.instances) - (overhead * vm.instances);
 				}
 				else{
@@ -255,14 +255,12 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	});
 	
 	$scope.dropDownTriggerRuncard = function() {
-		//console.log("ShekelCostingController:MGLOG:" + "Triggered RunCard Rebuild");	
-		
 		if ( 'gbhr' == $scope.forecasting.burndownMode.value ) {
 			$scope.forecasting.burndownMonths = $scope.forecasting.forecastLength;
 		}
 		
 		$scope.buildRunCards(planService.getPlans());
-	}
+	};
 	
 	$scope.calculatePayoffWithPlans = function() { 
 		var month = 0;
