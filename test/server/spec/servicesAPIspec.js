@@ -1,37 +1,24 @@
-var express = require('express');
-/*global describe, it */
-'use strict';
+var request = require('request');
+var app = require ("../../../app.js");
 
-
-(function () {
-    describe('ServicesAPI', function () {
-
-        var sandbox;
-        var app = express();
-
-        beforeEach(function(done) {
-            sandbox = sinon.sandbox.create();
-
-            done();
+describe("ServicesAPI", function () {
+    describe("GET /services", function() {
+        it("returns status code 200", function(done) {
+            request.get("http://localhost:3000/services",
+                function(error, response, body) {
+                    expect(response.statusCode).toBe(200);
+                    done();
+                });
         });
 
-        afterEach(function(done) {
-            sandbox.restore();
-            done();
-        });
-
-        it("Should return the versions", function () {
-            fail("NYI");
-        });
-
-        it("Should return 404 for unknown service", function () {
-            sandbox.stub(fs, 'readdir', function(path, callback) {
-                callback(null, []);
-            });
-
-            request(app).get('/services/garbage/versions')
-                .expect(404)
+        it("returns a json array", function(done) {
+            request.get("http://localhost:3000/services",
+                function(error, response, body) {
+                    expect(response.headers['content-type']).toMatch(/json/)
+                    expect(Array.isArray(JSON.parse(body))).toBeTruthy();
+                    done();
+                });
         });
 
     });
-})();
+});

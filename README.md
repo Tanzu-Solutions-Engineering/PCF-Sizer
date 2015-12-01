@@ -10,6 +10,8 @@ This [page](http://techportal.inviqa.com/2014/10/28/testing-javascript-get-start
 
 For this project you don't need to run the generators, as we've done that for you. In a nutshell: 
 
+
+TODO  `npm install` should deal with this now
 ```
 brew install npm
 npm install -g yo
@@ -28,6 +30,8 @@ Assuming you're on a mac, and it acts like mine:
 cd ~/git/shekel
 /usr/local/lib/node_modules/karma/bin/karma start test/karma.conf.js
 ``` 
+
+We've also got some server tests that can be ran w/ `npm test`
 
 That should get you going. If you can't find karma run `npm -g list` and make sure it's installed. 
 Coverage is lackluster, help us make it better if you like. 

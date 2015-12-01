@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 shekelApp.controller('ShekelServiceSizingController', function($scope) {
     $scope.serviceVersionOptions = [

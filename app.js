@@ -25,4 +25,8 @@ app.get('/services/:service/versions', function(req, res){
     res.send(versions)
 });
 
+app.get('/services', function(req, res) {
+    res.status(200).json(['1.3', '1.4']);
+});
+
 app.listen(process.env.PORT || 3000);
