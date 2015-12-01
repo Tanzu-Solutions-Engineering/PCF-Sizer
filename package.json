@@ -10,7 +10,8 @@
     "karma": "0.12.x",
     "karma-jasmine": "0.1.x",
     "karma-phantomjs-launcher": "0.2.x",
-    "request": "2.x"
+    "request": "2.x",
+    "rewire": "2.5.x"
   },
   "scripts": {
     "test": "./node_modules/.bin/jasmine-node --captureExceptions --forceexit ./test/server/spec "
