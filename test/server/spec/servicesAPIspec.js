@@ -1,5 +1,7 @@
+var express = require('express');
 /*global describe, it */
 'use strict';
+
 
 (function () {
     describe('ServicesAPI', function () {

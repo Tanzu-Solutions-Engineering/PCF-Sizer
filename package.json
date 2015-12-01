@@ -1,11 +1,17 @@
 {
-  "name" : "Shekel",
-  "version" : "0.0.1",
-  "dependencies" : {
-    "express" : "3.x",
+  "name": "Shekel",
+  "version": "0.0.2",
+  "dependencies": {
+    "express": "3.x",
     "glob": "5.0.14"
-
   },
-  "engines": { "node": "0.10.33" }
-
+  "devDependencies": {
+    "jasmine-node": "1.14.x"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node test/spec"
+  },
+  "engines": {
+    "node": "0.10.33"
+  }
 }
