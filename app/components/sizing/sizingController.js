@@ -21,6 +21,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     
     aiService.setAiPack($scope.aiPackOptions[0]);
 
+	
 	/**
 	 * When adding a new ERS version, ADD IT TO THE TOP OF THE LIST as the
 	 * code defaults to index 0, which should always return the latest

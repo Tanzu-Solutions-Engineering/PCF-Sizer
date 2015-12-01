@@ -17,6 +17,13 @@
             <form class="form-group form-inline" role="form">
 
                 <label for="version" class="">Version</label>
+
+                <select class="form-control col-md-6 input-sm" ng-model="service.serviceVersion"
+                        ng-options="opt as opt.value for opt in ersVersionOptions" ng-change="loadAzTemplate()">
+                </select>
+
+
+
                 <select id="version" class="form-control input-sm">
                     <option>1</option>
                     <option>2</option>
