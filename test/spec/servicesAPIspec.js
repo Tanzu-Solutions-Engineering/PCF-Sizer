@@ -1,6 +1,5 @@
 /*global describe, it */
 'use strict';
-require('app.js');
 
 (function () {
     describe('ServicesAPI', function () {
