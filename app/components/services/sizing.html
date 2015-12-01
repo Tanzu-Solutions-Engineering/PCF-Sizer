@@ -18,22 +18,14 @@
 
                 <label for="version" class="">Version</label>
 
-                <select class="form-control col-md-6 input-sm" ng-model="service.serviceVersion"
-                        ng-options="opt as opt.value for opt in ersVersionOptions" ng-change="loadAzTemplate()">
-                </select>
-
-
-
-                <select id="version" class="form-control input-sm">
-                    <option>1</option>
-                    <option>2</option>
+                <select class="form-control input-sm" id="version" ng-model="service.serviceVersion"
+                        ng-options="opt as opt.value for opt in serviceVersionOptions">
                 </select>
             </form>
             <a href="#">Configure</a>
 
         </div>
     </div>
-    <div class="col-md-1"></div>
 </div>
 
 <div class="row col-md-20">
