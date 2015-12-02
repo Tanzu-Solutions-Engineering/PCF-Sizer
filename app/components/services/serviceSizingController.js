@@ -1,12 +1,17 @@
 "use strict";
 
-shekelApp.controller('ShekelServiceSizingController', function($scope) {
-    $scope.serviceVersionOptions = [
-        {value: 2.0},
-        {value: 1.0}
-    ];
+shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
+    $scope.svcs = null;
 
-    $scope.service = {
-        serviceVersion: $scope.serviceVersionOptions[0]
+    $scope.services = function() {
+        if ( null == $scope.svcs) {
+            $http.get('/services').success(function(data) {
+                $scope.svcs = data;
+            })
+        }
+        return $scope.svcs
     };
+
+    $scope.services();
+
 });
