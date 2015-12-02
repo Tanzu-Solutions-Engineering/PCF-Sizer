@@ -17,7 +17,7 @@ app.get('/ersjson/:version', function(req, res){
 });
 
 app.get('/services/:service/versions', function(req, res){
-    var matchingFiles = glob.sync('js/data/services/' + req.param('service')  + '-*.json');
+    var matchingFiles = glob.sync('js/data/services/' + req.params['service']  + '-*.json');
     var versions = [];
     matchingFiles.forEach(function(file) {
         versions.push(file.split('-')[1].replace('.json', ''));
@@ -26,7 +26,15 @@ app.get('/services/:service/versions', function(req, res){
 });
 
 app.get('/services', function(req, res) {
-    res.status(200).json(['mysql', 'rabbit']);
+    var services = [];
+    var serviceJSONs = glob.sync('js/data/services/*.json');
+    serviceJSONs.forEach(function(file) {
+        var serviceName = file.split('-')[0];
+        if(-1 == services.indexOf(serviceName)) {
+            services.push(serviceName)
+        }
+    });
+    res.status(200).json(services);
 });
 
 app.listen(process.env.PORT || 3000);
