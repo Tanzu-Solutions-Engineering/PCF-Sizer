@@ -9,22 +9,22 @@
                 <label>
                     <input type="checkbox">{{service}}</input>
                 </label>
-
             </div>
         </div>
 
-        <!--<div class="panel-body">-->
-            <!--<form class="form-group form-inline" role="form">-->
+        <div class="panel-body">
+            <form class="form-group form-inline" role="form">
 
-                <!--<label for="version" class="">Version</label>-->
+                <label for="version" class="">Version</label>
 
-                <!--&lt;!&ndash;<select class="form-control input-sm" id="version"&ndash;&gt;-->
-                        <!--&lt;!&ndash;ng-options="version in getServiceVersions(service)">&ndash;&gt;-->
-                <!--&lt;!&ndash;</select>&ndash;&gt;-->
-            <!--</form>-->
-            <!--<a href="#">Configure</a>-->
+                <select class="form-control input-sm" id="version" ng-model="serviceversion"
+                    ng-options="version as version for version in versioncache[service]">
+                </select>
 
-        <!--</div>-->
+            </form>
+            <a href="#">Configure</a>
+
+        </div>
     </div>
 </div>
 

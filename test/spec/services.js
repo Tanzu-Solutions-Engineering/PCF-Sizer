@@ -12,6 +12,10 @@
             $httpBackend = $injector.get('$httpBackend');
             $httpBackend.when('GET', '/services').respond(services);
             $httpBackend.when('GET', '/services/mysql/versions').respond(mysqlVersions);
+            $httpBackend.when('GET', '/services/gemfire/versions').respond(mysqlVersions);
+            $httpBackend.when('GET', '/services/rabbit/versions').respond(mysqlVersions);
+            $httpBackend.when('GET', '/services/redis/versions').respond(mysqlVersions);
+
             $rootScope = $injector.get('$rootScope');
             var $controller = $injector.get('$controller');
             createController = function() {
@@ -41,6 +45,12 @@
             it ('should return as many services as the api returns', function() {
                 expect($rootScope.services().length).toBe(services.length)
             });
+
+            it('should initialize the version cache for all the services it finds so ng-repeat works', function() {
+                expect(Array.isArray($rootScope.versioncache['mysql'])).toBeTruthy();
+                expect(Array.isArray($rootScope.versioncache['gemfire'])).toBeTruthy();
+
+            })
         });
 
         describe('listing versions', function() {

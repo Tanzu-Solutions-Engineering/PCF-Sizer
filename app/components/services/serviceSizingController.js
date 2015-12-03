@@ -2,6 +2,7 @@
 
 shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
     $scope.svcs = null;
+    $scope.versioncache = {};
 
     $scope.services = function() {
         return $scope.svcs
@@ -9,6 +10,9 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
 
     $http.get('/services').success(function(data) {
         $scope.svcs = data;
+        $scope.svcs.forEach(function(service) {
+            $scope.getServiceVersions(service);
+        });
     });
 
     $scope.services();
@@ -20,7 +24,10 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
      */
     $scope.getServiceVersions = function(serviceName) {
         var url = '/services/' + serviceName + '/versions';
-        return $http.get(url).then(function(data) {return data.data;});
+        return $http.get(url).then(function(data) {
+            $scope.versioncache[serviceName] = data.data;
+            return $scope.versioncache[serviceName]
+        });
     };
 
 });
