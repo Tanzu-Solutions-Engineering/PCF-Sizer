@@ -1,30 +1,30 @@
 <div id="services" ng-controller="ShekelServiceSizingController">
     <h3>PCF Services Sizing</h3>
 
-    <div id="mysql-row" class="panel panel-basic bg-neutral-9 col-md-9">
+    <div class="panel panel-basic bg-neutral-9 col-md-9" ng-repeat="service in services()">
 
         <div class="panel-header">
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox">MySQL</input>
+                    <input type="checkbox">{{service}}</input>
                 </label>
 
             </div>
         </div>
 
-        <div class="panel-body">
-            <form class="form-group form-inline" role="form">
+        <!--<div class="panel-body">-->
+            <!--<form class="form-group form-inline" role="form">-->
 
-                <label for="version" class="">Version</label>
+                <!--<label for="version" class="">Version</label>-->
 
-                <select class="form-control input-sm" id="version" ng-model="service.serviceVersion"
-                        ng-options="opt as opt.value for opt in serviceVersionOptions">
-                </select>
-            </form>
-            <a href="#">Configure</a>
+                <!--&lt;!&ndash;<select class="form-control input-sm" id="version"&ndash;&gt;-->
+                        <!--&lt;!&ndash;ng-options="version in getServiceVersions(service)">&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+            <!--</form>-->
+            <!--<a href="#">Configure</a>-->
 
-        </div>
+        <!--</div>-->
     </div>
 </div>
 

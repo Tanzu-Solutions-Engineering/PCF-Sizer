@@ -13,7 +13,7 @@ app.get('/buildnumber', function(req, res) {
 
 app.get('/ersjson/:version', function(req, res){
     //TODO Is this safe?
-    res.redirect('/js/data/ers_vms_single_az_template-' + req.param('version') + '.json')
+    res.redirect('/js/data/ers_vms_single_az_template-' + req.params['version'] + '.json')
 });
 
 app.get('/services/:service/versions', function(req, res){
@@ -29,7 +29,8 @@ app.get('/services', function(req, res) {
     var services = [];
     var serviceJSONs = glob.sync('js/data/services/*.json');
     serviceJSONs.forEach(function(file) {
-        var serviceName = file.split('-')[0];
+        var withPath = file.split('-')[0];
+        var serviceName = withPath.split('/')[3];
         if(-1 == services.indexOf(serviceName)) {
             services.push(serviceName)
         }

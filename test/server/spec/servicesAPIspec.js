@@ -10,9 +10,9 @@ describe("ServicesAPI", function () {
             var globMock = {
                 sync: function(path) {
                     expect(path).toBe("js/data/services/*.json")
-                    return ['mysql-1.5.json',
-                        'gemfire-1.0.json',
-                        'rabbit-5.1.json'];
+                    return ['js/data/services/mysql-1.5.json',
+                        'js/data/services/gemfire-1.0.json',
+                        'js/data/services/rabbit-5.1.json'];
                 }
             };
             app.__set__("glob", globMock);
