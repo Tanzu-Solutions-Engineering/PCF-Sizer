@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 var shekelApp = angular.module('ShekelApp', []);
 

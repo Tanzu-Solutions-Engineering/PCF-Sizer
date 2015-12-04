@@ -2,7 +2,7 @@
 
 (function() {
     describe('ShekelServicesController', function() {
-        var $rootScope, createController, $httpBackend, vmLayout;
+        var $rootScope, createController, $httpBackend, tileService;
         var services = ['mysql', 'gemfire', 'rabbit', 'redis'];
         var mysqlVersions = ['1.6.5', '1.7.1', '1.6.4', '1.7', '1.3'];
 
@@ -30,6 +30,7 @@
                 "static_ips": 0,
                 "singleton": true
             };
+        var ers = [ vcenter, opsMan];
 
         beforeEach(module('ShekelApp'));
 
@@ -41,15 +42,20 @@
             $httpBackend.when('GET', '/services/rabbit/versions').respond(mysqlVersions);
             $httpBackend.when('GET', '/services/redis/versions').respond(mysqlVersions);
             $rootScope = $injector.get('$rootScope');
-            vmLayout = $injector.get('vmLayout');
-            vmLayout.push(vcenter);
-            vmLayout.push(opsMan);
+            tileService = $injector.get('tileService');
+
+            tileService.tiles.push({
+                    vms: ers,
+                    name: "ers",
+                    version: '1.6.1'
+                }
+            );
 
             var $controller = $injector.get('$controller');
             createController = function() {
                 return $controller('ShekelServiceSizingController', {
                     '$scope': $rootScope,
-                    vmLayout: vmLayout
+                    tileService: tileService
                 });
             }
         }));
@@ -105,51 +111,49 @@
                 expect(versions.elements.length).toBe(mysqlVersions.length);
             });
 
-            //It selects the highest element in the versonings.
-            it('should contain version 1.7 and select it by default', function() {
+            //It selects the highest element in the versions.
+            it('should contain version 1.7 and select 1.7.1 by default', function() {
                 expect(versions.elements).toContain('1.7');
                 expect(versions.selected).toBe('1.7.1')
             });
         });
 
+        var mysqlBroker = {
+            "vm": "MySQL Broker",
+            "instances": 2,
+            "vcpu": 1,
+            "ram": 1,
+            "ephemeral_disk": 10,
+            "persistent_disk": 0,
+            "dynamic_ips": 1,
+            "static_ips": 1,
+            "singleton": false
+        };
+
         describe('enabling a service', function() {
             beforeEach(function() {
                 createController();
                 $httpBackend.flush();
-
-                $httpBackend.expectGET('/tile/mysql/1.7.1').respond(
-                    [
-                       {
-                            "vm": "MySQL Broker",
-                            "instances": 2,
-                            "vcpu": 1,
-                            "ram": 1,
-                            "ephemeral_disk": 10,
-                            "persistent_disk": 0,
-                            "dynamic_ips": 1,
-                            "static_ips": 1,
-                            "singleton": false
-                        }
-                    ]
-                );
+                $httpBackend.expectGET('/tile/mysql/1.7.1').respond([mysqlBroker]);
+                $rootScope.versioncache['mysql'].enabled = true;
             });
 
             afterEach(function() {
                 $httpBackend.flush();
             });
 
-            it('should add the vms to the vmlist when enabled', function() {
-                var originalNumberOfVMs = vmLayout.length;
+            it('should add the release to the tile service when enabled', function() {
+                var originalNumberTiles = tileService.tiles.length;
                 $rootScope.toggleService('mysql').then(function() {
-                    expect(originalNumberOfVMs).toBeLessThan(vmLayout.length);
-                    expect(Array.isArray(vmLayout)).toBeTruthy();
+                    expect(originalNumberTiles).toBeLessThan(tileService.tiles.length);
+                    expect(Array.isArray(tileService.tiles[tileService.tiles.length - 1].vms)).toBeTruthy();
                 });
             });
 
             it('should have a vm named mysql broker at the end so we can group things in the vm list table', function() {
                 $rootScope.toggleService('mysql').then(function() {
-                    expect(vmLayout.length).toBe(3);
-                    expect(vmLayout[2].vm).toBe("MySQL Broker");
+                    expect(tileService.tiles.length).toBe(2);
+                    expect(tileService.tiles[1].vms[0].vm).toBe("MySQL Broker");
                 });
             });
 
@@ -157,6 +161,24 @@
                 $rootScope.getTile('mysql', '1.7.1').then(function(tile) {
                     expect(tile).toBeDefined();
                 });
+            });
+        });
+
+        describe('disabling a service', function() {
+            beforeEach(function() {
+                createController();
+                $httpBackend.flush();
+            });
+
+            it('should remove the vms from the vm list when disabled', function() {
+                tileService.tiles.push({
+                    name: 'mysql',
+                    version: '1.7.1',
+                    vms: [mysqlBroker]
+                });
+                var originalSize = tileService.tiles.length;
+                $rootScope.toggleService('mysql');
+                expect(tileService.tiles.length).toBe(originalSize - 1);
             });
         });
 

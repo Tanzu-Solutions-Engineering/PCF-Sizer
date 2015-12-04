@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelServiceSizingController', function($scope, $http, vmLayout) {
+shekelApp.controller('ShekelServiceSizingController', function($scope, $http, tileService) {
     $scope.svcs = null;
     $scope.versioncache = {};
 
@@ -38,9 +38,25 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, vm
     };
 
     $scope.toggleService = function(serviceName) {
-        return $scope.getTile(serviceName, $scope.versioncache[serviceName].selected).then(function(tile) {
-            vmLayout.splice.apply(vmLayout, [vmLayout.length,0].concat(tile));
-        });
+        if ( $scope.versioncache[serviceName].enabled ) {
+            var version =  $scope.versioncache[serviceName].selected;
+            return $scope.getTile(serviceName, version).then(function(tile) {
+                tileService.tiles.push(
+                    {
+                        name: serviceName,
+                        version: version,
+                        vms: tile
+                    }
+                );
+            });
+        } else {
+            tileService.tiles.forEach(function(tile, idx) {
+                if ( tile.name == serviceName) {
+                    tileService.tiles.splice(idx, 1);
+                    return;
+                }
+            });
+        }
     };
 
     $scope.getTile = function(tileName, tileVersion) {
