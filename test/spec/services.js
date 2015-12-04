@@ -47,8 +47,8 @@
             });
 
             it('should initialize the version cache for all the services it finds so ng-repeat works', function() {
-                expect(Array.isArray($rootScope.versioncache['mysql'])).toBeTruthy();
-                expect(Array.isArray($rootScope.versioncache['gemfire'])).toBeTruthy();
+                expect(Array.isArray($rootScope.versioncache['mysql'].elements)).toBeTruthy();
+                expect(Array.isArray($rootScope.versioncache['gemfire'].elements)).toBeTruthy();
 
             })
         });
@@ -67,11 +67,12 @@
             });
 
             it('Should return all the mysql versions', function() {
-                expect(versions.length).toBe(mysqlVersions.length);
+                expect(versions.elements.length).toBe(mysqlVersions.length);
             });
 
-            it('should contain version 1.7', function() {
-                expect(versions).toContain('1.7');
+            it('should contain version 1.7 and select it by default', function() {
+                expect(versions.elements).toContain('1.7');
+                expect(versions.selected).toBe('1.7')
             })
         });
     })

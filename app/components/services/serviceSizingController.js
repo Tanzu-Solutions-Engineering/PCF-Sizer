@@ -17,6 +17,7 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
 
     $scope.services();
 
+    $scope.serviceversion = 0;
     /**
      * Returns a promise which will contain an array of versions.
      * @param serviceName
@@ -25,9 +26,13 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
     $scope.getServiceVersions = function(serviceName) {
         var url = '/services/' + serviceName + '/versions';
         return $http.get(url).then(function(data) {
-            $scope.versioncache[serviceName] = data.data;
+            $scope.versioncache
+            $scope.versioncache[serviceName] = {
+                elements: data.data,
+                selected: data.data[0]
+            };
+
             return $scope.versioncache[serviceName]
         });
     };
-
 });

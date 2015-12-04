@@ -17,8 +17,8 @@
 
                 <label for="version" class="">Version</label>
 
-                <select class="form-control input-sm" id="version" ng-model="serviceversion"
-                    ng-options="version as version for version in versioncache[service]">
+                <select class="form-control input-sm" id="version" ng-model="versioncache[service].selected"
+                    ng-options="version for version in versioncache[service].elements">
                 </select>
 
             </form>
