@@ -146,14 +146,14 @@
                 var originalNumberTiles = tileService.tiles.length;
                 $rootScope.toggleService('mysql').then(function() {
                     expect(originalNumberTiles).toBeLessThan(tileService.tiles.length);
-                    expect(Array.isArray(tileService.tiles[tileService.tiles.length - 1].vms)).toBeTruthy();
+                    expect(Array.isArray(tileService.tiles[tileService.tiles.length - 1].template)).toBeTruthy();
                 });
             });
 
             it('should have a vm named mysql broker at the end so we can group things in the vm list table', function() {
                 $rootScope.toggleService('mysql').then(function() {
                     expect(tileService.tiles.length).toBe(2);
-                    expect(tileService.tiles[1].vms[0].vm).toBe("MySQL Broker");
+                    expect(tileService.tiles[1].template[0].vm).toBe("MySQL Broker");
                 });
             });
 

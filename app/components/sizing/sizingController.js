@@ -194,12 +194,16 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
     };
 
+    $scope.resetIaaSAsk = function () {
+        $scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
+    };
+
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
     //For diego we use all the dea logic but update cells. I expect we want something
     //finer grained as diego can run both...
     $scope.applyTemplate = function(template) { 
-    	$scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
+        $scope.resetIaaSAsk();
     	vmLayout.length = 0;
         for (var i = 0; i < template.length; i++) {
         	var vm = {};
@@ -226,9 +230,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     $scope.loadAzTemplate = function() {
     	return $http.get('/ersjson/' + $scope.platform.ersVersion.value)
     		.success(function(data) {
-
+				tileService.addTile("ers", $scope.platform.ersVersion.value, data);
+                $scope.applyTemplate(tileService.getTile("ers", $scope.platform.ersVersion.value));
+                //TODO Remove
     			$scope.vmTemplate = data;
-    			$scope.applyTemplate($scope.vmTemplate);
     		}).error(function(data) { 
     			alert("Failed to get PCF AZ Template json template");
     		});

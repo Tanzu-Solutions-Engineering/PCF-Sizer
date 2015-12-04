@@ -1,17 +1,32 @@
-var tileService = shekelApp.factory('tileService', function ($rootScope) {
+var tileService = shekelApp.factory('tileService', function () {
     var tileService = {
         tiles: new Array(),
-        addTile: function(name, version, vms) {
-            this.tiles.push({ name: name, version: version, vms: vms})
+        addTile: function(name, version, template) {
+            var idx = this.getIndexOfTile(name);
+            if ( -1 == idx ) {
+                this.tiles.push({ name: name, version: version, template: template})
+            } else {
+                this.tiles.splice(idx, { name: name, version: version, template: template} )
+            }
         },
         removeTile: function(name) {
+            var idx = this.getIndexOfTile(name);
+            if ( -1 != idx ) {
+                this.tiles.splice(idx, 1);
+            }
+        },
+        getIndexOfTile: function(name) {
             for(var idx=0; idx < this.tiles.length; idx++) {
                 if ( this.tiles[idx].name == name) {
-                    this.tiles.splice(idx, 1);
-                    return;
+                    return idx
                 }
             }
+            return -1;
+        },
+        getTile: function (name) {
+            return this.tiles[this.getIndexOfTile(name)];
         }
+
     };
 
     return tileService;

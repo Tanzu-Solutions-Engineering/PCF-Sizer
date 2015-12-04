@@ -50,7 +50,19 @@
                $rootScope.loadAzTemplate().then(function() {
                   expect(tileService.tiles.length).toBe(1);
                });
+               $httpBackend.flush();
            });
         });
+
+        describe('reset to apply templates', function () {
+            it('should reset iaas ask', function () {
+                $rootScope.iaasAskSummary = {};
+                $rootScope.resetIaaSAsk();
+                expect($rootScope.iaasAskSummary.ram).toBe(1);
+                expect($rootScope.iaasAskSummary.disk).toBe(1);
+                expect($rootScope.iaasAskSummary.vcpu).toBe(1);
+            });
+        });
+
     });
 })();
