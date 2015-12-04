@@ -43,14 +43,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	    { value: 20 }
 	]; 
 
-    $scope.deaSizeOptions = [ 
+    $scope.runnerSizeOptions = [
 	     {"text": "Small (16GB RAM)",    "size":16}, 
 	     {"text": "Medium (32GB RAM)",   "size":32},
 	     {"text": "Large (64GB RAM)",    "size":64},
 	     {"text": "Bad idea (128GB RAM)", "size":128}
 	 ];
     
-    $scope.deaSizeOptionsDisk =  [ 
+    $scope.runnerSizeOptionsDisk =  [
          {"text": "Small (32GB)",    "size":32}, 
          {"text": "Medium (64GB)",   "size":64},
          {"text": "Large (128GB)",    "size":128},
@@ -89,8 +89,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 		ersVersion: $scope.ersVersionOptions[0],
     	avgRam: $scope.avgRamOptions[1],
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
-    	deaSize: $scope.deaSizeOptions[0],
-    	deaSizeDisk: $scope.deaSizeOptionsDisk[1],
+    	runnerSize: $scope.runnerSizeOptions[0],
+    	runnerSizeDisk: $scope.runnerSizeOptionsDisk[1],
         numAZ: 3,
     	nPlusX: 1,
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
@@ -122,14 +122,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 
     //This function needs no update for diego as we use the same
     //logic for determining cell size
-    $scope.deaUsableRam = function() {
-    	return $scope.platform.deaSize.size - 3;
+    $scope.runnerUsableRAM = function() {
+    	return $scope.platform.runnerSize.size - 3;
     };
 
     //This function gets no update for diego as we use the same
     //logic for determining cell size. TODO Is that the correct thing to do.
-    $scope.deaUsableStg = function() { 
-    	return $scope.platform.deaSizeDisk.size - $scope.platform.deaSize.size - 4;
+    $scope.runnerUsableStg = function() {
+    	return $scope.platform.runnerSizeDisk.size - $scope.platform.runnerSize.size - 4;
     
     };
 
@@ -145,31 +145,30 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     };
     
     /**
-     * DEA Calculator
+     * Diego Cell Calculator
      */
-    $scope.numDeasToRunAIs = function() { 
+    $scope.numRunnersToRunAIs = function() {
     	var aipacks = 50;
     	if (null != $scope.aiPacks()) { 
     		aipacks = $scope.aiPacks().value * 50;
     	}
-    	
 
     	var totalRam = (aipacks * $scope.platform.avgRam.value);
     	var totalStg = (aipacks * $scope.platform.avgAIDisk.value);
     	    	
-    	var deasRam = (totalRam / $scope.deaUsableRam());
-    	var deasStg = (totalStg / $scope.deaUsableStg());
+    	var runnerRAM = (totalRam / $scope.runnerUsableRAM());
+    	var runnerStager = (totalStg / $scope.runnerUsableStg());
 
-    	return $scope.roundUp(Math.max(deasRam, deasStg));
+    	return $scope.roundUp(Math.max(runnerRAM, runnerStager));
     };
     
-    $scope.deasPerAz = function() { 
-    	var azDeas = $scope.numDeasToRunAIs() / $scope.platform.numAZ;
-    	return $scope.roundUp(azDeas) + $scope.platform.nPlusX;
+    $scope.runnersPerAz = function() {
+    	var azRunners = $scope.numRunnersToRunAIs() / $scope.platform.numAZ;
+    	return $scope.roundUp(azRunners) + $scope.platform.nPlusX;
     };
     
-    $scope.totalDEAs = function() { 
-    	return $scope.deasPerAz() * $scope.platform.numAZ;
+    $scope.totalRunners = function() {
+    	return $scope.runnersPerAz() * $scope.platform.numAZ;
     };
     
 	$scope.getVms = function() { return vmLayout; };
@@ -206,8 +205,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
-    //For diego we use all the dea logic but update cells. I expect we want something
-    //finer grained as diego can run both...
     $scope.applyTemplate = function(template) { 
         $scope.resetIaaSAsk();
     	vmLayout.length = 0;
@@ -216,9 +213,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     		angular.extend(vm, template[i]);
     		if ( !vm.singleton ) {
     			if ( $scope.isRunnerVM(vm)) {
-    				vm.instances = $scope.totalDEAs();
-    				vm.ram = $scope.platform.deaSize.size;
-					vm.ephemeral_disk = $scope.platform.deaSizeDisk.size;
+    				vm.instances = $scope.totalRunners();
+    				vm.ram = $scope.platform.runnerSize.size;
+					vm.ephemeral_disk = $scope.platform.runnerSizeDisk.size;
     			} else {
     				vm.instances = vm.instances * $scope.platform.numAZ;
     			}
