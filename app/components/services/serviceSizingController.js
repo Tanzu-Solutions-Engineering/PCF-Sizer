@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
+shekelApp.controller('ShekelServiceSizingController', function($scope, $http, vmLayout) {
     $scope.svcs = null;
     $scope.versioncache = {};
 
@@ -35,5 +35,9 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
 
             return $scope.versioncache[serviceName]
         });
+    };
+
+    $scope.enableService = function(serviceName) {
+      vmLayout.push({});
     };
 });

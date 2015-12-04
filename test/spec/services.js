@@ -2,7 +2,7 @@
 
 (function() {
     describe('ShekelServicesController', function() {
-        var $rootScope, createController, $httpBackend;
+        var $rootScope, createController, $httpBackend, vmLayout;
         var services = ['mysql', 'gemfire', 'rabbit', 'redis'];
         var mysqlVersions = ['1.6.5', '1.7.1', '1.6.4', '1.7', '1.3'];
 
@@ -17,9 +17,13 @@
             $httpBackend.when('GET', '/services/redis/versions').respond(mysqlVersions);
 
             $rootScope = $injector.get('$rootScope');
+            vmLayout = $injector.get('vmLayout')
             var $controller = $injector.get('$controller');
             createController = function() {
-                return $controller('ShekelServiceSizingController', {'$scope': $rootScope });
+                return $controller('ShekelServiceSizingController', {
+                    '$scope': $rootScope,
+                    vmLayout: vmLayout
+                });
             }
         }));
 
@@ -79,10 +83,25 @@
                 expect(versions.elements).toContain('1.7');
                 expect(versions.selected).toBe('1.7.1')
             });
-
-
         });
 
+        describe('enabling a service', function() {
+            beforeEach(function() {
+                createController();
+                $httpBackend.flush();
+            });
+
+            it('should add the vms to the vmlist when enabled', function() {
+                var originalNumberOfVMs = vmLayout.length;
+
+                $rootScope.enableService('mysql');
+                expect(originalNumberOfVMs).toBeLessThan(vmLayout.length);
+            });
+
+            it('should have a vm named mysql broker', function() {
+                fail("NYI");
+            })
+        });
 
     })
 })();
