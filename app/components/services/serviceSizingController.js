@@ -26,7 +26,6 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
     $scope.getServiceVersions = function(serviceName) {
         var url = '/services/' + serviceName + '/versions';
         return $http.get(url).then(function(data) {
-            $scope.versioncache
             $scope.versioncache[serviceName] = {
                 elements: data.data.sort().reverse(),
                 selected: data.data[0],
