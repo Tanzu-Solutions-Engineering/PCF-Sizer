@@ -1,5 +1,5 @@
 var request = require('request');
-var rewire = require('rewire')
+var rewire = require('rewire');
 var app = rewire ("../../../app.js");
 
 describe("ServicesAPI", function () {
@@ -9,7 +9,7 @@ describe("ServicesAPI", function () {
         beforeEach(function() {
             var globMock = {
                 sync: function(path) {
-                    expect(path).toBe("js/data/services/*.json")
+                    expect(path).toBe("js/data/services/*.json");
                     return ['js/data/services/mysql-1.5.json',
                         'js/data/services/gemfire-1.0.json',
                         'js/data/services/rabbit-5.1.json'];
@@ -73,19 +73,21 @@ describe("ServicesAPI", function () {
                 var mysqlVersions = JSON.parse(body);
                 expect(mysqlVersions).toContain('1.5');
                 expect(mysqlVersions).toContain('1.4');
-                expect(mysqlVersions.length).toBe(2)
+                expect(mysqlVersions.length).toBe(2);
                 done();
             });
         });
     });
 
     describe("GET /tile/:tile/:version", function() {
-        it('should return json', function() {
-            var tileURL = 'http://localhost:3000/tile/mysql/1.7.1';
-            request.get(tileURL, function(error, response, body) {
-                expect(response.headers['content-type']).toMatch(/json/);
-
-            });
+        var tileURL = 'http://localhost:3000/tile/mysql/1.7.1';
+        it('should redirect me to the proper path', function(done) {
+            request.get({url: tileURL, followRedirect: false},  function(error, response, body) {
+                expect(response.statusCode).toBe(302);
+                expect(response.headers['location']).toBe('/js/data/mysql-1.7.1.json');
+                done();
+            })
         });
+
     })
 });

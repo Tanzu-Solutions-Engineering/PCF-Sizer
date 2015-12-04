@@ -39,8 +39,8 @@ app.get('/services', function(req, res) {
 });
 
 app.get('/tile/:name/:version', function(req, res) {
-
-    res.status(200).json({});
+    var filePath = '/js/data/' + req.params['name'] + "-" + req.params['version']+ ".json";
+    res.contentType('application/json').redirect(filePath);
 });
 
 app.listen(process.env.PORT || 3000);
