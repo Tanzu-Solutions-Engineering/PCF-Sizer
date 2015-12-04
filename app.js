@@ -39,7 +39,7 @@ app.get('/services', function(req, res) {
 });
 
 app.get('/tile/:name/:version', function(req, res) {
-    var filePath = '/js/data/' + req.params['name'] + "-" + req.params['version']+ ".json";
+    var filePath = '/js/data/services/' + req.params['name'] + "-" + req.params['version']+ ".json";
     res.contentType('application/json').redirect(filePath);
 });
 

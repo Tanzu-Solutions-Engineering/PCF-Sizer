@@ -140,14 +140,14 @@
 
             it('should add the vms to the vmlist when enabled', function() {
                 var originalNumberOfVMs = vmLayout.length;
-                $rootScope.enableService('mysql').then(function() {
+                $rootScope.toggleService('mysql').then(function() {
                     expect(originalNumberOfVMs).toBeLessThan(vmLayout.length);
                     expect(Array.isArray(vmLayout)).toBeTruthy();
                 });
             });
 
             it('should have a vm named mysql broker at the end so we can group things in the vm list table', function() {
-                $rootScope.enableService('mysql').then(function() {
+                $rootScope.toggleService('mysql').then(function() {
                     expect(vmLayout.length).toBe(3);
                     expect(vmLayout[2].vm).toBe("MySQL Broker");
                 });

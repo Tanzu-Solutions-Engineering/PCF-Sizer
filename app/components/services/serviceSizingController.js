@@ -37,7 +37,7 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, vm
         });
     };
 
-    $scope.enableService = function(serviceName) {
+    $scope.toggleService = function(serviceName) {
         return $scope.getTile(serviceName, $scope.versioncache[serviceName].selected).then(function(tile) {
             vmLayout.splice.apply(vmLayout, [vmLayout.length,0].concat(tile));
         });

@@ -84,7 +84,7 @@ describe("ServicesAPI", function () {
         it('should redirect me to the proper path', function(done) {
             request.get({url: tileURL, followRedirect: false},  function(error, response, body) {
                 expect(response.statusCode).toBe(302);
-                expect(response.headers['location']).toBe('/js/data/mysql-1.7.1.json');
+                expect(response.headers['location']).toBe('/js/data/services/mysql-1.7.1.json');
                 done();
             })
         });
