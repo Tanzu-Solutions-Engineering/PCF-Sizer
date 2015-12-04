@@ -63,7 +63,6 @@
                     versions = v;
                 });
                 $httpBackend.flush();
-
             });
 
             it('Should return all the mysql versions', function() {
