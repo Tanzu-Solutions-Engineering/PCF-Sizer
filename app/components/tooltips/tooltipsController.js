@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelToolTipsController', function($scope, $http, vmLayout, aiService, planService) {
+shekelApp.controller('ShekelToolTipsController', function($scope, $http) {
 	
 	
 	$scope.getToolTip = function(tipId) {
@@ -9,7 +9,7 @@ shekelApp.controller('ShekelToolTipsController', function($scope, $http, vmLayou
     				return $scope.infoToolTips[i].msg
     			} 
 		}
-	}
+	};
 	
     $scope.loadToolTips = function() {
     	$http.get('/js/data/tooltip_string_data.json')
@@ -21,4 +21,4 @@ shekelApp.controller('ShekelToolTipsController', function($scope, $http, vmLayou
     };
     
 	$scope.loadToolTips();
-})
+});

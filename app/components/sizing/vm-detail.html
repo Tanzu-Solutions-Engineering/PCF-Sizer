@@ -1,24 +1,26 @@
 <div class="col-md-24">
 <h3>VM Requirement Details</h3>
-<table class="table table-light table-scrollable-body">
-	<thead>
-		<tr>
-			<th>VM</th>
-			<th>Qty</th>
-            <th>RAM</th>
-            <th>vCPU</th>
-            <th>Total RAM</th>
-            <th>Total vCPU</th>
-		</tr>
-	</thead>
-	
-	<tr ng-repeat="vm in getVms()">
-		<td>{{vm.vm}}</td>
-		<td>{{vm.instances}}</td>
-        <td>{{vm.ram}}</td>
-        <td>{{vm.vcpu}}</td>
-        <td>{{vm.ram * vm.instances}}</td>
-        <td>{{vm.vcpu * vm.instances}}</td>
-	<tr>
-</table>
+    <div ng-repeat="tile in getVms()">
+        <p>{{tile.name}}</p>
+        <table class="table table-light table-scrollable-body">
+            <thead>
+                <tr>
+                    <th>VM</th>
+                    <th>Qty</th>
+                    <th>RAM</th>
+                    <th>vCPU</th>
+                    <th>Total RAM</th>
+                    <th>Total vCPU</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="vm in tile.currentConfig">
+                <td>{{vm.vm}}</td>
+                <td>{{vm.instances}}</td>
+                <td>{{vm.ram}}</td>
+                <td>{{vm.vcpu}}</td>
+                <td>{{vm.ram * vm.instances}}</td>
+                <td>{{vm.vcpu * vm.instances}}</td>
+            <tr>
+        </table>
+    </div>
 </div>
