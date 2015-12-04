@@ -27,9 +27,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	 * version
 	 */
 	$scope.ersVersionOptions = [
-        {value: 1.6},
-		{value: 1.5},
-		{value: 1.4}
+        {value: 1.6}
 	];
 
     $scope.avgRamOptions = [ 
@@ -96,7 +94,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         numAZ: 3,
     	nPlusX: 1,
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
-    	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1],
+    	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1]
     };
 
     $scope.aZRecoveryCapacity = [25, 50, 100];
@@ -198,6 +196,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         $scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
     };
 
+    $scope.calculateAIDiskAsk = function(AIAvgDiskSizeInGB, NumAIPacks) {
+        return AIAvgDiskSizeInGB * NumAIPacks * 50;
+    };
+
+    $scope.isRunnerVM = function(vm) {
+        return vm.vm == "Diego Cell";
+    };
+
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
     //For diego we use all the dea logic but update cells. I expect we want something
@@ -209,8 +215,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         	var vm = {};
     		angular.extend(vm, template[i]);
     		if ( !vm.singleton ) {
-    			if ( ("DEA" == vm.vm && $scope.platform.ersVersion.value < 1.6)
-                 || ("Diego Cell" == vm.vm && $scope.platform.ersVersion.value >= 1.6)) {
+    			if ( $scope.isRunnerVM(vm)) {
     				vm.instances = $scope.totalDEAs();
     				vm.ram = $scope.platform.deaSize.size;
 					vm.ephemeral_disk = $scope.platform.deaSizeDisk.size;
@@ -224,7 +229,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     		$scope.doIaaSAskForVm(vm);
 			vmLayout.push(vm);
     	}
-        $scope.iaasAskSummary.disk += $scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50;
+        $scope.iaasAskSummary.disk += $scope.calculateAIDiskAsk($scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50);
     };
     
     $scope.loadAzTemplate = function() {

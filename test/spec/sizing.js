@@ -54,7 +54,7 @@
            });
         });
 
-        describe('reset to apply templates', function () {
+        describe('IaaS asks', function() {
             it('should reset iaas ask', function () {
                 $rootScope.iaasAskSummary = {};
                 $rootScope.resetIaaSAsk();
@@ -62,7 +62,30 @@
                 expect($rootScope.iaasAskSummary.disk).toBe(1);
                 expect($rootScope.iaasAskSummary.vcpu).toBe(1);
             });
+
+            it('should ask for the number of ai packs times the number of disks for ai disk needs', function () {
+                expect($rootScope.calculateAIDiskAsk(1, 1)).toEqual(50);
+                expect($rootScope.calculateAIDiskAsk(1, 2)).toEqual(100);
+                expect($rootScope.calculateAIDiskAsk(.5, 2)).toEqual(50);
+            });
         });
 
+        describe('vm type detection', function() {
+            var dea = { vm: "DEA" };
+            var cell = { vm: "Diego Cell" };
+            var router = {vm: "Router"};
+
+            it('should detect a cell', function () {
+                expect($rootScope.isRunnerVM(cell, '1.6' )).toBeTruthy();
+            });
+
+            it('should not detect a dea in 1.6', function() {
+                expect($rootScope.isRunnerVM(dea, '1.6' )).toBeFalsy();
+            });
+
+            it('should not detect a router', function () {
+                expect($rootScope.isRunnerVM(router)).toBeFalsy();
+            });
+        });
     });
 })();
