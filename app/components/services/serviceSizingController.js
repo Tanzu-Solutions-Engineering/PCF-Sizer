@@ -29,7 +29,8 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http) {
             $scope.versioncache
             $scope.versioncache[serviceName] = {
                 elements: data.data.sort().reverse(),
-                selected: data.data[0]
+                selected: data.data[0],
+                enabled: false
             };
 
             return $scope.versioncache[serviceName]

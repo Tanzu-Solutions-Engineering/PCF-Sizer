@@ -49,11 +49,16 @@
             it('should initialize the version cache for all the services it finds so ng-repeat works', function() {
                 expect(Array.isArray($rootScope.versioncache['mysql'].elements)).toBeTruthy();
                 expect(Array.isArray($rootScope.versioncache['gemfire'].elements)).toBeTruthy();
+            });
 
+            it('should be disabled by default', function() {
+                Object.keys($rootScope.versioncache).forEach(function (service) {
+                    expect(service.enabled).toBeFalsy();
+                });
             })
         });
 
-        describe('listing versions', function() {
+        describe('listing versions and being ', function() {
             var versions = null;
 
             beforeEach(function() {
@@ -73,7 +78,11 @@
             it('should contain version 1.7 and select it by default', function() {
                 expect(versions.elements).toContain('1.7');
                 expect(versions.selected).toBe('1.7.1')
-            })
+            });
+
+
         });
+
+
     })
 })();
