@@ -10,7 +10,6 @@
 		
 	    beforeEach(inject(function($injector) {
 	        $rootScope = $injector.get('$rootScope');
-	        // The $controller service is used to create instances of controllers
 	        var $controller = $injector.get('$controller');
 
 	        createController = function() {
@@ -45,8 +44,8 @@
 				expect($rootScope.platform.avgAIDisk.value).toBeGreaterThan(0);
 
             });
-            
-    
         });
+
+		
     });
 })();

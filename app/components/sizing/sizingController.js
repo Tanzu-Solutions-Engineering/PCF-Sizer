@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout, aiService) {
+shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout, tileService, aiService) {
 
     $scope.aiPackOptions = new Array();         
     
