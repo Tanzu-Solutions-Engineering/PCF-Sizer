@@ -4,7 +4,7 @@
     describe('ShekelServicesController', function() {
         var $rootScope, createController, $httpBackend;
         var services = ['mysql', 'gemfire', 'rabbit', 'redis'];
-        var mysqlVersions = ['1.7', '1.6.5', '1.6.4', '1.3'];
+        var mysqlVersions = ['1.6.5', '1.7.1', '1.6.4', '1.7', '1.3'];
 
         beforeEach(module('ShekelApp'));
 
@@ -70,9 +70,10 @@
                 expect(versions.elements.length).toBe(mysqlVersions.length);
             });
 
+            //It selects the highest element in the versonings.
             it('should contain version 1.7 and select it by default', function() {
                 expect(versions.elements).toContain('1.7');
-                expect(versions.selected).toBe('1.7')
+                expect(versions.selected).toBe('1.7.1')
             })
         });
     })
