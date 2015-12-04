@@ -4,48 +4,53 @@
 (function () {
     describe('sizingController', function () {
 
-		var $rootScope, createController ;
+		var $rootScope, createController, $httpBackend, tileService ;
 
 		beforeEach(module('ShekelApp')); 
 		
 	    beforeEach(inject(function($injector) {
-	        $rootScope = $injector.get('$rootScope');
-	        var $controller = $injector.get('$controller');
+            $httpBackend = $injector.get('$httpBackend');
+            $rootScope = $injector.get('$rootScope');
+	        tileService = $injector.get('tileService');
+            var $controller = $injector.get('$controller');
 
 	        createController = function() {
-	          return $controller('ShekelSizingController', {'$scope' : $rootScope });
+	          return $controller('ShekelSizingController',
+                  {
+                      '$scope' : $rootScope,
+                      tileService: tileService
+                  });
 	        };
+            createController();
 	      }));
 
 
-        describe('Test for Value in AI Pack Options', function () {
+        describe('Value in AI Pack Options', function () {
             it('Should not be null value', function () {
-				createController();
 				expect($rootScope.aiPackOptions.length).toBeGreaterThan(0);
-
             });
-            
-    
         });
         
-        describe('Test for AI Average Ram Value > 0', function () {
+        describe('AI Average Ram Value > 0', function () {
             it('AI Avg Ram must have a Valid integer > 0', function () {
-				createController();
 				expect($rootScope.platform.avgRam.value).toBeGreaterThan(0);
-
             });
-            
-    
         });
         
         describe('Test for AI Average Stg Value > 0', function () {
             it('AI Avg Stg must have a Valid integer > 0', function () {
-				createController();
 				expect($rootScope.platform.avgAIDisk.value).toBeGreaterThan(0);
-
             });
         });
 
-		
+		describe('Loading ERS template', function() {
+           it('should load it in the tile service', function() {
+               $httpBackend.when('GET', '/ersjson/1.6').respond("{}");
+               expect(tileService.tiles.length).toBe(0);
+               $rootScope.loadAzTemplate().then(function() {
+                  expect(tileService.tiles.length).toBe(1);
+               });
+           });
+        });
     });
 })();

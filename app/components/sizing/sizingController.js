@@ -224,8 +224,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     };
     
     $scope.loadAzTemplate = function() {
-    	$http.get('/ersjson/' + $scope.platform.ersVersion.value)
-    		.success(function(data) { 
+    	return $http.get('/ersjson/' + $scope.platform.ersVersion.value)
+    		.success(function(data) {
+
     			$scope.vmTemplate = data;
     			$scope.applyTemplate($scope.vmTemplate);
     		}).error(function(data) { 
