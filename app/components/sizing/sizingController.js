@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout, tileService, aiService) {
+shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService) {
 
     $scope.aiPackOptions = new Array();         
     
@@ -171,7 +171,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     	return $scope.runnersPerAz() * $scope.platform.numAZ;
     };
     
-	$scope.getVms = function() { return vmLayout; };
+	$scope.getVms = function() { return tileService; };
 
     $scope.iaasAskSummary = {
     	ram: 1,
@@ -203,11 +203,16 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         return vm.vm == "Diego Cell";
     };
 
+    $scope.isCompilationVM = function (vm) {
+        return vm.vm == "Compilation";
+    };
+
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
     $scope.applyTemplate = function(template) { 
         $scope.resetIaaSAsk();
-    	vmLayout.length = 0;
+    	var vmLayout = new Array();
+        tileService.getTile('ers').currentConfig = vmLayout;
         for (var i = 0; i < template.length; i++) {
         	var vm = {};
     		angular.extend(vm, template[i]);
@@ -219,8 +224,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     			} else {
     				vm.instances = vm.instances * $scope.platform.numAZ;
     			}
-    		}   
-			if ( "Compilation" == vm.vm ){
+    		}
+			if ( $scope.isCompilationVM(vm)){
 			    vm.instances = $scope.platform.pcfCompilationJobs.value;
 			}
     		$scope.doIaaSAskForVm(vm);

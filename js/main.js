@@ -2,11 +2,6 @@
 
 var shekelApp = angular.module('ShekelApp', []);
 
-var vmService = shekelApp.factory('vmLayout', function ($rootScope) {
-    var vmLayout = new Array();
-    return vmLayout;
-});
-
 var aiService = shekelApp.factory('aiService', function ($rootScope) {
     var aiPacks = {};
 

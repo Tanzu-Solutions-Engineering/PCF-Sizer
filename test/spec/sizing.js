@@ -74,6 +74,7 @@
             var dea = { vm: "DEA" };
             var cell = { vm: "Diego Cell" };
             var router = {vm: "Router"};
+            var compilation = {vm: "Compilation"};
 
             it('should detect a cell', function () {
                 expect($rootScope.isRunnerVM(cell, '1.6' )).toBeTruthy();
@@ -85,6 +86,118 @@
 
             it('should not detect a router', function () {
                 expect($rootScope.isRunnerVM(router)).toBeFalsy();
+            });
+
+            it('should detect a compilation vm', function () {
+                expect($rootScope.isCompilationVM(compilation)).toBeTruthy();
+            });
+
+            it('should not detect a router as a compilation vm', function () {
+                expect($rootScope.isCompilationVM(router)).toBeFalsy();
+            });
+        });
+
+        describe('apply template', function() {
+            var opsMan = {
+                "vm": "Ops Manager VM",
+                "instances": 1,
+                "vcpu": 2,
+                "ram": 2,
+                "ephemeral_disk": 0,
+                "persistent_disk": 150,
+                "dynamic_ips": 1,
+                "static_ips": 0,
+                "singleton": true
+            };
+
+            var cell = {
+                "vm": "Diego Cell",
+                "instances": 2,
+                "vcpu": 2,
+                "ram": 16,
+                "ephemeral_disk": 64,
+                "persistent_disk": 0,
+                "dynamic_ips": 1,
+                "static_ips": 0,
+                "singleton": false
+            };
+
+            var etcd = {
+                "vm": "etcd",
+                "instances": 1,
+                "vcpu": 1,
+                "ram": 1,
+                "ephemeral_disk": 2,
+                "persistent_disk": 1,
+                "dynamic_ips": 1,
+                "static_ips": 0,
+                "singleton": true
+            };
+
+            var router = {
+                "vm": "Router",
+                "instances": 2,
+                "vcpu": 1,
+                "ram": 1,
+                "ephemeral_disk": 2,
+                "persistent_disk": 0,
+                "dynamic_ips": 1,
+                "static_ips": 1,
+                "singleton": false
+            };
+
+            var cfg = null;
+            beforeEach(function () {
+                tileService.addTile('ers', '1.6', [opsMan, etcd, router, cell]);
+                expect(tileService.tiles.length).toBe(1);
+                expect(tileService.getTile('ers').currentConfig).toBeUndefined();
+                $rootScope.platform.numAZ = 100;
+                $rootScope.totalRunners = function () {
+                    return 10;
+                };
+                $rootScope.applyTemplate([opsMan, router, cell, etcd]);
+                cfg = tileService.getTile('ers').currentConfig;
+
+            });
+
+            function getVM(name) {
+                for(var i = 0 ; i < cfg.length; i++) {
+                    if ( cfg[i].vm == name) {
+                        return cfg[i];
+                    }
+                }
+            }
+
+            it('should build a current config for the ers release', function () {
+                expect(cfg).toBeDefined();
+            });
+
+            it('should have an ers release with one vm in the current config', function() {
+                expect(cfg.length).toBe(4);
+            });
+
+            it('should have only one etcd with 100 az', function() {
+                var etcd = getVM('etcd');
+                expect(etcd.instances).toBe(1);
+            });
+
+            it('should have 200 router vms', function() {
+                expect(getVM('Router').instances).toBe(200);
+            });
+
+            it('should have one opsman', function() {
+                expect(getVM('Ops Manager VM').instances).toBe(1);
+            });
+
+            it('should have 10 runners because we mocked it above', function() {
+                expect(getVM('Diego Cell').instances).toBe(10);
+            })
+        });
+
+        describe('getVMS()', function() {
+            it('gives me back something with tiles and vms', function () {
+                var vms = $rootScope.getVms();
+                expect(vms.tiles).toBeDefined();
             });
         });
     });

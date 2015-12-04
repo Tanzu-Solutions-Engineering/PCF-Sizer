@@ -35,17 +35,21 @@
         });
 
         describe('Getting tiles', function() {
+
             it('should get a tile by name', function() {
-                tileService.addTile('foo', '1.0', [{},{}]);
                 tileService.addTile('bar', '1.0', [{},{}]);
                 expect(tileService.getTile('bar').name).toBe("bar");
             });
 
             it('should return undefined when we ask for a name it does not have', function() {
-                tileService.addTile('foo', '1.0', [{},{}]);
                 expect(tileService.getTile("nada")).toBeUndefined();
-            })
-        })
+            });
+
+            it('should not have a current confg when its added', function () {
+                tileService.addTile('foo', '1.0', [{},{}]);
+                expect(tileService.getTile('foo').currentConfig).toBeUndefined();
+            });
+        });
 
 
     })
