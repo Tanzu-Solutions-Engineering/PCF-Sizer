@@ -78,4 +78,14 @@ describe("ServicesAPI", function () {
             });
         });
     });
+
+    describe("GET /tile/:tile/:version", function() {
+        it('should return json', function() {
+            var tileURL = 'http://localhost:3000/tile/mysql/1.7.1';
+            request.get(tileURL, function(error, response, body) {
+                expect(response.headers['content-type']).toMatch(/json/);
+
+            });
+        });
+    })
 });

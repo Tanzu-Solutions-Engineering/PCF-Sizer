@@ -38,4 +38,9 @@ app.get('/services', function(req, res) {
     res.status(200).json(services);
 });
 
+app.get('/tile/:name/:version', function(req, res) {
+
+    res.status(200).json({});
+});
+
 app.listen(process.env.PORT || 3000);

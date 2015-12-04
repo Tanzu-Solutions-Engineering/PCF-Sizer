@@ -38,6 +38,14 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, vm
     };
 
     $scope.enableService = function(serviceName) {
-      vmLayout.push({});
+        return $scope.getTile(serviceName, $scope.versioncache[serviceName].selected).then(function(tile) {
+            vmLayout.splice.apply(vmLayout, [vmLayout.length,0].concat(tile));
+        });
+    };
+
+    $scope.getTile = function(tileName, tileVersion) {
+      return $http.get(['/tile', tileName, tileVersion].join('/')).then(function(data) {
+          return data.data;
+      });
     };
 });

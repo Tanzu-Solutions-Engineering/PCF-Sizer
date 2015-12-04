@@ -6,6 +6,31 @@
         var services = ['mysql', 'gemfire', 'rabbit', 'redis'];
         var mysqlVersions = ['1.6.5', '1.7.1', '1.6.4', '1.7', '1.3'];
 
+        var vcenter =
+            {
+                "vm": "vCenter",
+                "instances": 1,
+                "vcpu": 2,
+                "ram": 12,
+                "ephemeral_disk": 0,
+                "persistent_disk": 125,
+                "dynamic_ips": 0,
+                "static_ips": 1,
+                "singleton": true
+            };
+        var opsMan =
+            {
+                "vm": "Ops Manager VM",
+                "instances": 1,
+                "vcpu": 2,
+                "ram": 2,
+                "ephemeral_disk": 0,
+                "persistent_disk": 150,
+                "dynamic_ips": 1,
+                "static_ips": 0,
+                "singleton": true
+            };
+
         beforeEach(module('ShekelApp'));
 
         beforeEach(inject(function($injector) {
@@ -15,9 +40,11 @@
             $httpBackend.when('GET', '/services/gemfire/versions').respond(mysqlVersions);
             $httpBackend.when('GET', '/services/rabbit/versions').respond(mysqlVersions);
             $httpBackend.when('GET', '/services/redis/versions').respond(mysqlVersions);
-
             $rootScope = $injector.get('$rootScope');
-            vmLayout = $injector.get('vmLayout')
+            vmLayout = $injector.get('vmLayout');
+            vmLayout.push(vcenter);
+            vmLayout.push(opsMan);
+
             var $controller = $injector.get('$controller');
             createController = function() {
                 return $controller('ShekelServiceSizingController', {
@@ -89,18 +116,48 @@
             beforeEach(function() {
                 createController();
                 $httpBackend.flush();
+
+                $httpBackend.expectGET('/tile/mysql/1.7.1').respond(
+                    [
+                       {
+                            "vm": "MySQL Broker",
+                            "instances": 2,
+                            "vcpu": 1,
+                            "ram": 1,
+                            "ephemeral_disk": 10,
+                            "persistent_disk": 0,
+                            "dynamic_ips": 1,
+                            "static_ips": 1,
+                            "singleton": false
+                        }
+                    ]
+                );
+            });
+
+            afterEach(function() {
+                $httpBackend.flush();
             });
 
             it('should add the vms to the vmlist when enabled', function() {
                 var originalNumberOfVMs = vmLayout.length;
-
-                $rootScope.enableService('mysql');
-                expect(originalNumberOfVMs).toBeLessThan(vmLayout.length);
+                $rootScope.enableService('mysql').then(function() {
+                    expect(originalNumberOfVMs).toBeLessThan(vmLayout.length);
+                    expect(Array.isArray(vmLayout)).toBeTruthy();
+                });
             });
 
-            it('should have a vm named mysql broker', function() {
-                fail("NYI");
-            })
+            it('should have a vm named mysql broker at the end so we can group things in the vm list table', function() {
+                $rootScope.enableService('mysql').then(function() {
+                    expect(vmLayout.length).toBe(3);
+                    expect(vmLayout[2].vm).toBe("MySQL Broker");
+                });
+            });
+
+            it('downloads the tiles json', function() {
+                $rootScope.getTile('mysql', '1.7.1').then(function(tile) {
+                    expect(tile).toBeDefined();
+                });
+            });
         });
 
     })
