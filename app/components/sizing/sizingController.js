@@ -1,6 +1,8 @@
 "use strict";
 
-shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService, iaasService) {
+shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService,
+                                                        iaasService, elasticRuntime)
+{
 
     $scope.aiPackOptions = new Array();
     
@@ -86,7 +88,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         {"text": "8:1", "ratio":8}
     ];
     
-    $scope.platform = {
+    $scope.platformConfigMapping = {
 		ersVersion: $scope.ersVersionOptions[0],
     	avgRam: $scope.avgRamOptions[1],
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
@@ -107,6 +109,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     	devs: 1,
     	steps: 1
     };
+
+    $scope.elasticRuntime = elasticRuntime;
        
 	// This is the app instances formula. for "help me choose"
     $scope.ais = function() {  
@@ -119,19 +123,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         
     $scope.setAis = function() { 
     	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
-    };
-
-    //This function needs no update for diego as we use the same
-    //logic for determining cell size
-    $scope.runnerUsableRAM = function() {
-    	return $scope.platform.runnerSize.size - 3;
-    };
-
-    //This function gets no update for diego as we use the same
-    //logic for determining cell size. TODO Is that the correct thing to do.
-    $scope.runnerUsableStg = function() {
-    	return $scope.platform.runnerSizeDisk.size - $scope.platform.runnerSize.size - 4;
-    
     };
 
     // TODO DRY w/ costing directives
@@ -154,22 +145,22 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     		aipacks = $scope.aiPacks().value * 50;
     	}
 
-    	var totalRam = (aipacks * $scope.platform.avgRam.value);
-    	var totalStg = (aipacks * $scope.platform.avgAIDisk.value);
+    	var totalRam = (aipacks * $scope.platformConfigMapping.avgRam.value);
+    	var totalStg = (aipacks * $scope.platformConfigMapping.avgAIDisk.value);
     	    	
-    	var runnerRAM = (totalRam / $scope.runnerUsableRAM());
-    	var runnerStager = (totalStg / $scope.runnerUsableStg());
+    	var runnerRAM = (totalRam / elasticRuntime.runnerUsableRAM());
+    	var runnerStager = (totalStg / elasticRuntime.runnerUsableStager());
 
     	return $scope.roundUp(Math.max(runnerRAM, runnerStager));
     };
     
     $scope.runnersPerAz = function() {
-    	var azRunners = $scope.numRunnersToRunAIs() / $scope.platform.numAZ;
-    	return $scope.roundUp(azRunners) + $scope.platform.nPlusX;
+    	var azRunners = $scope.numRunnersToRunAIs() / $scope.platformConfigMapping.numAZ;
+    	return $scope.roundUp(azRunners) + $scope.platformConfigMapping.nPlusX;
     };
     
     $scope.totalRunners = function() {
-    	return $scope.runnersPerAz() * $scope.platform.numAZ;
+    	return $scope.runnersPerAz() * $scope.platformConfigMapping.numAZ;
     };
     
 	$scope.getVms = function() { return tileService.tiles; };
@@ -177,7 +168,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     
     $scope.getPhysicalCores = function() { 
     	return $scope.roundUp(
-            iaasService.iaasAskSummary.vcpu / $scope.platform.iaasCPUtoCoreRatio.ratio);
+            iaasService.iaasAskSummary.vcpu / $scope.platformConfigMapping.iaasCPUtoCoreRatio.ratio);
     };
 
     $scope.iaasAskSummary = function() {
@@ -203,26 +194,26 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                 if ( !vm.singleton ) {
                     if ( tileService.isRunnerVM(vm)) {
                         vm.instances = $scope.totalRunners();
-                        vm.ram = $scope.platform.runnerSize.size;
-                        vm.ephemeral_disk = $scope.platform.runnerSizeDisk.size;
+                        vm.ram = $scope.platformConfigMapping.runnerSize.size;
+                        vm.ephemeral_disk = $scope.platformConfigMapping.runnerSizeDisk.size;
                     } else {
-                        vm.instances = vm.instances * $scope.platform.numAZ;
+                        vm.instances = vm.instances * $scope.platformConfigMapping.numAZ;
                     }
                 }
                 if ( tileService.isCompilationVM(vm)){
-                    vm.instances = $scope.platform.pcfCompilationJobs.value;
+                    vm.instances = $scope.platformConfigMapping.pcfCompilationJobs.value;
                 }
                 iaasService.doIaasAskForVM(vm);
                 vmLayout.push(vm);
             }
         });
-        iaasService.addRunnerDisk($scope.platform.avgAIDisk.value, $scope.aiPacks().value);
+        iaasService.addRunnerDisk($scope.platformConfigMapping.avgAIDisk.value, $scope.aiPacks().value);
     };
     
     $scope.loadAzTemplate = function() {
-    	return $http.get('/ersjson/' + $scope.platform.ersVersion.value)
+    	return $http.get('/ersjson/' + $scope.platformConfigMapping.ersVersion.value)
     		.success(function(data) {
-				tileService.addTile(tileService.ersName, $scope.platform.ersVersion.value, data);
+				tileService.addTile(tileService.ersName, $scope.platformConfigMapping.ersVersion.value, data);
                 $scope.applyTemplate(tileService.getTile(tileService.ersName).template);
     		}).error(function(data) { 
     			alert("Failed to get PCF AZ Template json template");
@@ -233,8 +224,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	
 	//Watch for Non ng-select input changes
 	[
-	 'platform.numAZ',
-	 'platform.nPlusX'
+	 'platformConfigMapping.numAZ',
+	 'platformConfigMapping.nPlusX'
 	].forEach(function(e,l,a) {
 		$scope.$watch(e, function() { 
             $scope.dropDownTriggerSizing()
@@ -243,6 +234,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	
 	$scope.dropDownTriggerSizing = function () {
         $scope.applyTemplate();
+        elasticRuntime.config.runnerDisk = $scope.platformConfigMapping.runnerSizeDisk.size;
+        elasticRuntime.config.runnerRAM = $scope.platformConfigMapping.runnerSize.size;
 	};
 	
 });

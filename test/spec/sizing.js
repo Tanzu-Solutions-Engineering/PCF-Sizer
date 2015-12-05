@@ -4,6 +4,7 @@
     describe('sizingController', function () {
 
 		var $rootScope, createController, $httpBackend, tileService, iaasService;
+        var elasticRuntime;
 
 		beforeEach(module('ShekelApp')); 
 		
@@ -12,6 +13,7 @@
             $rootScope = $injector.get('$rootScope');
             iaasService = $injector.get('iaasService');
 	        tileService = $injector.get('tileService');
+            elasticRuntime = $injector.get('elasticRuntime');
             var $controller = $injector.get('$controller');
 
 	        createController = function() {
@@ -33,13 +35,13 @@
         
         describe('AI Average Ram Value > 0', function () {
             it('AI Avg Ram must have a Valid integer > 0', function () {
-				expect($rootScope.platform.avgRam.value).toBeGreaterThan(0);
+				expect($rootScope.platformConfigMapping.avgRam.value).toBeGreaterThan(0);
             });
         });
         
         describe('Test for AI Average Stg Value > 0', function () {
             it('AI Avg Stg must have a Valid integer > 0', function () {
-				expect($rootScope.platform.avgAIDisk.value).toBeGreaterThan(0);
+				expect($rootScope.platformConfigMapping.avgAIDisk.value).toBeGreaterThan(0);
             });
         });
 
@@ -124,7 +126,7 @@
                 tileService.addTile($rootScope.ersName, '1.6', [opsMan, etcd, router, cell]);
                 expect(tileService.tiles.length).toBe(1);
                 expect(tileService.getTile($rootScope.ersName).currentConfig).toBeUndefined();
-                $rootScope.platform.numAZ = 100;
+                $rootScope.platformConfigMapping.numAZ = 100;
                 $rootScope.totalRunners = function () {
                     return 10;
                 };
@@ -223,6 +225,27 @@
                 expect(tileService.getTile('mysql').currentConfig).toBeUndefined();
                 $rootScope.applyTemplate();
                 expect(tileService.getTile('mysql').currentConfig).toBeDefined();
+            });
+        });
+
+        describe('numRunnersToRunAIs', function() {
+            it('should need 5 to run one ai pack at one gig', function () {
+                $rootScope.aiPacks = function () {
+                    return { value: 1};
+                };
+
+                expect($rootScope.numRunnersToRunAIs()).toBe(4);
+            });
+        });
+
+        describe('dropDownTriggerSizing should sync the config', function() {
+            it('synchronizes ram', function () {
+                elasticRuntime.config.runnerRAM = 0;
+                elasticRuntime.config.runnerDisk = 0;
+
+                $rootScope.dropDownTriggerSizing();
+                expect(elasticRuntime.config.runnerRAM).toBe(16);
+                expect(elasticRuntime.config.runnerDisk).toBe(64);
             });
         });
 

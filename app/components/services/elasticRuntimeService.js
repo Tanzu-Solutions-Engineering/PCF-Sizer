@@ -1,3 +1,17 @@
-/**
- * Created by jkruck on 12/5/15.
- */
+var elasticRuntime = shekelApp.factory('elasticRuntime', function () {
+
+    var ers = {
+        config: {
+            runnerRAM: 16,
+            runnerDisk: 64
+        },
+        runnerUsableRAM: function () {
+            return this.config.runnerRAM - 3;
+        },
+        runnerUsableStager: function() {
+            return this.config.runnerDisk - this.config.runnerRAM - 4;
+        }
+    };
+
+    return ers;
+});

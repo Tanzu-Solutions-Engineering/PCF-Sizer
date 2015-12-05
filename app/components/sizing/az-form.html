@@ -2,14 +2,14 @@
     <form role="form" class="form-horizontal form-group form-inline" name="azForm">
         <h3>Availability Options</h3>
 
-        <!--<shkl-num-input-form-group name="azinput" label="Availability Zone" ng-model="platform.numAZ"></shkl-num-input-form-group>-->
+        <!--<shkl-num-input-form-group name="azinput" label="Availability Zone" ng-model="platformConfigMapping.numAZ"></shkl-num-input-form-group>-->
 
         <label class="col-md-13" for="az-input">Availability Zone</label>
-        <input class="form-control col-md-6" name="azinput" id="az-input" type="number" min="1" ng-model="platform.numAZ" >
+        <input class="form-control col-md-6" name="azinput" id="az-input" type="number" min="1" ng-model="platformConfigMapping.numAZ" >
         <label class="col-md-13" for="az-dea">AZ Dea N+1 Factor</label>
-        <input class="form-control col-md-6" name="azdea" id="az-dea" type="number" min="1" ng-model="platform.nPlusX">
+        <input class="form-control col-md-6" name="azdea" id="az-dea" type="number" min="1" ng-model="platformConfigMapping.nPlusX">
 
-        <!--<shkl-num-input-form-group name="azdea" label="AZ DEA N+1 Factor" ng-model="platform.nPlusX"></shkl-num-input-form-group>-->
+        <!--<shkl-num-input-form-group name="azdea" label="AZ DEA N+1 Factor" ng-model="platformConfigMapping.nPlusX"></shkl-num-input-form-group>-->
 
         <div role="alert">
             <span class="error" ng-show="azForm.azinput.$error.number">Not valid number!</span>
