@@ -191,7 +191,11 @@
 
             it('should have 10 runners because we mocked it above', function() {
                 expect(getVM('Diego Cell').instances).toBe(10);
-            })
+            });
+
+            it('calculates disk ask after applying template', function () {
+                expect(iaasService.iaasAskSummary.disk).toEqual(1582);
+            });
 
             describe('getVMS()', function() {
                 it('gives me back something with vms and confgs', function () {
