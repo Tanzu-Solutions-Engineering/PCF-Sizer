@@ -171,13 +171,13 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     	return $scope.runnersPerAz() * $scope.platform.numAZ;
     };
     
-	$scope.getVms = function() { return tileService; };
+	$scope.getVms = function() { return tileService.tiles; };
 
-    $scope.iaasAskSummary = {
-    	ram: 1,
-    	disk: 1, 
-    	vcpu: 1
+    $scope.resetIaaSAsk = function () {
+        $scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
     };
+
+    $scope.iaasAskSummary = $scope.resetIaaSAsk();
     
     
     $scope.getPhysicalCores = function() { 
@@ -189,10 +189,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 		$scope.iaasAskSummary.disk 
 			+= (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
 		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
-    };
-
-    $scope.resetIaaSAsk = function () {
-        $scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
     };
 
     $scope.calculateAIDiskAsk = function(AIAvgDiskSizeInGB, NumAIPacks) {
@@ -238,14 +234,11 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     	return $http.get('/ersjson/' + $scope.platform.ersVersion.value)
     		.success(function(data) {
 				tileService.addTile("ers", $scope.platform.ersVersion.value, data);
-                $scope.applyTemplate(tileService.getTile("ers", $scope.platform.ersVersion.value));
-                //TODO Remove
-    			$scope.vmTemplate = data;
+                $scope.applyTemplate(tileService.getTile("ers").template);
     		}).error(function(data) { 
     			alert("Failed to get PCF AZ Template json template");
     		});
     };
-    
     
 	$scope.loadAzTemplate();
 	
@@ -260,8 +253,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	});
 	
 	$scope.dropDownTriggerSizing = function () {
-		if ($scope.vmTemplate !== undefined) {
-			$scope.applyTemplate($scope.vmTemplate)
+		if (tileService.getTile('ers') !== undefined) {
+			$scope.applyTemplate(tileService.getTile('ers').template)
 		}
 	};
 	

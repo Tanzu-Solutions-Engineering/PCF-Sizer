@@ -192,13 +192,37 @@
             it('should have 10 runners because we mocked it above', function() {
                 expect(getVM('Diego Cell').instances).toBe(10);
             })
-        });
 
-        describe('getVMS()', function() {
-            it('gives me back something with tiles and vms', function () {
-                var vms = $rootScope.getVms();
-                expect(vms.tiles).toBeDefined();
+            describe('getVMS()', function() {
+                it('gives me back something with vms and confgs', function () {
+                    var vms = $rootScope.getVms();
+                    expect(vms).toBeDefined();
+                    expect(vms[0].currentConfig).toBeDefined();
+                });
             });
         });
+
+        describe('loadAZTemplate', function() {
+            
+            it('adds the ers tile', function () {
+                $rootScope.loadAzTemplate().then(function() {
+                    expect(tileService.getTile('ers')).toBeDefined();
+                });
+            });
+
+            it('applies the template', function () {
+                var called = false;
+                $rootScope.applyTemplate = function (template) {
+                    expect(template).toBeDefined();
+                    called = true;
+                };
+
+                $rootScope.loadAzTemplate().then(function () {
+                    expect(called).toBeTruthy();
+                })
+            });
+        });
+
+
     });
 })();
