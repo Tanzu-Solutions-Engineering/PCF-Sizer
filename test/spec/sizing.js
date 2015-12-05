@@ -148,15 +148,15 @@
 
             var cfg = null;
             beforeEach(function () {
-                tileService.addTile('ers', '1.6', [opsMan, etcd, router, cell]);
+                tileService.addTile($rootScope.ersName, '1.6', [opsMan, etcd, router, cell]);
                 expect(tileService.tiles.length).toBe(1);
-                expect(tileService.getTile('ers').currentConfig).toBeUndefined();
+                expect(tileService.getTile($rootScope.ersName).currentConfig).toBeUndefined();
                 $rootScope.platform.numAZ = 100;
                 $rootScope.totalRunners = function () {
                     return 10;
                 };
                 $rootScope.applyTemplate([opsMan, router, cell, etcd]);
-                cfg = tileService.getTile('ers').currentConfig;
+                cfg = tileService.getTile($rootScope.ersName).currentConfig;
 
             });
 
@@ -206,7 +206,7 @@
             
             it('adds the ers tile', function () {
                 $rootScope.loadAzTemplate().then(function() {
-                    expect(tileService.getTile('ers')).toBeDefined();
+                    expect(tileService.getTile($rootScope.ersName)).toBeDefined();
                 });
             });
 

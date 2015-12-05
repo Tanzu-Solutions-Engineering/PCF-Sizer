@@ -2,6 +2,7 @@
 
 shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService) {
 
+    $scope.ersName = 'Elastic Runtime';
     $scope.aiPackOptions = new Array();         
     
     $scope.setAIPackOptions = function() {
@@ -208,7 +209,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     $scope.applyTemplate = function(template) { 
         $scope.resetIaaSAsk();
     	var vmLayout = new Array();
-        tileService.getTile('ers').currentConfig = vmLayout;
+        tileService.getTile($scope.ersName).currentConfig = vmLayout;
         for (var i = 0; i < template.length; i++) {
         	var vm = {};
     		angular.extend(vm, template[i]);
@@ -233,8 +234,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     $scope.loadAzTemplate = function() {
     	return $http.get('/ersjson/' + $scope.platform.ersVersion.value)
     		.success(function(data) {
-				tileService.addTile("ers", $scope.platform.ersVersion.value, data);
-                $scope.applyTemplate(tileService.getTile("ers").template);
+				tileService.addTile($scope.ersName, $scope.platform.ersVersion.value, data);
+                $scope.applyTemplate(tileService.getTile($scope.ersName).template);
     		}).error(function(data) { 
     			alert("Failed to get PCF AZ Template json template");
     		});
@@ -253,8 +254,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	});
 	
 	$scope.dropDownTriggerSizing = function () {
-		if (tileService.getTile('ers') !== undefined) {
-			$scope.applyTemplate(tileService.getTile('ers').template)
+		if (tileService.getTile($scope.ersName) !== undefined) {
+			$scope.applyTemplate(tileService.getTile($scope.ersName).template)
 		}
 	};
 	
