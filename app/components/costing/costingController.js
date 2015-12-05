@@ -49,7 +49,7 @@ shekelApp.controller('ShekelCostingController', function($scope, tileService, ai
 	 * Closure to enable math against a runners property.
 	 */
 	$scope.deaFunction = function(method, overhead) {
-        var ersConfig = tileService.getTile('ers').currentConfig;
+        var ersConfig = tileService.getTile(tileService.ersName).currentConfig;
 		for (var i = 0; i < ersConfig.length; ++i) {
 			var vm = ersConfig[i];
 			if ( "Diego Cell" == vm.vm) {

@@ -2,8 +2,7 @@
 
 shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService) {
 
-    $scope.ersName = 'Elastic Runtime';
-    $scope.aiPackOptions = new Array();         
+    $scope.aiPackOptions = new Array();
     
     $scope.setAIPackOptions = function() {
     	for ( var i = 1; i <= 300; ++i) {
@@ -206,36 +205,40 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
-    $scope.applyTemplate = function(template) { 
+    $scope.applyTemplate = function() {
         $scope.resetIaaSAsk();
-    	var vmLayout = new Array();
-        tileService.getTile($scope.ersName).currentConfig = vmLayout;
-        for (var i = 0; i < template.length; i++) {
-        	var vm = {};
-    		angular.extend(vm, template[i]);
-    		if ( !vm.singleton ) {
-    			if ( $scope.isRunnerVM(vm)) {
-    				vm.instances = $scope.totalRunners();
-    				vm.ram = $scope.platform.runnerSize.size;
-					vm.ephemeral_disk = $scope.platform.runnerSizeDisk.size;
-    			} else {
-    				vm.instances = vm.instances * $scope.platform.numAZ;
-    			}
-    		}
-			if ( $scope.isCompilationVM(vm)){
-			    vm.instances = $scope.platform.pcfCompilationJobs.value;
-			}
-    		$scope.doIaaSAskForVm(vm);
-			vmLayout.push(vm);
-    	}
+
+        tileService.tiles.forEach(function (tile) {
+            var template = tile.template;
+            var vmLayout = new Array();
+            tile.currentConfig = vmLayout;
+            for (var i = 0; i < template.length; i++) {
+                var vm = {};
+                angular.extend(vm, template[i]);
+                if ( !vm.singleton ) {
+                    if ( $scope.isRunnerVM(vm)) {
+                        vm.instances = $scope.totalRunners();
+                        vm.ram = $scope.platform.runnerSize.size;
+                        vm.ephemeral_disk = $scope.platform.runnerSizeDisk.size;
+                    } else {
+                        vm.instances = vm.instances * $scope.platform.numAZ;
+                    }
+                }
+                if ( $scope.isCompilationVM(vm)){
+                    vm.instances = $scope.platform.pcfCompilationJobs.value;
+                }
+                $scope.doIaaSAskForVm(vm);
+                vmLayout.push(vm);
+            }
+        });
         $scope.iaasAskSummary.disk += $scope.calculateAIDiskAsk($scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50);
     };
     
     $scope.loadAzTemplate = function() {
     	return $http.get('/ersjson/' + $scope.platform.ersVersion.value)
     		.success(function(data) {
-				tileService.addTile($scope.ersName, $scope.platform.ersVersion.value, data);
-                $scope.applyTemplate(tileService.getTile($scope.ersName).template);
+				tileService.addTile(tileService.ersName, $scope.platform.ersVersion.value, data);
+                $scope.applyTemplate(tileService.getTile(tileService.ersName).template);
     		}).error(function(data) { 
     			alert("Failed to get PCF AZ Template json template");
     		});
@@ -254,8 +257,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	});
 	
 	$scope.dropDownTriggerSizing = function () {
-		if (tileService.getTile($scope.ersName) !== undefined) {
-			$scope.applyTemplate(tileService.getTile($scope.ersName).template)
+		if (tileService.getTile(tileService.ersName) !== undefined) {
+			$scope.applyTemplate(tileService.getTile(tileService.ersName).template)
 		}
 	};
 	

@@ -223,6 +223,31 @@
             });
         });
 
+        describe('it applies templates for other services', function() {
+
+            var mysqlBroker = {
+                "vm": "MySQL Broker",
+                "instances": 2,
+                "vcpu": 1,
+                "ram": 1,
+                "ephemeral_disk": 10,
+                "persistent_disk": 0,
+                "dynamic_ips": 1,
+                "static_ips": 1,
+                "singleton": false
+            };
+
+            beforeEach(function () {
+                tileService.addTile($rootScope.ersName, '1.6', [mysqlBroker]);
+                tileService.addTile('mysql', '1.7', [mysqlBroker]);
+            });
+
+            it('gives the mysql broker a current config', function () {
+                expect(tileService.getTile('mysql').currentConfig).toBeUndefined();
+                $rootScope.applyTemplate();
+                expect(tileService.getTile('mysql').currentConfig).toBeDefined();
+            });
+        });
 
     });
 })();

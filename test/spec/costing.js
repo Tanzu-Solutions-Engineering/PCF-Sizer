@@ -11,8 +11,8 @@
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             tileService = $injector.get('tileService');
-            tileService.addTile('ers');
-            tileService.getTile('ers').currentConfig = {};
+            tileService.addTile(tileService.ersName);
+            tileService.getTile(tileService.ersName).currentConfig = {};
             var $controller = $injector.get('$controller');
             planService = $injector.get('planService');
             aiService = $injector.get('aiService');

@@ -1,6 +1,9 @@
 var tileService = shekelApp.factory('tileService', function () {
     var tileService = {
+        //Lots of things look for the ERS, and we display the string (which is probly wrong to do)... make it east
+        ersName: 'Elastic Runtime',
         tiles: new Array(),
+
         addTile: function(name, version, template) {
             var idx = this.getIndexOfTile(name);
             if ( -1 == idx ) {
