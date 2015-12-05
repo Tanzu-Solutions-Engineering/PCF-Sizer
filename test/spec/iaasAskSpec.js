@@ -50,5 +50,12 @@
             });
         });
 
+        describe('addRunnerDisk', function() {
+            it('should add the average disk need for every ai to the total', function () {
+                iaasService.addRunnerDisk(1, 10);
+                expect(iaasService.iaasAskSummary.disk).toBe(501);
+            });
+        });
+
     });
 })();

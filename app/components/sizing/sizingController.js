@@ -44,17 +44,17 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	]; 
 
     $scope.runnerSizeOptions = [
-	     {"text": "Small (16GB RAM)",    "size":16}, 
-	     {"text": "Medium (32GB RAM)",   "size":32},
-	     {"text": "Large (64GB RAM)",    "size":64},
+	     {"text": "Small (16GB RAM)",     "size":16},
+	     {"text": "Medium (32GB RAM)",    "size":32},
+	     {"text": "Large (64GB RAM)",     "size":64},
 	     {"text": "Bad idea (128GB RAM)", "size":128}
 	 ];
     
     $scope.runnerSizeOptionsDisk =  [
          {"text": "Small (32GB)",    "size":32}, 
          {"text": "Medium (64GB)",   "size":64},
-         {"text": "Large (128GB)",    "size":128},
-         {"text": "Crazy (256GB)",    "size":256}
+         {"text": "Large (128GB)",   "size":128},
+         {"text": "Crazy (256GB)",   "size":256}
     ];
     
     $scope.avgAIDiskOptions = [ 
@@ -188,14 +188,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         return AIAvgDiskSizeInGB * NumAIPacks * 50;
     };
 
-    $scope.isRunnerVM = function(vm) {
-        return vm.vm == "Diego Cell";
-    };
-
-    $scope.isCompilationVM = function (vm) {
-        return vm.vm == "Compilation";
-    };
-
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
     $scope.applyTemplate = function() {
@@ -209,7 +201,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                 var vm = {};
                 angular.extend(vm, template[i]);
                 if ( !vm.singleton ) {
-                    if ( $scope.isRunnerVM(vm)) {
+                    if ( tileService.isRunnerVM(vm)) {
                         vm.instances = $scope.totalRunners();
                         vm.ram = $scope.platform.runnerSize.size;
                         vm.ephemeral_disk = $scope.platform.runnerSizeDisk.size;
@@ -217,15 +209,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                         vm.instances = vm.instances * $scope.platform.numAZ;
                     }
                 }
-                if ( $scope.isCompilationVM(vm)){
+                if ( tileService.isCompilationVM(vm)){
                     vm.instances = $scope.platform.pcfCompilationJobs.value;
                 }
                 iaasService.doIaasAskForVM(vm);
                 vmLayout.push(vm);
             }
         });
-        iaasService.iaasAskSummary.disk +=
-            $scope.calculateAIDiskAsk($scope.platform.avgAIDisk.value,  $scope.aiPacks().value);
+        iaasService.addRunnerDisk($scope.platform.avgAIDisk.value, $scope.aiPacks().value);
     };
     
     $scope.loadAzTemplate = function() {

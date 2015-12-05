@@ -9,6 +9,9 @@ var iaasService = shekelApp.factory('iaasService', function($rootScope) {
             this.iaasAskSummary.ram += vm.ram * vm.instances;
             this.iaasAskSummary.disk += (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
             this.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
+        },
+        addRunnerDisk: function (aIAvgDiskSizeInGB, numAIPacks) {
+            this.iaasAskSummary.disk += aIAvgDiskSizeInGB * numAIPacks * 50;
         }
     };
 });

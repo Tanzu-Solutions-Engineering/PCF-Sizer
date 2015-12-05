@@ -52,5 +52,31 @@
         });
 
 
+        describe('vm type detection', function() {
+            var dea = { vm: "DEA" };
+            var cell = { vm: "Diego Cell" };
+            var router = {vm: "Router"};
+            var compilation = {vm: "Compilation"};
+
+            it('should detect a cell', function () {
+                expect(tileService.isRunnerVM(cell, '1.6' )).toBeTruthy();
+            });
+
+            it('should not detect a dea in 1.6', function() {
+                expect(tileService.isRunnerVM(dea, '1.6' )).toBeFalsy();
+            });
+
+            it('should not detect a router', function () {
+                expect(tileService.isRunnerVM(router)).toBeFalsy();
+            });
+
+            it('should detect a compilation vm', function () {
+                expect(tileService.isCompilationVM(compilation)).toBeTruthy();
+            });
+
+            it('should not detect a router as a compilation vm', function () {
+                expect(tileService.isCompilationVM(router)).toBeFalsy();
+            });
+        });
     })
 })();

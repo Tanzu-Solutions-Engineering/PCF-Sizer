@@ -1,4 +1,6 @@
 var tileService = shekelApp.factory('tileService', function () {
+
+
     var tileService = {
         //Lots of things look for the ERS, and we display the string (which is probly wrong to do)... make it east
         ersName: 'Elastic Runtime',
@@ -28,8 +30,13 @@ var tileService = shekelApp.factory('tileService', function () {
         },
         getTile: function (name) {
             return this.tiles[this.getIndexOfTile(name)];
+        },
+        isRunnerVM: function(vm) {
+            return vm.vm == "Diego Cell";
+        },
+        isCompilationVM: function(vm) {
+            return vm.vm == "Compilation";
         }
-
     };
 
     return tileService;
