@@ -2,8 +2,10 @@
     <h3>IaaS Tuning</h3>
     <div class="form-group form-inline">
         <label class="col-md-20" for="cpuConsolidation">vCPU to Core Consolidation Ratio</label>
-        <select class="form-control col-md-6" id="cpuConsolidation" ng-model="platform.iaasCPUtoCoreRatio"
-                ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions" ng-change="dropDownTriggerSizing()"></select>
+        <select class="form-control col-md-6" id="cpuConsolidation"
+                ng-model="platform.iaasCPUtoCoreRatio"
+                ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions"
+                ng-change="dropDownTriggerSizing()"></select>
     </div>
 
 </form>

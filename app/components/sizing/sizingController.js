@@ -181,13 +181,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     };
 
     $scope.iaasAskSummary = function() {
-        iaasService.iaasAskSummary;
+        return iaasService.iaasAskSummary;
     };
     
     $scope.doIaaSAskForVm = function(vm) {
     	iaasService.iaasAskSummary.ram += vm.ram * vm.instances;
-		iaasService.iaasAskSummary.disk
-			+= (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
+		iaasService.iaasAskSummary.disk += (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
 		iaasService.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
     };
 
@@ -232,7 +231,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
             }
         });
         iaasService.iaasAskSummary.disk +=
-            $scope.calculateAIDiskAsk($scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50);
+            $scope.calculateAIDiskAsk($scope.platform.avgAIDisk.value,  $scope.aiPacks().value);
     };
     
     $scope.loadAzTemplate = function() {
