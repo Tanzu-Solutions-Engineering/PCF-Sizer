@@ -3,13 +3,14 @@
 (function () {
     describe('sizingController', function () {
 
-		var $rootScope, createController, $httpBackend, tileService ;
+		var $rootScope, createController, $httpBackend, tileService, iaasService;
 
 		beforeEach(module('ShekelApp')); 
 		
 	    beforeEach(inject(function($injector) {
             $httpBackend = $injector.get('$httpBackend');
             $rootScope = $injector.get('$rootScope');
+            iaasService = $injector.get('iaasService');
 	        tileService = $injector.get('tileService');
             var $controller = $injector.get('$controller');
 
@@ -56,10 +57,10 @@
         describe('IaaS asks', function() {
             it('should reset iaas ask', function () {
                 $rootScope.iaasAskSummary = {};
-                $rootScope.resetIaaSAsk();
-                expect($rootScope.iaasAskSummary.ram).toBe(1);
-                expect($rootScope.iaasAskSummary.disk).toBe(1);
-                expect($rootScope.iaasAskSummary.vcpu).toBe(1);
+                iaasService.resetIaaSAsk();
+                expect(iaasService.iaasAskSummary.ram).toBe(1);
+                expect(iaasService.iaasAskSummary.disk).toBe(1);
+                expect(iaasService.iaasAskSummary.vcpu).toBe(1);
             });
 
             it('should ask for the number of ai packs times the number of disks for ai disk needs', function () {

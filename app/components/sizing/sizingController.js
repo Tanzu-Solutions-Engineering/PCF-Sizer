@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService) {
+shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService, iaasService) {
 
     $scope.aiPackOptions = new Array();
     
@@ -78,9 +78,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         { value: 9  },
         { value: 10  }
     ];
-    
-    $scope.iaasCPUtoCoreRatioOptions = [ 
-        {"text": "2:1", "ratio":2}, 
+
+
+    $scope.iaasCPUtoCoreRatioOptions = [
+        {"text": "2:1", "ratio":2},
         {"text": "4:1", "ratio":4},
         {"text": "8:1", "ratio":8}
     ];
@@ -99,7 +100,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 
     $scope.aZRecoveryCapacity = [25, 50, 100];
 
-    $scope.chooser = { aiHelpMeChoose: false }
+    $scope.chooser = { aiHelpMeChoose: false };
 
     $scope.aiChooser = { 
     	apps: 1,
@@ -172,23 +173,22 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     };
     
 	$scope.getVms = function() { return tileService.tiles; };
-
-    $scope.resetIaaSAsk = function () {
-        $scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
-    };
-
-    $scope.iaasAskSummary = $scope.resetIaaSAsk();
     
     
     $scope.getPhysicalCores = function() { 
-    	return $scope.roundUp($scope.iaasAskSummary.vcpu / $scope.platform.iaasCPUtoCoreRatio.ratio); 
+    	return $scope.roundUp(
+            iaasService.iaasAskSummary.vcpu / $scope.platform.iaasCPUtoCoreRatio.ratio);
+    };
+
+    $scope.iaasAskSummary = function() {
+        iaasService.iaasAskSummary;
     };
     
     $scope.doIaaSAskForVm = function(vm) {
-    	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
-		$scope.iaasAskSummary.disk 
+    	iaasService.iaasAskSummary.ram += vm.ram * vm.instances;
+		iaasService.iaasAskSummary.disk
 			+= (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
-		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
+		iaasService.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
     };
 
     $scope.calculateAIDiskAsk = function(AIAvgDiskSizeInGB, NumAIPacks) {
@@ -206,7 +206,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     //This is the main calculator. We do all the per vm stuff and add the 
     //constants at the bottom.  <--iaasAskSummary-->
     $scope.applyTemplate = function() {
-        $scope.resetIaaSAsk();
+        iaasService.resetIaaSAsk();
 
         tileService.tiles.forEach(function (tile) {
             var template = tile.template;
@@ -231,7 +231,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                 vmLayout.push(vm);
             }
         });
-        $scope.iaasAskSummary.disk += $scope.calculateAIDiskAsk($scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50);
+        iaasService.iaasAskSummary.disk +=
+            $scope.calculateAIDiskAsk($scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50);
     };
     
     $scope.loadAzTemplate = function() {
@@ -252,14 +253,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	 'platform.nPlusX'
 	].forEach(function(e,l,a) {
 		$scope.$watch(e, function() { 
-				$scope.dropDownTriggerSizing()
+            $scope.dropDownTriggerSizing()
 		});
 	});
 	
 	$scope.dropDownTriggerSizing = function () {
-		if (tileService.getTile(tileService.ersName) !== undefined) {
-			$scope.applyTemplate(tileService.getTile(tileService.ersName).template)
-		}
+        $scope.applyTemplate();
 	};
 	
 });
