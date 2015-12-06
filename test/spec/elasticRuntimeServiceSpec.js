@@ -139,19 +139,41 @@
                 "static_ips": 1,
                 "singleton": false
             };
+            var compilation = {
+                "vm": "Compilation",
+                "instances": 4,
+                "vcpu": 2,
+                "ram": 1,
+                "ephemeral_disk": 20,
+                "persistent_disk": 0,
+                "dynamic_ips": 1,
+                "static_ips": 0,
+                "singleton": true
+            };
+            var errand = {
+                "vm": "Errand",
+                "instances": 1,
+                "vcpu": 1,
+                "ram": 1,
+                "ephemeral_disk": 1,
+                "persistent_disk": 0,
+                "dynamic_ips": 1,
+                "static_ips": 0,
+                "singleton": true
+            };
 
             var cfg = null;
             beforeEach(function () {
                 expect(tileService.tiles.length).toBe(0);
 
-                tileService.addTile(tileService.ersName, '1.6', [opsMan, etcd, router, cell]);
+                tileService.addTile(tileService.ersName, '1.6', [opsMan, etcd, router, cell, compilation, errand]);
                 expect(tileService.tiles.length).toBe(1);
                 expect(tileService.getTile(tileService.ersName).currentConfig).toBeUndefined();
                 elasticRuntime.config.azCount = 100;
                 elasticRuntime.totalRunners = function () {
                     return 10;
                 };
-                elasticRuntime.applyTemplate([opsMan, router, cell, etcd]);
+                elasticRuntime.applyTemplate([opsMan, router, cell, etcd, compilation, errand]);
                 cfg = tileService.getTile(tileService.ersName).currentConfig;
             });
 
@@ -168,7 +190,7 @@
             });
 
             it('should have an ers release with one vm in the current config', function() {
-                expect(cfg.length).toBe(4);
+                expect(cfg.length).toBe(6);
             });
 
             it('should have only one etcd with 100 az', function() {
@@ -189,7 +211,7 @@
             });
 
             it('calculates disk ask after applying template', function () {
-                expect(iaasService.iaasAskSummary.disk).toEqual(1582);
+                expect(iaasService.iaasAskSummary.disk).toEqual(1668);
             });
 
             describe('getVMS()', function() {

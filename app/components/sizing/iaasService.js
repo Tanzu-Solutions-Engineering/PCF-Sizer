@@ -1,6 +1,6 @@
 "use strict";
 var iaasService = shekelApp.factory('iaasService', function($rootScope) {
-    return {
+    var iaas =  {
         iaasAskSummary: {ram: 1, disk: 1, vcpu: 1},
         resetIaaSAsk: function() {
             this.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1}
@@ -14,4 +14,6 @@ var iaasService = shekelApp.factory('iaasService', function($rootScope) {
             this.iaasAskSummary.disk += aIAvgDiskSizeInGB * numAIPacks * 50;
         }
     };
+
+    return iaas;
 });

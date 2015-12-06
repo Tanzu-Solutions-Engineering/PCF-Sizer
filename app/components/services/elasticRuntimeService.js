@@ -55,7 +55,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
                         }
                     }
                     if (tileService.isCompilationVM(vm)) {
-                        vm.instances = t.compilationJobs;
+                        vm.instances = t.config.compilationJobs;
                     }
                     iaasService.doIaasAskForVM(vm);
                     vmLayout.push(vm);
