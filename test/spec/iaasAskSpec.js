@@ -2,12 +2,13 @@
 
 (function() {
     describe('iaasService', function() {
-        var iaasService;
+        var iaasService, elasticRuntime;
 
         beforeEach(module('ShekelApp'));
 
         beforeEach(inject(function($injector) {
             iaasService = $injector.get('iaasService');
+            elasticRuntime = $injector.get('elasticRuntime');
         }));
 
         describe('resetIaaSAsk', function() {
