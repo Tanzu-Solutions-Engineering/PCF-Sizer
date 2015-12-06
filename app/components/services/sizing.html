@@ -50,7 +50,7 @@
                                type="number" min="1" ng-model="vm.vcpu"
                                ng-change="toggleService(service)">
                     </div>
-                    <div class="row" >
+                    <div class="row" ng-show="vm.persistent_disk > 0">
                         <label class="col-md-7" for="vm-persistent-disk">Persistent Disk</label>
                         <input class="form-control col-md-1" id="vm-persistent-disk"
                                type="number" min="1" ng-model="vm.persistent_disk"
