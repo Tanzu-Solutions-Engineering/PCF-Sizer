@@ -62,6 +62,7 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
             });
         } else {
             tileService.disableTile(serviceName);
+            elasticRuntime.applyTemplate();
         }
     };
 

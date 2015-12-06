@@ -2,7 +2,7 @@
 
 (function() {
     describe('ShekelServicesController', function() {
-        var $rootScope, createController, $httpBackend, tileService;
+        var $rootScope, createController, $httpBackend, tileService, elasticRuntime;
         var services = ['mysql', 'gemfire', 'rabbit', 'redis'];
         var mysqlVersions = ['1.6.5', '1.7.1', '1.6.4', '1.7', '1.3'];
 
@@ -43,15 +43,10 @@
             $httpBackend.when('GET', '/services/redis/versions').respond(mysqlVersions);
             $rootScope = $injector.get('$rootScope');
             tileService = $injector.get('tileService');
-
-            tileService.tiles.push({
-                    vms: ers,
-                    name: tileService.ersName,
-                    version: '1.6.1',
-                    template: []
-                }
-            );
-
+            tileService.addTile(tileService.ersName, '1.6.1', ers);
+            tileService.enableTile(tileService.ersName);
+            
+            elasticRuntime = $injector.get('elasticRuntime');
             var $controller = $injector.get('$controller');
             createController = function() {
                 return $controller('ShekelServiceSizingController', {
@@ -227,16 +222,26 @@
         });
 
         describe('disabling a service', function() {
+            var applyTemplateCalled = false;
+
             beforeEach(function() {
+                elasticRuntime.applyTemplate = function() {
+                    applyTemplateCalled = true;
+                };
                 createController();
                 $httpBackend.flush();
+                tileService.addTile('mysql', '1.7.1', [mysqlBroker]);
+                tileService.enableTile('mysql');
+                $rootScope.versioncache['mysql'].enabled = false;
+                $rootScope.toggleService('mysql'); //Disable it
             });
 
-            it('should remove the vms from the vm list when disabled', function() {
-                tileService.addTile('mysql', '1.7.1', [mysqlBroker]);
-                $rootScope.toggleService('mysql'); //Enable it
-                $rootScope.toggleService('mysql'); //Disable it
+            it('should disable the service', function() {
                 expect(tileService.getTile('mysql').enabled).toBeFalsy();
+            });
+
+            it('should apply the template', function () {
+                expect(applyTemplateCalled).toBeTruthy();
             });
         });
     });
