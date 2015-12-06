@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelServiceSizingController', function($scope, $http, tileService) {
+shekelApp.controller('ShekelServiceSizingController', function($scope, $http, tileService, elasticRuntime) {
     $scope.svcs = null;
     $scope.versioncache = {};
 
@@ -41,6 +41,7 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
             var version =  $scope.versioncache[serviceName].selected;
             return $scope.getTile(serviceName, version).then(function(tile) {
                 tileService.addTile(serviceName, version, tile);
+                elasticRuntime.applyTemplate();
             });
         } else {
             tileService.removeTile(serviceName);

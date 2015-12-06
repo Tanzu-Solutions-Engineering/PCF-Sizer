@@ -33,7 +33,7 @@ class JasmineDev < Thor
         File.join(JasmineDev.project_root, 'src', 'core', f)
       end
 
-      paths << File.join(JasmineDev.project_root, 'src', 'version.js')
+      paths << File.join(JasmineDev.project_root, 'src', 'versionSpec.js')
       paths
     end
 

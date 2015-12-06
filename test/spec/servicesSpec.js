@@ -47,7 +47,8 @@
             tileService.tiles.push({
                     vms: ers,
                     name: "ers",
-                    version: '1.6.1'
+                    version: '1.6.1',
+                    template: []
                 }
             );
 
@@ -154,6 +155,7 @@
                 $rootScope.toggleService('mysql').then(function() {
                     expect(tileService.tiles.length).toBe(2);
                     expect(tileService.tiles[1].template[0].vm).toBe("MySQL Broker");
+                    expect(tileService.tiles[1].currentConfig).toBeDefined();
                 });
             });
 
@@ -162,6 +164,7 @@
                     expect(tile).toBeDefined();
                 });
             });
+
         });
 
         describe('disabling a service', function() {

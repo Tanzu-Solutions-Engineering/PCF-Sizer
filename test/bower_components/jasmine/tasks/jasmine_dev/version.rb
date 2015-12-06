@@ -13,8 +13,8 @@ class JasmineDev < Thor
                            :release_candidate => version_object["release_candidate"],
                            :revision => Time.now.to_i)
 
-    js_template = Tilt.new(File.join(JasmineDev.project_root, 'src', 'templates', 'version.js.erb'))
-    create_file File.join(JasmineDev.project_root, 'src', 'version.js'), :force => true do
+    js_template = Tilt.new(File.join(JasmineDev.project_root, 'src', 'templates', 'versionSpec.js.erb'))
+    create_file File.join(JasmineDev.project_root, 'src', 'versionSpec.js'), :force => true do
       js_template.render(scope)
     end
 

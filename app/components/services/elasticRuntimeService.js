@@ -39,12 +39,11 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
             iaasService.resetIaaSAsk();
             var t = this;
             tileService.tiles.forEach(function (tile) {
-                var template = tile.template;
                 var vmLayout = new Array();
                 tile.currentConfig = vmLayout;
-                for (var i = 0; i < template.length; i++) {
+                for (var i = 0; i < tile.template.length; i++) {
                     var vm = {};
-                    angular.extend(vm, template[i]);
+                    angular.extend(vm, tile.template[i]);
                     if (!vm.singleton) {
                         if (tileService.isRunnerVM(vm)) {
                             vm.instances = t.totalRunners();
