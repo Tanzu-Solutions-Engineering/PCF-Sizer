@@ -35,6 +35,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
         },
         //This is the main calculator. We do all the per vm stuff and add the
         //constants at the bottom.  <--iaasAskSummary-->
+        //TODO Move this to tileService...
         applyTemplate: function () {
             iaasService.resetIaaSAsk();
             var t = this;
