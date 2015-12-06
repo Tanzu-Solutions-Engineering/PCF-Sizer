@@ -57,10 +57,11 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
             var version =  $scope.versioncache[serviceName].selected;
             return $scope.getTile(serviceName, version).then(function(tile) {
                 tileService.addTile(serviceName, version, tile);
+                tileService.enableTile(serviceName);
                 elasticRuntime.applyTemplate();
             });
         } else {
-            tileService.removeTile(serviceName);
+            tileService.disableTile(serviceName);
         }
     };
 

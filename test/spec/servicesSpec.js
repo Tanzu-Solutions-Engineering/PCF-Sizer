@@ -233,14 +233,10 @@
             });
 
             it('should remove the vms from the vm list when disabled', function() {
-                tileService.tiles.push({
-                    name: 'mysql',
-                    version: '1.7.1',
-                    vms: [mysqlBroker]
-                });
-                var originalSize = tileService.tiles.length;
-                $rootScope.toggleService('mysql');
-                expect(tileService.tiles.length).toBe(originalSize - 1);
+                tileService.addTile('mysql', '1.7.1', [mysqlBroker]);
+                $rootScope.toggleService('mysql'); //Enable it
+                $rootScope.toggleService('mysql'); //Disable it
+                expect(tileService.getTile('mysql').enabled).toBeFalsy();
             });
         });
     });

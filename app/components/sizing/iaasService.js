@@ -7,7 +7,8 @@ var iaasService = shekelApp.factory('iaasService', function($rootScope) {
         },
         doIaasAskForVM: function (vm) {
             this.iaasAskSummary.ram += vm.ram * vm.instances;
-            this.iaasAskSummary.disk += (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
+            var pdisk = vm.persistent_disk ? vm.persistent_disk : 0
+            this.iaasAskSummary.disk += (pdisk + vm.ephemeral_disk + vm.ram) * vm.instances;
             this.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
         },
         addRunnerDisk: function (aIAvgDiskSizeInGB, numAIPacks) {

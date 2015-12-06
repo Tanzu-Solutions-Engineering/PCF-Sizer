@@ -20,11 +20,13 @@ var tileService = shekelApp.factory('tileService', function () {
                 this.tiles.splice(idx, initial );
             }
         },
-        removeTile: function(name) {
-            var idx = this.getIndexOfTile(name);
-            if ( -1 != idx ) {
-                this.tiles.splice(idx, 1);
-            }
+        disableTile: function(name) {
+            var tile = this.getTile(name);
+            tile.enabled = false;
+            tile.currentConfig = undefined;
+        },
+        enableTile: function(name) {
+            this.getTile(name).enabled = true;
         },
         getIndexOfTile: function(name) {
             for(var idx=0; idx < this.tiles.length; idx++) {

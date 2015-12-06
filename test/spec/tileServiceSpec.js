@@ -22,15 +22,20 @@
             });
         });
 
-        describe('Removing tiles', function() {
+        describe('disable tiles', function() {
             beforeEach(function() {
                 tileService.addTile('foo', '1.0', [{},{}]);
-                expect(tileService.tiles.length).toBe(1);
+                tileService.getTile('foo').enabled = true;
+                tileService.addTile('bar', '1.0', [{},{}]);
+                tileService.getTile('bar').enabled = true;
+                expect(tileService.tiles.length).toBe(2);
             });
 
-            it('should remove one from the list of tiles', function() {
-                tileService.removeTile('foo');
-                expect(tileService.tiles.length).toBe(0);
+            it('should disable the tile', function() {
+                tileService.disableTile('foo');
+                expect(tileService.tiles.length).toBe(2);
+                expect(tileService.getTile('foo').enabled).toBeFalsy();
+                expect(tileService.getTile('bar').enabled).toBeTruthy();
             });
         });
 
@@ -82,6 +87,14 @@
             it('should disable tiles by default', function () {
                 tileService.addTile('foo', '1.0', [{},{}]);
                 expect(tileService.getTile('foo').enabled).toBeFalsy();
+            });
+        });
+        
+        describe('enabling tiles', function() {
+            it('enables a tile when I ask it too', function () {
+                tileService.addTile('foo', '1.0', [{}]);
+                tileService.enableTile('foo');
+                expect(tileService.getTile('foo').enabled).toBeTruthy();
             });
         });
     })

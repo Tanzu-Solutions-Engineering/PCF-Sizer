@@ -140,12 +140,14 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     };
     
     $scope.loadAzTemplate = function() {
-    	return $http.get('/ersjson/' + $scope.platformConfigMapping.ersVersion.value)
+
+        return $http.get('/ersjson/' + $scope.platformConfigMapping.ersVersion.value)
     		.success(function(data) {
-				tileService.addTile(tileService.ersName, $scope.platformConfigMapping.ersVersion.value, data);
+                tileService.addTile(tileService.ersName, $scope.platformConfigMapping.ersVersion.value, data);
+                tileService.enableTile(tileService.ersName);
                 elasticRuntime.applyTemplate(tileService.getTile(tileService.ersName).template);
-    		}).error(function(data) { 
-    			alert("Failed to get PCF AZ Template json template");
+    		}).error(function(data) {
+                alert("Failed to get PCF AZ Template json template");
     		});
     };
     

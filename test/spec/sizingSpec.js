@@ -24,7 +24,7 @@
                   });
 	        };
             createController();
-	      }));
+        }));
 
 
         describe('Value in AI Pack Options', function () {
@@ -123,15 +123,16 @@
 
             var cfg = null;
             beforeEach(function () {
-                tileService.addTile($rootScope.ersName, '1.6', [opsMan, etcd, router, cell]);
+                tileService.addTile(tileService.ersName, '1.6', [opsMan, etcd, router, cell]);
                 expect(tileService.tiles.length).toBe(1);
-                expect(tileService.getTile($rootScope.ersName).currentConfig).toBeUndefined();
+                expect(tileService.getTile(tileService.ersName).currentConfig).toBeUndefined();
+                tileService.enableTile(tileService.ersName);
                 elasticRuntime.config.azCount = 100;
                 elasticRuntime.totalRunners = function () {
                     return 10;
                 };
                 elasticRuntime.applyTemplate([opsMan, router, cell, etcd]);
-                cfg = tileService.getTile($rootScope.ersName).currentConfig;
+                cfg = tileService.getTile(tileService.ersName).currentConfig;
 
             });
 
@@ -182,23 +183,37 @@
         });
 
         describe('loadAZTemplate', function() {
-            
+            beforeEach(function() {
+                $httpBackend.when('GET', '/ersjson/1.6').respond("{}");
+                $rootScope.dropDownTriggerSizing = function() {};
+            });
+
+            afterEach(function () {
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+
             it('adds the ers tile', function () {
-                $rootScope.loadAzTemplate().then(function() {
-                    expect(tileService.getTile($rootScope.ersName)).toBeDefined();
+                $rootScope.loadAzTemplate().then(function () {
+                    expect(tileService.getTile(tileService.ersName).enabled).toBe(true);
                 });
+                $httpBackend.flush();
             });
 
             it('applies the template', function () {
                 var called = false;
-                $rootScope.applyTemplate = function (template) {
-                    expect(template).toBeDefined();
+                elasticRuntime.applyTemplate = function () {
+                    expect(tileService.getTile(tileService.ersName).enabled).toBeTruthy();
                     called = true;
                 };
 
                 $rootScope.loadAzTemplate().then(function () {
-                    expect(called).toBeTruthy();
-                })
+
+                    expect(called).toBe(true);
+                });
+                $httpBackend.flush();
+
+
             });
         });
 

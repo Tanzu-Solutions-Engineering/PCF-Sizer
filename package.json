@@ -8,7 +8,7 @@
   "devDependencies": {
     "jasmine-node": "1.14.x",
     "karma": "0.12.x",
-    "karma-jasmine": "0.1.x",
+    "karma-jasmine": "0.2.x",
     "karma-phantomjs-launcher": "0.2.x",
     "request": "2.x",
     "rewire": "2.5.x"

@@ -49,6 +49,26 @@
                 expect(iaasService.iaasAskSummary.vcpu).toBe(101);
             });
         });
+        
+        describe('a hack for undefined persistent disks', function() {
+
+            var vm = {
+                ram: 5,
+                ephemeral_disk: 5,
+                vcpu: 10,
+                instances: 1
+            };
+
+            beforeEach(function () {
+                elasticRuntime.config.azCount = 1;
+                iaasService.doIaasAskForVM(vm);
+            });
+
+            it('should add disk for all the instances', function () {
+                expect(iaasService.iaasAskSummary.disk).toBe(11);
+            });
+
+        });
 
         describe('addRunnerDisk', function() {
             it('should add the average disk need for every ai to the total', function () {

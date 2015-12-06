@@ -181,6 +181,7 @@
                 expect(tileService.tiles.length).toBe(0);
 
                 tileService.addTile(tileService.ersName, '1.6', [opsMan, etcd, router, cell, compilation, errand]);
+                tileService.enableTile(tileService.ersName);
                 expect(tileService.tiles.length).toBe(1);
                 expect(tileService.getTile(tileService.ersName).currentConfig).toBeUndefined();
                 elasticRuntime.config.azCount = 100;
@@ -216,7 +217,7 @@
                     elasticRuntime.applyTemplate();
                     expect(iaasService.iaasAskSummary.disk).toBeGreaterThan(origDisk);
                     expect(tileService.getTile('mysql').currentConfig).toBeDefined();
-                    tileService.getTile('mysql').enabled = false;
+                    tileService.disableTile('mysql');
                     elasticRuntime.applyTemplate();
                     expect(iaasService.iaasAskSummary.disk).toBe(origDisk);
                     expect(tileService.getTile('mysql').currentConfig).toBeUndefined();
@@ -263,8 +264,10 @@
         describe('it applies templates for other services', function() {
 
             beforeEach(function () {
-                tileService.addTile(tileService.ersName, '1.6', [mysqlBroker]);
+                tileService.addTile(tileService.ersName, '1.6', [{}]);
+                tileService.enableTile(tileService.ersName);
                 tileService.addTile('mysql', '1.7', [mysqlBroker]);
+                tileService.enableTile('mysql');
             });
 
             it('gives the mysql broker a current config', function () {

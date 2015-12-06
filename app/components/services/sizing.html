@@ -45,19 +45,19 @@
                                ng-change="toggleService(service)">
                     </div>
                     <div class="row">
-                        <label class="col-md-7" for="vm-vcpu">vcpu</label>
+                        <label class="col-md-7" for="vm-vcpu">vCPU</label>
                         <input class="form-control col-md-1" id="vm-vcpu"
                                type="number" min="1" ng-model="vm.vcpu"
                                ng-change="toggleService(service)">
                     </div>
-                    <div class="row" ng-show="vm.persistent_disk > 0">
+                    <div class="row" >
                         <label class="col-md-7" for="vm-persistent-disk">Persistent Disk</label>
                         <input class="form-control col-md-1" id="vm-persistent-disk"
                                type="number" min="1" ng-model="vm.persistent_disk"
                                ng-change="toggleService(service)">
                     </div>
                     <div class="row">
-                        <label class="col-md-7" for="vm-ephemeral-disk">ephemeral Disk</label>
+                        <label class="col-md-7" for="vm-ephemeral-disk">Ephemeral Disk</label>
                         <input class="form-control col-md-1" id="vm-ephemeral-disk"
                                type="number" min="1" ng-model="vm.ephemeral_disk"
                                ng-change="toggleService(service)">

@@ -40,6 +40,9 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
             iaasService.resetIaaSAsk();
             var t = this;
             tileService.tiles.forEach(function (tile) {
+                if (!tile.enabled) {
+                    return;
+                }
                 var vmLayout = new Array();
                 tile.currentConfig = vmLayout;
                 for (var i = 0; i < tile.template.length; i++) {
