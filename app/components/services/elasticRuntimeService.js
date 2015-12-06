@@ -1,4 +1,5 @@
-var elasticRuntime = shekelApp.factory('elasticRuntime', function (aiService) {
+var elasticRuntime = shekelApp.factory('elasticRuntime',
+    function (aiService, iaasService, tileService) {
 
     var ers = {
         config: {
@@ -7,15 +8,16 @@ var elasticRuntime = shekelApp.factory('elasticRuntime', function (aiService) {
             azCount: 3,
             extraRunnersPerAZ: 1,
             avgAIRAM: 1,
-            avgAIDisk:.5
+            avgAIDisk: .5,
+            compilationJobs: 4
         },
         runnerUsableRAM: function () {
             return this.config.runnerRAM - 3;
         },
-        runnerUsableStager: function() {
+        runnerUsableStager: function () {
             return this.config.runnerDisk - this.config.runnerRAM - 4;
         },
-        numRunnersToRunAIs: function() {
+        numRunnersToRunAIs: function () {
             var aiCount = aiService.getAiCount();
             var totalRam = (aiCount * this.config.avgAIRAM);
             var totalStg = (aiCount * this.config.avgAIDisk);
@@ -24,14 +26,44 @@ var elasticRuntime = shekelApp.factory('elasticRuntime', function (aiService) {
 
             return roundUp(Math.max(runnerRAM, runnerStager));
         },
-        numRunnersPerAz: function() {
+        numRunnersPerAz: function () {
             var azRunners = this.numRunnersToRunAIs() / this.config.azCount;
             return roundUp(azRunners) + this.config.extraRunnersPerAZ;
         },
-        totalRunners: function() {
+        totalRunners: function () {
             return this.numRunnersPerAz() * this.config.azCount;
+        },
+        //This is the main calculator. We do all the per vm stuff and add the
+        //constants at the bottom.  <--iaasAskSummary-->
+        applyTemplate: function () {
+            iaasService.resetIaaSAsk();
+            var t = this;
+            tileService.tiles.forEach(function (tile) {
+                var template = tile.template;
+                var vmLayout = new Array();
+                tile.currentConfig = vmLayout;
+                for (var i = 0; i < template.length; i++) {
+                    var vm = {};
+                    angular.extend(vm, template[i]);
+                    if (!vm.singleton) {
+                        if (tileService.isRunnerVM(vm)) {
+                            vm.instances = t.totalRunners();
+                            vm.ram = t.config.runnerRAM;
+                            vm.ephemeral_disk = t.config.runnerDisk;
+                        } else {
+                            vm.instances = vm.instances * t.config.azCount;
+                        }
+                    }
+                    if (tileService.isCompilationVM(vm)) {
+                        vm.instances = t.compilationJobs;
+                    }
+                    iaasService.doIaasAskForVM(vm);
+                    vmLayout.push(vm);
+                }
+            });
+            iaasService.addRunnerDisk(this.config.avgAIDisk, aiService.aiPacks());
         }
-};
+    };
 
     return ers;
 });

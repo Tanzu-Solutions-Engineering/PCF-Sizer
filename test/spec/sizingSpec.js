@@ -127,10 +127,10 @@
                 expect(tileService.tiles.length).toBe(1);
                 expect(tileService.getTile($rootScope.ersName).currentConfig).toBeUndefined();
                 elasticRuntime.config.azCount = 100;
-                elasticRuntime.numRunnersToRunAIs = function () {
+                elasticRuntime.totalRunners = function () {
                     return 10;
                 };
-                $rootScope.applyTemplate([opsMan, router, cell, etcd]);
+                elasticRuntime.applyTemplate([opsMan, router, cell, etcd]);
                 cfg = tileService.getTile($rootScope.ersName).currentConfig;
 
             });
@@ -202,31 +202,6 @@
             });
         });
 
-        describe('it applies templates for other services', function() {
-
-            var mysqlBroker = {
-                "vm": "MySQL Broker",
-                "instances": 2,
-                "vcpu": 1,
-                "ram": 1,
-                "ephemeral_disk": 10,
-                "persistent_disk": 0,
-                "dynamic_ips": 1,
-                "static_ips": 1,
-                "singleton": false
-            };
-
-            beforeEach(function () {
-                tileService.addTile($rootScope.ersName, '1.6', [mysqlBroker]);
-                tileService.addTile('mysql', '1.7', [mysqlBroker]);
-            });
-
-            it('gives the mysql broker a current config', function () {
-                expect(tileService.getTile('mysql').currentConfig).toBeUndefined();
-                $rootScope.applyTemplate();
-                expect(tileService.getTile('mysql').currentConfig).toBeDefined();
-            });
-        });
 
         describe('dropDownTriggerSizing should sync the config', function() {
             beforeEach(function () {
@@ -234,6 +209,7 @@
                 elasticRuntime.config.runnerDisk = 0;
                 elasticRuntime.config.avgAIRAM = 0;
                 elasticRuntime.config.avgAIRAM = 0;
+                elasticRuntime.config.compilationJobs = 0;
                 $rootScope.dropDownTriggerSizing();
 
             });
@@ -251,6 +227,10 @@
 
             it('synchronizes avg ai disk', function () {
                 expect(elasticRuntime.config.avgAIDisk).toBe(.5);
+            });
+
+            it('synchronizes compliation jobs', function () {
+                expect(elasticRuntime.config.compilationJobs).toBe(4);
             });
         });
 

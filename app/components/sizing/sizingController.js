@@ -138,43 +138,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     $scope.calculateAIDiskAsk = function(AIAvgDiskSizeInGB, NumAIPacks) {
         return AIAvgDiskSizeInGB * NumAIPacks * 50;
     };
-
-    //This is the main calculator. We do all the per vm stuff and add the 
-    //constants at the bottom.  <--iaasAskSummary-->
-    $scope.applyTemplate = function() {
-        iaasService.resetIaaSAsk();
-
-        tileService.tiles.forEach(function (tile) {
-            var template = tile.template;
-            var vmLayout = new Array();
-            tile.currentConfig = vmLayout;
-            for (var i = 0; i < template.length; i++) {
-                var vm = {};
-                angular.extend(vm, template[i]);
-                if ( !vm.singleton ) {
-                    if ( tileService.isRunnerVM(vm)) {
-                        vm.instances = elasticRuntime.numRunnersToRunAIs();
-                        vm.ram = $scope.platformConfigMapping.runnerSize.size;
-                        vm.ephemeral_disk = $scope.platformConfigMapping.runnerSizeDisk.size;
-                    } else {
-                        vm.instances = vm.instances * elasticRuntime.config.azCount;
-                    }
-                }
-                if ( tileService.isCompilationVM(vm)){
-                    vm.instances = $scope.platformConfigMapping.pcfCompilationJobs.value;
-                }
-                iaasService.doIaasAskForVM(vm);
-                vmLayout.push(vm);
-            }
-        });
-        iaasService.addRunnerDisk($scope.platformConfigMapping.avgAIDisk.value, $scope.aiPacks().value);
-    };
     
     $scope.loadAzTemplate = function() {
     	return $http.get('/ersjson/' + $scope.platformConfigMapping.ersVersion.value)
     		.success(function(data) {
 				tileService.addTile(tileService.ersName, $scope.platformConfigMapping.ersVersion.value, data);
-                $scope.applyTemplate(tileService.getTile(tileService.ersName).template);
+                elasticRuntime.applyTemplate(tileService.getTile(tileService.ersName).template);
     		}).error(function(data) { 
     			alert("Failed to get PCF AZ Template json template");
     		});
@@ -193,11 +162,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	});
 	
 	$scope.dropDownTriggerSizing = function () {
-        $scope.applyTemplate();
+        elasticRuntime.applyTemplate();
         elasticRuntime.config.runnerDisk = $scope.platformConfigMapping.runnerSizeDisk.size;
         elasticRuntime.config.runnerRAM = $scope.platformConfigMapping.runnerSize.size;
         elasticRuntime.config.avgAIRAM = $scope.platformConfigMapping.avgRam.value;
         elasticRuntime.config.avgAIDisk = $scope.platformConfigMapping.avgAIDisk.value;
+        elasticRuntime.config.compilationJobs = $scope.platformConfigMapping.pcfCompilationJobs.value;
 	};
 	
 });

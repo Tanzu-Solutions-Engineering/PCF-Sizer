@@ -8,10 +8,15 @@ var tileService = shekelApp.factory('tileService', function () {
 
         addTile: function(name, version, template) {
             var idx = this.getIndexOfTile(name);
+            var initial = {
+                name: name,
+                version: version,
+                template: template
+            };
             if ( -1 == idx ) {
-                this.tiles.push({ name: name, version: version, template: template})
+                this.tiles.push(initial);
             } else {
-                this.tiles.splice(idx, { name: name, version: version, template: template} )
+                this.tiles.splice(idx, initial );
             }
         },
         removeTile: function(name) {
