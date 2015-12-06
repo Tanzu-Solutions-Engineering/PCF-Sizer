@@ -36,6 +36,10 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
         });
     };
 
+    $scope.getActiveTemplate = function(serviceName) {
+        return tileService.getTile(serviceName).template;
+    };
+
     $scope.toggleService = function(serviceName) {
         if ( $scope.versioncache[serviceName].enabled ) {
             var version =  $scope.versioncache[serviceName].selected;

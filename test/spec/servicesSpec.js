@@ -46,7 +46,7 @@
 
             tileService.tiles.push({
                     vms: ers,
-                    name: "ers",
+                    name: tileService.ersName,
                     version: '1.6.1',
                     template: []
                 }
@@ -164,7 +164,27 @@
                     expect(tile).toBeDefined();
                 });
             });
+        });
 
+        describe('configuring an enabled service', function() {
+            beforeEach(function () {
+                createController();
+                $httpBackend.flush();
+            });
+
+            describe('getActiveTemplate', function() {
+                it('Should return a template', function () {
+                    var template = $rootScope.getActiveTemplate(tileService.ersName);
+                    expect(template).toBeDefined();
+                    expect(Array.isArray(template)).toBeTruthy();
+                });
+
+                it('should return a template that preserves modifications', function(){
+                    var template = $rootScope.getActiveTemplate(tileService.ersName);
+                    template.push({changed: true});
+                    expect(tileService.getTile(tileService.ersName).template.pop().changed).toBeTruthy();
+                });
+            });
         });
 
         describe('disabling a service', function() {
@@ -184,6 +204,5 @@
                 expect(tileService.tiles.length).toBe(originalSize - 1);
             });
         });
-
-    })
+    });
 })();
