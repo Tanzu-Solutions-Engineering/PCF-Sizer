@@ -2,6 +2,16 @@
 
 var shekelApp = angular.module('ShekelApp', []);
 
+function roundUp(x) {
+    var totalX;
+    if (x == Math.round(x)) {
+        totalX = x;
+    } else  {
+        totalX = parseInt(x) +1;
+    }
+    return totalX;
+}
+
 shekelApp.controller('ShekelFoundationController', function ($scope) {
     $scope.singleComplianceZone = "yes";
     $scope.seperateForProd = "yes";

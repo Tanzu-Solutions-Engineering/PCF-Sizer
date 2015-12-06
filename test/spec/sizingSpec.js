@@ -127,7 +127,7 @@
                 expect(tileService.tiles.length).toBe(1);
                 expect(tileService.getTile($rootScope.ersName).currentConfig).toBeUndefined();
                 elasticRuntime.config.azCount = 100;
-                $rootScope.totalRunners = function () {
+                elasticRuntime.numRunnersToRunAIs = function () {
                     return 10;
                 };
                 $rootScope.applyTemplate([opsMan, router, cell, etcd]);
@@ -228,24 +228,29 @@
             });
         });
 
-        describe('numRunnersToRunAIs', function() {
-            it('should need 5 to run one ai pack at one gig', function () {
-                $rootScope.aiPacks = function () {
-                    return { value: 1};
-                };
-
-                expect($rootScope.numRunnersToRunAIs()).toBe(4);
-            });
-        });
-
         describe('dropDownTriggerSizing should sync the config', function() {
-            it('synchronizes ram', function () {
+            beforeEach(function () {
                 elasticRuntime.config.runnerRAM = 0;
                 elasticRuntime.config.runnerDisk = 0;
-
+                elasticRuntime.config.avgAIRAM = 0;
+                elasticRuntime.config.avgAIRAM = 0;
                 $rootScope.dropDownTriggerSizing();
+
+            });
+            it('synchronizes ram', function () {
                 expect(elasticRuntime.config.runnerRAM).toBe(16);
+            });
+
+            it('synchronizes disk', function () {
                 expect(elasticRuntime.config.runnerDisk).toBe(64);
+            });
+
+            it('synchronizes avg ram', function() {
+                expect(elasticRuntime.config.avgAIRAM).toBe(1);
+            });
+
+            it('synchronizes avg ai disk', function () {
+                expect(elasticRuntime.config.avgAIDisk).toBe(.5);
             });
         });
 

@@ -124,48 +124,11 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     $scope.setAis = function() { 
     	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
     };
-
-    // TODO DRY w/ costing directives
-    $scope.roundUp = function(x) {  
-    	var totalX;
-	    if (x == Math.round(x)) { 
-			totalX = x;
-		} else  { 
-			totalX = parseInt(x) +1;
-		}
-	    return totalX;
-    };
-    
-    /**
-     * Diego Cell Calculator
-     */
-    $scope.numRunnersToRunAIs = function() {
-    	var aicount = aiService.getAiCount();
-
-    	var totalRam = (aicount * $scope.platformConfigMapping.avgRam.value);
-    	var totalStg = (aicount * $scope.platformConfigMapping.avgAIDisk.value);
-    	    	
-    	var runnerRAM = (totalRam / elasticRuntime.runnerUsableRAM());
-    	var runnerStager = (totalStg / elasticRuntime.runnerUsableStager());
-
-    	return $scope.roundUp(Math.max(runnerRAM, runnerStager));
-    };
-    
-    $scope.runnersPerAz = function() {
-    	var azRunners = $scope.numRunnersToRunAIs() / elasticRuntime.config.azCount;
-    	return $scope.roundUp(azRunners) + elasticRuntime.config.extraRunnersPerAZ;
-    };
-    
-    $scope.totalRunners = function() {
-    	return $scope.runnersPerAz() * elasticRuntime.config.azCount;
-    };
     
 	$scope.getVms = function() { return tileService.tiles; };
-    
-    
+
     $scope.getPhysicalCores = function() { 
-    	return $scope.roundUp(
-            iaasService.iaasAskSummary.vcpu / $scope.platformConfigMapping.iaasCPUtoCoreRatio.ratio);
+    	return roundUp(iaasService.iaasAskSummary.vcpu / $scope.platformConfigMapping.iaasCPUtoCoreRatio.ratio);
     };
 
     $scope.iaasAskSummary = function() {
@@ -190,7 +153,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                 angular.extend(vm, template[i]);
                 if ( !vm.singleton ) {
                     if ( tileService.isRunnerVM(vm)) {
-                        vm.instances = $scope.totalRunners();
+                        vm.instances = elasticRuntime.numRunnersToRunAIs();
                         vm.ram = $scope.platformConfigMapping.runnerSize.size;
                         vm.ephemeral_disk = $scope.platformConfigMapping.runnerSizeDisk.size;
                     } else {
@@ -233,6 +196,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         $scope.applyTemplate();
         elasticRuntime.config.runnerDisk = $scope.platformConfigMapping.runnerSizeDisk.size;
         elasticRuntime.config.runnerRAM = $scope.platformConfigMapping.runnerSize.size;
+        elasticRuntime.config.avgAIRAM = $scope.platformConfigMapping.avgRam.value;
+        elasticRuntime.config.avgAIDisk = $scope.platformConfigMapping.avgAIDisk.value;
 	};
 	
 });

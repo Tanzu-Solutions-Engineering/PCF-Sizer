@@ -2,12 +2,13 @@
 
 (function() {
     describe('elasticRuntimeService', function() {
-        var elasticRuntime;
+        var elasticRuntime, aiService;
 
         beforeEach(module('ShekelApp'));
 
         beforeEach(inject(function ($injector) {
             elasticRuntime = $injector.get('elasticRuntime');
+            aiService = $injector.get('aiService');
         }));
 
         describe('defaults', function() {
@@ -30,6 +31,10 @@
             it('should default to 1 gb average ai ram', function () {
                 expect(elasticRuntime.config.avgAIRAM).toBe(1);
             });
+
+            it('should default to 1 gb avg ai disk', function () {
+                expect(elasticRuntime.config.avgAIDisk).toBe(.5);
+            });
         });
 
         describe('usable resource calculations', function() {
@@ -51,5 +56,34 @@
                 });
             });
         });
+
+        describe('numRunnersToRunAIs', function() {
+            it('should need 5 to run one ai pack at one gig', function () {
+                aiService.setAiPack(1);
+                expect(elasticRuntime.numRunnersToRunAIs()).toBe(4);
+            });
+        });
+
+        describe('numRunnersPerAz', function() {
+            it('spits the runners evenly across az', function () {
+                elasticRuntime.config.azCount = 2;
+                elasticRuntime.numRunnersToRunAIs = function() {
+                    return 2;
+                };
+                expect(elasticRuntime.numRunnersPerAz()).toBe(2);
+            });
+        });
+
+        describe('total runners', function() {
+            it('should be the number of runners in each az times the number of azs', function () {
+                elasticRuntime.config.azCount = 2;
+                elasticRuntime.numRunnersPerAz = function() {
+                    return 10;
+                };
+
+                expect(elasticRuntime.totalRunners()).toBe(20);
+            });
+        });
+
     });
 })();
