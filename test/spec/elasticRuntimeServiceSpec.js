@@ -22,6 +22,10 @@
             it('should have 3 azs', function () {
                 expect(elasticRuntime.config.azCount).toBe(3);
             });
+
+            it('should set extraRunnersPerAZ to one', function () {
+                expect(elasticRuntime.config.extraRunnersPerAZ).toBe(1);
+            });
         });
 
         describe('usable resource calculations', function() {

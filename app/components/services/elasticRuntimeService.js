@@ -4,7 +4,8 @@ var elasticRuntime = shekelApp.factory('elasticRuntime', function () {
         config: {
             runnerRAM: 16,
             runnerDisk: 64,
-            azCount: 3
+            azCount: 3,
+            extraRunnersPerAZ: 1
         },
         runnerUsableRAM: function () {
             return this.config.runnerRAM - 3;

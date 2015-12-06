@@ -94,7 +94,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
     	runnerSize: $scope.runnerSizeOptions[0],
     	runnerSizeDisk: $scope.runnerSizeOptionsDisk[1],
-    	nPlusX: 1,
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
     	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1]
     };
@@ -156,7 +155,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     
     $scope.runnersPerAz = function() {
     	var azRunners = $scope.numRunnersToRunAIs() / elasticRuntime.config.azCount;
-    	return $scope.roundUp(azRunners) + $scope.platformConfigMapping.nPlusX;
+    	return $scope.roundUp(azRunners) + elasticRuntime.config.extraRunnersPerAZ;
     };
     
     $scope.totalRunners = function() {
@@ -225,7 +224,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	//Watch for Non ng-select input changes
 	[
 	 'elasticRuntime.config.azCount',
-	 'platformConfigMapping.nPlusX'
+	 'elasticRuntime.config.extraRunnersPerAZ'
 	].forEach(function(e,l,a) {
 		$scope.$watch(e, function() { 
             $scope.dropDownTriggerSizing()
