@@ -4,6 +4,18 @@
     describe('elasticRuntimeService', function() {
         var elasticRuntime, aiService, tileService, iaasService;
 
+        var mysqlBroker = {
+            "vm": "MySQL Broker",
+            "instances": 2,
+            "vcpu": 1,
+            "ram": 1,
+            "ephemeral_disk": 10,
+            "persistent_disk": 0,
+            "dynamic_ips": 1,
+            "static_ips": 1,
+            "singleton": false
+        };
+
         beforeEach(module('ShekelApp'));
 
         beforeEach(inject(function ($injector) {
@@ -11,6 +23,7 @@
             aiService = $injector.get('aiService');
             tileService = $injector.get('tileService');
             iaasService = $injector.get('iaasService');
+            iaasService.resetIaaSAsk();
         }));
 
         describe('defaults', function() {
@@ -90,6 +103,7 @@
                 expect(elasticRuntime.totalRunners()).toBe(20);
             });
         });
+
 
         describe('applyTemplate', function() {
             var opsMan = {
@@ -185,6 +199,31 @@
                 }
             }
 
+            describe('it should not ask for resources for disabled services', function() {
+
+                it('should ask the iaas for additional', function () {
+                    tileService.addTile('mysql', '1.6', [mysqlBroker]);
+                    var origDisk = iaasService.iaasAskSummary.disk;
+                    elasticRuntime.applyTemplate();
+                    expect(iaasService.iaasAskSummary.disk).toBe(origDisk);
+                    expect(tileService.getTile('mysql').currentConfig).toBeUndefined();
+                });
+
+                it('should add and then remove the service after we disable it', function () {
+                    tileService.addTile('mysql', '1.6', [mysqlBroker]);
+                    var origDisk = iaasService.iaasAskSummary.disk;
+                    tileService.getTile('mysql').enabled = true;
+                    elasticRuntime.applyTemplate();
+                    expect(iaasService.iaasAskSummary.disk).toBeGreaterThan(origDisk);
+                    expect(tileService.getTile('mysql').currentConfig).toBeDefined();
+                    tileService.getTile('mysql').enabled = false;
+                    elasticRuntime.applyTemplate();
+                    expect(iaasService.iaasAskSummary.disk).toBe(origDisk);
+                    expect(tileService.getTile('mysql').currentConfig).toBeUndefined();
+
+                });
+            });
+
             it('should build a current config for the ers release', function () {
                 expect(cfg).toBeDefined();
             });
@@ -223,18 +262,6 @@
 
         describe('it applies templates for other services', function() {
 
-            var mysqlBroker = {
-                "vm": "MySQL Broker",
-                "instances": 2,
-                "vcpu": 1,
-                "ram": 1,
-                "ephemeral_disk": 10,
-                "persistent_disk": 0,
-                "dynamic_ips": 1,
-                "static_ips": 1,
-                "singleton": false
-            };
-
             beforeEach(function () {
                 tileService.addTile(tileService.ersName, '1.6', [mysqlBroker]);
                 tileService.addTile('mysql', '1.7', [mysqlBroker]);
@@ -246,5 +273,6 @@
                 expect(tileService.getTile('mysql').currentConfig).toBeDefined();
             });
         });
+
     });
 })();

@@ -11,7 +11,8 @@ var tileService = shekelApp.factory('tileService', function () {
             var initial = {
                 name: name,
                 version: version,
-                template: template
+                template: template,
+                enabled: false
             };
             if ( -1 == idx ) {
                 this.tiles.push(initial);

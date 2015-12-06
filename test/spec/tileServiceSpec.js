@@ -35,7 +35,6 @@
         });
 
         describe('Getting tiles', function() {
-
             it('should get a tile by name', function() {
                 tileService.addTile('bar', '1.0', [{},{}]);
                 expect(tileService.getTile('bar').name).toBe("bar");
@@ -76,6 +75,13 @@
 
             it('should not detect a router as a compilation vm', function () {
                 expect(tileService.isCompilationVM(router)).toBeFalsy();
+            });
+        });
+        
+        describe('defaults', function() {
+            it('should disable tiles by default', function () {
+                tileService.addTile('foo', '1.0', [{},{}]);
+                expect(tileService.getTile('foo').enabled).toBeFalsy();
             });
         });
     })
