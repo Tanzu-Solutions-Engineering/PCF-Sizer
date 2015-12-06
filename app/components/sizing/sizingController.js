@@ -47,10 +47,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	]; 
 
     $scope.runnerSizeOptions = [
-	     {"text": "Small (16GB RAM)",     "size":16},
-	     {"text": "Medium (32GB RAM)",    "size":32},
-	     {"text": "Large (64GB RAM)",     "size":64},
-	     {"text": "Bad idea (128GB RAM)", "size":128}
+	     {"text": "Small (16GB)",     "size":16},
+	     {"text": "Medium (32GB)",    "size":32},
+	     {"text": "Large (64GB)",     "size":64},
+	     {"text": "Bad idea (128GB)", "size":128}
 	 ];
     
     $scope.runnerSizeOptionsDisk =  [
