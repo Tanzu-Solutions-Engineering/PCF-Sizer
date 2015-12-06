@@ -98,9 +98,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
     	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1]
     };
-
-    $scope.aZRecoveryCapacity = [25, 50, 100];
-
+    
     $scope.chooser = { aiHelpMeChoose: false };
 
     $scope.aiChooser = { 
