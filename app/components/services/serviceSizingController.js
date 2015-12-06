@@ -37,10 +37,19 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
     };
 
     $scope.getActiveTemplate = function(serviceName) {
-        if (false == $scope.versioncache[serviceName].enabled) {
+        var cachedService = $scope.versioncache[serviceName];
+        if (undefined === cachedService || false == cachedService.enabled) {
             return null;
         }
-        return tileService.getTile(serviceName).template;
+        var tile = tileService.getTile(serviceName);
+        //Handle the case where it's been enabled but not fetched. The digest cycle will
+        //run again in these cases, so this just prevents the browser console from getting
+        //errors.
+        if (undefined === tile) {
+            return [];
+        }
+        return tile.template;
+
     };
 
     $scope.toggleService = function(serviceName) {

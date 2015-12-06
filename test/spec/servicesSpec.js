@@ -206,9 +206,25 @@
                     expect($rootScope.getActiveTemplate('mysql')).toBeNull();
                 });
             });
+
+            describe('getActiveTemplate on an undefined service', function() {
+                it('should not be possible', function () {
+                    expect($rootScope.getActiveTemplate('alsdkfajsldaks')).toBeNull();
+                });
+            });
+
+            describe('getActiveTemplate on an service tile service hasnt fetched  completley yet', function() {
+                beforeEach(function () {
+                    $rootScope.versioncache['foo'] = {enabled: true};
+
+                });
+
+                it('should return an empty array', function(){
+                    expect(Array.isArray($rootScope.getActiveTemplate('foo'))).toBeTruthy();
+                    expect($rootScope.getActiveTemplate('foo').length).toBe(0);
+                })
+            })
         });
-
-
 
         describe('disabling a service', function() {
             beforeEach(function() {
