@@ -25,7 +25,14 @@
             <a href="#" ng-click="config=!config">Configure</a>
             <div class="row" ng-show="config">
                 <ul>
-                    <li ng-repeat="vm in versioncache[service].template"></li>
+                    <li ng-repeat="vm in getActiveTemplate(service)">
+                        Name: {{vm.vm}}
+                        <ul>
+                            <li>RAM: {{vm.ram}}</li>
+                            <li>Persistent Disk: {{vm.persistent_disk}}</li>
+                            <li>Ephemeral Disk: {{vm.ephemeral_disk}}</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -96,7 +96,7 @@
             })
         });
 
-        describe('listing versions and being ', function() {
+        describe('listing versions ', function() {
             var versions = null;
 
             beforeEach(function() {
@@ -166,26 +166,49 @@
             });
         });
 
-        describe('configuring an enabled service', function() {
+        describe('configuring', function() {
             beforeEach(function () {
                 createController();
                 $httpBackend.flush();
             });
 
-            describe('getActiveTemplate', function() {
+            describe('getActiveTemplate on an enabled service', function() {
+                beforeEach(function () {
+                    $rootScope.versioncache['mysql'] = {enabled: true};
+                    tileService.tiles.push({
+                            vms: [mysqlBroker],
+                            name: 'mysql',
+                            version: '1.6.1',
+                            template: []
+                        }
+                    );
+                });
+
                 it('Should return a template', function () {
-                    var template = $rootScope.getActiveTemplate(tileService.ersName);
+                    var template = $rootScope.getActiveTemplate('mysql');
                     expect(template).toBeDefined();
                     expect(Array.isArray(template)).toBeTruthy();
                 });
 
                 it('should return a template that preserves modifications', function(){
-                    var template = $rootScope.getActiveTemplate(tileService.ersName);
+                    var template = $rootScope.getActiveTemplate('mysql');
                     template.push({changed: true});
-                    expect(tileService.getTile(tileService.ersName).template.pop().changed).toBeTruthy();
+                    expect(tileService.getTile('mysql').template.pop().changed).toBeTruthy();
+                });
+            });
+
+            describe('getActiveTemplate on an disabled service', function () {
+                beforeEach(function () {
+                    $rootScope.versioncache['mysql'] = {enabled: false};
+                });
+
+                it('should not be possible', function () {
+                    expect($rootScope.getActiveTemplate('mysql')).toBeNull();
                 });
             });
         });
+
+
 
         describe('disabling a service', function() {
             beforeEach(function() {
