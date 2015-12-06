@@ -1,8 +1,10 @@
 "use strict";
 
-shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout, aiService) {
+shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService,
+                                                        iaasService, elasticRuntime)
+{
 
-    $scope.aiPackOptions = new Array();         
+    $scope.aiPackOptions = new Array();
     
     $scope.setAIPackOptions = function() {
     	for ( var i = 1; i <= 300; ++i) {
@@ -14,12 +16,13 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
                
     $scope.aiPacks = function(pack) { 
     	if (angular.isDefined(pack)) {
-    		aiService.setAiPack(pack);
+    		aiService.setAiPack(pack.value);
     	}
-		return aiService.aiPacks();	
+        //Look up the right object by the number of ai packs the service keeps track of
+		return $scope.aiPackOptions[aiService.aiPacks() - 1];
     };
     
-    aiService.setAiPack($scope.aiPackOptions[0]);
+    aiService.setAiPack($scope.aiPackOptions[0].value);
 
 	/**
 	 * When adding a new ERS version, ADD IT TO THE TOP OF THE LIST as the
@@ -27,9 +30,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	 * version
 	 */
 	$scope.ersVersionOptions = [
-        {value: 1.6},
-		{value: 1.5},
-		{value: 1.4}
+        {value: 1.6}
 	];
 
     $scope.avgRamOptions = [ 
@@ -45,18 +46,18 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
 	    { value: 20 }
 	]; 
 
-    $scope.deaSizeOptions = [ 
-	     {"text": "Small (16GB RAM)",    "size":16}, 
-	     {"text": "Medium (32GB RAM)",   "size":32},
-	     {"text": "Large (64GB RAM)",    "size":64},
+    $scope.runnerSizeOptions = [
+	     {"text": "Small (16GB RAM)",     "size":16},
+	     {"text": "Medium (32GB RAM)",    "size":32},
+	     {"text": "Large (64GB RAM)",     "size":64},
 	     {"text": "Bad idea (128GB RAM)", "size":128}
 	 ];
     
-    $scope.deaSizeOptionsDisk =  [ 
+    $scope.runnerSizeOptionsDisk =  [
          {"text": "Small (32GB)",    "size":32}, 
          {"text": "Medium (64GB)",   "size":64},
-         {"text": "Large (128GB)",    "size":128},
-         {"text": "Crazy (256GB)",    "size":256}
+         {"text": "Large (128GB)",   "size":128},
+         {"text": "Crazy (256GB)",   "size":256}
     ];
     
     $scope.avgAIDiskOptions = [ 
@@ -80,34 +81,36 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
         { value: 9  },
         { value: 10  }
     ];
-    
-    $scope.iaasCPUtoCoreRatioOptions = [ 
-        {"text": "2:1", "ratio":2}, 
+
+
+    $scope.iaasCPUtoCoreRatioOptions = [
+        {"text": "2:1", "ratio":2},
         {"text": "4:1", "ratio":4},
         {"text": "8:1", "ratio":8}
     ];
     
-    $scope.platform = {
+    $scope.platformConfigMapping = {
 		ersVersion: $scope.ersVersionOptions[0],
     	avgRam: $scope.avgRamOptions[1],
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
-    	deaSize: $scope.deaSizeOptions[0],
-    	deaSizeDisk: $scope.deaSizeOptionsDisk[1],
-        numAZ: 3,
-    	nPlusX: 1,
+    	runnerSize: $scope.runnerSizeOptions[0],
+    	runnerSizeDisk: $scope.runnerSizeOptionsDisk[1],
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
-    	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1],
+    	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1]
     };
 
     $scope.aZRecoveryCapacity = [25, 50, 100];
 
-    $scope.chooser = { aiHelpMeChoose: false }
+    $scope.chooser = { aiHelpMeChoose: false };
 
     $scope.aiChooser = { 
     	apps: 1,
     	devs: 1,
     	steps: 1
     };
+
+    $scope.elasticRuntime = elasticRuntime;
+    $scope.elasticRuntimeConfig = elasticRuntime.config;
        
 	// This is the app instances formula. for "help me choose"
     $scope.ais = function() {  
@@ -121,135 +124,52 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, vmLayout,
     $scope.setAis = function() { 
     	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
     };
+    
+	$scope.getVms = function() { return tileService.tiles; };
 
-    //This function needs no update for diego as we use the same
-    //logic for determining cell size
-    $scope.deaUsableRam = function() {
-    	return $scope.platform.deaSize.size - 3;
-    };
-
-    //This function gets no update for diego as we use the same
-    //logic for determining cell size. TODO Is that the correct thing to do.
-    $scope.deaUsableStg = function() { 
-    	return $scope.platform.deaSizeDisk.size - $scope.platform.deaSize.size - 4;
-    
-    };
-
-    // TODO DRY w/ costing directives
-    $scope.roundUp = function(x) {  
-    	var totalX;
-	    if (x == Math.round(x)) { 
-			totalX = x;
-		} else  { 
-			totalX = parseInt(x) +1;
-		}
-	    return totalX;
-    };
-    
-    /**
-     * DEA Calculator
-     */
-    $scope.numDeasToRunAIs = function() { 
-    	var aipacks = 50;
-    	if (null != $scope.aiPacks()) { 
-    		aipacks = $scope.aiPacks().value * 50;
-    	}
-    	
-
-    	var totalRam = (aipacks * $scope.platform.avgRam.value);
-    	var totalStg = (aipacks * $scope.platform.avgAIDisk.value);
-    	    	
-    	var deasRam = (totalRam / $scope.deaUsableRam());
-    	var deasStg = (totalStg / $scope.deaUsableStg());
-
-    	return $scope.roundUp(Math.max(deasRam, deasStg));
-    };
-    
-    $scope.deasPerAz = function() { 
-    	var azDeas = $scope.numDeasToRunAIs() / $scope.platform.numAZ;
-    	return $scope.roundUp(azDeas) + $scope.platform.nPlusX;
-    };
-    
-    $scope.totalDEAs = function() { 
-    	return $scope.deasPerAz() * $scope.platform.numAZ;
-    };
-    
-	$scope.getVms = function() { return vmLayout; };
-
-    $scope.iaasAskSummary = {
-    	ram: 1,
-    	disk: 1, 
-    	vcpu: 1
-    };
-    
-    
     $scope.getPhysicalCores = function() { 
-    	return $scope.roundUp($scope.iaasAskSummary.vcpu / $scope.platform.iaasCPUtoCoreRatio.ratio); 
-    };
-    
-    $scope.doIaaSAskForVm = function(vm) {
-    	$scope.iaasAskSummary.ram += vm.ram * vm.instances;
-		$scope.iaasAskSummary.disk 
-			+= (vm.persistent_disk + vm.ephemeral_disk + vm.ram) * vm.instances;
-		$scope.iaasAskSummary.vcpu += vm.vcpu * vm.instances;
+    	return roundUp(iaasService.iaasAskSummary.vcpu / $scope.platformConfigMapping.iaasCPUtoCoreRatio.ratio);
     };
 
-    //This is the main calculator. We do all the per vm stuff and add the 
-    //constants at the bottom.  <--iaasAskSummary-->
-    //For diego we use all the dea logic but update cells. I expect we want something
-    //finer grained as diego can run both...
-    $scope.applyTemplate = function(template) { 
-    	$scope.iaasAskSummary = {ram: 1, disk: 1, vcpu: 1};
-    	vmLayout.length = 0;
-        for (var i = 0; i < template.length; i++) {
-        	var vm = {};
-    		angular.extend(vm, template[i]);
-    		if ( !vm.singleton ) {
-    			if ( ("DEA" == vm.vm && $scope.platform.ersVersion.value < 1.6)
-                 || ("Diego Cell" == vm.vm && $scope.platform.ersVersion.value >= 1.6)) {
-    				vm.instances = $scope.totalDEAs();
-    				vm.ram = $scope.platform.deaSize.size;
-					vm.ephemeral_disk = $scope.platform.deaSizeDisk.size;
-    			} else {
-    				vm.instances = vm.instances * $scope.platform.numAZ;
-    			}
-    		}   
-			if ( "Compilation" == vm.vm ){
-			    vm.instances = $scope.platform.pcfCompilationJobs.value;
-			}
-    		$scope.doIaaSAskForVm(vm);
-			vmLayout.push(vm);
-    	}
-        $scope.iaasAskSummary.disk += $scope.platform.avgAIDisk.value * $scope.aiPacks().value * 50;
+    $scope.iaasAskSummary = function() {
+        return iaasService.iaasAskSummary;
+    };
+
+    $scope.calculateAIDiskAsk = function(AIAvgDiskSizeInGB, NumAIPacks) {
+        return AIAvgDiskSizeInGB * NumAIPacks * 50;
     };
     
     $scope.loadAzTemplate = function() {
-    	$http.get('/ersjson/' + $scope.platform.ersVersion.value)
-    		.success(function(data) { 
-    			$scope.vmTemplate = data;
-    			$scope.applyTemplate($scope.vmTemplate);
-    		}).error(function(data) { 
-    			alert("Failed to get PCF AZ Template json template");
+
+        return $http.get('/ersjson/' + $scope.platformConfigMapping.ersVersion.value)
+    		.success(function(data) {
+                tileService.addTile(tileService.ersName, $scope.platformConfigMapping.ersVersion.value, data);
+                tileService.enableTile(tileService.ersName);
+                elasticRuntime.applyTemplate(tileService.getTile(tileService.ersName).template);
+    		}).error(function(data) {
+                alert("Failed to get PCF AZ Template json template");
     		});
     };
-    
     
 	$scope.loadAzTemplate();
 	
 	//Watch for Non ng-select input changes
 	[
-	 'platform.numAZ',
-	 'platform.nPlusX'
+	 'elasticRuntime.config.azCount',
+	 'elasticRuntime.config.extraRunnersPerAZ'
 	].forEach(function(e,l,a) {
 		$scope.$watch(e, function() { 
-				$scope.dropDownTriggerSizing()
+            $scope.dropDownTriggerSizing()
 		});
 	});
 	
 	$scope.dropDownTriggerSizing = function () {
-		if ($scope.vmTemplate !== undefined) {
-			$scope.applyTemplate($scope.vmTemplate)
-		}
+        elasticRuntime.applyTemplate();
+        elasticRuntime.config.runnerDisk = $scope.platformConfigMapping.runnerSizeDisk.size;
+        elasticRuntime.config.runnerRAM = $scope.platformConfigMapping.runnerSize.size;
+        elasticRuntime.config.avgAIRAM = $scope.platformConfigMapping.avgRam.value;
+        elasticRuntime.config.avgAIDisk = $scope.platformConfigMapping.avgAIDisk.value;
+        elasticRuntime.config.compilationJobs = $scope.platformConfigMapping.pcfCompilationJobs.value;
 	};
 	
 });

@@ -4,10 +4,14 @@
     <title>CloudFoundry Sizing and Costing Tool</title>
     <link rel="stylesheet" href="/js/pivotal-ui/pivotal-ui.css">
     <script src="/js/pivotal-ui/pivotal-ui.js"></script>
-
     <script src="/js/angular.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/app/components/sizing/sizingController.js"></script>
+    <script src="/app/components/services/tileService.js"></script>
+    <script src="/app/components/sizing/iaasService.js"></script>
+    <script src="/app/components/services/serviceSizingController.js"></script>
+    <script src="/app/components/services/elasticRuntimeService.js"></script>
+    <script src="/app/components/sizing/aiService.js"></script>
     <script src="/app/components/plan/planController.js"></script>
     <script src="/app/components/plan/planService.js"></script>
     <script src="/app/components/version/versionController.js"></script>
@@ -45,12 +49,14 @@
             <div id="app-nav" class="row">
                 <ul class="nav hidden-xs">
                     <li class="active">
-                        <a data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
+                        <a data-toggle="tab" href="#tab-responsive-sizing">PCF Sizing</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tab-responsive-services">PCF Services</a>
                     </li>
                     <li>
                         <a data-toggle="tab" href="#tab-responsive-costing">Costing</a>
                     </li>
-
                     <li>
                         <a data-toggle="tab" href="#tab-responsive-plans">Plans</a>
                     </li>
@@ -58,9 +64,7 @@
                         <a data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
                     </li>
                 </ul>
-
             </div>
-
         </div>
     </div>
 
@@ -77,23 +81,18 @@
                         <span>Need Help? Drop us an <a href="mailto:shekel@pivotal.io">email</a></span>
                     </div>
                 </div>
-               <div class="row col-md-16">
-                   <div class="form-group form-inline">
-                       <label class="col-md-13" for="versionselect">PCF Version</label>
-                       <select class="form-control col-md-6" id="versionselect" ng-model="platform.ersVersion"
-                               ng-options="opt as opt.value for opt in ersVersionOptions" ng-change="loadAzTemplate()">
-                       </select>
-                   </div>
-               </div>
 
                <ul class="tab-content list-unstyled">
-	                <li class="active" id="sizing">
-	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">Sizing</a>
+	                <li class="active" id="pcf-sizing">
+	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-sizing">PCF Sizing</a>
 	                </li>
 	                <li class="tab-pane active fade in" id="tab-responsive-sizing">
 	                    <div ng-include="'/app/components/sizing/sizing.html'"></div>
 	                </li>
-	
+
+                    <li class="tab-pane fade" id="tab-responsive-services">
+                        <div ng-include="'/app/components/services/sizing.html'"></div>
+                    </li>
 	                <li>
 	                    <a class="visible-xs-block" data-toggle="tab" href="#tab-responsive-costing">Costing</a>
 	                </li>

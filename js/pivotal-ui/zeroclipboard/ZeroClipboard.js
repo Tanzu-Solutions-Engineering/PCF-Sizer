@@ -447,7 +447,7 @@
   var _state = function() {
     _detectSandbox();
     return {
-      browser: _pick(_navigator, [ "userAgent", "platform", "appName" ]),
+      browser: _pick(_navigator, [ "userAgent", "platformConfigMapping", "appName" ]),
       flash: _omit(_flashState, [ "bridge" ]),
       zeroclipboard: {
         version: ZeroClipboard.version,

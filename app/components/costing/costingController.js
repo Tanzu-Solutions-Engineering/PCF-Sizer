@@ -1,5 +1,5 @@
 "use strict";
-shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiService, planService) {
+shekelApp.controller('ShekelCostingController', function($scope, tileService, aiService, planService) {
 	
 	$scope.rampUpPlans = 5;
 
@@ -46,12 +46,13 @@ shekelApp.controller('ShekelCostingController', function($scope, vmLayout, aiSer
 	};
 
 	/**
-	 * Closure to enable math against a dea property.
+	 * Closure to enable math against a runners property.
 	 */
-	$scope.deaFunction = function(method, overhead) { 
-		for (var i = 0; i < vmLayout.length; ++i) { 
-			var vm = vmLayout[i];
-			if ( "DEA" == vm.vm || "Diego Cell" == vm.vm) {
+	$scope.deaFunction = function(method, overhead) {
+        var ersConfig = tileService.getTile(tileService.ersName).currentConfig;
+		for (var i = 0; i < ersConfig.length; ++i) {
+			var vm = ersConfig[i];
+			if ( "Diego Cell" == vm.vm) {
 				if ( "ephemeral_disk" == method ){
 					return (vm[method] * vm.instances) - (vm.ram * vm.instances) - (overhead * vm.instances);
 				}

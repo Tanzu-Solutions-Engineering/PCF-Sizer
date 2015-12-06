@@ -1,18 +1,26 @@
 <!-- <a href="#" ng-click="applyTemplate(vmTemplate)">Refresh All Tables</a> -->
 
-<div class="row">
 
-    <div class="col-md-10">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-group form-inline">
+                <label class="col-md-13">PCF Version</label>
+                <select class="form-control col-md-6 input-sm" id="versionselect" ng-model="platformConfigMapping.ersVersion"
+                        ng-options="opt as opt.value for opt in ersVersionOptions" ng-change="loadAzTemplate()">
+                </select>
+            </div>
+        </div>
         <div ng-include="'app/components/sizing/ai-form.html'"></div>
         <div ng-include="'app/components/sizing/az-form.html'"></div>
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div ng-include="'app/components/sizing/misc-iaas-form.html'"></div>
         <div ng-include="'app/components/sizing/resource-list.html'"></div>
         <div ng-include="'app/components/sizing/dea-detail.html'"></div>
     </div>
 </div>
-<div class="row col-md-20">
+<div class="row">
     <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
 </div>

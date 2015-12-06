@@ -14,8 +14,8 @@ describe "Version tasks" do
       @output.should match(/Building version files/)
     end
 
-    it "should build the version.js file" do 
-      js_version = File.read(File.join(project_root, 'src', 'version.js'))
+    it "should build the versionSpec.js file" do
+      js_version = File.read(File.join(project_root, 'src', 'versionSpec.js'))
       js_version.should match(%Q{"build": #{jasmine_version_object["build"]}})
       js_version.should match(%Q{"minor": #{jasmine_version_object["minor"]}})
       js_version.should match(%Q{"build": #{jasmine_version_object["build"]}})

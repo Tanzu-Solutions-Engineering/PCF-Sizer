@@ -19964,7 +19964,7 @@ module.exports = {
  */
 
 /**
- * Does not take into account specific nature of platform.
+ * Does not take into account specific nature of platformConfigMapping.
  */
 var EventListener = {
   /**
@@ -23189,7 +23189,7 @@ var emptyFunction = require("./emptyFunction");
 
 /**
  * Upstream version of event listener. Does not take into account specific
- * nature of platform.
+ * nature of platformConfigMapping.
  */
 var EventListener = {
   /**
@@ -25860,7 +25860,7 @@ var injected = false;
 var unmountIDFromEnvironment = null;
 
 /**
- * The "image" of a component tree, is the platform specific (typically
+ * The "image" of a component tree, is the platformConfigMapping specific (typically
  * serialized) data that represents a tree of lower level UI building blocks.
  * On the web, this "image" is HTML markup which describes a construction of
  * low level `div` and `span` nodes. Other platforms may have different

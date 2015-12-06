@@ -26,12 +26,12 @@
     at e (/gitroot/shekel/js/angular.min.js:36)
     at /gitroot/shekel/js/angular.min.js:36
     at /gitroot/shekel/js/angular.min.js:76
-    at /gitroot/shekel/test/spec/version.js:25
-    at /gitroot/shekel/test/spec/version.js:37
+    at /gitroot/shekel/test/spec/versionSpec.js:25
+    at /gitroot/shekel/test/spec/versionSpec.js:37
 </failure>
       <failure type="">Error: Unsatisfied requests: GET /buildnumber
     at /gitroot/shekel/js/angular-mocks.js:1559
-    at /gitroot/shekel/test/spec/version.js:30
+    at /gitroot/shekel/test/spec/versionSpec.js:30
 </failure>
     </testcase>
     <system-out><![CDATA[

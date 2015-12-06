@@ -1,29 +1,16 @@
-"use strict"
+"use strict";
 
 var shekelApp = angular.module('ShekelApp', []);
 
-var vmService = shekelApp.factory('vmLayout', function ($rootScope) {
-    var vmLayout = new Array();
-    return vmLayout;
-});
-
-var aiService = shekelApp.factory('aiService', function ($rootScope) {
-    var aiPacks = {};
-
-    function setAiPacks(pack) {
-        aiPacks = pack;
+function roundUp(x) {
+    var totalX;
+    if (x == Math.round(x)) {
+        totalX = x;
+    } else  {
+        totalX = parseInt(x) +1;
     }
-
-    function getAiPacks() {
-        return aiPacks;
-    }
-
-    return {
-        aiPacks: getAiPacks,
-        setAiPack: setAiPacks
-    }
-
-});
+    return totalX;
+}
 
 shekelApp.controller('ShekelFoundationController', function ($scope) {
     $scope.singleComplianceZone = "yes";

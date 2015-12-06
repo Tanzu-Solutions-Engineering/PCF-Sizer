@@ -10,7 +10,9 @@
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
-
+            tileService = $injector.get('tileService');
+            tileService.addTile(tileService.ersName);
+            tileService.getTile(tileService.ersName).currentConfig = {};
             var $controller = $injector.get('$controller');
             planService = $injector.get('planService');
             aiService = $injector.get('aiService');
@@ -18,7 +20,8 @@
                 return $controller('ShekelCostingController',
                     {
                         '$scope': $rootScope,
-                        'aiService': aiService
+                        aiService: aiService,
+                        tileService: tileService
                     });
             };
         }));
@@ -59,7 +62,6 @@
         });
 
         describe('AI Consumption', function() {
-
             it('should run out of ais in the first month', function() {
                 $rootScope.markupRuncard();
                 expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("AI");

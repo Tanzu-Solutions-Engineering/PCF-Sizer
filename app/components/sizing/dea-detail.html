@@ -1,21 +1,21 @@
 <div id="deaAllocations">
-    <h3>DEA/Cell Details</h3>
+    <h3>Cell Details</h3>
     <table class="table table-light">
         <tr>
-            <td>Usable DEA/Cell RAM(GB)</td>
-            <td>{{deaUsableRam()}}</td>
+            <td>Usable Cell RAM(GB)</td>
+            <td>{{elasticRuntime.runnerUsableRAM()}}</td>
         </tr>
         <tr>
-            <td>Usable DEA/Cell Disk(GB)</td>
-            <td>{{deaUsableStg()}}</td>
+            <td>Usable Cell Disk(GB)</td>
+            <td>{{elasticRuntime.runnerUsableStager()}}</td>
         </tr>
         <tr>
-            <td>Number of DEAs or Cells</td>
-            <td>{{totalDEAs()}}</td>
+            <td>Number of Cells</td>
+            <td>{{elasticRuntime.numRunnersToRunAIs()}}</td>
         </tr>
         <tr>
-            <td>DEAs or Cells per AZ</td>
-            <td>{{deasPerAz()}}</td>
+            <td>Cells per AZ</td>
+            <td>{{elasticRuntime.numRunnersPerAz()}}</td>
         </tr>
     </table>
 </div>

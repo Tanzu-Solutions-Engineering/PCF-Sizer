@@ -18,7 +18,7 @@
     <div class="form-group form-inline">
         <label class="col-md-13" for="aiAvgRam">AI Average RAM (GB)</label>
 
-        <select class="form-control col-md-6" id="aiAvgRam" ng-model="platform.avgRam"
+        <select class="form-control col-md-6" id="aiAvgRam" ng-model="platformConfigMapping.avgRam"
                 ng-options="opt as opt.value for opt in avgRamOptions" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
@@ -26,28 +26,28 @@
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="aiAvgStorage">AI Average Storage (GB)</label>
-        <select class="form-control col-md-6" id="aiAvgStorage" ng-model="platform.avgAIDisk"
+        <select class="form-control col-md-6" id="aiAvgStorage" ng-model="platformConfigMapping.avgAIDisk"
                 ng-options="opt as opt.value for opt in avgAIDiskOptions" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="deaMemSize">DEA/Cell Mem Size</label>
-        <select class="form-control col-md-6" id="deaMemSize" ng-model="platform.deaSize"
-                ng-options="opt as opt.text for opt in deaSizeOptions" ng-change="dropDownTriggerSizing()">
+        <select class="form-control col-md-6" id="deaMemSize" ng-model="platformConfigMapping.runnerSize"
+                ng-options="opt as opt.text for opt in runnerSizeOptions" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="deaEphemStorage">DEA/Cell Ephemeral Storage Size</label>
-        <select class="form-control col-md-6" id="deaEphemStorage" ng-model="platform.deaSizeDisk"
-                ng-options="opt as opt.text for opt in deaSizeOptionsDisk" ng-change="dropDownTriggerSizing()">
+        <select class="form-control col-md-6" id="deaEphemStorage" ng-model="platformConfigMapping.runnerSizeDisk"
+                ng-options="opt as opt.text for opt in runnerSizeOptionsDisk" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
 
     <div class="form-group form-inline">
         <label class="col-md-13" for="compilation">Compilation Jobs (Ephemeral VMs)</label>
-        <select class="form-control col-md-6" id="compilation" ng-model="platform.pcfCompilationJobs"
+        <select class="form-control col-md-6" id="compilation" ng-model="platformConfigMapping.pcfCompilationJobs"
                 ng-options="opt as opt.value for opt in pcfCompilationJobsOptions" ng-change="dropDownTriggerSizing()">
         </select>
     </div>
