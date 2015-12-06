@@ -26,6 +26,10 @@
             it('should set extraRunnersPerAZ to one', function () {
                 expect(elasticRuntime.config.extraRunnersPerAZ).toBe(1);
             });
+
+            it('should default to 1 gb average ai ram', function () {
+                expect(elasticRuntime.config.avgAIRAM).toBe(1);
+            });
         });
 
         describe('usable resource calculations', function() {

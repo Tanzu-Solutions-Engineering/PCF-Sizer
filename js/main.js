@@ -2,24 +2,6 @@
 
 var shekelApp = angular.module('ShekelApp', []);
 
-var aiService = shekelApp.factory('aiService', function ($rootScope) {
-    var aiPacks = {};
-
-    function setAiPacks(pack) {
-        aiPacks = pack;
-    }
-
-    function getAiPacks() {
-        return aiPacks;
-    }
-
-    return {
-        aiPacks: getAiPacks,
-        setAiPack: setAiPacks
-    }
-
-});
-
 shekelApp.controller('ShekelFoundationController', function ($scope) {
     $scope.singleComplianceZone = "yes";
     $scope.seperateForProd = "yes";

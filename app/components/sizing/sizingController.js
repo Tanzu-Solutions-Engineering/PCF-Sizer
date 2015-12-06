@@ -16,12 +16,13 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                
     $scope.aiPacks = function(pack) { 
     	if (angular.isDefined(pack)) {
-    		aiService.setAiPack(pack);
+    		aiService.setAiPack(pack.value);
     	}
-		return aiService.aiPacks();	
+        //Look up the right object by the number of ai packs the service keeps track of
+		return $scope.aiPackOptions[aiService.aiPacks() - 1];
     };
     
-    aiService.setAiPack($scope.aiPackOptions[0]);
+    aiService.setAiPack($scope.aiPackOptions[0].value);
 
 	/**
 	 * When adding a new ERS version, ADD IT TO THE TOP OF THE LIST as the
@@ -139,13 +140,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
      * Diego Cell Calculator
      */
     $scope.numRunnersToRunAIs = function() {
-    	var aipacks = 50;
-    	if (null != $scope.aiPacks()) { 
-    		aipacks = $scope.aiPacks().value * 50;
-    	}
+    	var aicount = aiService.getAiCount();
 
-    	var totalRam = (aipacks * $scope.platformConfigMapping.avgRam.value);
-    	var totalStg = (aipacks * $scope.platformConfigMapping.avgAIDisk.value);
+    	var totalRam = (aicount * $scope.platformConfigMapping.avgRam.value);
+    	var totalStg = (aicount * $scope.platformConfigMapping.avgAIDisk.value);
     	    	
     	var runnerRAM = (totalRam / elasticRuntime.runnerUsableRAM());
     	var runnerStager = (totalStg / elasticRuntime.runnerUsableStager());
