@@ -18,6 +18,10 @@
             it('should default to 64 gig of disk', function () {
                 expect(elasticRuntime.config.runnerDisk).toBe(64);
             });
+
+            it('should have 3 azs', function () {
+                expect(elasticRuntime.config.azCount).toBe(3);
+            });
         });
 
         describe('usable resource calculations', function() {
@@ -25,6 +29,7 @@
                 elasticRuntime.config.runnerRAM = 10;
                 elasticRuntime.config.runnerDisk = 100;
             });
+
             describe('runnerUsableRAM', function() {
 
                 it('should calculate total ram size - 3 gb', function () {

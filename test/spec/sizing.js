@@ -126,7 +126,7 @@
                 tileService.addTile($rootScope.ersName, '1.6', [opsMan, etcd, router, cell]);
                 expect(tileService.tiles.length).toBe(1);
                 expect(tileService.getTile($rootScope.ersName).currentConfig).toBeUndefined();
-                $rootScope.platformConfigMapping.numAZ = 100;
+                elasticRuntime.config.azCount = 100;
                 $rootScope.totalRunners = function () {
                     return 10;
                 };

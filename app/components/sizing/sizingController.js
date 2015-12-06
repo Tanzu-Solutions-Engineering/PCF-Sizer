@@ -94,7 +94,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
     	runnerSize: $scope.runnerSizeOptions[0],
     	runnerSizeDisk: $scope.runnerSizeOptionsDisk[1],
-        numAZ: 3,
     	nPlusX: 1,
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
     	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1]
@@ -111,6 +110,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     };
 
     $scope.elasticRuntime = elasticRuntime;
+    $scope.elasticRuntimeConfig = elasticRuntime.config;
        
 	// This is the app instances formula. for "help me choose"
     $scope.ais = function() {  
@@ -155,12 +155,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     };
     
     $scope.runnersPerAz = function() {
-    	var azRunners = $scope.numRunnersToRunAIs() / $scope.platformConfigMapping.numAZ;
+    	var azRunners = $scope.numRunnersToRunAIs() / elasticRuntime.config.azCount;
     	return $scope.roundUp(azRunners) + $scope.platformConfigMapping.nPlusX;
     };
     
     $scope.totalRunners = function() {
-    	return $scope.runnersPerAz() * $scope.platformConfigMapping.numAZ;
+    	return $scope.runnersPerAz() * elasticRuntime.config.azCount;
     };
     
 	$scope.getVms = function() { return tileService.tiles; };
@@ -197,7 +197,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                         vm.ram = $scope.platformConfigMapping.runnerSize.size;
                         vm.ephemeral_disk = $scope.platformConfigMapping.runnerSizeDisk.size;
                     } else {
-                        vm.instances = vm.instances * $scope.platformConfigMapping.numAZ;
+                        vm.instances = vm.instances * elasticRuntime.config.azCount;
                     }
                 }
                 if ( tileService.isCompilationVM(vm)){
@@ -224,7 +224,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	
 	//Watch for Non ng-select input changes
 	[
-	 'platformConfigMapping.numAZ',
+	 'elasticRuntime.config.azCount',
 	 'platformConfigMapping.nPlusX'
 	].forEach(function(e,l,a) {
 		$scope.$watch(e, function() { 
