@@ -1,8 +1,7 @@
 <div id="services" ng-controller="ShekelServiceSizingController">
     <h3>PCF Services Sizing</h3>
 
-    <div class="panel panel-basic bg-neutral-9 col-md-9" ng-repeat="service in services()">
-
+    <div class="panel panel-basic bg-neutral-9" ng-repeat="service in services()">
         <div class="panel-header">
 
             <div class="checkbox">
@@ -17,17 +16,17 @@
 
                 <label for="version" class="">Version</label>
 
-                <select class="form-control input-sm" id="version" ng-model="versioncache[service].selected"
-                    ng-options="version for version in versioncache[service].elements">
+                <select class="form-control input-sm" id="version"
+                        ng-model="versioncache[service].selected"
+                        ng-options="version for version in versioncache[service].elements">
                 </select>
 
             </form>
-            <a href="#">Configure</a>
-
+            <a href="#" ng-click="config=!config">Configure</a>
         </div>
     </div>
 </div>
 
-<div class="row col-md-20">
+<div class="row">
     <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
 </div>`
