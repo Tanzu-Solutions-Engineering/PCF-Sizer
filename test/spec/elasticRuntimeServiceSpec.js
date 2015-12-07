@@ -71,7 +71,7 @@
 
             describe('runnerUsableStagers', function() {
                 it('should calculate total stagers by disk size - ram size -4', function () {
-                    expect(elasticRuntime.runnerUsableStager()).toBe(86);
+                    expect(elasticRuntime.runnerUsableStorage()).toBe(86);
                 });
             });
         });

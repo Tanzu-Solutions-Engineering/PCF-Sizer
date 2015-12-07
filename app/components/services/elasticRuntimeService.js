@@ -14,7 +14,8 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
         runnerUsableRAM: function () {
             return this.config.runnerRAM - 3;
         },
-        runnerUsableStager: function () {
+        runnerUsableStorage: function () {
+            // the 4 accounts for overhead. ram is the size of swap
             return this.config.runnerDisk - this.config.runnerRAM - 4;
         },
         numRunnersToRunAIs: function () {
@@ -22,9 +23,9 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
             var totalRam = (aiCount * this.config.avgAIRAM);
             var totalStg = (aiCount * this.config.avgAIDisk);
             var runnerRAM = (totalRam / this.runnerUsableRAM());
-            var runnerStager = (totalStg / this.runnerUsableStager());
+            var runnerStorage = (totalStg / this.runnerUsableStorage());
 
-            return roundUp(Math.max(runnerRAM, runnerStager));
+            return roundUp(Math.max(runnerRAM, runnerStorage));
         },
         numRunnersPerAz: function () {
             var azRunners = this.numRunnersToRunAIs() / this.config.azCount;
@@ -64,6 +65,9 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
                     vmLayout.push(vm);
                 }
             });
+            //TODO @mglynn & @jkruck think this inflates storage ask. Logic should
+            //TODO be revisited, our best guess is that it's accommodating the blob
+            //TODO store size, although no vm accounts for that.
             iaasService.addRunnerDisk(this.config.avgAIDisk, aiService.aiPacks());
         }
     };
