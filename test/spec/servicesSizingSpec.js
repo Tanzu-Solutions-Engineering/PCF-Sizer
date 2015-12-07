@@ -64,31 +64,31 @@
         describe('listing services', function() {
 
             beforeEach(function() {
-                $httpBackend.expectGET('/services');
+                $httpBackend.expectGET('/services').respond(['mysql']);
+                $httpBackend.expectGET('/tile/mysql/1.7.1').respond([mysqlBroker]);
                 createController();
                 $httpBackend.flush();
             });
 
-            it('should return a mysql and gemfire service', function() {
+            it('should return a mysql service', function() {
                 var returnedServices = $rootScope.services();
                 expect(returnedServices).toContain('mysql');
-                expect(returnedServices).toContain('gemfire');
+//                expect(returnedServices).toContain('gemfire');
             });
 
             it ('should return as many services as the api returns', function() {
-                expect($rootScope.services().length).toBe(services.length)
+                expect($rootScope.services().length).toBe(1);
             });
 
             it('should initialize the version cache for all the services it finds so ng-repeat works', function() {
                 expect(Array.isArray($rootScope.versioncache['mysql'].elements)).toBeTruthy();
-                expect(Array.isArray($rootScope.versioncache['gemfire'].elements)).toBeTruthy();
             });
 
             it('should be disabled by default', function() {
                 Object.keys($rootScope.versioncache).forEach(function (service) {
                     expect(service.enabled).toBeFalsy();
                 });
-            })
+            });
         });
 
         describe('listing versions ', function() {
@@ -112,6 +112,19 @@
                 expect(versions.elements).toContain('1.7');
                 expect(versions.selected).toBe('1.7.1')
             });
+
+            it('should register add the latest version to the tile service', function () {
+                $rootScope.getTile = function(serviceName, version) {
+                    expect(serviceName).toBe('mysql');
+                    expect(version).toBe('1.7.1');
+                    return [mysqlBroker];
+                };
+
+                expect(tileService.getTile('mysql').version).toBe('1.7.1');
+                expect(tileService.getTile('mysql').enabled).toBeFalsy();
+                expect(tileService.getTile('mysql').template.length).toBe(1);
+            });
+
         });
 
         var mysqlBroker = {
@@ -131,19 +144,6 @@
                 createController();
                 $httpBackend.flush();
                 $httpBackend.expectGET('/tile/mysql/1.7.1').respond([mysqlBroker]);
-                $rootScope.versioncache['mysql'].enabled = true;
-            });
-
-            afterEach(function() {
-                $httpBackend.flush();
-            });
-
-            it('should add the release to the tile service when enabled', function() {
-                var originalNumberTiles = tileService.tiles.length;
-                $rootScope.toggleService('mysql').then(function() {
-                    expect(originalNumberTiles).toBeLessThan(tileService.tiles.length);
-                    expect(Array.isArray(tileService.tiles[tileService.tiles.length - 1].template)).toBeTruthy();
-                });
             });
 
             it('should have a vm named mysql broker at the end so we can group things in the vm list table', function() {
@@ -152,13 +152,16 @@
                     expect(tileService.tiles[1].template[0].vm).toBe("MySQL Broker");
                     expect(tileService.tiles[1].currentConfig).toBeDefined();
                 });
+                $httpBackend.flush();
             });
 
             it('downloads the tiles json', function() {
                 $rootScope.getTile('mysql', '1.7.1').then(function(tile) {
                     expect(tile).toBeDefined();
                 });
+                $httpBackend.flush();
             });
+
         });
 
         describe('configuring', function() {
@@ -169,14 +172,8 @@
 
             describe('getActiveTemplate on an enabled service', function() {
                 beforeEach(function () {
-                    $rootScope.versioncache['mysql'] = {enabled: true};
-                    tileService.tiles.push({
-                            vms: [mysqlBroker],
-                            name: 'mysql',
-                            version: '1.6.1',
-                            template: []
-                        }
-                    );
+                    tileService.addTile('mysql', '1.6.1', [mysqlBroker]);
+                    tileService.enableTile('mysql');
                 });
 
                 it('Should return a template', function () {
@@ -194,7 +191,7 @@
 
             describe('getActiveTemplate on an disabled service', function () {
                 beforeEach(function () {
-                    $rootScope.versioncache['mysql'] = {enabled: false};
+                    tileService.addTile('mysql', '1.0', [mysqlBroker]);
                 });
 
                 it('should not be possible', function () {
@@ -208,32 +205,25 @@
                 });
             });
 
-            describe('getActiveTemplate on an service tile service hasnt fetched  completley yet', function() {
-                beforeEach(function () {
-                    $rootScope.versioncache['foo'] = {enabled: true};
-
-                });
-
-                it('should return an empty array', function(){
-                    expect(Array.isArray($rootScope.getActiveTemplate('foo'))).toBeTruthy();
-                    expect($rootScope.getActiveTemplate('foo').length).toBe(0);
-                })
-            })
         });
 
         describe('disabling a service', function() {
-            var applyTemplateCalled = false;
+            var applyTemplateCalled;
 
             beforeEach(function() {
+                applyTemplateCalled = 0;
                 elasticRuntime.applyTemplate = function() {
-                    applyTemplateCalled = true;
+                    applyTemplateCalled++;
                 };
                 createController();
                 $httpBackend.flush();
+                $httpBackend.expectGET('/tile/mysql/1.7.1').respond([mysqlBroker]);
                 tileService.addTile('mysql', '1.7.1', [mysqlBroker]);
                 tileService.enableTile('mysql');
-                $rootScope.versioncache['mysql'].enabled = false;
-                $rootScope.toggleService('mysql'); //Disable it
+                $rootScope.toggleService('mysql'); //enable
+                $httpBackend.flush();
+                tileService.disableTile('mysql');
+                $rootScope.toggleService('mysql'); //disable
             });
 
             it('should disable the service', function() {
@@ -241,7 +231,7 @@
             });
 
             it('should apply the template', function () {
-                expect(applyTemplateCalled).toBeTruthy();
+                expect(applyTemplateCalled).toBe(2);
             });
         });
     });

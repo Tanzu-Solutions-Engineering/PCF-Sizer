@@ -96,6 +96,13 @@
                 tileService.enableTile('foo');
                 expect(tileService.getTile('foo').enabled).toBeTruthy();
             });
+
+            it('should not overwrite a modified template', function () {
+                tileService.addTile('foo', '1.0', [{}]);
+                tileService.addTile('foo', '1.0', [{},{}]);
+
+                expect(tileService.getTile('foo').template.length).toBe(1);
+            })
         });
     })
 })();

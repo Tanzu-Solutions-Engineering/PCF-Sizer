@@ -32,13 +32,19 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
                 enabled: false
             };
 
+            var selectedVersion = data.data[0]
+
+            $scope.getTile(serviceName, selectedVersion).then(function(tile) {
+                tileService.addTile(serviceName, selectedVersion, tile);
+            });
+
             return $scope.versioncache[serviceName]
         });
     };
 
     $scope.getActiveTemplate = function(serviceName) {
         var cachedService = $scope.versioncache[serviceName];
-        if (undefined === cachedService || false == cachedService.enabled) {
+        if (undefined === cachedService || false == tileService.getTile(serviceName).enabled) {
             return null;
         }
         var tile = tileService.getTile(serviceName);
@@ -53,7 +59,7 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
     };
 
     $scope.toggleService = function(serviceName) {
-        if ( $scope.versioncache[serviceName].enabled ) {
+        if ( tileService.getTile(serviceName).enabled ) {
             var version =  $scope.versioncache[serviceName].selected;
             return $scope.getTile(serviceName, version).then(function(tile) {
                 tileService.addTile(serviceName, version, tile);

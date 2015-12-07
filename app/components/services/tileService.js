@@ -1,6 +1,5 @@
 var tileService = shekelApp.factory('tileService', function () {
 
-
     var tileService = {
         //Lots of things look for the ERS, and we display the string (which is probly wrong to do)... make it east
         ersName: 'Elastic Runtime',
@@ -16,8 +15,6 @@ var tileService = shekelApp.factory('tileService', function () {
             };
             if ( -1 == idx ) {
                 this.tiles.push(initial);
-            } else {
-                this.tiles.splice(idx, initial );
             }
         },
         disableTile: function(name) {
