@@ -1,0 +1,24 @@
+[
+  {
+    "vm": "JMX Provider",
+    "instances": 1,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": true,
+    "ram": 4,
+    "ephemeral_disk": 8,
+    "persistent_disk": 1,
+    "vcpu": 2
+  },
+  {
+    "vm": "OpenTSDB Firehose Nozzle",
+    "instances": 0,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": false,
+    "ram": 4,
+    "ephemeral_disk": 8,
+    "persistent_disk": 1,
+    "vcpu": 2
+  },
+]
