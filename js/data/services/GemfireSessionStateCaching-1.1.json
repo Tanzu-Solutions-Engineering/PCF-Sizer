@@ -1,0 +1,35 @@
+[
+  {
+    "vm": "SSC GemFire Broker",
+    "instances": 2,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": false,
+    "ram": 4,
+    "ephemeral_disk": 4,
+    "persistent_disk": 4,
+    "vcpu": 2
+  },
+  {
+    "vm": "SSC GemFire Locator",
+    "instances": 2,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": false,
+    "ram": 2,
+    "ephemeral_disk": 2,
+    "persistent_disk": 1,
+    "vcpu": 1
+  },
+  {
+    "vm": "SSC GemFire Server",
+    "instances": 3,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "singleton": false,
+    "ram": 4,
+    "ephemeral_disk": 6,
+    "persistent_disk": 8,
+    "vcpu": 1
+  }
+]
