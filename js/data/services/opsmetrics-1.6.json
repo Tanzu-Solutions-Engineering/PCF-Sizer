@@ -12,7 +12,7 @@
   },
   {
     "vm": "OpenTSDB Firehose Nozzle",
-    "instances": 1,
+    "instances": 2,
     "dynamic_ips": 0,
     "static_ips": 1,
     "singleton": false,

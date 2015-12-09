@@ -35,6 +35,7 @@
                 <div ng-repeat="vm in getActiveTemplate(service)">
                     <h4>{{vm.vm}}</h4>
                     <div class="form-horizontal form-group form-inline">
+                        <div>{{vm.notes}}</div>
 
                         <!--TODO Directive-->
                         <div class="row" ng-hide="vm.singleton">
