@@ -1,6 +1,6 @@
 {
   "name": "Shekel",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "dependencies": {
     "express": "4.x",
     "glob": "5.0.14"

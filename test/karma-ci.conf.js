@@ -24,7 +24,6 @@ module.exports = function(config) {
 			'js/main.js',
 			'app/**/*.js',
 			'test/spec/**/*.js',
-			//'test/mock/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -43,7 +42,7 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      //'Chrome'
+      //'Chrome',
      'PhantomJS'
     ],
 
@@ -51,6 +50,7 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
+      'karma-chrome-launcher',
       'karma-super-dots-reporter',
       'karma-junit-reporter'
     ],
