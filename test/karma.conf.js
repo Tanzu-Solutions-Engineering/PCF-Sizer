@@ -19,11 +19,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
 			'js/angular.min.js',
+                        'js/ui-bootstrap-tpls.min.js',
 			'js/angular-mocks.js',
 			'js/main.js',
 			'app/**/*.js',
-			'test/spec/**/*.js',
-			'test/mock/**/*.js'
+			'test/spec/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -42,8 +42,8 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      //'Chrome'
-     'PhantomJS'
+      'Chrome',
+      'PhantomJS'
     ],
 
     // Which plugins to enable
@@ -58,6 +58,12 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: false,
+    
+    reporters: ['super-dots','junit'],
+    junitReporter: {
+                  outputDir: 'results',
+    		  outputFile: 'shekeltest-results.xml'
+    		},
     
     
     colors: true,

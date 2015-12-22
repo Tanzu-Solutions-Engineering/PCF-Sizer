@@ -1,5 +1,5 @@
 applications:
 - name: shekel
   memory: 128M
-  host: shekel-dev
+  host: rj-shekel-dev
 

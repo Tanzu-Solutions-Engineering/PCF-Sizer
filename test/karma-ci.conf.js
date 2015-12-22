@@ -19,6 +19,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
 			'js/angular.min.js',
+                        'js/ui-bootstrap-tpls.min.js',
 			'js/angular-mocks.js',
 			'js/main.js',
 			'app/**/*.js',
@@ -59,6 +60,7 @@ module.exports = function(config) {
     singleRun: true,
     reporters: ['super-dots','junit'],
     junitReporter: {
+                  outputDir: 'results',
     		  outputFile: 'shekeltest-results.xml'
     		},
     

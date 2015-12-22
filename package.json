@@ -1,22 +1,35 @@
 {
   "name": "Shekel",
-  "version": "0.0.2",
+  "version": "1.0.2",
   "dependencies": {
     "express": "4.x",
     "glob": "5.0.14"
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-livereload": "^3.8.0",
+    "gulp-nodemon": "^2.0.2",
+    "gulp-plumber": "^1.0.0",
+    "gulp-ruby-sass": "^2.0.1",
+    "jasmine-core": "^2.4.1",
     "jasmine-node": "1.14.x",
-    "karma": "0.12.x",
-    "karma-jasmine": "0.2.x",
+    "phantomjs": "^1.9.x",
+    "karma": "^0.13.0",
     "karma-phantomjs-launcher": "0.2.x",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "0.2.x",
+    "karma-junit-reporter": "^0.3.8",
+    "karma-super-dots-reporter": "^0.1.0",
+    "time-grunt": "^1.0.0",
     "request": "2.x",
-    "rewire": "2.5.x"
+    "rewire": "2.5.x",
+    "autoprefixer-core": "^5.2.1",
+    "jshint-stylish": "^1.0.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/jasmine-node --captureExceptions --forceexit ./test/server/spec "
+    "start": "node app.js"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "4.2.2"
   }
 }

@@ -43,4 +43,7 @@ app.get('/tile/:name/:version', function(req, res) {
     res.contentType('application/json').redirect(filePath);
 });
 
+var port = process.env.PORT||3000;
+console.log("Shekel:: " + "Starting App on port :" + port);
+
 app.listen(process.env.PORT || 3000);

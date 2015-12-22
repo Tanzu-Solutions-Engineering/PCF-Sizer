@@ -10,4 +10,6 @@ src/main/resources/static/node_modules/
 src/main/resources/static/.yo-rc.json
 src/main/resources/static/shekeltest-results.xml
 node_modules/
-p-metrics-1.4.0.0.pivotal 
+bower_components/
+p-metrics-1.4.0.0.pivotal
+results/
