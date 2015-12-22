@@ -11,6 +11,7 @@ This [page](http://techportal.inviqa.com/2014/10/28/testing-javascript-get-start
 For this project you don't need to run the generators, as we've done that for you. In a nutshell: 
 
 Prerequisite
+
 1. brew install npm 
 2. Clone this repo to run it locally. 
 3. npm install -g bower karma gulp
