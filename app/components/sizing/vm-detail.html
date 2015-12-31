@@ -11,6 +11,8 @@
                     <th>vCPU</th>
                     <th>Total RAM</th>
                     <th>Total vCPU</th>
+                    <th>Total Static IPs</th>
+                    <th>Total Dynamic IPs</th>
                 </tr>
             </thead>
             <tr ng-repeat="vm in tile.currentConfig">
@@ -20,6 +22,9 @@
                 <td>{{vm.vcpu}}</td>
                 <td>{{vm.ram * vm.instances}}</td>
                 <td>{{vm.vcpu * vm.instances}}</td>
+                <td>{{vm.static_ips * vm.instances}}</td>
+                <td>{{vm.dynamic_ips * vm.instances}}</td>
+
             <tr>
         </table>
     </div>

@@ -4,6 +4,10 @@
     <div class="panel panel-alt panel-empty">
         <table class="table table-light">
             <tr>
+                <td>Total AZ's </td>
+                <td>{{elasticRuntimeConfig.azCount}}</td>
+            </tr>
+            <tr>
                 <td>Foundation Memory (GB)</td>
                 <td>{{iaasAskSummary().ram}}</td>
             </tr>
@@ -14,6 +18,10 @@
             <tr>
                 <td>Foundation vCPU #</td>
                 <td>{{iaasAskSummary().vcpu}}</td>
+            </tr>
+            <tr>
+                <td>Total IPs #</td>
+                <td>{{iaasAskSummary().ip}}</td>
             </tr>
             <tr>
                 <td>Foundation Physical Cores (2GHz or >) #</td>

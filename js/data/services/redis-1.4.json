@@ -2,10 +2,10 @@
   {
     "vm": "Redis Broker (Shared VM Plan)",
     "instances": 2,
-    "vcpu": 1,
-    "ram": 1,
+    "vcpu": 2,
+    "ram": 3,
     "ephemeral_disk": 4,
-    "persistent_disk": 1,
+    "persistent_disk": 9,
     "dynamic_ips": 0,
     "static_ips": 1,
     "singleton": false

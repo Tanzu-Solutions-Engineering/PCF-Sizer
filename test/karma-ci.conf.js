@@ -19,11 +19,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
 			'js/angular.min.js',
+                        'js/ui-bootstrap-tpls.min.js',
 			'js/angular-mocks.js',
 			'js/main.js',
 			'app/**/*.js',
 			'test/spec/**/*.js',
-			//'test/mock/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -42,7 +42,7 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      //'Chrome'
+      //'Chrome',
      'PhantomJS'
     ],
 
@@ -50,6 +50,7 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
+      'karma-chrome-launcher',
       'karma-super-dots-reporter',
       'karma-junit-reporter'
     ],
@@ -59,6 +60,7 @@ module.exports = function(config) {
     singleRun: true,
     reporters: ['super-dots','junit'],
     junitReporter: {
+                  outputDir: 'results',
     		  outputFile: 'shekeltest-results.xml'
     		},
     

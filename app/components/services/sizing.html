@@ -28,12 +28,13 @@
 
             <div class="row" ng-show="config">
                 <p>
-                    Configure {{service}} for one AZ. The selections from the PCF Sizing tab
-                    on determine it's final topology and resource needs.
+                    Configure {{service}} for one AZ. For singleton jobs, you cannot configure the instances.
+                    The selection determines the final topology and resource needs for the foundation.
                 </p>
 
                 <div ng-repeat="vm in getActiveTemplate(service)">
-                    <h4>{{vm.vm}}</h4>
+                    <h4 uib-tooltip="{{vm.tooltip}}" uib-tooltip-trigger="focus"
+                        uib-tooltip-placement="bottom">{{vm.vm}}</h4>
                     <div class="form-horizontal form-group form-inline">
                         <div>{{vm.notes}}</div>
 
@@ -69,6 +70,7 @@
                                    type="number" min="1" ng-model="vm.ephemeral_disk"
                                    ng-change="toggleService(service)">
                         </div>
+
                     </div>
                 </div>
             </div>

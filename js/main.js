@@ -1,6 +1,6 @@
 "use strict";
 
-var shekelApp = angular.module('ShekelApp', []);
+var shekelApp = angular.module('ShekelApp', ['ui.bootstrap']);
 
 function roundUp(x) {
     var totalX;
@@ -27,4 +27,3 @@ shekelApp.controller('ShekelFoundationController', function ($scope) {
         return $scope.physicalDC * $scope.complianceZones * multiplier;
     }
 });
-
