@@ -2,4 +2,5 @@ applications:
 - name: shekel
   memory: 128M
   host: shekel-dev
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.5.4
 
