@@ -30,6 +30,6 @@
     "start": "node app.js"
   },
   "engines": {
-    "node": "4.2.2"
+    "node": "5.1.1"
   }
 }
