@@ -154,17 +154,6 @@
         "singleton": false
     },
     {
-        "vm": "Health Manager",
-        "instances": 1,
-        "vcpu": 1,
-        "ram": 1,
-        "ephemeral_disk": 2,
-        "persistent_disk": 0,
-        "dynamic_ips": 1,
-        "static_ips": 0,
-        "singleton": false
-    },
-    {
         "vm": "Clock Global",
         "instances": 1,
         "vcpu": 1,
