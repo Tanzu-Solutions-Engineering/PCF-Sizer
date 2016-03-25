@@ -19,7 +19,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     		aiService.setAiPack(pack.value);
     	}
         //Look up the right object by the number of ai packs the service keeps track of
-		return $scope.aiPackOptions[aiService.aiPacks() - 1];
+		return $scope.aiPackOptions[aiService.getAiPacks() - 1];
     };
     
     aiService.setAiPack($scope.aiPackOptions[0].value);

@@ -48,7 +48,7 @@ shekelApp.controller('ShekelCostingController', function($scope, tileService, ai
 	/**
 	 * Closure to enable math against a runners property.
 	 */
-	$scope.deaFunction = function(method, overhead) {
+	$scope.cellFunction = function(method, overhead) {
         var ersConfig = tileService.getTile(tileService.ersName).currentConfig;
 		for (var i = 0; i < ersConfig.length; ++i) {
 			var vm = ersConfig[i];
@@ -63,29 +63,29 @@ shekelApp.controller('ShekelCostingController', function($scope, tileService, ai
 		}
 	};
 	
-	$scope.deaVcpu = function() { 
-		return $scope.deaFunction("vcpu", 0);
+	$scope.cellVcpu = function() { 
+		return $scope.cellFunction("vcpu", 0);
 	};
 	
-	$scope.deaRam = function() { 
-		return $scope.deaFunction("ram", 3)
+	$scope.cellRam = function() { 
+		return $scope.cellFunction("ram", 3)
 	};
 	
-	$scope.deaDisk = function() {
+	$scope.cellDisk = function() {
 		//MG Factor in 4 GB Used Space in /var/vcap/data
-		return $scope.deaFunction("ephemeral_disk", 4);
+		return $scope.cellFunction("ephemeral_disk", 4);
 	};
 	
 	$scope.aiAvgDisk = function ()  { 
-		return $scope.roundto2($scope.deaDisk() / (aiService.aiPacks().value * 50)); 
+		return $scope.roundto2($scope.cellDisk() / (aiService.getAiPacks() * 50)); 
 	};
 
 	$scope.aiAvgRam = function ()  { 
-		return $scope.roundto2($scope.deaRam() / (aiService.aiPacks().value * 50)); 
+		return $scope.roundto2($scope.cellRam() / (aiService.getAiPacks() * 50)); 
 	};
 	
 	$scope.aiAvgVcpu = function ()  { 
-		return $scope.roundto2($scope.deaVcpu() / (aiService.aiPacks().value * 50)); 
+		return $scope.roundto2($scope.cellVcpu() / (aiService.getAiPacks() * 50)); 
 	};
 	
 	$scope.getDurationTCO = function() { 
@@ -111,7 +111,7 @@ shekelApp.controller('ShekelCostingController', function($scope, tileService, ai
 	$scope.gbPerHrBreakEven = function() {
 		var perDay = ($scope.getMonthlyTCO() * 12) / 365;
 		var perHour = perDay / 24;
-		return perHour/$scope.deaRam();	
+		return perHour/$scope.cellRam();	
 	}
 	
 	$scope.getGbPerHrWithPoints = function() {
@@ -319,19 +319,19 @@ shekelApp.controller('ShekelCostingController', function($scope, tileService, ai
 		                	}
 		                }
 		                runCardForMonth.oversubscribed = new Array();
-		                if (consumedRam >= ($scope.deaRam() * ( runCardIaasReservation * .01))) {
+		                if (consumedRam >= ($scope.cellRam() * ( runCardIaasReservation * .01))) {
 		                    runCardForMonth.oversubscribed.push("RAM");
 		                    runHasIaaS = false;
 		                }
-		                if ( consumedVCPU >= ($scope.deaVcpu() * ( runCardIaasReservation * .01))) {
+		                if ( consumedVCPU >= ($scope.cellVcpu() * ( runCardIaasReservation * .01))) {
 		                	runCardForMonth.oversubscribed.push("VCPU");
 		                    runHasIaaS = false;
 		                }
-		                if (runCardForMonth.ais >= (aiService.aiPacks().value * 50) * (runCardIaasReservation * .01)) {
+		                if (runCardForMonth.ais >= (aiService.getAiPacks() * 50) * (runCardIaasReservation * .01)) {
 		                    runCardForMonth.oversubscribed.push("AI");
 		                    runHasIaaS = false;
 		                }
-		                if ( consumedDisk > ( $scope.deaDisk() * ( runCardIaasReservation * .01))) {
+		                if ( consumedDisk > ( $scope.cellDisk() * ( runCardIaasReservation * .01))) {
 		                    runCardForMonth.oversubscribed.push("Disk");
 		                    runHasIaaS = false;
 		                }

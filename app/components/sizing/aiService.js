@@ -9,12 +9,11 @@ var aiService = shekelApp.factory('aiService', function ($rootScope) {
         return aiPacks;
     }
 
-
     return {
-        aiPacks: getAiPacks,
+        getAiPacks: getAiPacks,
         setAiPack: setAiPacks,
         getAiCount: function (){
-            return this.aiPacks() * 50;
+            return this.getAiPacks() * 50;
         }
     }
 });
