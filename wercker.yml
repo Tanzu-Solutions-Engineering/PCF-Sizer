@@ -52,4 +52,5 @@ deploy:
         alt_appname: rj-shekel-b
         domain: cfapps.io
         hostname: rj-shekel
+        route: rj-shekel.cfapps.io
 
