@@ -41,15 +41,14 @@ deploy:
           apt-get update
     - install-packages:
         packages: wget
-    - dlapiduz/cloud-foundry-deploy:
+    - joshuamckenty/cloud-foundry-deploy:
         api: $CF_API
         username: $CF_USER
         password: $CF_PASS
         organization: $CF_ORG
         space: $CF_SPACE
         skip_ssl: true
-        appname: rj-shekel-a
-        alt_appname: rj-shekel-b
-        domain: cfapps.io
-        hostname: rj-shekel
+        appname: shekel-dev-green
+        alt_appname: shekel-dev-blue
+        route: shekel-dev.cfapps.io
 
