@@ -1,27 +1,29 @@
 "use strict";
 
+
+
 shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, aiService,
-                                                        iaasService, elasticRuntime)
+                                                        iaasService, iaasSelectionService, aiSelectionService,elasticRuntime)
 {
 
     $scope.aiPackOptions = new Array();
-    
+
     $scope.setAIPackOptions = function() {
     	for ( var i = 1; i <= 300; ++i) {
     		$scope.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
     	}
     };
-    
+
     $scope.setAIPackOptions();
-               
-    $scope.aiPacks = function(pack) { 
+
+    $scope.aiPacks = function(pack) {
     	if (angular.isDefined(pack)) {
     		aiService.setAiPack(pack.value);
     	}
         //Look up the right object by the number of ai packs the service keeps track of
 		return $scope.aiPackOptions[aiService.aiPacks() - 1];
     };
-    
+
     aiService.setAiPack($scope.aiPackOptions[0].value);
 
 	/**
@@ -30,10 +32,12 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	 * version
 	 */
 	$scope.ersVersionOptions = [
+        {value: 1.7},
         {value: 1.6}
+
 	];
 
-    $scope.avgRamOptions = [ 
+    $scope.avgRamOptions = [
 	    { value: .5 },
 	    { value: 1  },
 	    { value: 1.5},
@@ -44,7 +48,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	    { value: 6  },
 	    { value: 10 },
 	    { value: 20 }
-	]; 
+	];
 
     $scope.runnerSizeOptions = [
 	     {"text": "Small (16GB)",     "size":16},
@@ -52,24 +56,24 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	     {"text": "Large (64GB)",     "size":64},
 	     {"text": "Bad idea (128GB)", "size":128}
 	 ];
-    
+
     $scope.runnerSizeOptionsDisk =  [
-         {"text": "Small (32GB)",    "size":32}, 
+         {"text": "Small (32GB)",    "size":32},
          {"text": "Medium (64GB)",   "size":64},
          {"text": "Large (128GB)",   "size":128},
          {"text": "Crazy (256GB)",   "size":256}
     ];
-    
-    $scope.avgAIDiskOptions = [ 
+
+    $scope.avgAIDiskOptions = [
         { value: .5  },
 	    { value: 1  },
 	    { value: 2  },
 	    { value: 4  },
 	    { value: 8  }
     ];
-    
-    $scope.pcfCompilationJobsOptions = [ 
-        { value: 0  },                           	
+
+    $scope.pcfCompilationJobsOptions = [
+        { value: 0  },
         { value: 1  },
         { value: 2  },
         { value: 3  },
@@ -88,20 +92,21 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         {"text": "4:1", "ratio":4},
         {"text": "8:1", "ratio":8}
     ];
-    
+
     $scope.platformConfigMapping = {
-		ersVersion: $scope.ersVersionOptions[0],
+		  ersVersion: $scope.ersVersionOptions[0],
     	avgRam: $scope.avgRamOptions[1],
     	avgAIDisk:  $scope.avgAIDiskOptions[0],
     	runnerSize: $scope.runnerSizeOptions[0],
     	runnerSizeDisk: $scope.runnerSizeOptionsDisk[1],
     	pcfCompilationJobs: $scope.pcfCompilationJobsOptions[4],
-    	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1]
+    	iaasCPUtoCoreRatio: $scope.iaasCPUtoCoreRatioOptions[1],
+      aiCount : $scope.aiPackOptions[0]
     };
-    
+
     $scope.chooser = { aiHelpMeChoose: false };
 
-    $scope.aiChooser = { 
+    $scope.aiChooser = {
     	apps: 1,
     	devs: 1,
     	steps: 1
@@ -109,23 +114,23 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 
     $scope.elasticRuntime = elasticRuntime;
     $scope.elasticRuntimeConfig = elasticRuntime.config;
-       
+
 	// This is the app instances formula. for "help me choose"
-    $scope.ais = function() {  
-    	var totalAis = $scope.aiChooser.apps 
-    			* $scope.aiChooser.devs 
+    $scope.ais = function() {
+    	var totalAis = $scope.aiChooser.apps
+    			* $scope.aiChooser.devs
     			* $scope.aiChooser.steps;
     	var packs = (totalAis /  50) + 1;
     	return parseInt(packs);
     };
-        
-    $scope.setAis = function() { 
+
+    $scope.setAis = function() {
     	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
     };
-    
+
 	$scope.getVms = function() { return tileService.tiles; };
 
-    $scope.getPhysicalCores = function() { 
+    $scope.getPhysicalCores = function() {
     	return roundUp(iaasService.iaasAskSummary.vcpu / $scope.platformConfigMapping.iaasCPUtoCoreRatio.ratio);
     };
 
@@ -133,10 +138,29 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         return iaasService.iaasAskSummary;
     };
 
+    $scope.iaasSelectionList = iaasSelectionService.iaasList();
+
+    $scope.setDefaultIaaS = function(iaaS) {
+      console.log("Input Iaas " + iaaS.id);
+
+      $scope.selectedIaaS = iaasSelectionService.selectIaaS(iaaS);
+      console.log("Selected Iaas a " + iaasSelectionService.selectIaaS(iaaS));
+
+      return $scope.selectedIaaS;
+    };
+
+
+    $scope.ec2 = iaasSelectionService.selectEC2(0);
+
+    $scope.setDefaultAWS = function(ec2) {
+      return iaasSelectionService.selectEC2(ec2);
+    };
+
+
     $scope.calculateAIDiskAsk = function(AIAvgDiskSizeInGB, NumAIPacks) {
         return AIAvgDiskSizeInGB * NumAIPacks * 50;
     };
-    
+
     $scope.loadAzTemplate = function() {
 
         return $http.get('/ersjson/' + $scope.platformConfigMapping.ersVersion.value)
@@ -148,20 +172,20 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                 alert("Failed to get PCF AZ Template json template");
     		});
     };
-    
+
 	$scope.loadAzTemplate();
-	
+
 	//Watch for Non ng-select input changes
 	[
 	 'elasticRuntime.config.azCount',
 	 'elasticRuntime.config.extraRunnersPerAZ'
 	].forEach(function(e,l,a) {
-		$scope.$watch(e, function() { 
+		$scope.$watch(e, function() {
             $scope.dropDownTriggerSizing()
 		});
 	});
-	
-	$scope.dropDownTriggerSizing = function () {
+
+  $scope.dropDownTriggerSizing = function () {
         elasticRuntime.applyTemplate();
         elasticRuntime.config.runnerDisk = $scope.platformConfigMapping.runnerSizeDisk.size;
         elasticRuntime.config.runnerRAM = $scope.platformConfigMapping.runnerSize.size;
@@ -169,5 +193,28 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
         elasticRuntime.config.avgAIDisk = $scope.platformConfigMapping.avgAIDisk.value;
         elasticRuntime.config.compilationJobs = $scope.platformConfigMapping.pcfCompilationJobs.value;
 	};
-	
+
+  $scope.aiList = aiSelectionService.aiSelectionList();
+
+  $scope.fixedSizing = function (size) {
+    $scope.sizingDescription = $scope.aiList[size].description;
+    $scope.platformConfigMapping.runnerSizeDisk.size = $scope.aiList[size].runnerSizeDisk.size;
+    $scope.platformConfigMapping.runnerSizeDisk.text = $scope.aiList[size].runnerSizeDisk.text;
+    $scope.platformConfigMapping.runnerSize.size = $scope.aiList[size].runnerSize.size;
+    $scope.platformConfigMapping.runnerSize.text = $scope.aiList[size].runnerSize.text;
+
+    $scope.platformConfigMapping.avgRam.value = $scope.aiList[size].avgRam.value;
+    $scope.platformConfigMapping.avgAIDisk.value = $scope.aiList[size].avgAIDisk.value;
+    $scope.platformConfigMapping.pcfCompilationJobs.value = $scope.aiList[size].pcfCompilationJobs.value;
+    $scope.platformConfigMapping.aiCount.value = $scope.aiList[size].aiCount.value;
+    $scope.platformConfigMapping.aiCount.label = $scope.aiList[size].aiCount.label;
+    $scope.elasticRuntimeConfig.azCount = $scope.aiList[size].azCount;
+    $scope.elasticRuntimeConfig.extraRunnersPerAZ = $scope.aiList[size].extraRunnersPerAZ;
+
+    aiService.setAiPack($scope.aiList[size].aiCount.value)
+    $scope.dropDownTriggerSizing();
+  };
+
+  $scope.fixedSizing(0);
+
 });

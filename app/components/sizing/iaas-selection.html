@@ -1,0 +1,76 @@
+<div>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <h3>Step 1: Select the IaaS</h3>
+    </tr>
+    <tr>
+        <td ng-repeat="iaaS in iaasSelectionList">
+          <label>
+          <input type="radio" ng-value="iaaS" ng-disabled="iaaS.isDisabled" ng-click="setDefaultIaaS(iaaS)"   ng-model="$parent.selectedIaaS"/>
+          {{iaaS.name}}
+        </label>
+      </td>
+    </tr>
+</table>
+</div>
+
+<!-- vCPU is only relevant for vSphere-->
+<span ng-if="selectedIaaS.id == '0'" class="animate-if">
+  <form role="form" class="form-horizontal">
+      <h3>Step 1.1: IaaS Tuning</h3>
+      <div class="form-group form-inline">
+          <label class="col-md-13" for="cpuConsolidation">vCPU to Core Consolidation Ratio</label>
+          <select class="form-control col-md-6 input-sm" id="cpuConsolidation"
+                  ng-model="platformConfigMapping.iaasCPUtoCoreRatio"
+                  ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions"
+                  ng-change="dropDownTriggerSizing()"></select>
+      </div>
+  </form>
+</span>
+
+<!-- Select the AWS  EC2 Instance Sizes-->
+<span ng-if="selectedIaaS.id == '1'" class="animate-if">
+  <h3>Step 1.1: Mininum EC2 Instance count and size</h3>
+
+<table  class="table table-striped table-bordered">
+  <tr>
+    <td>
+      <label>
+      <input type="radio" ng-value="0" ng-click="setDefaultAWS(0)"   ng-model="$parent.ec2"/>
+      13 EC2 Instances of t2.micro
+    </label>
+    </td>
+
+    <td>
+      <label>
+      <input type="radio" ng-value="1" ng-click="setDefaultAWS(1)"   ng-model="$parent.ec2"/>
+      15 EC2 Instances of t2.small
+    </label>
+    </td>
+
+    <td>
+      <label>
+      <input type="radio" ng-value="2" ng-click="setDefaultAWS(2)"   ng-model="$parent.ec2"/>
+      2 EC2 Instances of m3.medium
+    </label>
+    </td>
+  </tr>
+  <tr>
+
+    <td>
+      <label>
+      <input type="radio" ng-value="3" ng-click="setDefaultAWS(3)"   ng-model="$parent.ec2"/>
+      6 EC2 Instances of m3.xlarge
+    </label>
+    </td>
+
+    <td>
+      <label>
+      <input type="radio" ng-value="4" ng-click="setDefaultAWS(4)"   ng-model="$parent.ec2"/>
+      3 EC2 Instances of m3.2xlarge
+    </label>
+    </td>
+    <td></td>
+  </tr>
+</table>
+</span>

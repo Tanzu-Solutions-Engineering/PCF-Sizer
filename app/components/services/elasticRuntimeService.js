@@ -29,6 +29,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
         },
         numRunnersPerAz: function () {
             var azRunners = this.numRunnersToRunAIs() / this.config.azCount;
+            //console.log("NumRunners Per AZ: " + roundUp(azRunners) + this.config.extraRunnersPerAZ)
             return roundUp(azRunners) + this.config.extraRunnersPerAZ;
         },
         totalRunners: function () {
