@@ -39,14 +39,16 @@ shekelApp.service('iaasSelectionService', function() {
      }
 
      this.selectIaaS = function (iaaS) {
+       var selectedIaas = iaasSelectionList[0];
        if (iaaS == null) {
             //fall back to default
-            this.selectedIaaS = iaasSelectionList[0];
+             selectedIaaS = iaasSelectionList[0];
         } else {
-            this.selectedIaas = iaasSelectionList[iaaS.id];
+             selectedIaaS = iaasSelectionList[iaaS.id];
         }
-        console.log("In selectIaaS Iaas " + this.selectedIaas.id);
-        return this.selectedIaaS;
+        console.log("In selectIaaS Iaas " + selectedIaas.id);
+
+        return selectedIaaS;
      }
 
      var ec2 = "0";

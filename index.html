@@ -11,6 +11,9 @@
 
     <script src="/js/main.js"></script>
 
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="/js/printjs/print.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/printjs/print.css">
+
     <script src="/app/components/sizing/sizingController.js"></script>
     <script src="/app/components/services/tileService.js"></script>
     <script src="/app/components/sizing/iaasService.js"></script>
@@ -83,9 +86,14 @@
                         <h2>PCF Sizing & Cost Estimation Tool</h2>
                     </div>
                     <div class="col-md-5">
-                        <span>Need Help? Drop us an <a href="mailto:shekel@pivotal.io">email</a></span>
+                        <span>Need Help? Drop us an <a href="mailto:shekel@pivotal.io">email</a>
+                        <button class="btn btn-highlight-alt btn-block" onclick="printJS('printSection', 'pdf')" ><i class="fa fa-print"></i> Print</button>
+                        </span>
                     </div>
+
                 </div>
+
+
 
                <ul class="tab-content list-unstyled">
 	                <li class="active" id="pcf-sizing">

@@ -141,12 +141,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     $scope.iaasSelectionList = iaasSelectionService.iaasList();
 
     $scope.setDefaultIaaS = function(iaaS) {
-      console.log("Input Iaas " + iaaS.id);
-
       $scope.selectedIaaS = iaasSelectionService.selectIaaS(iaaS);
-      console.log("Selected Iaas a " + iaasSelectionService.selectIaaS(iaaS));
-
-      return $scope.selectedIaaS;
+      return iaasSelectionService.selectIaaS(iaaS);
     };
 
 
@@ -195,8 +191,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	};
 
   $scope.aiList = aiSelectionService.aiSelectionList();
+  $scope.fixedSize = 0;
 
   $scope.fixedSizing = function (size) {
+    $scope.fixedSize = size;
     $scope.sizingDescription = $scope.aiList[size].description;
     $scope.platformConfigMapping.runnerSizeDisk.size = $scope.aiList[size].runnerSizeDisk.size;
     $scope.platformConfigMapping.runnerSizeDisk.text = $scope.aiList[size].runnerSizeDisk.text;
@@ -216,5 +214,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
   };
 
   $scope.fixedSizing(0);
+
+  $scope.customSizing = function (size) {
+    // This is for custom sizing
+    $scope.fixedSize = size; 
+  }
 
 });
