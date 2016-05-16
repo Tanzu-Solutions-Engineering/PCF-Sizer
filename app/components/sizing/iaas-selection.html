@@ -1,12 +1,12 @@
-<div>
+<div ng-init="$parent.selectedIaaS.id=0">
   <table class="table table-striped table-bordered">
     <tr>
       <h3>Step 1: Select the IaaS</h3>
     </tr>
     <tr>
-        <td ng-repeat="iaaS in iaasSelectionList">
+        <td ng-repeat="iaaS in iaasSelectionList" >
           <label>
-          <input type="radio" ng-value="iaaS" ng-disabled="iaaS.isDisabled" ng-click="setDefaultIaaS(iaaS)"   ng-model="$parent.selectedIaaS"/>
+          <input type="radio" ng-value="iaaS.id" ng-disabled="iaaS.isDisabled" ng-click="setDefaultIaaS(iaaS)"   ng-model="$parent.selectedIaaS.id"/>
           {{iaaS.name}}
         </label>
       </td>

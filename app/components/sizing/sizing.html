@@ -15,7 +15,7 @@
         <div ng-include="'app/components/sizing/ai-form.html'"></div>
     </div>
 
-    <div class="col-md-12" >
+    <div id="printSection" class="col-md-12" >
         <span ng-if="selectedIaaS.id == '0'" class="animate-if">
           <div ng-include="'app/components/sizing/vsphere.html'"></div>
         </span>
@@ -35,6 +35,6 @@
         <div ng-include="'app/components/sizing/dea-detail.html'"></div>
     </div>
 </div>
-<div class="row">
+<div class="row" id="printSection">
     <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
 </div>

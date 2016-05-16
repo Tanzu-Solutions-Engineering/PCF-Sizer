@@ -1,17 +1,25 @@
 <div>
-<h2> Openstack resources for Ops Manager and Elastic Requirements </h2>
-<p>Your OpenStack tenant must have the following resources before you install Pivotal Cloud Foundry® /p>
-<ul>
-  <li>70 GB of RAM </li>
-  <li>22 available instances </li>
-  <li>16 small VMs (1 vCPU, 1024 MB of RAM, 10 GB of root disk)</li>
-  <li>3 large VMs (4 vCPU, 16384 MB of RAM, 10 GB root disk) </li>
-  <li>32 vCPUs </li>
-  <li>1 TB of storage </li>
-  <li>Neutron networking with floating IP support </li>
-</ul>
+<h3>Minimum Resources for vSphere Cluster</h3>
+<div class="panel panel-alt panel-empty">
+    <table class="table table-light">
+        <tr>
+          <td>
+            <p>Your vSphere cluster must have the following minimum resources before you install Pivotal Cloud Foundry® </p>
+            <ul>
+              <li>Disk space: 1TB</li>
+              <li>Memory: 120GB</li>
+              <li>Two public IP addresses: One for Elastic Runtime and one for Ops Manager</li>
+              <li>vCPU cores: 80</li>
+              <li>Overall CPU: 28 GHz</li>
+              <li>1 TB of storage </li>
+              <li>Ops Manager Director must have HTTPS access to vCenter and ESX hosts on TCP ports 443, 902, and 903.</li>
+            </ul>
 
-<p>For more details on the minimum starting requirements refer to the documentation <a href="http://docs.pivotal.io/pivotalcf/customizing/openstack.html"/></p>
-
+            <p>For more details on the minimum starting requirements refer to the
+              <a href="http://docs.pivotal.io/pivotalcf/customizing/requirements.html#vsphere">documentation</a></p>
+          </td>
+        </tr>
+    </table>
+  </div>
 
 </div>

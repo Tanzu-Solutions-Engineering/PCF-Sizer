@@ -33,11 +33,16 @@
     var bodyStyle = 'font-family:' + defaultParams.font + ' !important; font-size: ' + defaultParams.font_size + ' !important; width:100%;';
     var headerStyle = 'font-weight:300;';
 
-    //get document body
-    var documentBody = document.getElementsByTagName("body")[0];
+    //get document body and head
+    var documentBody;
+    var documentHead;
+
 
     //Occupy the global variable of printJS
     window.printJS = function() {
+      documentBody = document.getElementsByTagName("body")[0];
+      documentHead = document.getElementsByTagName("head")[0];
+
 
         //check if a printable document or object was supplied
         if (arguments[0] === undefined) {
@@ -61,11 +66,13 @@
         switch (typeof args[0]) {
 
             case 'string':
+
                 print.params.printable = encodeURI(args[0]);
                 print.params.type = args[1] || defaultParams.type;
                 break;
 
             case 'object':
+
                 print.params.printable = args[0].printable;
                 print.params.type = args[0].type || defaultParams.type;
                 print.params.frameId = args[0].frameId || defaultParams.frameId;
@@ -212,6 +219,7 @@
 
     PrintJS.prototype.html = function() {
         //get HTML printable element
+
         var printElement = document.getElementById(this.params.printable);
 
         //check if element exists
@@ -223,6 +231,7 @@
 
         //make a copy of the printElement to prevent DOM changes
         var printableElement = document.createElement('div');
+
         printableElement.appendChild(printElement.cloneNode(true));
 
         //add cloned element to DOM, to have DOM element methods available. It will also be easier to colect styles
@@ -235,6 +244,8 @@
 
         //get main element styling
         printableElement.setAttribute('style', this.collectStyles(printableElement) + 'margin:0 !important;');
+
+        console.log("Style : " + this.collectStyles(printableElement));
 
         //get all children elements
         var elements = printableElement.children;
@@ -295,7 +306,7 @@
 
         //set variables to use within .onload
         var frameId = this.params.frameId;
-        
+
         //wait for iframe to load all content
         this.printFrame.onload = function() {
 

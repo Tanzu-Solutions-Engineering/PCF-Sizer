@@ -46,8 +46,6 @@ shekelApp.service('iaasSelectionService', function() {
         } else {
              selectedIaaS = iaasSelectionList[iaaS.id];
         }
-        console.log("In selectIaaS Iaas " + selectedIaas.id);
-
         return selectedIaaS;
      }
 
