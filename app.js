@@ -1,8 +1,16 @@
 var express = require('express');
 var app = express();
 var glob = require('glob');
+var path = require('path');
 
-app.use(express.static('.'));
+app.use('/bower_components', express.static('bower_components'));
+app.use('/app', express.static('app'));
+app.use('/images', express.static('images'));
+app.use('/js', express.static('js'));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
 
 app.get('/buildnumber', function(req, res) {
     var vcapApplication = process.env.VCAP_APPLICATION
