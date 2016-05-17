@@ -69,7 +69,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
             //TODO @mglynn & @jkruck think this inflates storage ask. Logic should
             //TODO be revisited, our best guess is that it's accommodating the blob
             //TODO store size, although no vm accounts for that.
-            iaasService.addRunnerDisk(this.config.avgAIDisk, aiService.aiPacks());
+            iaasService.addRunnerDisk(this.config.avgAIDisk, aiService.getAiPacks());
         }
     };
 

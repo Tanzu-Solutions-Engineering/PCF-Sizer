@@ -8,7 +8,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 
 
     $scope.aiPackOptions = [];
-    $scope.setAIPackOptions = function() {      
+    $scope.setAIPackOptions = function() {
         for ( var i = 1; i <= 300; ++i) {
     		$scope.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
     	}
@@ -21,7 +21,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     		aiService.setAiPack(pack.value);
     	}
         //Look up the right object by the number of ai packs the service keeps track of
-		  return $scope.aiPackOptions[aiService.aiPacks() - 1];
+		  return $scope.aiPackOptions[aiService.getAiPacks() - 1];
     };
 
 	/**

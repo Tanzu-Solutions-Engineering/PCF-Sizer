@@ -27,7 +27,7 @@
         }));
 
         beforeEach(function() {
-            aiService.aiPacks = function() { return { label: "0", value: 0} };
+            aiService.getAiPacks = function() { return 0 };
         });
 
         beforeEach( function () {
@@ -47,14 +47,14 @@
             });
 
             it('should run out of CPU in the first month', function() {
-                $rootScope.deaVcpu = function() { return 0; };
+                $rootScope.cellVcpu = function() { return 0; };
                 $rootScope.markupRuncard();
                 expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("VCPU");
             });
 
             it('should be out of CPU and RAM in the first Month', function() {
-                $rootScope.deaVcpu = function() { return 0; };
-                $rootScope.deaRam = function() { return 0; };
+                $rootScope.cellVcpu = function() { return 0; };
+                $rootScope.cellRam = function() { return 0; };
 
                 $rootScope.markupRuncard();
                 expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("VCPU");
@@ -71,7 +71,7 @@
 
         describe('Disk consumption', function() {
             beforeEach(function() {
-                $rootScope.deaDisk = function() { return 0;};
+                $rootScope.cellDisk = function() { return 0;};
                 $rootScope.aiAvgDisk = function() { return 1;};
             });
 
@@ -84,17 +84,17 @@
         describe('IaaS RAM consumption', function() {
 
             beforeEach(function() {
-                aiService.aiPacks = function() { return { label: "0", value: 100000} };
+                aiService.getAiPacks = function() { return 100000 };
             });
 
             it('should run out of memory in the first month', function() {
-                $rootScope.deaRam = function() { return 0; };
+                $rootScope.cellRam = function() { return 0; };
                 $rootScope.markupRuncard();
                 expect($rootScope.runCards[0].runCard[0].oversubscribed).toContain("RAM");
             });
 
             it('should run out of memory in the 26th month with default data', function() {
-                $rootScope.deaRam = function() { return 10; };
+                $rootScope.cellRam = function() { return 10; };
                 var card = $rootScope.runCards[0];
                 for (var i = 0; i < 25; ++i) {
                     card.runCard[i].ais = i + 1;
