@@ -6,10 +6,10 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
                                                         iaasService, iaasSelectionService, aiSelectionService,elasticRuntime)
 {
 
-    $scope.aiPackOptions = new Array();
 
-    $scope.setAIPackOptions = function() {
-    	for ( var i = 1; i <= 300; ++i) {
+    $scope.aiPackOptions = [];
+    $scope.setAIPackOptions = function() {      
+        for ( var i = 1; i <= 300; ++i) {
     		$scope.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
     	}
     };
@@ -21,10 +21,8 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
     		aiService.setAiPack(pack.value);
     	}
         //Look up the right object by the number of ai packs the service keeps track of
-		return $scope.aiPackOptions[aiService.aiPacks() - 1];
+		  return $scope.aiPackOptions[aiService.aiPacks() - 1];
     };
-
-    aiService.setAiPack($scope.aiPackOptions[0].value);
 
 	/**
 	 * When adding a new ERS version, ADD IT TO THE TOP OF THE LIST as the
@@ -37,7 +35,7 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 
 	];
 
-    $scope.avgRamOptions = [
+  $scope.avgRamOptions = [
 	    { value: .5 },
 	    { value: 1  },
 	    { value: 1.5},
@@ -51,21 +49,21 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	];
 
     $scope.runnerSizeOptions = [
-	     {"text": "Small (16GB)",     "size":16},
-	     {"text": "Medium (32GB)",    "size":32},
-	     {"text": "Large (64GB)",     "size":64},
-	     {"text": "Bad idea (128GB)", "size":128}
+	     {text: "Small (16GB)",     size:16},
+	     {text: "Medium (32GB)",    size:32},
+	     {text: "Large (64GB)",     size:64},
+	     {text: "Bad idea (128GB)", size:128}
 	 ];
 
     $scope.runnerSizeOptionsDisk =  [
-         {"text": "Small (32GB)",    "size":32},
-         {"text": "Medium (64GB)",   "size":64},
-         {"text": "Large (128GB)",   "size":128},
-         {"text": "Crazy (256GB)",   "size":256}
+         {text: "Small (32GB)",    size:32},
+         {text: "Medium (64GB)",   size:64},
+         {text: "Large (128GB)",   size:128},
+         {text: "Crazy (256GB)",   size:256}
     ];
 
     $scope.avgAIDiskOptions = [
-        { value: .5  },
+      { value: .5  },
 	    { value: 1  },
 	    { value: 2  },
 	    { value: 4  },
@@ -88,9 +86,9 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 
 
     $scope.iaasCPUtoCoreRatioOptions = [
-        {"text": "2:1", "ratio":2},
-        {"text": "4:1", "ratio":4},
-        {"text": "8:1", "ratio":8}
+        {text: "2:1", ratio:2},
+        {text: "4:1", ratio:4},
+        {text: "8:1", ratio:8}
     ];
 
     $scope.platformConfigMapping = {
@@ -171,16 +169,6 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 
 	$scope.loadAzTemplate();
 
-	//Watch for Non ng-select input changes
-	[
-	 'elasticRuntime.config.azCount',
-	 'elasticRuntime.config.extraRunnersPerAZ'
-	].forEach(function(e,l,a) {
-		$scope.$watch(e, function() {
-            $scope.dropDownTriggerSizing()
-		});
-	});
-
   $scope.dropDownTriggerSizing = function () {
         elasticRuntime.applyTemplate();
         elasticRuntime.config.runnerDisk = $scope.platformConfigMapping.runnerSizeDisk.size;
@@ -196,19 +184,26 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
   $scope.fixedSizing = function (size) {
     $scope.fixedSize = size;
     $scope.sizingDescription = $scope.aiList[size].description;
-    $scope.platformConfigMapping.runnerSizeDisk.size = $scope.aiList[size].runnerSizeDisk.size;
-    $scope.platformConfigMapping.runnerSizeDisk.text = $scope.aiList[size].runnerSizeDisk.text;
-    $scope.platformConfigMapping.runnerSize.size = $scope.aiList[size].runnerSize.size;
-    $scope.platformConfigMapping.runnerSize.text = $scope.aiList[size].runnerSize.text;
-
-    $scope.platformConfigMapping.avgRam.value = $scope.aiList[size].avgRam.value;
-    $scope.platformConfigMapping.avgAIDisk.value = $scope.aiList[size].avgAIDisk.value;
-    $scope.platformConfigMapping.pcfCompilationJobs.value = $scope.aiList[size].pcfCompilationJobs.value;
-    $scope.platformConfigMapping.aiCount.value = $scope.aiList[size].aiCount.value;
-    $scope.platformConfigMapping.aiCount.label = $scope.aiList[size].aiCount.label;
+    $scope.platformConfigMapping.runnerSizeDisk = _.find($scope.runnerSizeOptionsDisk, function(o) {
+      if (o.size === $scope.aiList[size].runnerSizeDisk.size) { return o; }
+    });
+    $scope.platformConfigMapping.runnerSize = _.find($scope.runnerSizeOptions, function(o) {
+      if (o.size === $scope.aiList[size].runnerSize.size) { return o; }
+    });
+    $scope.platformConfigMapping.avgRam = _.find($scope.avgRamOptions, function(o) {
+      if (o.value === $scope.aiList[size].avgRam.value) { return o; }
+    });
+    $scope.platformConfigMapping.avgAIDisk = _.find($scope.avgAIDiskOptions, function(o) {
+      if (o.value === $scope.aiList[size].avgAIDisk.value) { return o; }
+    });
+    $scope.platformConfigMapping.pcfCompilationJobs = _.find($scope.pcfCompilationJobsOptions, function(o) {
+      if (o.value === $scope.aiList[size].pcfCompilationJobs.value) { return o; }
+    });
+    $scope.platformConfigMapping.aiCount = _.find($scope.aiPackOptions, function(o) {
+      if (o.value === $scope.aiList[size].aiCount.value) { return o; }
+    });
     $scope.elasticRuntimeConfig.azCount = $scope.aiList[size].azCount;
     $scope.elasticRuntimeConfig.extraRunnersPerAZ = $scope.aiList[size].extraRunnersPerAZ;
-
     aiService.setAiPack($scope.aiList[size].aiCount.value)
     $scope.dropDownTriggerSizing();
   };
@@ -216,8 +211,11 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
   $scope.fixedSizing(0);
 
   $scope.customSizing = function (size) {
+    $scope.setAIPackOptions();
+    $scope.fixedSizing(1); //default to settings for Medium size
+    $scope.dropDownTriggerSizing();
     // This is for custom sizing
-    $scope.fixedSize = size; 
+    $scope.fixedSize = size;
   }
 
 });

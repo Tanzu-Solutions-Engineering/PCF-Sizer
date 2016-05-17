@@ -29,7 +29,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
         },
         numRunnersPerAz: function () {
             var azRunners = this.numRunnersToRunAIs() / this.config.azCount;
-            //console.log("NumRunners Per AZ: " + roundUp(azRunners) + this.config.extraRunnersPerAZ)
+            // console.log("NumRunners Per AZ: " + (roundUp(azRunners) + this.config.extraRunnersPerAZ));
             return roundUp(azRunners) + this.config.extraRunnersPerAZ;
         },
         totalRunners: function () {
@@ -45,7 +45,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
                 if (!tile.enabled) {
                     return;
                 }
-                var vmLayout = new Array();
+                var vmLayout = [];
                 tile.currentConfig = vmLayout;
                 for (var i = 0; i < tile.template.length; i++) {
                     var vm = {};

@@ -23,7 +23,7 @@
           <select class="form-control col-md-6 input-sm" id="cpuConsolidation"
                   ng-model="platformConfigMapping.iaasCPUtoCoreRatio"
                   ng-options="opt as opt.text for opt in iaasCPUtoCoreRatioOptions"
-                  ng-change="dropDownTriggerSizing()"></select>
+                  ng-change="dropDownTriggerSizing(); getPhysicalCores()"></select>
       </div>
   </form>
 </span>
