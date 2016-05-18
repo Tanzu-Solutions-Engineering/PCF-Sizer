@@ -35,7 +35,7 @@ build:
           echo "npm version $(npm -v) running"
     - script:
         name: install bower
-        code: sudo npm install -g bower
+        code: npm install -g bower
     - script:
         name: run bower install
         code: bower install
