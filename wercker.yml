@@ -33,6 +33,12 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+    - script:
+        name: install bower
+        code: sudo npm install -g bower
+    - script:
+        name: run bower install
+        code: bower install
 deploy:
   steps:
     - script:
@@ -48,7 +54,7 @@ deploy:
         organization: $CF_ORG
         space: $CF_SPACE
         skip_ssl: true
-        appname: shekel-dev-green
-        alt_appname: shekel-dev-blue
+        appname: shekel-dev-green-test
+        alt_appname: shekel-dev-blue-test
         domain: cfapps.io
-        hostname: shekel-dev
+        hostname: shekel-dev-test
