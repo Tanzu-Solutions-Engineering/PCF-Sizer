@@ -3,7 +3,7 @@
 # If you want Nodesource's container you would reference nodesource/node
 # Read more about containers on our dev center
 # http://devcenter.wercker.com/docs/containers/index.html
-box: wercker/nodejs
+box: node
 # This is the build pipeline. Pipelines are the core of wercker
 # Read more about pipelines on our dev center
 # http://devcenter.wercker.com/docs/pipelines/index.html
@@ -34,8 +34,15 @@ build:
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
     - script:
+        name: enable root/sudo for npm/bower
+        code: |
+          # https://docs.npmjs.com/misc/config#unsafe-perm
+          npm config set unsafe-perm true
+          # https://github.com/bower/bower/issues/1752#issuecomment-113455403
+          echo "{\"allow_root\": true}" > ~/.bowerrc
+    - script:
         name: install bower
-        code: sudo npm install -g bower
+        code: npm install -g bower
     - script:
         name: run bower install
         code: bower install
