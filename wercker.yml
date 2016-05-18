@@ -33,7 +33,12 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
-    - plasticine/step-bower-install
+    - script:
+        name: install bower
+        code: npm install bower
+    - script:
+        name: run bower install
+        code: ./node_modules/bower/bin/bower install
 deploy:
   steps:
     - script:
