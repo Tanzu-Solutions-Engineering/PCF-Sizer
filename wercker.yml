@@ -26,6 +26,8 @@ build:
     # A step that executes `npm test` command
     - npm-test
 
+    -bower-install
+
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
@@ -33,12 +35,7 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
-    - script:
-        name: install bower
-        code: npm install -g bower
-    - script:
-        name: run bower install
-        code: bower install
+    
 deploy:
   steps:
     - script:
