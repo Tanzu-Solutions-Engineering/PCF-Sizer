@@ -61,7 +61,7 @@ deploy:
         organization: $CF_ORG
         space: $CF_SPACE
         skip_ssl: true
-        appname: shekel-dev-green-test
-        alt_appname: shekel-dev-blue-test
+        appname: shekel-dev-green
+        alt_appname: shekel-dev-blue
         domain: cfapps.io
-        hostname: shekel-dev-test
+        hostname: shekel-dev
