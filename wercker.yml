@@ -3,7 +3,7 @@
 # If you want Nodesource's container you would reference nodesource/node
 # Read more about containers on our dev center
 # http://devcenter.wercker.com/docs/containers/index.html
-box: node
+box: wercker/nodejs
 # This is the build pipeline. Pipelines are the core of wercker
 # Read more about pipelines on our dev center
 # http://devcenter.wercker.com/docs/pipelines/index.html
@@ -35,10 +35,10 @@ build:
           echo "npm version $(npm -v) running"
     - script:
         name: install bower
-        code: npm install bower
+        code: sudo npm install -g bower
     - script:
         name: run bower install
-        code: ./node_modules/bower/bin/bower install
+        code: bower install
 deploy:
   steps:
     - script:
