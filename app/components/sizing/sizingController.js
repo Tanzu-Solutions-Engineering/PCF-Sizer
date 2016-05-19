@@ -170,12 +170,13 @@ shekelApp.controller('ShekelSizingController', function($scope, $http, tileServi
 	$scope.loadAzTemplate();
 
   $scope.dropDownTriggerSizing = function () {
-        elasticRuntime.applyTemplate();
+        iaasService.resetIaaSAsk();
         elasticRuntime.config.runnerDisk = $scope.platformConfigMapping.runnerSizeDisk.size;
         elasticRuntime.config.runnerRAM = $scope.platformConfigMapping.runnerSize.size;
         elasticRuntime.config.avgAIRAM = $scope.platformConfigMapping.avgRam.value;
         elasticRuntime.config.avgAIDisk = $scope.platformConfigMapping.avgAIDisk.value;
         elasticRuntime.config.compilationJobs = $scope.platformConfigMapping.pcfCompilationJobs.value;
+        elasticRuntime.applyTemplate();
 	};
 
   $scope.aiList = aiSelectionService.aiSelectionList();

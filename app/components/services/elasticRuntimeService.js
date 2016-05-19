@@ -39,7 +39,6 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
         //constants at the bottom.  <--iaasAskSummary-->
         //TODO Move this to tileService...
         applyTemplate: function () {
-            iaasService.resetIaaSAsk();
             var t = this;
             tileService.tiles.forEach(function (tile) {
                 if (!tile.enabled) {
