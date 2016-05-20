@@ -1,31 +1,31 @@
 <div>
-    <h3>Resource Min Requirements Summary</h3>
+    <h3>Summary of Total Resources</h3>
 
     <div class="panel panel-alt panel-empty">
         <table class="table table-light">
             <tr>
                 <td>Total AZ's </td>
-                <td>{{elasticRuntimeConfig.azCount}}</td>
+                <td>{{elasticRuntimeConfig.azCount || 0}}</td>
             </tr>
             <tr>
                 <td>Foundation Memory (GB)</td>
-                <td>{{iaasAskSummary().ram}}</td>
+                <td>{{iaasAskSummary().ram || 0}}</td>
             </tr>
             <tr>
                 <td>Foundation Storage (GB)</td>
-                <td>{{iaasAskSummary().disk}}</td>
+                <td>{{iaasAskSummary().disk || 0}}</td>
             </tr>
             <tr>
                 <td>Foundation vCPU #</td>
-                <td>{{iaasAskSummary().vcpu}}</td>
+                <td>{{iaasAskSummary().vcpu || 0}}</td>
             </tr>
             <tr>
                 <td>Total IPs #</td>
-                <td>{{iaasAskSummary().ip}}</td>
+                <td>{{iaasAskSummary().ip || 0}}</td>
             </tr>
             <tr>
                 <td>Foundation Physical Cores (2GHz or >) #</td>
-                <td>{{getPhysicalCores()}}</td>
+                <td>{{getPhysicalCores() || 0}}</td>
             </tr>
         </table>
     </div>

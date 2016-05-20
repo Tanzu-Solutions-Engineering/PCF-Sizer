@@ -1,0 +1,13 @@
+<div class="row">
+    <h3>IaaS Cell Resource Summary</h3>
+</div>
+<div class="col-md-12">
+    <shkl-form-group label="vCPU" value="{{cellVcpu()}}"></shkl-form-group>
+    <shkl-form-group label="Memory (GB)" value="{{cellRam()}}"></shkl-form-group>
+    <shkl-form-group label="Storage (GB)" value="{{cellDisk()}}"></shkl-form-group>
+</div>
+<div class="col-md-12">
+    <shkl-form-group label="vCPU % per AI:" value="{{aiAvgVcpu()}}"></shkl-form-group>
+    <shkl-form-group label="Memory (GB) per AI:" value="{{aiAvgRam()}}"></shkl-form-group>
+    <shkl-form-group label="Storage (GB) per AI:" value=" {{aiAvgDisk()}}"></shkl-form-group>
+</div>

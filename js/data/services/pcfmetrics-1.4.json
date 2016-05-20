@@ -1,0 +1,101 @@
+[
+  {
+    "vm": "Push APM UI",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 1,
+    "ephemeral_disk": 4,
+    "persistent_disk": 0,
+    "vcpu": 1
+  },
+  {
+    "vm": "Zookeeper",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 16,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 4
+  },
+  {
+    "vm": "Kafka",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 16,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 1
+  },
+  {
+    "vm": "Ingestor",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 8,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 4
+  },
+  {
+    "vm": "Network Metrics Data Store",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 16,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 4
+  },
+  {
+    "vm": "Container Metrics Data Store",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 16,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 4
+  },
+  {
+    "vm": "App Event Data Store",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 16,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 4
+  },
+  {
+    "vm": "APM API",
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "instances": 1,
+    "singleton": false,
+    "ram": 8,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 4
+  },
+  {
+    "vm": "Compilation",
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instances": 1,
+    "singleton": false,
+    "ram": 8,
+    "ephemeral_disk": 80,
+    "persistent_disk": 0,
+    "vcpu": 4
+  }
+]

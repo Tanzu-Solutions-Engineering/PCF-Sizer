@@ -29,6 +29,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
         },
         numRunnersPerAz: function () {
             var azRunners = this.numRunnersToRunAIs() / this.config.azCount;
+            // console.log("NumRunners Per AZ: " + (roundUp(azRunners) + this.config.extraRunnersPerAZ));
             return roundUp(azRunners) + this.config.extraRunnersPerAZ;
         },
         totalRunners: function () {
@@ -38,13 +39,12 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
         //constants at the bottom.  <--iaasAskSummary-->
         //TODO Move this to tileService...
         applyTemplate: function () {
-            iaasService.resetIaaSAsk();
             var t = this;
             tileService.tiles.forEach(function (tile) {
                 if (!tile.enabled) {
                     return;
                 }
-                var vmLayout = new Array();
+                var vmLayout = [];
                 tile.currentConfig = vmLayout;
                 for (var i = 0; i < tile.template.length; i++) {
                     var vm = {};
@@ -68,7 +68,7 @@ var elasticRuntime = shekelApp.factory('elasticRuntime',
             //TODO @mglynn & @jkruck think this inflates storage ask. Logic should
             //TODO be revisited, our best guess is that it's accommodating the blob
             //TODO store size, although no vm accounts for that.
-            iaasService.addRunnerDisk(this.config.avgAIDisk, aiService.aiPacks());
+            iaasService.addRunnerDisk(this.config.avgAIDisk, aiService.getAiPacks());
         }
     };
 
