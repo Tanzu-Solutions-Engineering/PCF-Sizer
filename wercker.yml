@@ -46,7 +46,7 @@ build:
     - script:
         name: run bower install
         code: bower install
-deploy:
+dev-deploy:
   steps:
     - script:
         name: Install packages
@@ -65,3 +65,23 @@ deploy:
         alt_appname: shekel-dev-blue
         domain: cfapps.io
         hostname: shekel-dev
+
+prod-deploy:
+  steps:
+    - script:
+        name: Install packages
+        code: |
+          apt-get update
+    - install-packages:
+        packages: wget
+    - joshuamckenty/cloud-foundry-deploy:
+        api: $CF_API
+        username: $CF_USER
+        password: $CF_PASS
+        organization: $CF_ORG
+        space: $CF_SPACE
+        skip_ssl: true
+        appname: shekel-prod-green
+        alt_appname: shekel-prod-blue
+        domain: cfapps.io
+        hostname: shekel-prod
