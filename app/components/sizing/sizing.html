@@ -3,14 +3,14 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="row">
+        <!-- <div class="row">
             <div class="form-group form-inline">
                 <label class="col-md-13">PCF Version</label>
                 <select class="form-control col-md-6 input-sm" id="versionselect" ng-model="platformConfigMapping.ersVersion"
                         ng-options="opt as opt.value for opt in ersVersionOptions" ng-change="loadAzTemplate()">
                 </select>
             </div>
-        </div>
+        </div> -->
         <div ng-include="'app/components/sizing/iaas-selection.html'"></div>
         <div ng-include="'app/components/sizing/ai-form.html'"></div>
     </div>
