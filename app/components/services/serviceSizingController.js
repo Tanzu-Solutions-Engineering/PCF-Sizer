@@ -58,6 +58,7 @@ shekelApp.controller('ShekelServiceSizingController', function($scope, $http, ti
             return $scope.getTile(serviceName, version).then(function(tile) {
                 tileService.addTile(serviceName, version, tile);
                 tileService.enableTile(serviceName);
+                iaasService.resetIaaSAsk();
                 elasticRuntime.applyTemplate();
             });
         } else {
