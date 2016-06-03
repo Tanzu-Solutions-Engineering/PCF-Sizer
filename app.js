@@ -11,9 +11,9 @@ app.get('/buildnumber', function(req, res) {
     res.send(vcapApplication);
 });
 
-app.get('/ersjson/:version', function(req, res){
+app.get('/ersjson/:iaas/:version', function(req, res){
     //TODO Is this safe?
-    res.redirect('/js/data/ers_vms_single_az_template-' + req.params['version'] + '.json')
+    res.redirect('/js/data/ers_' + req.params['iaas'] + '_single_az_template-' + req.params['version'] + '.json')
 });
 
 app.get('/services/:service/versions', function(req, res){

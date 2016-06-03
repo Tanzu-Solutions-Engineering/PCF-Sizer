@@ -4,7 +4,7 @@
 
     describe('ShekelCostingController', function() {
 
-        var $rootScope, createController, planService, aiService;
+        var $rootScope, createController, planService, iaasService;
 
         beforeEach(module('ShekelApp'));
 
@@ -15,19 +15,19 @@
             tileService.getTile(tileService.ersName).currentConfig = {};
             var $controller = $injector.get('$controller');
             planService = $injector.get('planService');
-            aiService = $injector.get('aiService');
+            iaasService = $injector.get('iaasService');
             createController = function() {
                 return $controller('ShekelCostingController',
                     {
                         '$scope': $rootScope,
-                        aiService: aiService,
+                        iaasService: iaasService,
                         tileService: tileService
                     });
             };
         }));
 
         beforeEach(function() {
-            aiService.getAiPacks = function() { return 0 };
+            iaasService.getAiPacks = function() { return 0 };
         });
 
         beforeEach( function () {
@@ -84,7 +84,7 @@
         describe('IaaS RAM consumption', function() {
 
             beforeEach(function() {
-                aiService.getAiPacks = function() { return 100000 };
+                iaasService.getAiPacks = function() { return 100000 };
             });
 
             it('should run out of memory in the first month', function() {

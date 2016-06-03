@@ -2,7 +2,7 @@
 
 (function() {
     describe('elasticRuntimeService', function() {
-        var elasticRuntime, aiService, tileService, iaasService;
+        var elasticRuntime, iaasService, tileService, iaasService;
 
         var mysqlBroker = {
             "vm": "MySQL Broker",
@@ -20,7 +20,7 @@
 
         beforeEach(inject(function ($injector) {
             elasticRuntime = $injector.get('elasticRuntime');
-            aiService = $injector.get('aiService');
+            iaasService = $injector.get('iaasService');
             tileService = $injector.get('tileService');
             iaasService = $injector.get('iaasService');
             iaasService.resetIaaSAsk();
@@ -78,7 +78,7 @@
 
         describe('numRunnersToRunAIs', function() {
             it('should need 5 to run one ai pack at one gig', function () {
-                aiService.setAiPack(1);
+                iaasService.setAiPack(1);
                 expect(elasticRuntime.numRunnersToRunAIs()).toBe(4);
             });
         });
