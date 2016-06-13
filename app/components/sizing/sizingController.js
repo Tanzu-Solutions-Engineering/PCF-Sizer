@@ -313,6 +313,7 @@
       var numbersOfCellsBasedOnRam = ($scope.data.elasticRuntimeConfig.aiPacks.value * iaasService.getAIsPerPack() * $scope.data.elasticRuntimeConfig.avgRam.value) / (cellInfo.instanceInfo.ram - iaasService.getRamOverhead());
       var numbersOfCellsBasedOnDisk = ($scope.data.elasticRuntimeConfig.aiPacks.value * iaasService.getAIsPerPack() * $scope.data.elasticRuntimeConfig.avgAIDisk.value) / (cellInfo.instanceInfo.ephemeral_disk - iaasService.getDiskOverhead());
       cellInfo.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
+      cellInfo.instances += ($scope.data.elasticRuntimeConfig.azCount * $scope.data.elasticRuntimeConfig.extraRunnersPerAZ)
       $scope.updateStuff();
     }
   });
