@@ -1,0 +1,37 @@
+<div id="deaAllocations">
+    <h3>Cell Details</h3>
+    <table class="table table-light">
+        <tr>
+            <td width="80%">Total Cell RAM(GB)</td>
+            <td width="20%">{{data.cellDetailSummary.totalRam}}</td>
+        </tr>
+        <!-- <tr>
+            <td>Service AI Count</td>
+            <td>{{storage.serviceAICount}}</td>
+        </tr> -->
+        <tr>
+            <td width="80%">Useable Ram(GB) per Cell</td>
+            <td width="20%">{{data.cellDetailSummary.useableCellRam}}</td>
+        </tr>
+        <tr>
+            <td width="80%">Useable Disk(GB) per Cell</td>
+            <td width="20%">{{data.cellDetailSummary.useableCellDisk}}</td>
+        </tr>
+        <tr>
+            <td width="80%">Available Cell RAM(GB)</td>
+            <td width="20%">{{data.cellDetailSummary.availableCellRam}}</td>
+        </tr>
+        <tr>
+            <td width="80%">Available Cell Disk(GB)</td>
+            <td width="20%">{{data.cellDetailSummary.availableCellDisk}}</td>
+        </tr>
+        <tr>
+            <td width="80%">Number of Cells</td>
+            <td width="20%">{{data.cellDetailSummary.numberOfCells}}</td>
+        </tr>
+        <tr>
+            <td width="80%">Cells per AZ</td>
+            <td width="20%"><span ng-show="data.cellDetailSummary.numberOfCells % data.cellDetailSummary.cellsPerAZ !== 0">~</span>{{data.cellDetailSummary.cellsPerAZ}}</td>
+        </tr>
+    </table>
+</div>

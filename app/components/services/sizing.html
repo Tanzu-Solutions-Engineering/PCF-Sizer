@@ -33,8 +33,7 @@
                 </p>
 
                 <div ng-repeat="vm in getActiveTemplate(service)">
-                    <h4 uib-tooltip="{{vm.tooltip}}" uib-tooltip-trigger="focus"
-                        uib-tooltip-placement="bottom">{{vm.vm}}</h4>
+                    <h4>{{vm.vm}}</h4>
                     <div class="form-horizontal form-group form-inline">
                         <div>{{vm.notes}}</div>
 
@@ -42,20 +41,19 @@
                         <div class="row" ng-hide="vm.singleton">
                             <label class="col-md-7" for="vm-instances">Instances</label>
                             <input class="form-control col-md-1" id="vm-instances"
-                                   type="number" min="1" ng-model="vm.instances"
-                                   ng-change="toggleService(service)">
+                                   type="number" min="1" ng-model="vm.instances">
                         </div>
 
                         <div class="row">
                             <label class="col-md-7" for="vm-ram">RAM</label>
                             <input class="form-control col-md-1" id="vm-ram"
-                                   type="number" min="1" ng-model="vm.ram"
+                                   type="number" min="1" ng-model="vm.type.ram"
                                    ng-change="toggleService(service)">
                         </div>
                         <div class="row">
                             <label class="col-md-7" for="vm-vcpu">vCPU</label>
                             <input class="form-control col-md-1" id="vm-vcpu"
-                                   type="number" min="1" ng-model="vm.vcpu"
+                                   type="number" min="1" ng-model="vm.type.cpu"
                                    ng-change="toggleService(service)">
                         </div>
                         <div class="row" ng-show="vm.persistent_disk > 0">
@@ -67,7 +65,7 @@
                         <div class="row">
                             <label class="col-md-7" for="vm-ephemeral-disk">Ephemeral Disk</label>
                             <input class="form-control col-md-1" id="vm-ephemeral-disk"
-                                   type="number" min="1" ng-model="vm.ephemeral_disk"
+                                   type="number" min="1" ng-model="vm.type.ephemeral_disk"
                                    ng-change="toggleService(service)">
                         </div>
 

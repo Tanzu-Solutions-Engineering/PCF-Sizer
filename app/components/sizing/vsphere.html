@@ -1,76 +1,19 @@
 <div>
-  <span ng-if="fixedSize == '0'" class="animate-if">
+  <span ng-if="storage.selectedIaaS.id == 'vsphere'" class="animate-if">
     <h3>Minimum Resources for vSphere Cluster</h3>
-    <div class="panel panel-alt panel-empty">
         <table class="table table-light">
             <tr>
               <td>
-                <p>Your vSphere cluster must have the following minimum resources before you install Pivotal Cloud Foundry® </p>
-                <ul>
-                  <li>Disk space: 1TB</li>
-                  <li>Memory: 120GB</li>
-                  <li>Two public IP addresses: One for Elastic Runtime and one for Ops Manager</li>
-                  <li>vCPU cores: 80</li>
-                  <li>Overall CPU: 28 GHz</li>
-                  <li>1 TB of storage </li>
-                  <li>Ops Manager Director must have HTTPS access to vCenter and ESX hosts on TCP ports 443, 902, and 903.</li>
-                </ul>
-
                 <p>For more details on the minimum starting requirements refer to the
-                  <a href="http://docs.pivotal.io/pivotalcf/customizing/requirements.html#vsphere">documentation</a></p>
+                  <a target="_blank" href="http://docs.pivotal.io/pivotalcf/customizing/requirements.html#vsphere">documentation</a></p>
+                <p>Your vSphere cluster must have the following resources available before you install Pivotal Cloud Foundry® </p>
+                <ul>
+                  <li>Two public IP addresses: One for Elastic Runtime and one for Ops Manager</li>
+                  <li>Ops Manager Director must have HTTPS access to vCenter and ESX hosts on TCP ports 443, 902, and 903.</li>
+                  <li><b>For specific IaaS resource requirements, see below for more detail</b></li>
+                </ul>
               </td>
             </tr>
         </table>
-      </div>
-  </span>
-
-  <span ng-if="fixedSize == '1'" class="animate-if">
-    <h3>Minimum Resources for vSphere Cluster</h3>
-    <div class="panel panel-alt panel-empty">
-        <table class="table table-light">
-            <tr>
-              <td>
-                <p>Your vSphere cluster must have the following minimum resources before you install Pivotal Cloud Foundry® </p>
-                <ul>
-                  <li>Disk space: 1TB</li>
-                  <li>Memory: 120GB</li>
-                  <li>Two public IP addresses: One for Elastic Runtime and one for Ops Manager</li>
-                  <li>vCPU cores: 80</li>
-                  <li>Overall CPU: 28 GHz</li>
-                  <li>1 TB of storage </li>
-                  <li>Ops Manager Director must have HTTPS access to vCenter and ESX hosts on TCP ports 443, 902, and 903.</li>
-                </ul>
-
-                <p>For more details on the minimum starting requirements refer to the
-                  <a href="http://docs.pivotal.io/pivotalcf/customizing/requirements.html#vsphere">documentation</a></p>
-              </td>
-            </tr>
-        </table>
-      </div>
-  </span>
-
-  <span ng-if="fixedSize == '2'" class="animate-if">
-    <h3>Minimum Resources for vSphere Cluster</h3>
-    <div class="panel panel-alt panel-empty">
-        <table class="table table-light">
-            <tr>
-              <td>
-                <p>Your vSphere cluster must have the following minimum resources before you install Pivotal Cloud Foundry® </p>
-                <ul>
-                  <li>Disk space: 1TB</li>
-                  <li>Memory: 120GB</li>
-                  <li>Two public IP addresses: One for Elastic Runtime and one for Ops Manager</li>
-                  <li>vCPU cores: 80</li>
-                  <li>Overall CPU: 28 GHz</li>
-                  <li>1 TB of storage </li>
-                  <li>Ops Manager Director must have HTTPS access to vCenter and ESX hosts on TCP ports 443, 902, and 903.</li>
-                </ul>
-
-                <p>For more details on the minimum starting requirements refer to the
-                  <a href="http://docs.pivotal.io/pivotalcf/customizing/requirements.html#vsphere">documentation</a></p>
-              </td>
-            </tr>
-        </table>
-      </div>
   </span>
 </div>

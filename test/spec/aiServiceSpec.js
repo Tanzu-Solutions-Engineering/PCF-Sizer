@@ -12,12 +12,12 @@
         }));
 
         it('returns the right number of for one pack', function () {
-            iaasService.setAiPack(1);
+            iaasService.setAiPacks(1);
             expect(iaasService.getAiCount()).toBe(50);
         });
 
         it('reutnrs the right number of ais for 10 packs', function() {
-            iaasService.setAiPack(10);
+            iaasService.setAiPacks(10);
             expect(iaasService.getAiCount()).toBe(500);
         });
 

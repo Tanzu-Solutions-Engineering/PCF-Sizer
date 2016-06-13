@@ -1,0 +1,44 @@
+[
+  {
+    "name": "t2.micro",
+    "cpu": 1,
+    "ram": 1,
+    "ephemeral_disk": 1,
+    "cost": 0.013
+  },
+  {
+    "name": "t2.small",
+    "cpu": 1,
+    "ram": 2,
+    "ephemeral_disk": 2,
+    "cost": 0.026
+  },
+  {
+    "name": "m3.medium",
+    "cpu": 1,
+    "ram": 3.75,
+    "ephemeral_disk": 4,
+    "cost": 0.067
+  },
+  {
+    "name": "m3.xlarge",
+    "cpu": 4,
+    "ram": 15,
+    "ephemeral_disk": 32,
+    "cost": 0.266
+  },
+  {
+    "name": "m3.2xlarge",
+    "cpu": 8,
+    "ram": 30,
+    "ephemeral_disk": 64,
+    "cost": 0.532
+  },
+  {
+    "name": "db.r3.large",
+    "cpu": 2,
+    "ram": 15,
+    "ephemeral_disk": 0,
+    "cost": 0.290
+  }
+]

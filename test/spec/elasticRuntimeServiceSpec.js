@@ -78,7 +78,7 @@
 
         describe('numRunnersToRunAIs', function() {
             it('should need 5 to run one ai pack at one gig', function () {
-                iaasService.setAiPack(1);
+                iaasService.setAiPacks(1);
                 expect(elasticRuntime.numRunnersToRunAIs()).toBe(4);
             });
         });

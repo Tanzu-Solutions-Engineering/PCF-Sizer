@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var glob = require('glob');
+var fs = require('fs');
 
 app.use(express.static('.'));
 
@@ -13,11 +14,17 @@ app.get('/buildnumber', function(req, res) {
 
 app.get('/ersjson/:iaas/:version', function(req, res){
     //TODO Is this safe?
-    res.redirect('/js/data/ers_' + req.params['iaas'] + '_single_az_template-' + req.params['version'] + '.json')
+    var matchingFiles = glob.sync('js/data/ers_' + req.params['iaas']  + '_*-' + req.params['version'] + '.json');
+    var json = {};
+    matchingFiles.forEach(function(file) {
+      var size = file.split('_')[2];
+      json[size] = JSON.parse(fs.readFileSync(file));
+    });
+    res.send(JSON.stringify(json));
 });
 
 app.get('/services/:service/versions', function(req, res){
-    var matchingFiles = glob.sync('js/data/services/' + req.params['service']  + '-*.json');
+    var matchingFiles = glob.sync('js/data/services/' + req.params['service']  + '_*-*.json');
     var versions = [];
     matchingFiles.forEach(function(file) {
         versions.push(file.split('-')[1].replace('.json', ''));
@@ -38,8 +45,13 @@ app.get('/services', function(req, res) {
     res.status(200).json(services);
 });
 
-app.get('/tile/:name/:version', function(req, res) {
-    var filePath = '/js/data/services/' + req.params['name'] + "-" + req.params['version']+ ".json";
+app.get('/tile/:iaas/:name/:version', function(req, res) {
+    var filePath = '/js/data/services/' + req.params['name'] + "_" + req.params['iaas'] + "-" + req.params['version']+ ".json";
+    res.contentType('application/json').redirect(filePath);
+});
+
+app.get('/instanceTypes/:iaas', function(req, res) {
+    var filePath = '/js/data/' + req.params['iaas'] + "_" + "instance_types.json";
     res.contentType('application/json').redirect(filePath);
 });
 

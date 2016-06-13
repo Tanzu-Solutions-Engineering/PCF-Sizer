@@ -1,32 +1,42 @@
 <div>
     <h3>Summary of Total Resources</h3>
 
-    <div class="panel panel-alt panel-empty">
         <table class="table table-light">
             <tr>
-                <td>Total AZ's </td>
-                <td>{{tileService.azCount || 0}}</td>
+                <td width="80%">Total AZ's </td>
+                <td width="20%">{{data.resourceSummary.azCount}}</td>
+            </tr>
+            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+                <td width="80%">Foundation Memory (GB)</td>
+                <td width="20%">{{data.resourceSummary.ram}}</td>
+            </tr>
+            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+                <td width="80%">Foundation Storage (GB)</td>
+                <td width="20%">{{data.resourceSummary.disk}}</td>
+            </tr>
+            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+                <td width="80%">Foundation vCPU #</td>
+                <td width="20%">{{data.resourceSummary.cpu}}</td>
             </tr>
             <tr>
-                <td>Foundation Memory (GB)</td>
-                <td>{{iaasAskSummary().ram || 0}}</td>
+                <td width="80%">Total IPs #</td>
+                <td width="20%">{{data.resourceSummary.ips}}</td>
             </tr>
-            <tr>
-                <td>Foundation Storage (GB)</td>
-                <td>{{iaasAskSummary().disk || 0}}</td>
+            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+                <td width="80%">Foundation Physical Cores (2GHz or >) #</td>
+                <td width="20%">{{getPhysicalCores()}}</td>
             </tr>
-            <tr>
-                <td>Foundation vCPU #</td>
-                <td>{{iaasAskSummary().vcpu || 0}}</td>
+            <tr ng-show="storage.selectedIaaS.id === 'aws'">
+                <td width="80%"><a target="_blank" href="{{storage.selectedIaaS.pricingUrl}}">Instance Types</a></td>
+                <td width="20%"></td>
             </tr>
-            <tr>
-                <td>Total IPs #</td>
-                <td>{{iaasAskSummary().ip || 0}}</td>
+            <tr ng-repeat="type in data.resourceSummary.vmTypes" ng-show="storage.selectedIaaS.id === 'aws'">
+                <td width="80%">{{type.name}} ({{type.cpu}} CPU, {{type.ram}}GB RAM)</td>
+                <td width="20%">{{type.count}} ({{type.cost | currency}}/hr)</td>
             </tr>
-            <tr>
-                <td>Foundation Physical Cores (2GHz or >) #</td>
-                <td>{{getPhysicalCores() || 0}}</td>
+            <tr ng-show="storage.selectedIaaS.id === 'aws'">
+                <td width="80%">Cost</td>
+                <td width="20%">{{data.resourceSummary.cost | currency}}/hr</td>
             </tr>
         </table>
-    </div>
 </div>

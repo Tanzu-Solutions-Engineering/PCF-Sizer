@@ -1,0 +1,227 @@
+[
+  {
+    "vm": "Ops Manager VM",
+    "id": "1",
+    "instances": 1,
+    "persistent_disk": 50,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.xlarge",
+    "singleton": true,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Ops Manager Director",
+    "id": "2",
+    "instances": 1,
+    "persistent_disk": 50,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.xlarge",
+    "singleton": true,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Consul",
+    "id": "3",
+    "instances": 3,
+    "persistent_disk": 1,
+    "dynamic_ips": 1,
+    "static_ips": 1,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "NATS",
+    "id": "4",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 1,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "etcd",
+    "id": "5",
+    "instances": 3,
+    "persistent_disk": 1,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Diego BBS",
+    "id": "6",
+    "instances": 3,
+    "persistent_disk": 1,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "S3 Blob Store",
+    "id": "7",
+    "instances": 1,
+    "ephemeral_disk": 0,
+    "persistent_disk": 0,
+    "dynamic_ips": 0,
+    "static_ips": 0,
+    "instance_type": null,
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Router",
+    "id": "8",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 1,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "RDS",
+    "id": "9",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 0,
+    "static_ips": 0,
+    "instance_type": "db.r3.large",
+    "singleton": true,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Cloud Controller",
+    "id": "10",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.xlarge",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Clock Global",
+    "id": "11",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": true,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Cloud Controller Worker",
+    "id": "12",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "UAA",
+    "id": "13",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Diego Brain",
+    "id": "14",
+    "instances": 3,
+    "persistent_disk": 1,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.medium",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Diego Cell",
+    "id": "15",
+    "instances": 15,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.2xlarge",
+    "valid_instance_types": [
+      "m3.xlarge",
+      "m3.2xlarge"
+    ],
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Doppler Server",
+    "id": "16",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 1,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Loggregator Traffic Controller",
+    "id": "17",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 1,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Compilation",
+    "id": "18",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.xlarge",
+    "singleton": true,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Errands & Tests - Type 1",
+    "id": "19",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.micro",
+    "singleton": true,
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Errands & Tests - Type 2",
+    "id": "20",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": true,
+    "tile": "Elastic Runtime"
+  }
+]
