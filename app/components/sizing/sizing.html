@@ -7,17 +7,15 @@
       <div class="panel panel-primary">
         <div class="panel-heading">Step 1.1: IaaS Tuning</div>
         <div class="panel-body">
-          <span ng-if="storage.selectedIaaS == 'vsphere'" class="animate-if">
-            <form role="form" class="form-horizontal">
-                <div class="form-group form-inline">
-                    <label class="col-md-4" for="cpuConsolidation">vCPU to Core Consolidation Ratio</label>
-                    <select class="form-control col-md-8 input-sm" id="cpuConsolidation"
-                            ng-model="data.elasticRuntimeConfig.iaasCPUtoCoreRatio"
-                            ng-options="opt as opt.text for opt in data.iaasCPUtoCoreRatioOptions"
-                            ng-change=" updateStuff();"></select>
-                </div>
-            </form>
-          </span>
+          <form role="form" class="form-horizontal">
+              <div class="form-group form-inline">
+                  <label class="col-md-5" for="cpuConsolidation">vCPU to Core Consolidation Ratio</label>
+                  <select class="form-control col-md-7 input-sm" id="cpuConsolidation"
+                          ng-model="data.elasticRuntimeConfig.iaasCPUtoCoreRatio"
+                          ng-options="opt as opt.text for opt in data.iaasCPUtoCoreRatioOptions"
+                          ng-change=" updateStuff();"></select>
+              </div>
+          </form>
         </div>
       </div>
 

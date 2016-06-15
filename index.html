@@ -3,8 +3,6 @@
 <head>
   <title>CloudFoundry Sizing and Costing Tool</title>
 
-
-  <!-- <link rel="stylesheet" href="/js/components.css"> -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/js/pcfsizer.css">
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -24,12 +22,6 @@
   <script src="app/components/sizing/iaasService.js"></script>
   <script src="app/components/services/serviceSizingController.js"></script>
 
-  <!-- <script src="app/components/plan/planController.js"></script>
-  <script src="app/components/plan/planService.js"></script>
-  <script src="app/components/version/versionController.js"></script>
-  <script src="app/components/costing/costingController.js"></script>
-  <script src="app/components/costing/costingDirectives.js"></script>
-  <script src="app/components/directives/formgroupDirective.js"></script> -->
   <script src="app/components/tooltips/tooltipsController.js"></script>
 </head>
 <body class="bg-dark" ng-app="SizerApp">
@@ -43,24 +35,14 @@
     <div class="row">
       <div class="col-md-1">
         <img src="images/icon-p-green.png" height="96" width="96">
-
-        <div id="app-nav" class="row">
-            <ul class="nav">
+        <div id="app-nav">
+            <ul class="nav nav-pills nav-stacked">
                 <li ng-class="{'active': isNavItemSelected('pcf')}">
                     <a href="#/sizing/pcf/{{storage.selectedIaaS}}/{{storage.elasticRuntimeConfig.ersVersion}}/small">PCF Sizing</a>
                 </li>
                 <li ng-class="{'active': isNavItemSelected('services')}">
                     <a href="#/sizing/services/{{storage.selectedIaaS}}">PCF Services</a>
                 </li>
-                <!-- <li>
-                    <a data-toggle="tab" href="#tab-responsive-costing">Costing</a>
-                </li> -->
-                <!-- <li>
-                    <a data-toggle="tab" href="#tab-responsive-plans">Plans</a>
-                </li> -->
-                <!-- <li>
-                    <a data-toggle="tab" href="#tab-responsive-foundations">Foundations</a>
-                </li> -->
             </ul>
         </div>
       </div>
@@ -83,8 +65,7 @@
             <div ng-include="'app/components/sizing/iaas-selection.html'"></div>
             <div ng-view></div>
           </div>
-          <div class="col-md-5">
-            <!-- <div ng-include="'app/components/sizing/iaas-selection.html'"></div> -->
+          <div class="col-md-6">
             <div ng-include="'app/components/sizing/vsphere.html'"></div>
             <div ng-include="'app/components/sizing/resource-list.html'"></div>
             <div ng-include="'app/components/sizing/cell-detail.html'"></div>
@@ -94,11 +75,18 @@
           <div class="col-md-12">
             <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
           </div>
+        </div>
       </div>
-
     </div>
   </div>
+  <div class="col-md-6" id="printSection">
+    <div ng-include="'app/components/sizing/vsphere.html'"></div>
+    <div ng-include="'app/components/sizing/resource-list.html'"></div>
+    <div ng-include="'app/components/sizing/cell-detail.html'"></div>
+    <div ng-include="'app/components/sizing/vm-detail.html'"></div>
+  </div>
 </div>
+
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

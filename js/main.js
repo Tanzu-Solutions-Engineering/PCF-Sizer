@@ -41,7 +41,6 @@
   sizerApp.controller('MainController', function($rootScope, $scope, $route, $routeParams, $location, sizingStorageService, iaasService) {
     $scope.$route = $route;
     $scope.$location = $location;
-    console.log($scope.$location);
     $scope.$routeParams = $routeParams;
     $scope.storage = sizingStorageService.data;
     $scope.data = {};
@@ -127,7 +126,6 @@
 
     $scope.isNavItemSelected = function(nav) {
       var current = $location.path().split('/')[2];
-      console.log(current === nav);
       return current === nav;
     }
    });
