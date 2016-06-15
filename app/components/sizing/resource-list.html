@@ -1,20 +1,19 @@
-<div>
-    <h3>Summary of Total Resources</h3>
-
-        <table class="table table-light">
+<div class="panel panel-primary">
+  <div class="panel-heading">Summary of Total Resources</div>
+        <table class="table">
             <tr>
                 <td width="80%">Total AZ's </td>
                 <td width="20%">{{data.resourceSummary.azCount}}</td>
             </tr>
-            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+            <tr ng-show="data.selectedIaaS.id === 'vsphere'">
                 <td width="80%">Foundation Memory (GB)</td>
                 <td width="20%">{{data.resourceSummary.ram}}</td>
             </tr>
-            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+            <tr ng-show="data.selectedIaaS.id === 'vsphere'">
                 <td width="80%">Foundation Storage (GB)</td>
                 <td width="20%">{{data.resourceSummary.disk}}</td>
             </tr>
-            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+            <tr ng-show="data.selectedIaaS.id === 'vsphere'">
                 <td width="80%">Foundation vCPU #</td>
                 <td width="20%">{{data.resourceSummary.cpu}}</td>
             </tr>
@@ -22,19 +21,19 @@
                 <td width="80%">Total IPs #</td>
                 <td width="20%">{{data.resourceSummary.ips}}</td>
             </tr>
-            <tr ng-show="storage.selectedIaaS.id === 'vsphere'">
+            <tr ng-show="data.selectedIaaS.id === 'vsphere'">
                 <td width="80%">Foundation Physical Cores (2GHz or >) #</td>
                 <td width="20%">{{getPhysicalCores()}}</td>
             </tr>
-            <tr ng-show="storage.selectedIaaS.id === 'aws'">
-                <td width="80%"><a target="_blank" href="{{storage.selectedIaaS.pricingUrl}}">Instance Types</a></td>
+            <tr ng-show="data.selectedIaaS.id === 'aws'">
+                <td width="80%"><a target="_blank" href="{{data.selectedIaaS.pricingUrl}}">Instance Types</a></td>
                 <td width="20%"></td>
             </tr>
-            <tr ng-repeat="type in data.resourceSummary.vmTypes" ng-show="storage.selectedIaaS.id === 'aws'">
+            <tr ng-repeat="type in data.resourceSummary.vmTypes" ng-show="data.selectedIaaS.id === 'aws'">
                 <td width="80%">{{type.name}} ({{type.cpu}} CPU, {{type.ram}}GB RAM)</td>
                 <td width="20%">{{type.count}} ({{type.cost | currency}}/hr)</td>
             </tr>
-            <tr ng-show="storage.selectedIaaS.id === 'aws'">
+            <tr ng-show="data.selectedIaaS.id === 'aws'">
                 <td width="80%">Cost</td>
                 <td width="20%">{{data.resourceSummary.cost | currency}}/hr</td>
             </tr>

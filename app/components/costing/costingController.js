@@ -1,5 +1,5 @@
 "use strict";
-shekelApp.controller('ShekelCostingController', function($scope, tileService, iaasService, planService, sizingStorageService) {
+shekelApp.controller('ShekelCostingController', function($scope, iaasService, planService, sizingStorageService) {
 
 	// $scope.rampUpPlans = 5;
 	//

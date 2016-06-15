@@ -1,3 +1,56 @@
-.tab-responsive a[data-toggle="tab"] {
-  color: #1B78B3;
+.bg-dark {
+    background-color: #232B2F !important;
+}
+.bg-white {
+  background-color: white;
+}
+
+.btn-highlight-alt {
+  color: #fff;
+  background-color: #138078;
+  outline: none;
+  -webkit-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+  -webkit-transition-property: background-color, color, opacity;
+  transition-property: background-color, color, opacity;
+  box-shadow: 0 2px 0 rgba(211,217,217,0.5);
+}
+
+body {
+  font-family: "Source Sans Pro","SourceSansPro",sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #243641;
+  background-color: transparent;
+}
+
+h2, .h2 {
+    font-size: 25px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    padding-top: .107em;
+    padding-bottom: .107em;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 400;
+    line-height: 1.286;
+}
+
+.panel-primary > .panel-heading {
+    background-color: #138078;
+    border-color: #138078;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #138078;
+}
+
+#app-nav > .nav > li.active > a, #app-nav > .nav > li.active > a:hover, #app-nav > .nav > li.active > a:focus {
+  background-color: #138078;
+  color: white;
 }

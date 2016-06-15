@@ -1,5 +1,5 @@
 "use strict";
-var iaasService = shekelApp.factory('iaasService', function(sizingStorageService, $http) {
+var iaasService = angular.module('SizerApp').factory('iaasService', function(sizingStorageService, $http) {
   var ramOverhead = 3;
   var diskOverhead = 20;
   var aisPerPack = 50;
@@ -7,6 +7,11 @@ var iaasService = shekelApp.factory('iaasService', function(sizingStorageService
   var iaasService = {
     vms: [],
     templateVms: [],
+    loadedConfig: {
+      iaas: null,
+      ersFixedSize: null,
+      ersVersion: null
+    },
     resourceSummary: {
       azCount: 0,
       ram: 0,

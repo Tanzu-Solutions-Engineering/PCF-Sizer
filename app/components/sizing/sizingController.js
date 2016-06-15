@@ -1,9 +1,9 @@
 "use strict";
 (function() {
-  shekelApp.controller('ShekelSizingController', function($scope, $http, tileService, iaasService, sizingStorageService) {
+    angular.module('SizerApp').controller('PCFSizingController', function($scope, $route, $routeParams, $location, $http, iaasService, sizingStorageService) {
     $scope.data = {};
     $scope.data.aiPackOptions = [];
-
+    // console.log(iaasService.getVMs('Elastic Runtime'));
     $scope.setAIPackOptions = function() {
       for (var i = 1; i <= 300; ++i) {
         $scope.data.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
@@ -132,45 +132,45 @@
       }
     ];
 
-    $scope.data.iaasSelectionList = [
-      {
-        id: 'vsphere',
-        name: 'vSphere',
-        isDefault: true,
-        isDisabled: false,
-        pricingUrl: null
-      },
-      {
-        id: 'aws',
-        name: 'AWS',
-        isDefault: false,
-        isDisabled: false,
-        pricingUrl: 'https://aws.amazon.com/ec2/pricing/'
-      },
-      {
-        id: 'azure',
-        name: 'Azure',
-        isDefault: false,
-        isDisabled: true,
-        pricingUrl: null
-      },{
-        id: 'gcp',
-        name: 'GCP',
-        isDefault: false,
-        isDisabled: true,
-        pricingUrl: null
-      },{
-        id: 'openstack',
-        name: 'OpenStack',
-        isDefault: false,
-        isDisabled: true,
-        pricingUrl: null
-      }
-    ];
+    // $scope.data.iaasSelectionList = [
+    //   {
+    //     id: 'vsphere',
+    //     name: 'vSphere',
+    //     isDefault: true,
+    //     isDisabled: false,
+    //     pricingUrl: null
+    //   },
+    //   {
+    //     id: 'aws',
+    //     name: 'AWS',
+    //     isDefault: false,
+    //     isDisabled: false,
+    //     pricingUrl: 'https://aws.amazon.com/ec2/pricing/'
+    //   },
+    //   {
+    //     id: 'azure',
+    //     name: 'Azure',
+    //     isDefault: false,
+    //     isDisabled: true,
+    //     pricingUrl: null
+    //   },{
+    //     id: 'gcp',
+    //     name: 'GCP',
+    //     isDefault: false,
+    //     isDisabled: true,
+    //     pricingUrl: null
+    //   },{
+    //     id: 'openstack',
+    //     name: 'OpenStack',
+    //     isDefault: false,
+    //     isDisabled: true,
+    //     pricingUrl: null
+    //   }
+    // ];
 
     $scope.storage = sizingStorageService.data;
-    $scope.storage.selectedIaaS = _.first($scope.data.iaasSelectionList);
-    $scope.storage.elasticRuntimeConfig = {};
+    $scope.data.selectedIaaS = _.find($scope.data.iaasSelectionList, {id: $scope.storage.selectedIaaS});
+    // $scope.storage.elasticRuntimeConfig = {};
 
     $scope.data.elasticRuntimeConfig = {
       ersVersion: $scope.data.ersVersionOptions[0],
@@ -206,17 +206,7 @@
       // };
 
       //refactor to use iaasService.getVms()
-    $scope.getVMs = function(tile) {
-      return iaasService.getVMs(tile);
-    };
 
-    $scope.getTileNames = function() { //gets all the unique tile names
-      return _.map(_.uniqBy($scope.getVMs(), 'tile'), 'tile');
-    }
-
-    $scope.getPhysicalCores = function() {
-    	return roundUp($scope.data.resourceSummary.cpu / $scope.data.elasticRuntimeConfig.iaasCPUtoCoreRatio.ratio);
-    };
 
     $scope.updateEstimatedApplicationSize = function() {
       var cell = iaasService.getDiegoCellInfo();
@@ -246,16 +236,15 @@
       }
     };
 
-    $scope.changeIaaS = function(iaas) {
-      iaasService.loadIaaSTemplate($scope.storage.selectedIaaS.id).then(function() {
-        iaasService.loadERSTemplates($scope.storage.selectedIaaS.id, $scope.data.elasticRuntimeConfig.ersVersion.value).then(function() {
-          $scope.fixedSizing($scope.storage.fixedSize);
-          $scope.data.elasticRuntimeConfig.instanceType = $scope.data.instanceTypes[0];
-        });
-      });
-    };
+    // $scope.changeIaaS = function(iaas) {
+      // iaasService.loadIaaSTemplate($scope.data.selectedIaaS.id).then(function() {
+        // iaasService.loadERSTemplates($scope.data.selectedIaaS.id, $scope.data.elasticRuntimeConfig.ersVersion.value).then(function() {
 
-    $scope.changeIaaS($scope.storage.selectedIaaS);
+        // });
+      // });
+    // };
+
+    // $scope.changeIaaS($scope.storage.selectedIaaS);
 
     $scope.setElasticRuntimeConfig = function() {
       $scope.data.elasticRuntimeConfig.runnerDisk = $scope.data.elasticRuntimeConfig.instanceType.disk;
@@ -264,10 +253,8 @@
       $scope.storage.elasticRuntimeConfig.avgAIDisk = $scope.data.elasticRuntimeConfig.avgAIDisk.value;
       $scope.storage.elasticRuntimeConfig.azCount = $scope.data.elasticRuntimeConfig.azCount;
       $scope.storage.elasticRuntimeConfig.extraRunnersPerAZ = $scope.data.elasticRuntimeConfig.extraRunnersPerAZ;
+      $scope.storage.elasticRuntimeConfig.iaasCPUtoCoreRatio = $scope.data.elasticRuntimeConfig.iaasCPUtoCoreRatio.ratio;
     }
-
-    $scope.data.cellDetailSummary = iaasService.getDiegoCellSummary();
-    $scope.data.resourceSummary = iaasService.getResourceSummary();
 
     $scope.fixedSizing = function (size) {
       $scope.storage.fixedSize = size;
@@ -292,12 +279,15 @@
       $scope.updateStuff();
     };
 
+
     $scope.updateStuff = function() {
       $scope.setElasticRuntimeConfig();
       $scope.updateEstimatedApplicationSize();
       iaasService.generateResourceSummary();
       iaasService.generateDiegoCellSummary();
     }
+
+    $scope.fixedSizing($scope.storage.fixedSize);
 
     $scope.customSizing = function (size) {
       $scope.fixedSizing('custom');
@@ -315,6 +305,11 @@
       cellInfo.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
       cellInfo.instances += ($scope.data.elasticRuntimeConfig.azCount * $scope.data.elasticRuntimeConfig.extraRunnersPerAZ)
       $scope.updateStuff();
+    };
+
+    //when controller loads, make sure if custom size to recalculate resources
+    if ($scope.storage.fixedSize === 'custom') {
+      $scope.customSizeDropdownUpdated();
     }
   });
 })();

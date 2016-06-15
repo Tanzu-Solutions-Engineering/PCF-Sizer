@@ -1,261 +1,102 @@
-<div role="form" class="form-horizontal">
-    <h3>Step 2: Estimate Application Size</h3>
-
-    <div class="panel paxl bg-neutral-9">
-      <div class="tab-simple-alt">
+<div class="panel panel-primary">
+  <div class="panel-heading">Step 2: Estimate Application Size</div>
+  <div class="panel-body">
+    <div role="form" class="form-horizontal">
+      <div class="">
         <ul class="nav nav-tabs">
-          <li class="active">
-            <a data-toggle="tab" href="#small" ng-click="fixedSizing('small')">Small</a>
+          <li ng-class="{'active': storage.fixedSize === 'small'}">
+            <a href ng-click="changeSize('small')">Small</a>
           </li>
-          <li>
-            <a data-toggle="tab" href="#medium" ng-click="fixedSizing('medium')">Medium</a>
+          <li ng-class="{'active': storage.fixedSize === 'medium'}">
+            <a href ng-click="changeSize('medium')">Medium</a>
           </li>
-          <li>
-            <a data-toggle="tab" href="#large"  ng-click="fixedSizing('large')">Large</a>
+          <li ng-class="{'active': storage.fixedSize === 'large'}">
+            <a href ng-click="changeSize('large')">Large</a>
           </li>
-          <li>
-            <a data-toggle="tab" href="#custom" ng-click="customSizing('custom')">Custom</a>
+          <li ng-class="{'active': storage.fixedSize === 'custom'}">
+            <a href ng-click="changeSize('custom')">Custom</a>
           </li>
         </ul>
-        <div class="tab-content">
-          <div class="tab-pane fade in active" id="small">
-            <dfn>Small Size of PCF Foundation and Elastic Runtime for POC and Evalution</dfn>
+      </div>
+      <div class="">
+        <p>{{data.sizingDescription}}</p>
 
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiPacks">AI Packs</label>
-                <div>{{data.elasticRuntimeConfig.aiPacks.label}}</div>
+        <div class="row">
+          <label class="col-md-5">AI Packs</label>
+          <div class="col-md-2">
+            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.aiPacks.label}}</span>
+            <span ng-show="storage.fixedSize === 'custom'">
+              <select class="form-control" ng-model="data.elasticRuntimeConfig.aiPacks"
+                  ng-options="opt as opt.label for opt in data.aiPackOptions" ng-change="customSizeDropdownUpdated()">
+              </select>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-md-5">AI Average RAM (GB)</label>
+          <div class="col-md-2">
+            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.avgRam.value}}</span>
+            <span ng-show="storage.fixedSize === 'custom'">
+              <select class="form-control" ng-model="data.elasticRuntimeConfig.avgRam"
+                  ng-options="opt as opt.value for opt in data.avgRamOptions" ng-change="customSizeDropdownUpdated()">
+              </select>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-md-5">AI Average Storage (GB)</label>
+          <div class="col-md-2">
+            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.avgAIDisk.value}}</span>
+            <span ng-show="storage.fixedSize === 'custom'">
+              <select class="form-control" ng-model="data.elasticRuntimeConfig.avgAIDisk"
+                  ng-options="opt as opt.value for opt in data.avgAIDiskOptions" ng-change="customSizeDropdownUpdated()">
+              </select>
+            </span>
+          </div>
+        </div>
 
+        <div class="row">
+          <label class="col-md-5">Cell Instance Type</label>
+          <div class="col-md-2">
+            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.instanceType.instance_type}}</span>
+            <span ng-show="storage.fixedSize === 'custom'">
+              <select class="form-control" ng-model="data.elasticRuntimeConfig.instanceType"
+                  ng-options="opt as opt.instance_type for opt in data.instanceTypes" ng-change="customSizeDropdownUpdated()">
+              </select>
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-5">Cell Mem Size (GB)</label>
+          <div class="col-md-2">{{data.elasticRuntimeConfig.runnerRam}}</div>
+        </div>
+
+        <div class="row">
+            <label class="col-md-5">Cell Ephemeral Storage Size (GB)</label>
+            <div class="col-md-2">{{data.elasticRuntimeConfig.runnerDisk}}</div>
+        </div>
+
+        <div class="row">
+            <label class="col-md-5">Availability Zone</label>
+            <div class="col-md-2">
+              <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.azCount}}</span>
+              <span ng-show="storage.fixedSize === 'custom'">
+                <select class="form-control" ng-model="data.elasticRuntimeConfig.azCount"
+                    ng-options="opt as opt for opt in data.availabilityZones" ng-change="customSizeDropdownUpdated()">
+                </select>
+              </span>
             </div>
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiAvgRam">AI Average RAM (GB)</label>
-                <div>{{data.elasticRuntimeConfig.avgRam.value}}</div>
+        </div>
+        <div class="row" ng-show="storage.fixedSize === 'custom'">
+            <label class="col-md-5">Extra Cells per AZ</label>
+            <div class="col-md-2">
+              <select class="form-control" ng-model="data.elasticRuntimeConfig.extraRunnersPerAZ"
+                  ng-options="opt as opt for opt in data.extraCellsPerAZ" ng-change="customSizeDropdownUpdated()">
+              </select>
             </div>
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiAvgStorage">AI Average Storage (GB)</label>
-                <div>{{data.elasticRuntimeConfig.avgAIDisk.value}}</div>
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="deaMemSize">Cell Mem Size (GB)</label>
-                <div>{{data.elasticRuntimeConfig.runnerRam}}</div>
-
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" for="deaEphemStorage">Cell Ephemeral Storage Size (GB)</label>
-                <div>{{data.elasticRuntimeConfig.runnerDisk}}</div>
-
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" for="az">Availability Zone</label>
-                <div>{{data.elasticRuntimeConfig.azCount}}</div>
-
-            </div>
-
-            <!-- <div class="form-group form-inline">
-                <label class="col-md-13" for="extraCells">Extra Cells Per AZ</label>
-                <div>{{data.elasticRuntimeConfig.extraRunnersPerAZ}}</div>
-
-            </div> -->
-
-
-          </div> <!-- End of Small -->
-          <div class="tab-pane fade" id="medium">
-            <dfn>{{data.sizingDescription}}</dfn>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiPacks">AI Packs</label>
-                <div>{{data.elasticRuntimeConfig.aiPacks.label}}</div>
-
-            </div>
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiAvgRam">AI Average RAM (GB)</label>
-                <div>{{data.elasticRuntimeConfig.avgRam.value}}</div>
-            </div>
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiAvgStorage">AI Average Storage (GB)</label>
-                <div>{{data.elasticRuntimeConfig.avgAIDisk.value}}</div>
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="deaMemSize">Cell Mem Size (GB)</label>
-                <div>{{data.elasticRuntimeConfig.runnerRam}}</div>
-
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" for="deaEphemStorage">Cell Ephemeral Storage Size (GB)</label>
-                <div>{{data.elasticRuntimeConfig.runnerDisk}}</div>
-
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" for="az">Availability Zone</label>
-                <div>{{data.elasticRuntimeConfig.azCount}}</div>
-
-            </div>
-
-            <!-- <div class="form-group form-inline">
-                <label class="col-md-13" for="extraCells">Extra Cells Per AZ</label>
-                <div>{{data.elasticRuntimeConfig.extraRunnersPerAZ}}</div>
-
-            </div> -->
-
-
-          </div> <!-- End of Medium -->
-          <div class="tab-pane fade" id="large">
-            <dfn>{{data.sizingDescription}}</dfn>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiPacks">AI Packs</label>
-                <div>{{data.elasticRuntimeConfig.aiPacks.label}}</div>
-
-            </div>
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiAvgRam">AI Average RAM (GB)</label>
-                <div>{{data.elasticRuntimeConfig.avgRam.value}}</div>
-            </div>
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="aiAvgStorage">AI Average Storage (GB)</label>
-                <div>{{data.elasticRuntimeConfig.avgAIDisk.value}}</div>
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" id="deaMemSize">Cell Mem Size (GB)</label>
-                <div>{{data.elasticRuntimeConfig.runnerRam}}</div>
-
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" for="deaEphemStorage">Cell Ephemeral Storage Size (GB)</label>
-                <div>{{data.elasticRuntimeConfig.runnerDisk}}</div>
-
-            </div>
-
-            <div class="form-group form-inline">
-                <label class="col-md-13" for="az">Availability Zone</label>
-                <div>{{data.elasticRuntimeConfig.azCount}}</div>
-
-            </div>
-
-            <!-- <div class="form-group form-inline">
-                <label class="col-md-13" for="extraCells">Extra Cells Per AZ</label>
-                <div>{{data.elasticRuntimeConfig.extraRunnersPerAZ}}</div>
-
-            </div> -->
-
-          </div> <!-- End of Large -->
-
-          <div class="tab-pane fade" id="custom">
-            <dfn>Custom Size of PCF Foundation and Elastic Runtime where you can choose the AI Pack Size</dfn>
-
-              <div class="form-group form-inline">
-                  <label class="col-md-13" for="aiPacks">AI Packs
-                      <!-- <a class="small" href="#" ng-click="chooser.aiHelpMeChoose = !chooser.aiHelpMeChoose">
-                          HelpMe Choose #AIs</a> -->
-                  </label>
-                  <select class="form-control col-md-6" id="aiPacks" ng-model="data.elasticRuntimeConfig.aiPacks"
-                          ng-model-options="{ getterSetter: true }"
-                          ng-options="opt as opt.label for opt in data.aiPackOptions" ng-change="customSizeDropdownUpdated()">
-                  </select>
-
-                  <!-- <div id="ai-help-me-choose" ng-show="chooser.aiHelpMeChoose"
-                       ng-include="'app/components/sizing/ai-chooser.html'"></div> -->
-              </div>
-
-              <div class="form-group form-inline">
-                  <label class="col-md-13" for="aiAvgRam">AI Average RAM (GB)</label>
-
-                  <select class="form-control col-md-6" id="aiAvgRam" ng-model="data.elasticRuntimeConfig.avgRam"
-                          ng-options="opt as opt.value for opt in data.avgRamOptions" ng-change="customSizeDropdownUpdated()">
-                  </select>
-              </div>
-
-              <div class="form-group form-inline">
-                  <label class="col-md-13" for="aiAvgStorage">AI Average Storage (GB)</label>
-                  <select class="form-control col-md-6" id="aiAvgStorage" ng-model="data.elasticRuntimeConfig.avgAIDisk"
-                          ng-options="opt as opt.value for opt in data.avgAIDiskOptions" ng-change="customSizeDropdownUpdated()">
-                  </select>
-              </div>
-
-              <div class="form-group form-inline">
-                  <label class="col-md-13" for="aiAvgStorage">Instance Type</label>
-                  <select class="form-control col-md-6" id="aiAvgStorage" ng-model="data.elasticRuntimeConfig.instanceType"
-                          ng-options="opt as opt.instance_type for opt in data.instanceTypes" ng-change="customSizeDropdownUpdated()">
-                  </select>
-              </div>
-
-                <!-- {{data.elasticRuntimeConfig.instanceType}} -->
-                <!-- {{data.instanceTypes}} -->
-
-                <div class="form-group form-inline">
-                    <label class="col-md-13" id="deaMemSize">Cell Mem Size (GB)</label>
-                    <div>{{data.elasticRuntimeConfig.runnerRam}}</div>
-
-                </div>
-
-                <div class="form-group form-inline">
-                    <label class="col-md-13" for="deaEphemStorage">Cell Ephemeral Storage Size (GB)</label>
-                    <div>{{data.elasticRuntimeConfig.runnerDisk}}</div>
-
-                </div>
-              <!-- <div class="form-group form-inline">
-                  <label class="col-md-13" for="deaMemSize">Cell Mem Size</label>
-                  <select class="form-control col-md-6" id="deaMemSize" ng-model="data.elasticRuntimeConfig.runnerSize"
-                          ng-options="opt as opt.text for opt in data.runnerSizeOptions" ng-change="dropDownTriggerSizing()">
-                  </select>
-              </div>
-
-              <div class="form-group form-inline">
-                  <label class="col-md-13" for="deaEphemStorage">Cell Ephemeral Storage Size</label>
-                  <select class="form-control col-md-6" id="deaEphemStorage" ng-model="data.elasticRuntimeConfig.runnerSizeDisk"
-                          ng-options="opt as opt.text for opt in data.runnerSizeDiskOptions" ng-change="dropDownTriggerSizing()">
-                  </select>
-              </div> -->
-
-              <!-- <div class="form-group form-inline">
-                  <label class="col-md-13" for="compilation">Compilation Jobs (Ephemeral VMs)</label>
-                  <select class="form-control col-md-6" id="compilation" ng-model="data.elasticRuntimeConfig.pcfCompilationJobs"
-                          ng-options="opt as opt.value for opt in data.pcfCompilationJobsOptions" ng-change="dropDownTriggerSizing()">
-                  </select>
-              </div> -->
-              <div class="form-group form-inline">
-                  <label class="col-md-13" for="aiAvgStorage">Availability Zones</label>
-                  <select class="form-control col-md-6" id="azs" ng-model="data.elasticRuntimeConfig.azCount"
-                          ng-options="opt as opt for opt in data.availabilityZones" ng-change="customSizeDropdownUpdated()">
-                  </select>
-              </div>
-              <div class="form-group form-inline">
-                  <label class="col-md-13" for="aiAvgStorage">Extra Cells per AZ</label>
-                  <select class="form-control col-md-6" id="azs" ng-model="data.elasticRuntimeConfig.extraRunnersPerAZ"
-                          ng-options="opt as opt for opt in data.extraCellsPerAZ" ng-change="customSizeDropdownUpdated()">
-                  </select>
-              </div>
-
-              <!-- <div class="form-group form-inline">
-                      <label class="col-md-13" for="az-input">Availability Zones</label>
-                      <input class="form-control col-md-6" name="azinput" id="az-input"
-                             type="number" min="1" ng-model="data.elasticRuntimeConfig.azCount" ng-change="customSizeDropdownUpdated()">
-                      <label class="col-md-13" for="az-dea">Extra Cells Per AZ</label>
-                      <input class="form-control col-md-6" name="azdea" id="az-dea" type="number"
-                             min="0" ng-model="elasticRuntimeConfig.extraRunnersPerAZ" ng-change="customSizeDropdownUpdated()">
-                      <div role="alert">
-                          <span class="error" ng-show="azForm.azinput.$error.number">Not valid number!</span>
-                      </div>
-              </div> -->
-
-
-          </div> <!-- End of Custom -->
-
-
-
         </div>
       </div>
     </div>
-
-
-
-
-
+  </div>
 </div>

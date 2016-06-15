@@ -1,32 +1,18 @@
-<div>
-  <table class="table table-striped table-bordered">
-    <tr>
-      <h3>Step 1: Select the IaaS</h3>
-    </tr>
+<div class="panel panel-primary">
+  <div class="panel-heading">Step 1: Select the IaaS</div>
+  <table class="table">
     <tr>
         <td ng-repeat="iaaS in data.iaasSelectionList" >
           <label>
-          <input type="radio" name="iaasSelection" ng-value="iaaS" ng-disabled="iaaS.isDisabled" ng-click="changeIaaS(iaaS)" ng-model="storage.selectedIaaS"/>
+          <input type="radio" name="iaasSelection" ng-value="iaaS" ng-disabled="iaaS.isDisabled" ng-click="changeIaaS(iaaS)" ng-model="data.selectedIaaS"/>
           {{iaaS.name}}
         </label>
       </td>
     </tr>
-</table>
+  </table>
 </div>
 
-<!-- vCPU is only relevant for vSphere-->
-<span ng-if="storage.selectedIaaS.id == 'vsphere'" class="animate-if">
-  <form role="form" class="form-horizontal">
-      <h3>Step 1.1: IaaS Tuning</h3>
-      <div class="form-group form-inline">
-          <label class="col-md-13" for="cpuConsolidation">vCPU to Core Consolidation Ratio</label>
-          <select class="form-control col-md-6 input-sm" id="cpuConsolidation"
-                  ng-model="data.elasticRuntimeConfig.iaasCPUtoCoreRatio"
-                  ng-options="opt as opt.text for opt in data.iaasCPUtoCoreRatioOptions"
-                  ng-change=" dropDownTriggerSizing();"></select>
-      </div>
-  </form>
-</span>
+
 
 <!-- AWS--
 <span ng-if="selectedIaaS.id == '1'" class="animate-if">

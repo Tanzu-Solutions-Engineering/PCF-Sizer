@@ -1,36 +1,36 @@
-<div class="col-md-24">
-<h3>VM Requirement Details</h3>
+<div class="panel panel-primary">
+  <div class="panel-heading">VM Requirement Details</div>
     <div ng-repeat="tile in getTileNames()">
-        <p>{{tile}} Resources</p>
-        <table class="table table-light table-scrollable-body">
-            <thead>
-                <tr>
-                    <th>VM</th>
-                    <th>Qty</th>
-                    <th ng-show="storage.selectedIaaS.id === 'aws'">Instance Type</th>
-                    <th ng-show="storage.selectedIaaS.id === 'vsphere'">RAM</th>
-                    <th ng-show="storage.selectedIaaS.id === 'vsphere'">vCPU</th>
-                    <th ng-show="storage.selectedIaaS.id === 'vsphere'">Total RAM</th>
-                    <th ng-show="storage.selectedIaaS.id === 'vsphere'">Total vCPU</th>
-                    <th>Total Ephemeral Disk</th>
-                    <th>Total Persistent Disk</th>
-                    <th>Total Static IPs</th>
-                    <th>Total Dynamic IPs</th>
-                </tr>
-            </thead>
-            <tr ng-repeat="vm in getVMs(tile)">
-                <td>{{vm.vm}}</td>
-                <td>{{vm.instances}}</td>
-                <td ng-show="storage.selectedIaaS.id === 'aws'">{{vm.instance_type}}  <span ng-if="vm.instance_type">({{vm.instanceInfo.cpu}} CPU, {{vm.instanceInfo.ram}}GB RAM)</span></td>
-                <td ng-show="storage.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.ram}}</td>
-                <td ng-show="storage.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.cpu}}</td>
-                <td ng-show="storage.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.ram * vm.instances}}</td>
-                <td ng-show="storage.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.cpu * vm.instances}}</td>
-                <td><span ng-if="vm.instance_type">{{vm.instanceInfo.ephemeral_disk * vm.instances}}</span></td>
-                <td><span ng-if="vm.instance_type">{{vm.persistent_disk * vm.instances}}</span></td>
-                <td><span ng-if="vm.instance_type">{{vm.static_ips * vm.instances}}</span></td>
-                <td><span ng-if="vm.instance_type">{{vm.dynamic_ips * vm.instances}}</span></td>
-            <tr>
-        </table>
-    </div>
+      <div class="panel-body"><strong>{{tile}} Resources</strong></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>VM</th>
+            <th>Qty</th>
+            <th ng-show="data.selectedIaaS.id === 'aws'">Instance Type</th>
+            <th ng-show="data.selectedIaaS.id === 'vsphere'">RAM</th>
+            <th ng-show="data.selectedIaaS.id === 'vsphere'">vCPU</th>
+            <th ng-show="data.selectedIaaS.id === 'vsphere'">Total RAM</th>
+            <th ng-show="data.selectedIaaS.id === 'vsphere'">Total vCPU</th>
+            <th>Total Ephemeral Disk</th>
+            <th>Total Persistent Disk</th>
+            <th>Total Static IPs</th>
+            <th>Total Dynamic IPs</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="vm in getVMs(tile)">
+            <td>{{vm.vm}}</td>
+            <td>{{vm.instances}}</td>
+            <td ng-show="data.selectedIaaS.id === 'aws'">{{vm.instance_type}}  <span ng-if="vm.instance_type">({{vm.instanceInfo.cpu}} CPU, {{vm.instanceInfo.ram}}GB RAM)</span></td>
+            <td ng-show="data.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.ram}}</td>
+            <td ng-show="data.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.cpu}}</td>
+            <td ng-show="data.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.ram * vm.instances}}</td>
+            <td ng-show="data.selectedIaaS.id === 'vsphere'">{{vm.instanceInfo.cpu * vm.instances}}</td>
+            <td><span ng-if="vm.instance_type">{{vm.instanceInfo.ephemeral_disk * vm.instances}}</span></td>
+            <td><span ng-if="vm.instance_type">{{vm.persistent_disk * vm.instances}}</span></td>
+            <td><span ng-if="vm.instance_type">{{vm.static_ips * vm.instances}}</span></td>
+            <td><span ng-if="vm.instance_type">{{vm.dynamic_ips * vm.instances}}</span></td>
+        </tr>
+      </table>
+  </div>
 </div>

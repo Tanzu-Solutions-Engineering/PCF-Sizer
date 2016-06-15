@@ -1,6 +1,6 @@
 "use strict";
 
-shekelApp.controller('ShekelServiceSizingController', function($scope, $http, tileService, iaasService, sizingStorageService) {
+angular.module('SizerApp').controller('ServiceSizingController', function($scope, $route, $routeParams, $location, $http, iaasService, sizingStorageService) {
     $scope.svcs = [];
     $scope.versioncache = {};
     $scope.serviceData = sizingStorageService.data;
