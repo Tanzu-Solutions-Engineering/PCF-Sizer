@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-2">
               <select class="form-control" ng-model="storage.services[service].version"
-                  ng-options="opt as opt for opt in versions">
+                  ng-options="opt as opt for opt in versions" ng-change="serviceVersionChanged(service)">
               </select>
             </div>
           </div>
@@ -40,7 +40,7 @@
               {{vm.vm}}
             </div>
             <div class="col-md-2">
-              <select class="form-control" ng-model="vm.instances" ng-options="count for count in data.numberOfInstances" ng-change="serviceUpdated(service, vm)">
+              <select class="form-control" ng-disabled="vm.singleton" ng-model="vm.instances" ng-options="count for count in data.numberOfInstances" ng-change="serviceUpdated(service, vm)">
               </select>
             </div>
             <div class="col-md-4">

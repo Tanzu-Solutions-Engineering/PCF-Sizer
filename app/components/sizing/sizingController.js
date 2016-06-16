@@ -87,6 +87,7 @@
       10
     ];
     $scope.data.persistentDiskOptions = [
+      0,
       1,
       2,
       5,

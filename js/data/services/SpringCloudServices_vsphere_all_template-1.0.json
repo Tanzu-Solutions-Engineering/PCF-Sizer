@@ -1,0 +1,16 @@
+[
+  {
+    "vm": "SCS",
+    "instances": 1,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "singleton": false,
+    "persistent_disk": 0,
+    "notes": "SCS does not actually deploy a VM, but we account for it as one so people can add / remove resources.",
+    "instance_type": "small",
+    "valid_instance_types": [
+      "small"
+    ],
+    "tile": "Spring Cloud Services"
+  }
+]

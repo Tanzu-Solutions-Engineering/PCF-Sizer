@@ -1,24 +1,30 @@
 [
   {
     "vm": "JMX Provider",
+    "id": 1,
     "instances": 1,
     "dynamic_ips": 0,
     "static_ips": 1,
     "singleton": true,
-    "ram": 4,
-    "ephemeral_disk": 8,
     "persistent_disk": 1,
-    "vcpu": 2
+    "instance_type": "medium",
+    "valid_instance_types": [
+      "medium"
+    ],
+    "tile": "Ops Metrics"
   },
   {
     "vm": "OpenTSDB Firehose Nozzle",
+    "id": 2,
     "instances": 2,
     "dynamic_ips": 0,
     "static_ips": 1,
     "singleton": false,
-    "ram": 4,
-    "ephemeral_disk": 8,
     "persistent_disk": 1,
-    "vcpu": 2
+    "instance_type": "medium",
+    "valid_instance_types": [
+      "medium"
+    ],
+    "tile": "Ops Metrics"
   }
 ]
