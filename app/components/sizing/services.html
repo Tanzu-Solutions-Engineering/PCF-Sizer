@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Step 3: Select Services</div>
     <div class="panel-body">
-      <div ng-repeat="service in data.services" class="row">
+      <div ng-repeat="service in data.services | orderBy:'name'" class="row">
         <div class="checkbox col-md-3">
           <label>
             <input type="checkbox" ng-model="storage.services[service.name].enabled" id="services[{{service.name}}]_enabled" ng-click="toggleService(service.name)"/> {{service.name}}
