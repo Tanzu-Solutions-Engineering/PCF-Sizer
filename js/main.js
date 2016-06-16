@@ -4,12 +4,12 @@
 
   sizerApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
-    .when('/sizing/pcf/:iaas/:version/:size', {
+    .when('/sizing/:iaas/:version/:size', {
       templateUrl: 'app/components/sizing/sizing.html',
       controller: 'PCFSizingController',
       controllerAs: 'vm',
       resolve: {
-        loadTemplates: function(iaasService, $route, sizingStorageService) {
+        loadErsTemplates: function(iaasService, $route, sizingStorageService) {
           var storage = sizingStorageService.data;
           var iaas = $route.current.params.iaas;
           var version = $route.current.params.version;
@@ -17,24 +17,18 @@
 
           storage.selectedIaaS = iaas;
           storage.fixedSize = size;
-          storage.elasticRuntimeConfig.ersVersion = version;
-          if (iaasService.loadedConfig.iaas !== iaas || iaasService.loadedConfig.ersVersion !== version) {
+          if (iaasService.loadedConfig.iaas !== iaas) {
             return iaasService.loadIaaSTemplate(iaas).then(function() {
-              return iaasService.loadERSTemplates(iaas, version).then(function() {
+              return iaasService.loadERSTemplates(iaas).then(function() {
                 iaasService.loadedConfig.iaas = iaas;
                 iaasService.loadedConfig.ersFixedSize = size;
-                iaasService.loadedConfig.ersVersion = version;
+                return iaasService.loadServiceTemplates(storage.selectedIaaS);
               });
             });
           }
         }
       }
-    })
-    .when('/sizing/services/:iaas', {
-      templateUrl: 'app/components/services/sizing.html',
-      controller: 'ServiceSizingController',
-      controllerAs: 'vm'
-    }).otherwise({redirectTo:'/sizing/pcf/vsphere/1.7/small'});
+    }).otherwise({redirectTo:'/sizing/vsphere/1.7/small'});
     $locationProvider.html5Mode(false);
   });
 
@@ -94,14 +88,14 @@
       $scope.storage.selectedIaaS = iaas.id;
       var version = $scope.storage.elasticRuntimeConfig.ersVersion;
       var fixedSize = $scope.storage.fixedSize;
-      $location.path(['/sizing/pcf', iaas.id, version, fixedSize].join('/'));
+      $location.path(['/sizing', iaas.id, version, fixedSize].join('/'));
     };
 
     $scope.changeVersion = function(version) {
       var iaas = $scope.storage.selectedIaaS;
       var fixedSize = $scope.storage.fixedSize;
       $scope.storage.elasticRuntimeConfig.ersVersion = version;
-      $location.path(['/sizing/pcf', iaas, version, fixedSize].join('/'));
+      $location.path(['/sizing', iaas, version, fixedSize].join('/'));
     };
 
     $scope.changeSize = function(size) {
@@ -109,7 +103,7 @@
       $scope.storage.fixedSize = size;
       var version = $scope.storage.elasticRuntimeConfig.ersVersion;
       $scope.storage.elasticRuntimeConfig.ersVersion = version;
-      $location.path(['/sizing/pcf', iaas, version, size].join('/'));
+      $location.path(['/sizing', iaas, version, size].join('/'));
     };
 
     $scope.getVMs = function(tile) {
@@ -125,7 +119,7 @@
     };
 
     $scope.isNavItemSelected = function(nav) {
-      var current = $location.path().split('/')[2];
+      var current = $location.path().split('/')[1];
       return current === nav;
     }
    });

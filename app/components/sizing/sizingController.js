@@ -132,45 +132,8 @@
       }
     ];
 
-    // $scope.data.iaasSelectionList = [
-    //   {
-    //     id: 'vsphere',
-    //     name: 'vSphere',
-    //     isDefault: true,
-    //     isDisabled: false,
-    //     pricingUrl: null
-    //   },
-    //   {
-    //     id: 'aws',
-    //     name: 'AWS',
-    //     isDefault: false,
-    //     isDisabled: false,
-    //     pricingUrl: 'https://aws.amazon.com/ec2/pricing/'
-    //   },
-    //   {
-    //     id: 'azure',
-    //     name: 'Azure',
-    //     isDefault: false,
-    //     isDisabled: true,
-    //     pricingUrl: null
-    //   },{
-    //     id: 'gcp',
-    //     name: 'GCP',
-    //     isDefault: false,
-    //     isDisabled: true,
-    //     pricingUrl: null
-    //   },{
-    //     id: 'openstack',
-    //     name: 'OpenStack',
-    //     isDefault: false,
-    //     isDisabled: true,
-    //     pricingUrl: null
-    //   }
-    // ];
-
     $scope.storage = sizingStorageService.data;
     $scope.data.selectedIaaS = _.find($scope.data.iaasSelectionList, {id: $scope.storage.selectedIaaS});
-    // $scope.storage.elasticRuntimeConfig = {};
 
     $scope.data.elasticRuntimeConfig = {
       ersVersion: $scope.data.ersVersionOptions[0],
@@ -179,34 +142,9 @@
       instanceType: {},
       runnerDisk: 0,
       runnerRam: 0,
-      // pcfCompilationJobs: $scope.data.pcfCompilationJobsOptions[4],
       iaasCPUtoCoreRatio: $scope.data.iaasCPUtoCoreRatioOptions[1],
       aiPacks : $scope.data.aiPackOptions[0]
     };
-
-      // $scope.chooser = { aiHelpMeChoose: false };
-
-      // $scope.aiChooser = {
-      // 	apps: 1,
-      // 	devs: 1,
-      // 	steps: 1
-      // };
-
-  	// This is the app instances formula. for "help me choose"
-      // $scope.ais = function() {
-      // 	var totalAis = $scope.aiChooser.apps
-      // 			* $scope.aiChooser.devs
-      // 			* $scope.aiChooser.steps;
-      // 	var packs = (totalAis /  50) + 1;
-      // 	return parseInt(packs);
-      // };
-
-      // $scope.setAis = function() {
-      // 	$scope.aiPacks($scope.aiPackOptions[$scope.ais() - 1]);
-      // };
-
-      //refactor to use iaasService.getVms()
-
 
     $scope.updateEstimatedApplicationSize = function() {
       var cell = iaasService.getDiegoCellInfo();
@@ -236,16 +174,6 @@
       }
     };
 
-    // $scope.changeIaaS = function(iaas) {
-      // iaasService.loadIaaSTemplate($scope.data.selectedIaaS.id).then(function() {
-        // iaasService.loadERSTemplates($scope.data.selectedIaaS.id, $scope.data.elasticRuntimeConfig.ersVersion.value).then(function() {
-
-        // });
-      // });
-    // };
-
-    // $scope.changeIaaS($scope.storage.selectedIaaS);
-
     $scope.setElasticRuntimeConfig = function() {
       $scope.data.elasticRuntimeConfig.runnerDisk = $scope.data.elasticRuntimeConfig.instanceType.disk;
       $scope.data.elasticRuntimeConfig.runnerRAM = $scope.data.elasticRuntimeConfig.instanceType.ram;
@@ -256,9 +184,15 @@
       $scope.storage.elasticRuntimeConfig.iaasCPUtoCoreRatio = $scope.data.elasticRuntimeConfig.iaasCPUtoCoreRatio.ratio;
     }
 
+    $scope.loadVMs = function(size, version) {
+      iaasService.addTileVMs('Elastic Runtime', size, version);
+      $scope.data.services = iaasService.getServices();
+    }
+
     $scope.fixedSizing = function (size) {
+      var version = $scope.storage.elasticRuntimeConfig.ersVersion;
+      $scope.loadVMs(size, version);
       $scope.storage.fixedSize = size;
-      iaasService.addTileVMs('Elastic Runtime', size);
       $scope.data.instanceTypes = $scope.getAvailableCellTypes();
       var cellInfo = iaasService.getDiegoCellInfo();
       $scope.data.elasticRuntimeConfig.instanceType = _.find($scope.data.instanceTypes, {instance_type: cellInfo.instance_type});
@@ -285,9 +219,22 @@
       $scope.updateEstimatedApplicationSize();
       iaasService.generateResourceSummary();
       iaasService.generateDiegoCellSummary();
-    }
+    };
 
-    $scope.fixedSizing($scope.storage.fixedSize);
+    $scope.enableService = function(service) {
+      if ($scope.storage.services[service].enabled === true) {
+        var version = $scope.storage.services[service].version;
+
+        if (version === undefined) { //version not set yet, set a default
+          version = _.first(iaasService.getTemplateVMVersions(service));
+          $scope.storage.services[service].version = version; //set the version in storage
+        }
+        iaasService.addTileVMs(service, 'all', version);
+      } else {
+        iaasService.removeVMs(service);
+      }
+      $scope.updateStuff();
+    };
 
     $scope.customSizing = function (size) {
       $scope.fixedSizing('custom');
@@ -307,6 +254,7 @@
       $scope.updateStuff();
     };
 
+    $scope.fixedSizing($scope.storage.fixedSize);
     //when controller loads, make sure if custom size to recalculate resources
     if ($scope.storage.fixedSize === 'custom') {
       $scope.customSizeDropdownUpdated();

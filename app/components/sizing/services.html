@@ -1,0 +1,20 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Step 3: Select Services</div>
+    <div class="panel-body">
+    <!-- <form class="form-inline"> -->
+      <div ng-repeat="(service, versions) in data.services" class="row">
+        <div class="checkbox col-md-3">
+          <label>
+            <input type="checkbox" ng-model="storage.services[service].enabled" id="services[{{service}}]_enabled" ng-click="enableService(service)"/> {{service}}
+          </label>
+        </div>
+        <!-- <div class=" col-md-1">
+          <select class="form-control col-md-2" ng-model="storage.services[service].enabled"
+              ng-options="opt as opt for opt in versions">
+          </select>
+        </div> -->
+      </div>
+    <!-- </form> -->
+    </div>
+  </div>
+</div>

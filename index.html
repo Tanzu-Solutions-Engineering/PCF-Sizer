@@ -28,19 +28,19 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <p>The Pivotal Cloud Foundry Sizing Requirements provided by this tool are only estimates. <p>Please work your Pivotal Contact to get the actual numbers and refer to the latest product documentation.  </p>
     </div>
-    <div ng-include="'/app/components/legal/splash.html'"></div>
+    <!-- <div ng-include="'/app/components/legal/splash.html'"></div> -->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-1">
           <img src="images/icon-p-green.png" height="96" width="96">
           <div id="app-nav">
               <ul class="nav nav-pills nav-stacked">
-                  <li ng-class="{'active': isNavItemSelected('pcf')}">
-                      <a href="#/sizing/pcf/{{storage.selectedIaaS}}/{{storage.elasticRuntimeConfig.ersVersion}}/small">PCF Sizing</a>
+                  <li ng-class="{'active': isNavItemSelected('sizing')}">
+                      <a href="#/sizing/pcf/{{storage.selectedIaaS}}/{{storage.elasticRuntimeConfig.ersVersion}}/small">Sizing</a>
                   </li>
-                  <li ng-class="{'active': isNavItemSelected('services')}">
+                  <!-- <li ng-class="{'active': isNavItemSelected('services')}">
                       <a href="#/sizing/services/{{storage.selectedIaaS}}">PCF Services</a>
-                  </li>
+                  </li> -->
               </ul>
           </div>
         </div>
@@ -59,11 +59,11 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <div ng-include="'app/components/sizing/iaas-selection.html'"></div>
               <div ng-view></div>
             </div>
-            <div class="col-md-6" id="sideSummary">
+            <div class="col-md-4" id="sideSummary">
               <div ng-include="'app/components/sizing/vsphere.html'"></div>
               <div ng-include="'app/components/sizing/resource-list.html'"></div>
               <div ng-include="'app/components/sizing/cell-detail.html'"></div>
@@ -72,13 +72,13 @@
           <div class="row">
             <div class="col-md-12" id="vmSummary">
               <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
+              <!-- {{storage}} -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

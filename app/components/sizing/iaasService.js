@@ -46,10 +46,10 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
   /**
     methods for VMs currently active
   */
-  iaasService.addTileVMs = function(tile, size) {
+  iaasService.addTileVMs = function(tile, size, version) {
     var t = this;
     this.removeVMs(tile);
-    this.getTemplateVMs(tile, size).forEach(function(vm) {
+    this.getTemplateVMs(tile, size, version).forEach(function(vm) {
       t.addVM(vm);
     });
   };
@@ -92,17 +92,34 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
     return _.remove(this.templateVms, {tile: tile});
   };
 
-  iaasService.getTemplateVMs = function(tile, size) {
-    if (tile === undefined && size === undefined) {
-      console.log('Tile and size required');
+  iaasService.getTemplateVMs = function(tile, size, version) {
+    if (tile === undefined || size === undefined || version === undefined) {
+      console.log('Tile, size and version required');
       return;
     }
-    return _.filter(this.templateVms, {tile: tile, tshirt: size});
+    return _.filter(this.templateVms, {tile: tile, tshirt: size, version: version});
   };
+
+  iaasService.getTemplateVMVersions = function(tile) {
+    return _.map(_.uniqBy(_.filter(this.templateVms, {tile: tile}), 'version'), 'version');
+  }
 
   /**
     END methods for VMs loaded from templates
   */
+
+  iaasService.getServices = function() {
+    var serviceNames = _.map(_.uniqBy(this.templateVms, 'tile'), 'tile');
+    var idx = serviceNames.indexOf('Elastic Runtime');
+    serviceNames.splice(idx, 1);
+    var services = {};
+    serviceNames.forEach(function(service) {
+      var versions = iaasService.getTemplateVMVersions(service);
+      services[service] = versions;
+    });
+
+    return services;
+  }
 
   iaasService.getInstanceTypes = function() {
     return this.instanceTypes;
@@ -155,17 +172,15 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
 
   iaasService.generateDiegoCellSummary = function() {
     var cell = this.getDiegoCellInfo();
-    if (cell !== undefined) {
-      this.diegoCellSummary.totalRam = cell.instances * cell.instanceInfo.ram;
-      this.diegoCellSummary.useableCellRam = cell.instanceInfo.ram - ramOverhead
-      this.diegoCellSummary.useableCellDisk = cell.instanceInfo.ephemeral_disk - diskOverhead;
-      this.diegoCellSummary.availableCellRam = cell.instances * this.diegoCellSummary.useableCellRam;
-      this.diegoCellSummary.availableCellRam -= (sizingStorageService.data.elasticRuntimeConfig.avgAIRAM * sizingStorageService.data.aiPacks * aisPerPack);
-      this.diegoCellSummary.availableCellDisk = cell.instances * this.diegoCellSummary.useableCellDisk;
-      this.diegoCellSummary.availableCellDisk -= (sizingStorageService.data.elasticRuntimeConfig.avgAIDisk * sizingStorageService.data.aiPacks * aisPerPack);
-      this.diegoCellSummary.numberOfCells = cell.instances;
-      this.diegoCellSummary.cellsPerAZ = Math.ceil(this.diegoCellSummary.numberOfCells / sizingStorageService.data.elasticRuntimeConfig.azCount)
-    }
+    this.diegoCellSummary.totalRam = cell.instances * cell.instanceInfo.ram;
+    this.diegoCellSummary.useableCellRam = cell.instanceInfo.ram - ramOverhead
+    this.diegoCellSummary.useableCellDisk = cell.instanceInfo.ephemeral_disk - diskOverhead;
+    this.diegoCellSummary.availableCellRam = cell.instances * this.diegoCellSummary.useableCellRam;
+    this.diegoCellSummary.availableCellRam -= (sizingStorageService.data.elasticRuntimeConfig.avgAIRAM * sizingStorageService.data.aiPacks * aisPerPack);
+    this.diegoCellSummary.availableCellDisk = cell.instances * this.diegoCellSummary.useableCellDisk;
+    this.diegoCellSummary.availableCellDisk -= (sizingStorageService.data.elasticRuntimeConfig.avgAIDisk * sizingStorageService.data.aiPacks * aisPerPack);
+    this.diegoCellSummary.numberOfCells = cell.instances;
+    this.diegoCellSummary.cellsPerAZ = Math.ceil(this.diegoCellSummary.numberOfCells / sizingStorageService.data.elasticRuntimeConfig.azCount);
   };
 
   iaasService.getDiegoCellSummary = function() {
@@ -186,20 +201,24 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
     });
   };
 
-  iaasService.processTemplates = function(sizes) {
-    Object.keys(sizes).forEach(function(size) {
-      var vms = sizes[size];
-      vms.forEach(function(vm) {
-        vm.instanceInfo = iaasService.getInstanceTypeInfo(vm.instance_type);
-        vm.tshirt = size;
-        iaasService.addTemplateVM(vm);
+  iaasService.processTemplates = function(versions) {
+    Object.keys(versions).forEach(function(version) {
+      var sizes = versions[version];
+      Object.keys(sizes).forEach(function(size) {
+        var vms = sizes[size];
+        vms.forEach(function(vm) {
+          vm.instanceInfo = iaasService.getInstanceTypeInfo(vm.instance_type);
+          vm.tshirt = size;
+          vm.version = parseFloat(version);
+          iaasService.addTemplateVM(vm);
+        });
       });
     });
   };
 
-  iaasService.loadERSTemplates = function(iaas, ersVersion) {
+  iaasService.loadERSTemplates = function(iaas) {
     var t = this;
-    var url = ['/ersjson', iaas, ersVersion].join('/');
+    var url = ['/ers', iaas].join('/');
 
     return $http.get(url)
     .success(function(data) {
@@ -211,15 +230,18 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
     });
   };
 
-  iaasService.loadTileTemplate = function(tileName, tileVersion) {
+  iaasService.loadServiceTemplates = function(iaas) {
     var t = this;
-    var url = ['/tile', $scope.serviceData.selectedIaaS.name, tileName, tileVersion].join('/');
+    var url = ['/services', iaas].join('/');
 
     return $http.get(url)
     .success(function(data) {
-      t.removeVMs(tileName);
-      t.removeTemplateVMs(tileName);
-      t.processTemplates(data);
+      Object.keys(data).forEach(function(tileName) {
+        t.removeVMs(tileName);
+        t.removeTemplateVMs(tileName);
+        t.processTemplates(data[tileName]);
+      });
+
     }).error(function(data) {
       alert("Failed to get " + tileName + " " + tileVersion + " Service Template JSON template");
     });

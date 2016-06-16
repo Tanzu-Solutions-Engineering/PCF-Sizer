@@ -5,6 +5,10 @@ angular.module('SizerApp').controller('ServiceSizingController', function($scope
     $scope.versioncache = {};
     $scope.serviceData = sizingStorageService.data;
 
+    if (iaasService.loadedConfig.iaas === null) {
+      $location.path('/');
+    }
+
     $scope.services = function() {
         return $scope.svcs
     };
@@ -61,32 +65,9 @@ angular.module('SizerApp').controller('ServiceSizingController', function($scope
         if ( $scope.versioncache[serviceName].enabled ) {
             var version =  $scope.versioncache[serviceName].selected;
             iaasService.addTileVMs(serviceName);
-            console.log('service enabled');
-            // return $scope.getTile(serviceName, version).then(function(tile) {
-            //   tileService.addTile(serviceName, version, tile);
-            //   tileService.enableTile(serviceName);
-            //   tileService.applyTemplate($scope.storage.fixedSize);
-            //
-            //
-            //     // tileService.addTile(serviceName, version, tile);
-            //     // tileService.enableTile(serviceName);
-            //     // iaasService.resetIaaSAsk();
-            //     // tileService.applyTileTemplate(serviceName,$scope.fixedSize);
-            // });
         } else {
           console.log('service disabled');
           iaasService.removeVMs(serviceName);
-            // tileService.disableTile(serviceName);
-            // iaasService.resetIaaSAsk();
-            // tileService.applyTemplate($scope.storage.fixedSize);
-            // tileService.applyTileTemplate(serviceName,$scope.fixedSize);
         }
     };
-
-    // $scope.getTile = function(tileName, tileVersion) {
-    //   return $http.get(['/tile', $scope.serviceData.selectedIaaS.name, tileName, tileVersion].join('/')).then(function(data) {
-    //     // console.log(data);
-    //       return data.data;
-    //   });
-    // };
 });

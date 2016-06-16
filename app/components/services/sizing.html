@@ -1,82 +1,75 @@
 <div id="services" ng-controller="ServiceSizingController">
-    <h3>PCF Services Sizing</h3>
-    <div ng-include="'app/components/sizing/resource-list.html'"></div>
-
-    <div class="panel panel-basic bg-neutral-9 col-md-8" ng-repeat="service in services()">
-        <div class="panel-header">
-
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" ng-model="versioncache[service].enabled"
-                           ng-click="toggleService(service); config=false">{{service}}</input>
-                </label>
-            </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Step 2: Select Services</div>
+    <div class="panel panel-primary" ng-repeat="service in services()">
+      <div class="panel-header">
+        <div class="checkbox">
+          <label>
+              <input type="checkbox" ng-model="versioncache[service].enabled"
+                 ng-click="toggleService(service); config=false">{{service}}</input>
+          </label>
         </div>
+      </div>
 
-        <div class="panel-body">
-            <form class="form-group form-inline" role="form">
-                <label for="version" class="">Version</label>
-                <select class="form-control input-sm" id="version"
-                        ng-model="versioncache[service].selected"
-                        ng-options="version for version in versioncache[service].elements">
-                </select>
-            </form>
+      <div class="panel-body">
+        <form class="form-group form-inline" role="form">
+          <label for="version" class="">Version</label>
+          <select class="form-control input-sm" id="version"
+                  ng-model="versioncache[service].selected"
+                  ng-options="version for version in versioncache[service].elements">
+          </select>
+        </form>
 
-            <!--TODO seems like theres a better way to do the enable / disable of the service / config button-->
-            <a ng-click="config=!config" ng-show="versioncache[service].enabled">Configure</a>
-            <span ng-hide="versioncache[service].enabled">Configure</span>
+        <!--TODO seems like theres a better way to do the enable / disable of the service / config button-->
+        <a ng-click="config=!config" ng-show="versioncache[service].enabled">Configure</a>
+        <span ng-hide="versioncache[service].enabled">Configure</span>
 
-            <div class="row" ng-show="config">
-                <p>
-                    Configure {{service}} for one AZ. For singleton jobs, you cannot configure the instances.
-                    The selection determines the final topology and resource needs for the foundation.
-                </p>
+        <div class="row" ng-show="config">
+          <p>
+              Configure {{service}} for one AZ. For singleton jobs, you cannot configure the instances.
+              The selection determines the final topology and resource needs for the foundation.
+          </p>
 
-                <div ng-repeat="vm in getActiveTemplate(service)">
-                    <h4>{{vm.vm}}</h4>
-                    <div class="form-horizontal form-group form-inline">
-                        <div>{{vm.notes}}</div>
+          <div ng-repeat="vm in getActiveTemplate(service)">
+            <h4>{{vm.vm}}</h4>
+            <div class="form-horizontal form-group form-inline">
+              <div>{{vm.notes}}</div>
 
-                        <!--TODO Directive-->
-                        <div class="row" ng-hide="vm.singleton">
-                            <label class="col-md-7" for="vm-instances">Instances</label>
-                            <input class="form-control col-md-1" id="vm-instances"
-                                   type="number" min="1" ng-model="vm.instances">
-                        </div>
+              <!--TODO Directive-->
+              <div class="row" ng-hide="vm.singleton">
+                <label class="col-md-7" for="vm-instances">Instances</label>
+                <input class="form-control col-md-1" id="vm-instances"
+                   type="number" min="1" ng-model="vm.instances">
+              </div>
 
-                        <div class="row">
-                            <label class="col-md-7" for="vm-ram">RAM</label>
-                            <input class="form-control col-md-1" id="vm-ram"
-                                   type="number" min="1" ng-model="vm.type.ram"
-                                   ng-change="toggleService(service)">
-                        </div>
-                        <div class="row">
-                            <label class="col-md-7" for="vm-vcpu">vCPU</label>
-                            <input class="form-control col-md-1" id="vm-vcpu"
-                                   type="number" min="1" ng-model="vm.type.cpu"
-                                   ng-change="toggleService(service)">
-                        </div>
-                        <div class="row" ng-show="vm.persistent_disk > 0">
-                            <label class="col-md-7" for="vm-persistent-disk">Persistent Disk</label>
-                            <input class="form-control col-md-1" id="vm-persistent-disk"
-                                   type="number" min="1" ng-model="vm.persistent_disk"
-                                   ng-change="toggleService(service)">
-                        </div>
-                        <div class="row">
-                            <label class="col-md-7" for="vm-ephemeral-disk">Ephemeral Disk</label>
-                            <input class="form-control col-md-1" id="vm-ephemeral-disk"
-                                   type="number" min="1" ng-model="vm.type.ephemeral_disk"
-                                   ng-change="toggleService(service)">
-                        </div>
-
-                    </div>
-                </div>
+              <div class="row">
+                <label class="col-md-7" for="vm-ram">RAM</label>
+                <input class="form-control col-md-1" id="vm-ram"
+                   type="number" min="1" ng-model="vm.type.ram"
+                   ng-change="toggleService(service)">
+              </div>
+              <div class="row">
+                <label class="col-md-7" for="vm-vcpu">vCPU</label>
+                <input class="form-control col-md-1" id="vm-vcpu"
+                   type="number" min="1" ng-model="vm.type.cpu"
+                   ng-change="toggleService(service)">
+              </div>
+              <div class="row" ng-show="vm.persistent_disk > 0">
+                <label class="col-md-7" for="vm-persistent-disk">Persistent Disk</label>
+                <input class="form-control col-md-1" id="vm-persistent-disk"
+                   type="number" min="1" ng-model="vm.persistent_disk"
+                   ng-change="toggleService(service)">
+              </div>
+              <div class="row">
+                <label class="col-md-7" for="vm-ephemeral-disk">Ephemeral Disk</label>
+                <input class="form-control col-md-1" id="vm-ephemeral-disk"
+                   type="number" min="1" ng-model="vm.type.ephemeral_disk"
+                   ng-change="toggleService(service)">
+              </div>
             </div>
+          </div>
         </div>
-
+      </div>
     </div>
+  </div>
 </div>
-
-<div class="row">
-    <div id="vm-detail" ng-include="'app/components/sizing/vm-detail.html'"></div>
-</div>`
