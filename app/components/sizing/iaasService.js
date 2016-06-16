@@ -124,13 +124,25 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
     var serviceNames = _.map(_.uniqBy(this.templateVms, 'tile'), 'tile');
     var idx = serviceNames.indexOf('Elastic Runtime');
     serviceNames.splice(idx, 1);
-    var services = {};
+    var services = [];
     serviceNames.forEach(function(service) {
       var versions = iaasService.getTemplateVMVersions(service);
-      services[service] = versions;
+      services.push(
+        {
+            name: service,
+            versions: versions
+        }
+      )
     });
 
     return services;
+  };
+
+  iaasService.getServiceAICount = function() {
+    var services = _.filter(this.vms, {deployed_application: true});
+    return _.reduce(_.map(services, 'instances'), function(sum, n) {
+      return sum + n;
+    }) || 0;
   }
 
   iaasService.getInstanceTypes = function() {

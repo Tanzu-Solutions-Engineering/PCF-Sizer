@@ -1,6 +1,6 @@
 [
   {
-    "vm": "SSC GemFire Broker",
+    "vm": "GemFire Broker",
     "id": 1,
     "instances": 2,
     "persistent_disk": 5,
@@ -14,7 +14,7 @@
     "tile": "Gemfire Session State Caching"
   },
   {
-    "vm": "SSC GemFire Locator",
+    "vm": "GemFire Locator",
     "id": 2,
     "instances": 2,
     "persistent_disk": 1,
@@ -28,7 +28,7 @@
     "tile": "Gemfire Session State Caching"
   },
   {
-    "vm": "SSC GemFire Server",
+    "vm": "GemFire Server",
     "id": 3,
     "instances": 3,
     "persistent_disk": 10,

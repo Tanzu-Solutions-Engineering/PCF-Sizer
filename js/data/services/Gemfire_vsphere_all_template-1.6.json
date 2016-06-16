@@ -11,7 +11,7 @@
     "valid_instance_types": [
       "medium"
     ],
-    "tile": "Gemfire"
+    "tile": "Pivotal Gemfire"
   },
   {
     "vm": "GemFire locator (Plan 1)",
@@ -24,7 +24,7 @@
       "micro"
     ],
     "singleton": false,
-    "tile": "Gemfire"
+    "tile": "Pivotal Gemfire"
   },
   {
     "vm": "GemFire locator (Plan 2)",
@@ -37,7 +37,7 @@
       "micro"
     ],
     "singleton": false,
-    "tile": "Gemfire"
+    "tile": "Pivotal Gemfire"
   },
   {
     "vm": "GemFire locator (Plan 3)",
@@ -50,7 +50,7 @@
       "micro"
     ],
     "singleton": false,
-    "tile": "Gemfire"
+    "tile": "Pivotal Gemfire"
   },
   {
     "vm": "GemFire server (Plan 1)",
@@ -63,7 +63,7 @@
       "medium"
     ],
     "singleton": false,
-    "tile": "Gemfire"
+    "tile": "Pivotal Gemfire"
   },
   {
     "vm": "GemFire server (Plan 2)",
@@ -76,7 +76,7 @@
       "medium"
     ],
     "singleton": false,
-    "tile": "Gemfire"
+    "tile": "Pivotal Gemfire"
   },
   {
     "vm": "GemFire server (Plan 3)",
@@ -89,6 +89,6 @@
       "medium"
     ],
     "singleton": false,
-    "tile": "Gemfire"
+    "tile": "Pivotal Gemfire"
   }
 ]

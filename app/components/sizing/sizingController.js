@@ -275,6 +275,7 @@
         iaasService.removeVMs(service);
         $scope.storage.services[service] = {}; //remove all config saved in storage for the service
       }
+      $scope.storage.serviceAICount = iaasService.getServiceAICount();
       $scope.updateStuff();
     };
 
@@ -331,6 +332,12 @@
       iaasService.generateResourceSummary();
       iaasService.generateDiegoCellSummary();
     };
+
+    $scope.serviceCountUpdated = function(service, vm) {
+      var storedVM = _.find($scope.storage.services[service].vms, {name: vm.vm});
+      storedVM.instances = vm.instances;
+      $scope.storage.serviceAICount = iaasService.getServiceAICount();
+    }
 
     $scope.serviceVersionChanged = function(service) {
       var version = $scope.storage.services[service].version;
