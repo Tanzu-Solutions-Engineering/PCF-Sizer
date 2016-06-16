@@ -263,7 +263,6 @@
 
     $scope.toggleService = function(service) {
       $scope.storage.services[service].configure = false;
-      $scope.storage.services[service].vms = [];
       if ($scope.storage.services[service].enabled === true) {
         var version = $scope.storage.services[service].version;
         if (version === undefined) { //version not set yet, set a default
@@ -280,6 +279,7 @@
 
     $scope.addServiceVMs = function(service, version) {
       iaasService.addTileVMs(service, 'all', version);
+      $scope.storage.services[service].vms = [];
       iaasService.getVMs(service).forEach(function(vm) {
         var vmInfo = {
           name: vm.vm,
@@ -333,6 +333,7 @@
 
     $scope.serviceVersionChanged = function(service) {
       var version = $scope.storage.services[service].version;
+      $scope.addServiceVMs(service, version);
     }
 
     $scope.fixedSizing($scope.storage.fixedSize);
