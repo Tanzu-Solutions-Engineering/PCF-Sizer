@@ -21,6 +21,13 @@
     "cost": 0.067
   },
   {
+    "name": "m3.large",
+    "cpu": 2,
+    "ram": 7.5,
+    "ephemeral_disk": 16,
+    "cost": 0.133
+  },
+  {
     "name": "m3.xlarge",
     "cpu": 4,
     "ram": 15,
@@ -40,5 +47,12 @@
     "ram": 15,
     "ephemeral_disk": 0,
     "cost": 0.290
+  },
+  {
+    "name": "r3.4xlarge",
+    "cpu": 4,
+    "ram": 15,
+    "ephemeral_disk": 32,
+    "cost": 1.33
   }
 ]

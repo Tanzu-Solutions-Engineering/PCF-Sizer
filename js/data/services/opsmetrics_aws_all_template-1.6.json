@@ -1,0 +1,30 @@
+[
+  {
+    "vm": "JMX Provider",
+    "id": 1,
+    "instances": 1,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": true,
+    "persistent_disk": 1,
+    "instance_type": "m3.large",
+    "valid_instance_types": [
+      "m3.large"
+    ],
+    "tile": "Ops Metrics"
+  },
+  {
+    "vm": "OpenTSDB Firehose Nozzle",
+    "id": 2,
+    "instances": 2,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": false,
+    "persistent_disk": 1,
+    "instance_type": "m3.large",
+    "valid_instance_types": [
+      "m3.large"
+    ],
+    "tile": "Ops Metrics"
+  }
+]

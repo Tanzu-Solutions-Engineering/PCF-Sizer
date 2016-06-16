@@ -1,0 +1,44 @@
+[
+  {
+    "vm": "GemFire Broker",
+    "id": 1,
+    "instances": 2,
+    "persistent_disk": 5,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": false,
+    "instance_type": "m3.large",
+    "valid_instance_types": [
+      "m3.large"
+    ],
+    "tile": "Gemfire Session State Caching"
+  },
+  {
+    "vm": "GemFire Locator",
+    "id": 2,
+    "instances": 2,
+    "persistent_disk": 1,
+    "dynamic_ips": 0,
+    "static_ips": 1,
+    "singleton": false,
+    "instance_type": "t2.small",
+    "valid_instance_types": [
+      "t2.small"
+    ],
+    "tile": "Gemfire Session State Caching"
+  },
+  {
+    "vm": "GemFire Server",
+    "id": 3,
+    "instances": 3,
+    "persistent_disk": 10,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "singleton": false,
+    "instance_type": "m3.large",
+    "valid_instance_types": [
+      "m3.large"
+    ],
+    "tile": "Gemfire Session State Caching"
+  }
+]
