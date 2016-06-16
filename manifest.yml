@@ -1,6 +1,5 @@
 applications:
-- name: shekel
+- name: pcfsizer
   memory: 128M
-  host: shekel-dev
+  host: pcfsizer-dev
   buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.5.4
-
