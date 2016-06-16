@@ -7,18 +7,17 @@
             <input type="checkbox" ng-model="storage.services[service].enabled" id="services[{{service}}]_enabled" ng-click="toggleService(service)"/> {{service}}
           </label>
         </div>
-        <div class="col-md-1" ng-show="storage.services[service].enabled">
+        <div class="col-md-1 margin-top-10" ng-show="storage.services[service].enabled">
           <a href ng-click="storage.services[service].configure = !storage.services[service].configure">Configure</a>
         </div>
-        <div class="col-md-8" ng-show="storage.services[service].configure">
+        <div class="col-md-8 margin-top-10" ng-show="storage.services[service].configure">
           <div class="row">
-            <div class="col-md-4">
-              <label>Version</label>
-            </div>
-            <div class="col-md-2">
+            <div class="col-md-offset-4 col-md-4">
+              <label>Version
               <select class="form-control" ng-model="storage.services[service].version"
                   ng-options="opt as opt for opt in versions" ng-change="serviceVersionChanged(service)">
               </select>
+              </label>
             </div>
           </div>
           <div class="row">
@@ -53,6 +52,7 @@
               </select>
             </div>
           </div>
+          <div class="margin-bottom-20"></div>
         </div>
       </div>
     </div>
