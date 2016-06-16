@@ -60,12 +60,10 @@ app.get('/services/:iaas', function(req, res) {
 
   services.forEach(function(service) {
     var files = glob.sync('js/data/services/' + service + '_' + req.params['iaas'] + '*.json');
-    // console.log(files);
     var perVersionJson = {};
     files.forEach(function(file) {
       var withPath = file.split('-')[0];
       var version = file.split('-')[1].replace('.json', '');
-      // var size = withPath.split('/')[3].split('_')[2];
       var sizeFiles = glob.sync('js/data/services/' + service + '_' + req.params['iaas'] + '_*' + version + '.json');
       var sizeJson = {};
       sizeFiles.forEach(function(file) {

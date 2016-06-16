@@ -1,20 +1,60 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Step 3: Select Services</div>
     <div class="panel-body">
-    <!-- <form class="form-inline"> -->
       <div ng-repeat="(service, versions) in data.services" class="row">
         <div class="checkbox col-md-3">
           <label>
-            <input type="checkbox" ng-model="storage.services[service].enabled" id="services[{{service}}]_enabled" ng-click="enableService(service)"/> {{service}}
+            <input type="checkbox" ng-model="storage.services[service].enabled" id="services[{{service}}]_enabled" ng-click="toggleService(service)"/> {{service}}
           </label>
         </div>
-        <!-- <div class=" col-md-1">
-          <select class="form-control col-md-2" ng-model="storage.services[service].enabled"
-              ng-options="opt as opt for opt in versions">
-          </select>
-        </div> -->
+        <div class="col-md-1" ng-show="storage.services[service].enabled">
+          <a href ng-click="storage.services[service].configure = !storage.services[service].configure">Configure</a>
+        </div>
+        <div class="col-md-8" ng-show="storage.services[service].configure">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Version</label>
+            </div>
+            <div class="col-md-2">
+              <select class="form-control" ng-model="storage.services[service].version"
+                  ng-options="opt as opt for opt in versions">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <strong>VM</strong>
+            </div>
+            <div class="col-md-2">
+              <strong>Instances</strong>
+            </div>
+            <div class="col-md-4">
+              <strong>Instance Type</strong>
+            </div>
+            <div class="col-md-2">
+              <strong>Persistent Disk</strong>
+            </div>
+          </div>
+          <div ng-repeat="vm in getServiceVMs(service)" class="row">
+            <div class="col-md-4">
+              {{vm.vm}}
+            </div>
+            <div class="col-md-2">
+              <select class="form-control" ng-model="vm.instances" ng-options="count for count in data.numberOfInstances" ng-change="serviceUpdated(service, vm)">
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select class="form-control" ng-model="vm.instance_type" ng-change="serviceUpdated(service, vm)">
+                  <option value="{{type}}" ng-repeat="type in vm.valid_instance_types">{{getInstanceTypeInfo(type).name}} ({{getInstanceTypeInfo(type).cpu}} CPU, {{getInstanceTypeInfo(type).ram}} RAM)</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select class="form-control" ng-model="vm.persistent_disk" ng-options="disk for disk in data.persistentDiskOptions" ng-change="serviceUpdated(service, vm)">
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-    <!-- </form> -->
     </div>
   </div>
 </div>

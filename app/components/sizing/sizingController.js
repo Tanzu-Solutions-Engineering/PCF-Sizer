@@ -3,7 +3,6 @@
     angular.module('SizerApp').controller('PCFSizingController', function($scope, $route, $routeParams, $location, $http, iaasService, sizingStorageService) {
     $scope.data = {};
     $scope.data.aiPackOptions = [];
-    // console.log(iaasService.getVMs('Elastic Runtime'));
     $scope.setAIPackOptions = function() {
       for (var i = 1; i <= 300; ++i) {
         $scope.data.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
@@ -25,7 +24,7 @@
   	 * code defaults to index 0, which should always return the latest
   	 * version
   	 */
-    $scope.data.ersVersionOptions = [
+    $scope.data.ersVersionOptions = [ //this can be removed once we pull in versions properly for ERS
       {value: 1.7},
       {value: 1.6}
     ];
@@ -74,6 +73,40 @@
       9,
       10
     ];
+    $scope.data.numberOfInstances = [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ];
+    $scope.data.persistentDiskOptions = [
+      1,
+      2,
+      5,
+      10,
+      20,
+      30,
+      50,
+      75,
+      100,
+      150,
+      200,
+      300,
+      500,
+      740,
+      1000,
+      2000,
+      5000,
+      10000,
+      160000
+    ]
 
     $scope.data.iaasCPUtoCoreRatioOptions = [
       {text: "2:1", ratio:2},
@@ -157,26 +190,33 @@
     };
 
     $scope.getAvailableCellTypes = function() {
-      var cellInfo = iaasService.getDiegoCellInfo();
-      if (cellInfo !== undefined) {
-        var choices = [];
-        cellInfo.valid_instance_types.forEach(function(type) {
-          var specs = iaasService.getInstanceTypeInfo(type);
-          choices.push({
-            instance_type: type,
-            cpu: specs.cpu,
-            ram: specs.ram,
-            cost: specs.cost,
-            disk: specs.ephemeral_disk
-          });
-        });
-        return choices;
-      }
+      var cell = iaasService.getDiegoCellInfo();
+      return $scope.getAvailableInstanceTypes(cell);
     };
+
+    $scope.getAvailableInstanceTypes = function(vm) {
+      var choices = [];
+      vm.valid_instance_types.forEach(function(type) {
+        var specs = iaasService.getInstanceTypeInfo(type);
+        choices.push({
+          instance_type: type,
+          cpu: specs.cpu,
+          ram: specs.ram,
+          cost: specs.cost,
+          disk: specs.ephemeral_disk
+        });
+      });
+      return choices;
+    };
+
+    $scope.getInstanceTypeInfo = function(instanceType) {
+      return iaasService.getInstanceTypeInfo(instanceType);
+    }
 
     $scope.setElasticRuntimeConfig = function() {
       $scope.data.elasticRuntimeConfig.runnerDisk = $scope.data.elasticRuntimeConfig.instanceType.disk;
       $scope.data.elasticRuntimeConfig.runnerRAM = $scope.data.elasticRuntimeConfig.instanceType.ram;
+      $scope.storage.elasticRuntimeConfig.diegoCellInstanceType = $scope.data.elasticRuntimeConfig.instanceType.instance_type;
       $scope.storage.elasticRuntimeConfig.avgAIRAM = $scope.data.elasticRuntimeConfig.avgRam.value;
       $scope.storage.elasticRuntimeConfig.avgAIDisk = $scope.data.elasticRuntimeConfig.avgAIDisk.value;
       $scope.storage.elasticRuntimeConfig.azCount = $scope.data.elasticRuntimeConfig.azCount;
@@ -221,19 +261,38 @@
       iaasService.generateDiegoCellSummary();
     };
 
-    $scope.enableService = function(service) {
+    $scope.toggleService = function(service) {
+      $scope.storage.services[service].configure = false;
+      $scope.storage.services[service].vms = [];
       if ($scope.storage.services[service].enabled === true) {
         var version = $scope.storage.services[service].version;
-
         if (version === undefined) { //version not set yet, set a default
           version = _.first(iaasService.getTemplateVMVersions(service));
           $scope.storage.services[service].version = version; //set the version in storage
         }
-        iaasService.addTileVMs(service, 'all', version);
+        $scope.addServiceVMs(service, version);
       } else {
         iaasService.removeVMs(service);
+        $scope.storage.services[service] = {}; //remove all config saved in storage for the service
       }
       $scope.updateStuff();
+    };
+
+    $scope.addServiceVMs = function(service, version) {
+      iaasService.addTileVMs(service, 'all', version);
+      iaasService.getVMs(service).forEach(function(vm) {
+        var vmInfo = {
+          name: vm.vm,
+          instances: vm.instances,
+          instance_type: vm.instance_type,
+          persistent_disk: vm.persistent_disk
+        };
+        $scope.storage.services[service].vms.push(vmInfo);
+      });
+    };
+
+    $scope.getServiceVMs = function(service) {
+      return iaasService.getVMs(service);
     };
 
     $scope.customSizing = function (size) {
@@ -244,7 +303,8 @@
     $scope.customSizeDropdownUpdated = function() {
       $scope.setAiPacks($scope.data.elasticRuntimeConfig.aiPacks.value);
       var cellInfo = iaasService.getDiegoCellInfo();
-      var templateCellInfo = iaasService.getDiegoCellTemplateInfo();
+      cellInfo.instance_type = $scope.data.elasticRuntimeConfig.instanceType.instance_type;
+      cellInfo.instanceInfo.cpu = $scope.data.elasticRuntimeConfig.instanceType.cpu;
       cellInfo.instanceInfo.ephemeral_disk = $scope.data.elasticRuntimeConfig.instanceType.disk;
       cellInfo.instanceInfo.ram = $scope.data.elasticRuntimeConfig.instanceType.ram;
       var numbersOfCellsBasedOnRam = ($scope.data.elasticRuntimeConfig.aiPacks.value * iaasService.getAIsPerPack() * $scope.data.elasticRuntimeConfig.avgRam.value) / (cellInfo.instanceInfo.ram - iaasService.getRamOverhead());
@@ -253,6 +313,27 @@
       cellInfo.instances += ($scope.data.elasticRuntimeConfig.azCount * $scope.data.elasticRuntimeConfig.extraRunnersPerAZ)
       $scope.updateStuff();
     };
+
+    $scope.serviceUpdated = function(service, vm) {
+      var instanceInfo = iaasService.getInstanceTypeInfo(vm.instance_type);
+      var storedVM = _.find($scope.storage.services[service].vms, {name: vm.vm});
+      //update storage
+      storedVM.instances = vm.instances;
+      storedVM.instance_type = vm.instance_type;
+      storedVM.persistent_disk = vm.persistent_disk;
+
+      //update existing VM info
+      vm.instanceInfo.name = instanceInfo.name;
+      vm.instanceInfo.cpu = instanceInfo.cpu;
+      vm.instanceInfo.ram = instanceInfo.ram;
+      vm.instanceInfo.ephemeral_disk = instanceInfo.ephemeral_disk;
+      iaasService.generateResourceSummary();
+      iaasService.generateDiegoCellSummary();
+    };
+
+    $scope.serviceVersionChanged = function(service) {
+      var version = $scope.storage.services[service].version;
+    }
 
     $scope.fixedSizing($scope.storage.fixedSize);
     //when controller loads, make sure if custom size to recalculate resources

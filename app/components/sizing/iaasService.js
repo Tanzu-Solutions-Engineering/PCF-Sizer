@@ -63,7 +63,7 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
   };
 
   iaasService.removeVMs = function(tile) {
-    return _.remove(this.vms, {tile: tile});
+    _.remove(this.vms, {tile: tile});
   };
 
   iaasService.getVMs = function(tile) {
@@ -89,7 +89,7 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
   };
 
   iaasService.removeTemplateVMs = function(tile) {
-    return _.remove(this.templateVms, {tile: tile});
+    _.remove(this.templateVms, {tile: tile});
   };
 
   iaasService.getTemplateVMs = function(tile, size, version) {
@@ -107,6 +107,18 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
   /**
     END methods for VMs loaded from templates
   */
+
+  iaasService.removeAllServiceVMs = function() {
+    _.remove(this.vms, function(n) {
+      return n.tile !== 'Elastic Runtime';
+    });
+  };
+
+  iaasService.removeAllServiceTemplateVMs = function() {
+    _.remove(this.templateVms, function(n) {
+      return n.tile !== 'Elastic Runtime';
+    });
+  };
 
   iaasService.getServices = function() {
     var serviceNames = _.map(_.uniqBy(this.templateVms, 'tile'), 'tile');
@@ -207,7 +219,8 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
       Object.keys(sizes).forEach(function(size) {
         var vms = sizes[size];
         vms.forEach(function(vm) {
-          vm.instanceInfo = iaasService.getInstanceTypeInfo(vm.instance_type);
+          vm.instanceInfo = {};
+          angular.extend(vm.instanceInfo, iaasService.getInstanceTypeInfo(vm.instance_type));
           vm.tshirt = size;
           vm.version = parseFloat(version);
           iaasService.addTemplateVM(vm);
@@ -219,11 +232,10 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
   iaasService.loadERSTemplates = function(iaas) {
     var t = this;
     var url = ['/ers', iaas].join('/');
-
+    t.removeVMs('Elastic Runtime');
+    t.removeTemplateVMs('Elastic Runtime');
     return $http.get(url)
     .success(function(data) {
-      t.removeVMs('Elastic Runtime');
-      t.removeTemplateVMs('Elastic Runtime');
       t.processTemplates(data);
     }).error(function(data) {
       alert("Failed to get PCF Template JSON template");
@@ -233,15 +245,13 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
   iaasService.loadServiceTemplates = function(iaas) {
     var t = this;
     var url = ['/services', iaas].join('/');
-
+    t.removeAllServiceVMs();
+    t.removeAllServiceTemplateVMs();
     return $http.get(url)
     .success(function(data) {
       Object.keys(data).forEach(function(tileName) {
-        t.removeVMs(tileName);
-        t.removeTemplateVMs(tileName);
         t.processTemplates(data[tileName]);
       });
-
     }).error(function(data) {
       alert("Failed to get " + tileName + " " + tileVersion + " Service Template JSON template");
     });

@@ -1,13 +1,14 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Step 1: Select the IaaS</div>
-  <table class="table">
-    <tr>
+    <table class="table">
+      <tr>
         <td ng-repeat="iaaS in data.iaasSelectionList" >
           <label>
-          <input type="radio" name="iaasSelection" ng-value="iaaS" ng-disabled="iaaS.isDisabled" ng-click="changeIaaS(iaaS)" ng-model="data.selectedIaaS"/>
-          {{iaaS.name}}
-        </label>
-      </td>
-    </tr>
-  </table>
+            <input type="radio" name="iaasSelection" ng-value="iaaS" ng-disabled="iaaS.isDisabled" ng-click="changeIaaS(iaaS)" ng-model="data.selectedIaaS"/>
+            {{iaaS.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

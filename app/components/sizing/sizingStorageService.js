@@ -8,8 +8,6 @@
         serviceAICount: 0,
         selectedIaaS: 'vsphere',
         elasticRuntimeConfig: {
-          runnerRAM:0,
-          runnerDisk:0,
           azCount: 0,
           extraRunnersPerAZ: 0,
           avgAIRAM: 0,

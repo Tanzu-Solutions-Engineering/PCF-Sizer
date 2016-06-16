@@ -3,7 +3,7 @@
     "vm": "GemFire Broker",
     "id": 1,
     "instances": 2,
-    "persistent_disk": 4,
+    "persistent_disk": 5,
     "dynamic_ips": 0,
     "static_ips": 1,
     "singleton": false,
@@ -55,7 +55,7 @@
   {
     "vm": "GemFire server (Plan 1)",
     "instances": 3,
-    "persistent_disk": 6,
+    "persistent_disk": 5,
     "dynamic_ips": 1,
     "static_ips": 0,
     "instance_type": "medium",
@@ -68,7 +68,7 @@
   {
     "vm": "GemFire server (Plan 2)",
     "instances": 5,
-    "persistent_disk": 8,
+    "persistent_disk": 10,
     "dynamic_ips": 1,
     "static_ips": 0,
     "instance_type": "medium",
@@ -81,7 +81,7 @@
   {
     "vm": "GemFire server (Plan 3)",
     "instances": 7,
-    "persistent_disk": 8,
+    "persistent_disk": 10,
     "dynamic_ips": 1,
     "static_ips": 0,
     "instance_type": "medium",
