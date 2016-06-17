@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">Step 3: Estimate Application Size</div>
+  <div class="panel-heading bg-brand-6">Step 3: Estimate Application Size</div>
   <div class="panel-body">
-    <div role="form" class="form-horizontal">
+    <div>
       <div class="">
         <ul class="nav nav-tabs">
           <li ng-class="{'active': storage.fixedSize === 'small'}">
@@ -22,8 +22,8 @@
         <p>{{data.sizingDescription}}</p>
 
         <div class="row">
-          <label class="col-md-5">AI Packs</label>
-          <div class="col-md-2">
+          <label class="col-md-10">AI Packs</label>
+          <div class="col-md-4">
             <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.aiPacks.label}}</span>
             <span ng-show="storage.fixedSize === 'custom'">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.aiPacks"
@@ -33,8 +33,8 @@
           </div>
         </div>
         <div class="row">
-          <label class="col-md-5">AI Average RAM (GB)</label>
-          <div class="col-md-2">
+          <label class="col-md-10">AI Average RAM (GB)</label>
+          <div class="col-md-4">
             <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.avgRam.value}}</span>
             <span ng-show="storage.fixedSize === 'custom'">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.avgRam"
@@ -44,8 +44,8 @@
           </div>
         </div>
         <div class="row">
-          <label class="col-md-5">AI Average Storage (GB)</label>
-          <div class="col-md-2">
+          <label class="col-md-10">AI Average Storage (GB)</label>
+          <div class="col-md-4">
             <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.avgAIDisk.value}}</span>
             <span ng-show="storage.fixedSize === 'custom'">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.avgAIDisk"
@@ -56,8 +56,8 @@
         </div>
 
         <div class="row">
-          <label class="col-md-5">Cell Instance Type</label>
-          <div class="col-md-2">
+          <label class="col-md-10">Cell Instance Type</label>
+          <div class="col-md-4">
             <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.instanceType.instance_type}}</span>
             <span ng-show="storage.fixedSize === 'custom'">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.instanceType"
@@ -68,18 +68,18 @@
         </div>
 
         <div class="row">
-          <label class="col-md-5">Cell Mem Size (GB)</label>
-          <div class="col-md-2">{{data.elasticRuntimeConfig.runnerRam}}</div>
+          <label class="col-md-10">Cell Mem Size (GB)</label>
+          <div class="col-md-4">{{data.elasticRuntimeConfig.runnerRam}}</div>
         </div>
 
         <div class="row">
-            <label class="col-md-5">Cell Ephemeral Storage Size (GB)</label>
-            <div class="col-md-2">{{data.elasticRuntimeConfig.runnerDisk}}</div>
+            <label class="col-md-10">Cell Ephemeral Storage Size (GB)</label>
+            <div class="col-md-4">{{data.elasticRuntimeConfig.runnerDisk}}</div>
         </div>
 
         <div class="row">
-            <label class="col-md-5">Availability Zone</label>
-            <div class="col-md-2">
+            <label class="col-md-10">Availability Zone</label>
+            <div class="col-md-4">
               <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.azCount}}</span>
               <span ng-show="storage.fixedSize === 'custom'">
                 <select class="form-control" ng-model="data.elasticRuntimeConfig.azCount"
@@ -89,8 +89,8 @@
             </div>
         </div>
         <div class="row" ng-show="storage.fixedSize === 'custom'">
-            <label class="col-md-5">Extra Cells per AZ</label>
-            <div class="col-md-2">
+            <label class="col-md-10">Extra Cells per AZ</label>
+            <div class="col-md-4">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.extraRunnersPerAZ"
                   ng-options="opt as opt for opt in data.extraCellsPerAZ" ng-change="customSizeDropdownUpdated()">
               </select>

@@ -118,7 +118,7 @@
     }
 
     $scope.scsSelected = function() {
-      return _.find(iaasService.getVMs('Spring Cloud Services')) !== undefined;
+      return _.find(iaasService.getVMs('Spring Cloud Services')) !== undefined || _.find(iaasService.getVMs('Single Sign On')) !== undefined;
     };
 
     $scope.getPhysicalCores = function() {

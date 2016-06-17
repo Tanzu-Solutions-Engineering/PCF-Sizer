@@ -1,14 +1,14 @@
 <div ng-controller="PCFSizingController">
   <div class="row" ng-show="storage.selectedIaaS === 'vsphere'">
-    <div class="col-md-12">
+    <div class="col-md-24">
     <!-- vCPU is only relevant for vSphere-->
       <div class="panel panel-primary">
-        <div class="panel-heading">Step 1.1: IaaS Tuning</div>
+        <div class="panel-heading bg-brand-6">Step 1.1: IaaS Tuning</div>
         <div class="panel-body">
           <form role="form" class="form-horizontal">
             <div class="form-group form-inline">
-              <label class="col-md-4" for="cpuConsolidation">vCPU to Core Consolidation Ratio</label>
-              <select class="form-control col-md-8 input-sm" id="cpuConsolidation"
+              <label class="col-md-8" for="cpuConsolidation">vCPU to Core Consolidation Ratio</label>
+              <select class="form-control col-md-16 input-sm" id="cpuConsolidation"
                   ng-model="data.elasticRuntimeConfig.iaasCPUtoCoreRatio"
                   ng-options="opt as opt.text for opt in data.iaasCPUtoCoreRatioOptions"
                   ng-change=" updateStuff();"></select>
@@ -19,17 +19,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-24">
       <div ng-include="'app/components/sizing/url-selection.html'"></div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-24">
       <div ng-include="'app/components/sizing/ai-form.html'"></div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-24">
       <div ng-include="'app/components/sizing/services.html'"></div>
     </div>
   </div>

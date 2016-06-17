@@ -1,5 +1,5 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">Summary of Total Resources</div>
+  <div class="panel-heading bg-brand-6">Summary of Total Resources</div>
         <table class="table">
             <tr>
                 <td width="70%">Total AZ's </td>
@@ -17,10 +17,7 @@
                 <td width="70%">Foundation vCPU #</td>
                 <td width="30%">{{data.resourceSummary.cpu}}</td>
             </tr>
-            <tr>
-                <td width="70%">Total IPs #</td>
-                <td width="30%">{{data.resourceSummary.ips}}</td>
-            </tr>
+
             <tr ng-show="data.selectedIaaS.id === 'vsphere'">
                 <td width="70%">Foundation Physical Cores (2GHz or >) #</td>
                 <td width="30%">{{getPhysicalCores()}}</td>
@@ -36,6 +33,10 @@
             <tr ng-show="data.selectedIaaS.id === 'aws'">
                 <td width="70%">Cost</td>
                 <td width="30%">{{data.resourceSummary.cost | currency}}/hr</td>
+            </tr>
+            <tr>
+                <td width="70%">Total IPs #</td>
+                <td width="30%">{{data.resourceSummary.ips}}</td>
             </tr>
         </table>
 </div>
