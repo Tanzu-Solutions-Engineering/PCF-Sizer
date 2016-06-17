@@ -1,7 +1,6 @@
 [
   {
     "vm": "JMX Provider",
-    "id": 1,
     "instances": 1,
     "dynamic_ips": 0,
     "static_ips": 1,
@@ -15,7 +14,6 @@
   },
   {
     "vm": "OpenTSDB Firehose Nozzle",
-    "id": 2,
     "instances": 2,
     "dynamic_ips": 0,
     "static_ips": 1,

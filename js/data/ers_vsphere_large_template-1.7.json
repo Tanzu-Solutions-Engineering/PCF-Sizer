@@ -1,7 +1,6 @@
 [
   {
     "vm": "vCenter",
-    "id": "1",
     "instances": 1,
     "persistent_disk": 120,
     "dynamic_ips": 0,
@@ -12,7 +11,6 @@
   },
   {
     "vm": "Ops Manager VM",
-    "id": "2",
     "instances": 1,
     "persistent_disk": 160,
     "dynamic_ips": 1,
@@ -23,7 +21,6 @@
   },
   {
     "vm": "Ops Manager Director",
-    "id": "3",
     "instances": 1,
     "persistent_disk": 50,
     "dynamic_ips": 1,
@@ -34,7 +31,6 @@
   },
   {
     "vm": "Consul",
-    "id": "4",
     "instances": 3,
     "persistent_disk": 1,
     "dynamic_ips": 1,
@@ -45,7 +41,6 @@
   },
   {
     "vm": "NATS - Message Bus",
-    "id": "5",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -56,7 +51,6 @@
   },
   {
     "vm": "etcd",
-    "id": "6",
     "instances": 3,
     "persistent_disk": 1,
     "dynamic_ips": 1,
@@ -67,7 +61,6 @@
   },
   {
     "vm": "Diego BBS",
-    "id": "7",
     "instances": 3,
     "persistent_disk": 1,
     "dynamic_ips": 1,
@@ -78,7 +71,6 @@
   },
   {
     "vm": "NFS Server || Blob Store",
-    "id": "8",
     "instances": 1,
     "persistent_disk": 100,
     "dynamic_ips": 1,
@@ -89,7 +81,6 @@
   },
   {
     "vm": "Router",
-    "id": "9",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -100,7 +91,6 @@
   },
   {
     "vm": "MySQL Proxy",
-    "id": "10",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -111,7 +101,6 @@
   },
   {
     "vm": "MySQL Server",
-    "id": "11",
     "instances": 3,
     "persistent_disk": 50,
     "dynamic_ips": 1,
@@ -122,7 +111,6 @@
   },
   {
     "vm": "Cloud Controller",
-    "id": "12",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -133,7 +121,6 @@
   },
   {
     "vm": "HA Proxy",
-    "id": "13",
     "instances": 1,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -144,7 +131,6 @@
   },
   {
     "vm": "Clock Global",
-    "id": "14",
     "instances": 1,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -155,7 +141,6 @@
   },
   {
     "vm": "Cloud Controller Worker",
-    "id": "15",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -166,7 +151,6 @@
   },
   {
     "vm": "UAA",
-    "id": "16",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -177,7 +161,6 @@
   },
   {
     "vm": "Diego Brain",
-    "id": "17",
     "instances": 3,
     "persistent_disk": 1,
     "dynamic_ips": 1,
@@ -188,7 +171,6 @@
   },
   {
     "vm": "Diego Cell",
-    "id": "18",
     "instances": 15,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -203,7 +185,6 @@
   },
   {
     "vm": "Doppler Server",
-    "id": "19",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -214,7 +195,6 @@
   },
   {
     "vm": "Loggregator Traffic Controller",
-    "id": "20",
     "instances": 3,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -225,7 +205,6 @@
   },
   {
     "vm": "Errands & Tests - Type 1",
-    "id": "21",
     "instances": 1,
     "persistent_disk": 0,
     "dynamic_ips": 1,
@@ -236,7 +215,6 @@
   },
   {
     "vm": "Errands & Tests - Type 2",
-    "id": "22",
     "instances": 1,
     "ephemeral_disk": 2,
     "persistent_disk": 0,
@@ -248,7 +226,6 @@
   },
   {
     "vm": "Compilation",
-    "id": "23",
     "instances": 1,
     "persistent_disk": 0,
     "dynamic_ips": 1,

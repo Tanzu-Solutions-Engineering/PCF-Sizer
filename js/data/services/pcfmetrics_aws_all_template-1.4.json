@@ -1,7 +1,6 @@
 [
   {
     "vm": "Push APM UI",
-    "id": 1,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -15,7 +14,6 @@
   },
   {
     "vm": "Zookeeper",
-    "id": 2,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -29,7 +27,6 @@
   },
   {
     "vm": "Kafka",
-    "id": 3,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -43,7 +40,6 @@
   },
   {
     "vm": "Ingestor",
-    "id": 4,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -57,7 +53,6 @@
   },
   {
     "vm": "Network Metrics Data Store",
-    "id": 5,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -71,7 +66,6 @@
   },
   {
     "vm": "Container Metrics Data Store",
-    "id": 6,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -85,7 +79,6 @@
   },
   {
     "vm": "App Event Data Store",
-    "id": 7,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -99,7 +92,6 @@
   },
   {
     "vm": "APM API",
-    "id": 8,
     "dynamic_ips": 0,
     "static_ips": 1,
     "instances": 1,
@@ -113,7 +105,6 @@
   },
   {
     "vm": "Compilation",
-    "id": 9,
     "dynamic_ips": 1,
     "static_ips": 0,
     "instances": 1,
