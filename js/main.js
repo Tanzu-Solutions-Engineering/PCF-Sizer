@@ -117,6 +117,10 @@
       return tiles;
     }
 
+    $scope.scsSelected = function() {
+      return _.find(iaasService.getVMs('Spring Cloud Services')) !== undefined;
+    };
+
     $scope.getPhysicalCores = function() {
     	return Math.ceil($scope.data.resourceSummary.cpu / $scope.storage.elasticRuntimeConfig.iaasCPUtoCoreRatio  );
     };
