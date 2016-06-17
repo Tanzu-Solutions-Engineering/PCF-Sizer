@@ -186,7 +186,7 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
           type.count += vm.instances;
           type.cost += cost;
         } else {
-          this.resourceSummary.vmTypes.push({name: vm.instance_type, count: vm.instances, cost: cost, cpu: vm.instanceInfo.cpu, ram: vm.instanceInfo.ram});
+          this.resourceSummary.vmTypes.push({name: vm.instance_type, instanceInfo: vm.instanceInfo, count: vm.instances, cost: cost, cpu: vm.instanceInfo.cpu, ram: vm.instanceInfo.ram});
         }
       }
     }

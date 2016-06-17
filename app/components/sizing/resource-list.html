@@ -27,7 +27,7 @@
                 <td width="30%"></td>
             </tr>
             <tr ng-repeat="type in data.resourceSummary.vmTypes" ng-show="data.selectedIaaS.id === 'aws'">
-                <td width="70%">{{type.name}} ({{type.cpu}} CPU, {{type.ram}}GB RAM)</td>
+                <td width="70%">{{type.name}} ({{type.cpu}} CPU, {{type.ram}}GB RAM, ${{type.instanceInfo.cost}}/hr)</td>
                 <td width="30%">{{type.count}} ({{type.cost | currency}}/hr)</td>
             </tr>
             <tr ng-show="data.selectedIaaS.id === 'aws'">
