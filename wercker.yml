@@ -61,10 +61,10 @@ dev-deploy:
         organization: $CF_ORG
         space: $CF_SPACE
         skip_ssl: true
-        appname: shekel-dev-green
-        alt_appname: shekel-dev-blue
+        appname: pcfsizer-dev-green
+        alt_appname: pcfsizer-dev-blue
         domain: cfapps.io
-        hostname: shekel-dev
+        hostname: pcfsizer-dev
 
 prod-deploy:
   steps:
@@ -81,7 +81,7 @@ prod-deploy:
         organization: $CF_ORG
         space: $CF_SPACE
         skip_ssl: true
-        appname: shekel-prod-green
-        alt_appname: shekel-prod-blue
+        appname: pcfsizer-prod-green
+        alt_appname: pcfsizer-prod-blue
         domain: cfapps.io
-        hostname: shekel-prod
+        hostname: pcfsizer
