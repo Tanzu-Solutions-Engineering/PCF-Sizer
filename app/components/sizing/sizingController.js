@@ -317,10 +317,7 @@
       cellInfo.instanceInfo.cpu = $scope.data.elasticRuntimeConfig.instanceType.cpu;
       cellInfo.instanceInfo.ephemeral_disk = $scope.data.elasticRuntimeConfig.instanceType.disk;
       cellInfo.instanceInfo.ram = $scope.data.elasticRuntimeConfig.instanceType.ram;
-      var numbersOfCellsBasedOnRam = ($scope.data.elasticRuntimeConfig.aiPacks.value * iaasService.getAIsPerPack() * $scope.data.elasticRuntimeConfig.avgRam.value) / (cellInfo.instanceInfo.ram - iaasService.getRamOverhead());
-      var numbersOfCellsBasedOnDisk = ($scope.data.elasticRuntimeConfig.aiPacks.value * iaasService.getAIsPerPack() * $scope.data.elasticRuntimeConfig.avgAIDisk.value) / (cellInfo.instanceInfo.ephemeral_disk - iaasService.getDiskOverhead());
-      cellInfo.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
-      cellInfo.instances += ($scope.data.elasticRuntimeConfig.azCount * $scope.data.elasticRuntimeConfig.extraRunnersPerAZ)
+      iaasService.calculateDiegoCellCount();
       $scope.updateStuff();
     };
 
@@ -345,6 +342,9 @@
       var storedVM = _.find($scope.storage.services[service].vms, {name: vm.vm});
       storedVM.instances = vm.instances;
       $scope.storage.serviceAICount = iaasService.getServiceAICount();
+      iaasService.calculateDiegoCellCount();
+      iaasService.generateResourceSummary();
+      iaasService.generateDiegoCellSummary();
     }
 
     $scope.serviceVersionChanged = function(service) {

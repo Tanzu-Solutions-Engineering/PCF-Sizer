@@ -197,15 +197,39 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
   iaasService.generateDiegoCellSummary = function() {
     var cell = this.getDiegoCellInfo();
     this.diegoCellSummary.totalRam = cell.instances * cell.instanceInfo.ram;
-    this.diegoCellSummary.useableCellRam = cell.instanceInfo.ram - ramOverhead
+    this.diegoCellSummary.useableCellRam = cell.instanceInfo.ram - ramOverhead;
     this.diegoCellSummary.useableCellDisk = cell.instanceInfo.ephemeral_disk - diskOverhead;
     this.diegoCellSummary.availableCellRam = cell.instances * this.diegoCellSummary.useableCellRam;
-    this.diegoCellSummary.availableCellRam -= (sizingStorageService.data.elasticRuntimeConfig.avgAIRAM * sizingStorageService.data.aiPacks * aisPerPack);
+    this.diegoCellSummary.availableCellRam -= this.getTotalAIRam();
     this.diegoCellSummary.availableCellDisk = cell.instances * this.diegoCellSummary.useableCellDisk;
-    this.diegoCellSummary.availableCellDisk -= (sizingStorageService.data.elasticRuntimeConfig.avgAIDisk * sizingStorageService.data.aiPacks * aisPerPack);
+    this.diegoCellSummary.availableCellDisk -= this.getTotalAIDisk();
     this.diegoCellSummary.numberOfCells = cell.instances;
     this.diegoCellSummary.cellsPerAZ = Math.ceil(this.diegoCellSummary.numberOfCells / sizingStorageService.data.elasticRuntimeConfig.azCount);
   };
+
+  iaasService.calculateDiegoCellCount = function() {
+    var cellInfo = this.getDiegoCellInfo();
+    var ram = this.getTotalAIRam();
+    var disk = this.getTotalAIDisk();
+    var numbersOfCellsBasedOnRam = ram / (cellInfo.instanceInfo.ram - this.getRamOverhead());
+    var numbersOfCellsBasedOnDisk = disk / (cellInfo.instanceInfo.ephemeral_disk - this.getDiskOverhead());
+    cellInfo.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
+    cellInfo.instances += (sizingStorageService.data.elasticRuntimeConfig.azCount * sizingStorageService.data.elasticRuntimeConfig.extraRunnersPerAZ);
+  }
+
+  iaasService.getTotalAIRam = function() {
+    var aiCount = sizingStorageService.data.aiPacks * aisPerPack;
+    var ram = aiCount * sizingStorageService.data.elasticRuntimeConfig.avgAIRAM;
+    ram += sizingStorageService.data.serviceAICount; //assume 1GB ram usage per service AI
+    return ram;
+  }
+
+  iaasService.getTotalAIDisk = function() {
+    var aiCount = sizingStorageService.data.aiPacks * aisPerPack;
+    var disk = aiCount * sizingStorageService.data.elasticRuntimeConfig.avgAIDisk;
+    disk += sizingStorageService.data.serviceAICount *2; //assume 2GB disk usage per service AI
+    return disk;
+  }
 
   iaasService.getDiegoCellSummary = function() {
     return this.diegoCellSummary;
