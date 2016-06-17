@@ -17,6 +17,7 @@
 
           storage.selectedIaaS = iaas;
           storage.fixedSize = size;
+          storage.services = {};
           if (iaasService.loadedConfig.iaas !== iaas) {
             return iaasService.loadIaaSTemplate(iaas).then(function() {
               return iaasService.loadERSTemplates(iaas).then(function() {
@@ -111,7 +112,9 @@
     };
 
     $scope.getTileNames = function() { //gets all the unique tile names
-      return _.map(_.uniqBy($scope.getVMs(), 'tile'), 'tile');
+      var tiles = _.map(_.uniqBy($scope.getVMs(), 'tile'), 'tile')
+      tiles.sort();
+      return tiles;
     }
 
     $scope.getPhysicalCores = function() {

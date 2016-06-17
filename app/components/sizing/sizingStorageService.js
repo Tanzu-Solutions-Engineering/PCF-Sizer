@@ -15,6 +15,7 @@
           compilationJobs: 0,
           ersVersion: 1.7
         },
+        services: {},
         fixedSize: 'small'
       }
     };

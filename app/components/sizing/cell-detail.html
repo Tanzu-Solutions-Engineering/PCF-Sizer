@@ -2,36 +2,36 @@
   <div class="panel-heading">Cell Details</div>
   <table class="table">
     <tr>
-      <td width="80%">Total Cell RAM(GB)</td>
-      <td width="20%">{{data.cellDetailSummary.totalRam}}</td>
+      <td width="70%">Total Cell RAM(GB)</td>
+      <td width="30%">{{data.cellDetailSummary.totalRam}}</td>
     </tr>
     <tr>
-        <td>Service AI Count</td>
-        <td>{{storage.serviceAICount}}</td>
+      <td width="70%">Service AI Count</td>
+      <td width="30%">{{storage.serviceAICount}}</td>
     </tr>
     <tr>
-      <td width="80%">Useable Ram(GB) per Cell</td>
-      <td width="20%">{{data.cellDetailSummary.useableCellRam}}</td>
+      <td width="70%">Useable Ram(GB) per Cell</td>
+      <td width="30%">{{data.cellDetailSummary.useableCellRam}}</td>
     </tr>
     <tr>
-      <td width="80%">Useable Disk(GB) per Cell</td>
-      <td width="20%">{{data.cellDetailSummary.useableCellDisk}}</td>
+      <td width="70%">Useable Disk(GB) per Cell</td>
+      <td width="30%">{{data.cellDetailSummary.useableCellDisk}}</td>
     </tr>
     <tr>
-      <td width="80%">Available Cell RAM(GB)</td>
-      <td width="20%">{{data.cellDetailSummary.availableCellRam}}</td>
+      <td width="70%">Available Cell RAM(GB)</td>
+      <td width="30%">{{data.cellDetailSummary.availableCellRam}}</td>
     </tr>
     <tr>
-      <td width="80%">Available Cell Disk(GB)</td>
-      <td width="20%">{{data.cellDetailSummary.availableCellDisk}}</td>
+      <td width="70%">Available Cell Disk(GB)</td>
+      <td width="30%">{{data.cellDetailSummary.availableCellDisk}}</td>
     </tr>
     <tr>
-      <td width="80%">Number of Cells</td>
-      <td width="20%">{{data.cellDetailSummary.numberOfCells}}</td>
+      <td width="70%">Number of Cells</td>
+      <td width="30%">{{data.cellDetailSummary.numberOfCells}}</td>
     </tr>
     <tr>
-      <td width="80%">Cells per AZ</td>
-      <td width="20%"><span ng-show="data.cellDetailSummary.numberOfCells % data.cellDetailSummary.cellsPerAZ !== 0">~</span>{{data.cellDetailSummary.cellsPerAZ}}</td>
+      <td width="70%">Cells per AZ</td>
+      <td width="30%"><span ng-show="data.cellDetailSummary.numberOfCells % data.cellDetailSummary.cellsPerAZ !== 0">~</span>{{data.cellDetailSummary.cellsPerAZ}}</td>
     </tr>
   </table>
 </div>

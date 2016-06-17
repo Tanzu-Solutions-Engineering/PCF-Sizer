@@ -351,6 +351,7 @@
       var version = $scope.storage.services[service].version;
       $scope.addServiceVMs(service, version);
     }
+    console.log($scope.storage.services);
 
     $scope.fixedSizing($scope.storage.fixedSize);
     //when controller loads, make sure if custom size to recalculate resources
