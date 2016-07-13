@@ -34,5 +34,31 @@
     "instance_type": null,
     "deployed_application": true,
     "tile": "Spring Cloud Services"
+  },
+  {
+    "vm": "Compilation",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "micro",
+    "singleton": true,
+    "valid_instance_types": [
+      "micro"
+    ],
+    "tile": "Spring Cloud Services"
+  },
+  {
+    "vm": "Errands",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "micro",
+    "singleton": true,
+    "valid_instance_types": [
+      "micro"
+    ],
+    "tile": "Spring Cloud Services"
   }
 ]

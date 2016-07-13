@@ -13,8 +13,8 @@
     "vm": "Ops Manager VM",
     "instances": 1,
     "persistent_disk": 160,
-    "dynamic_ips": 1,
-    "static_ips": 0,
+    "dynamic_ips": 0,
+    "static_ips": 1,
     "instance_type": "OpsManager",
     "singleton": true,
     "tile": "Elastic Runtime"
@@ -24,7 +24,7 @@
     "instances": 1,
     "persistent_disk": 50,
     "dynamic_ips": 1,
-    "static_ips": 0,
+    "static_ips": 1,
     "instance_type": "medium.disk",
     "singleton": true,
     "tile": "Elastic Runtime"
@@ -204,34 +204,29 @@
     "tile": "Elastic Runtime"
   },
   {
-    "vm": "Errands & Tests - Type 1",
-    "instances": 1,
-    "persistent_disk": 0,
-    "dynamic_ips": 1,
-    "static_ips": 0,
-    "instance_type": "micro",
-    "singleton": false,
-    "tile": "Elastic Runtime"
-  },
-  {
-    "vm": "Errands & Tests - Type 2",
-    "instances": 1,
-    "ephemeral_disk": 2,
-    "persistent_disk": 0,
-    "dynamic_ips": 1,
-    "static_ips": 0,
-    "instance_type": "nano",
-    "singleton": false,
-    "tile": "Elastic Runtime"
-  },
-  {
     "vm": "Compilation",
     "instances": 1,
     "persistent_disk": 0,
     "dynamic_ips": 1,
     "static_ips": 0,
-    "instance_type": "medium.disk",
-    "singleton": true,
+    "instance_type": "medium",
+    "singleton": false,
+    "valid_instance_types": [
+      "medium"
+    ],
+    "tile": "Elastic Runtime"
+  },
+  {
+    "vm": "Errands",
+    "instances": 13,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "micro",
+    "singleton": false,
+    "valid_instance_types": [
+      "micro"
+    ],
     "tile": "Elastic Runtime"
   }
 ]

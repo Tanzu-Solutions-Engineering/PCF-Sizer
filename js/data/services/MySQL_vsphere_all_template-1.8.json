@@ -7,9 +7,9 @@
     "singleton": false,
     "persistent_disk": 100,
     "tooltip" : "MySQL Server is Galera 3 Node with Minimum Ram of 8 GB and 2 CPU",
-    "instance_type": "m3.xlarge",
+    "instance_type": "large.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "large.disk"
     ],
     "tile": "MySQL"
   },
@@ -21,9 +21,9 @@
     "singleton": true,
     "persistent_disk": 0,
     "tooltip" : "The Backup Prepare Node is for backing up",
-    "instance_type": "r3.4xlarge",
+    "instance_type": "2xlarge.disk",
     "valid_instance_types": [
-      "r3.4xlarge"
+      "2xlarge.disk"
     ],
     "tile": "MySQL"
 
@@ -36,9 +36,9 @@
     "singleton": false,
     "persistent_disk": 0,
     "tooltip" : "Tooltip for Proxy",
-    "instance_type": "m3.medium",
+    "instance_type": "small",
     "valid_instance_types": [
-      "m3.medium"
+      "small"
     ],
     "tile": "MySQL"
 
@@ -46,14 +46,40 @@
   {
     "vm": "Broker",
     "instances": 2,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "singleton": false,
     "persistent_disk": 0,
     "tooltip" : "Tooltip for Service Broker",
-    "instance_type": "t2.micro",
+    "instance_type": "micro",
     "valid_instance_types": [
-      "t2.micro"
+      "micro"
+    ],
+    "tile": "MySQL"
+  },
+  {
+    "vm": "Compilation",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "xlarge",
+    "singleton": false,
+    "valid_instance_types": [
+      "xlarge"
+    ],
+    "tile": "MySQL"
+  },
+  {
+    "vm": "Errands",
+    "instances": 4,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "small",
+    "singleton": false,
+    "valid_instance_types": [
+      "small"
     ],
     "tile": "MySQL"
   }

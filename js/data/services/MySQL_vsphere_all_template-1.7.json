@@ -2,7 +2,7 @@
   {
     "vm": "MySQL Server",
     "instances": 3,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "singleton": false,
     "persistent_disk": 100,
@@ -16,7 +16,7 @@
   {
     "vm": "Backup Prepare Node",
     "instances": 1,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "singleton": true,
     "persistent_disk": 0,
@@ -31,7 +31,7 @@
   {
     "vm": "Proxy",
     "instances": 2,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "singleton": false,
     "persistent_disk": 0,
@@ -46,7 +46,7 @@
   {
     "vm": "Broker",
     "instances": 2,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "singleton": false,
     "persistent_disk": 0,

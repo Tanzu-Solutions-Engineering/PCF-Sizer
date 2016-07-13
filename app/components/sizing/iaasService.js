@@ -258,7 +258,7 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
           vm.instanceInfo = {};
           angular.extend(vm.instanceInfo, iaasService.getInstanceTypeInfo(vm.instance_type));
           vm.tshirt = size;
-          vm.version = parseFloat(version);
+          vm.version = version;
           iaasService.addTemplateVM(vm);
         });
       });

@@ -92,18 +92,10 @@
       $location.path(['/sizing', iaas.id, version, fixedSize].join('/'));
     };
 
-    $scope.changeVersion = function(version) {
-      var iaas = $scope.storage.selectedIaaS;
-      var fixedSize = $scope.storage.fixedSize;
-      $scope.storage.elasticRuntimeConfig.ersVersion = version;
-      $location.path(['/sizing', iaas, version, fixedSize].join('/'));
-    };
-
     $scope.changeSize = function(size) {
       var iaas = $scope.storage.selectedIaaS;
       $scope.storage.fixedSize = size;
       var version = $scope.storage.elasticRuntimeConfig.ersVersion;
-      $scope.storage.elasticRuntimeConfig.ersVersion = version;
       $location.path(['/sizing', iaas, version, size].join('/'));
     };
 

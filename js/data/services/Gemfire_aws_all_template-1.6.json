@@ -1,11 +1,11 @@
 [
   {
     "vm": "GemFire Broker",
-    "instances": 2,
+    "instances": 1,
     "persistent_disk": 5,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
-    "singleton": false,
+    "singleton": true,
     "instance_type": "m3.large",
     "valid_instance_types": [
       "m3.large"
@@ -16,7 +16,7 @@
     "vm": "GemFire locator (Plan 1)",
     "instances": 2,
     "persistent_disk": 1,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instance_type": "t2.micro",
     "valid_instance_types": [
@@ -29,7 +29,7 @@
     "vm": "GemFire locator (Plan 2)",
     "instances": 2,
     "persistent_disk": 1,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instance_type": "t2.micro",
     "valid_instance_types": [
@@ -42,7 +42,7 @@
     "vm": "GemFire locator (Plan 3)",
     "instances": 2,
     "persistent_disk": 1,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instance_type": "t2.micro",
     "valid_instance_types": [
@@ -88,6 +88,32 @@
       "m3.large"
     ],
     "singleton": false,
+    "tile": "Pivotal Gemfire"
+  },
+  {
+    "vm": "Compilation",
+    "instances": 2,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.xlarge",
+    "singleton": true,
+    "valid_instance_types": [
+      "m3.xlarge"
+    ],
+    "tile": "Pivotal Gemfire"
+  },
+  {
+    "vm": "Errands",
+    "instances": 5,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": true,
+    "valid_instance_types": [
+      "t2.small"
+    ],
     "tile": "Pivotal Gemfire"
   }
 ]

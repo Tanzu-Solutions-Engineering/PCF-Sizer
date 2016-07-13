@@ -3,8 +3,8 @@
     "vm": "Ops Manager VM",
     "instances": 1,
     "persistent_disk": 50,
-    "dynamic_ips": 1,
-    "static_ips": 0,
+    "dynamic_ips": 0,
+    "static_ips": 1,
     "instance_type": "m3.xlarge",
     "singleton": true,
     "tile": "Elastic Runtime"
@@ -14,7 +14,7 @@
     "instances": 1,
     "persistent_disk": 50,
     "dynamic_ips": 1,
-    "static_ips": 0,
+    "static_ips": 1,
     "instance_type": "m3.xlarge",
     "singleton": true,
     "tile": "Elastic Runtime"
@@ -181,27 +181,23 @@
     "dynamic_ips": 1,
     "static_ips": 0,
     "instance_type": "m3.xlarge",
-    "singleton": true,
+    "singleton": false,
+    "valid_instance_types": [
+      "m3.xlarge"
+    ],
     "tile": "Elastic Runtime"
   },
   {
-    "vm": "Errands & Tests - Type 1",
-    "instances": 1,
+    "vm": "Errands",
+    "instances": 13,
     "persistent_disk": 0,
     "dynamic_ips": 1,
     "static_ips": 0,
     "instance_type": "t2.micro",
-    "singleton": true,
-    "tile": "Elastic Runtime"
-  },
-  {
-    "vm": "Errands & Tests - Type 2",
-    "instances": 1,
-    "persistent_disk": 0,
-    "dynamic_ips": 1,
-    "static_ips": 0,
-    "instance_type": "t2.small",
-    "singleton": true,
+    "singleton": false,
+    "valid_instance_types": [
+      "t2.micro"
+    ],
     "tile": "Elastic Runtime"
   }
 ]

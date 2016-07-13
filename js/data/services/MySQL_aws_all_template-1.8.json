@@ -18,7 +18,7 @@
     "instances": 1,
     "dynamic_ips": 1,
     "static_ips": 1,
-    "singleton": true,
+    "singleton": false,
     "persistent_disk": 0,
     "tooltip" : "The Backup Prepare Node is for backing up",
     "instance_type": "r3.4xlarge",
@@ -46,7 +46,7 @@
   {
     "vm": "Broker",
     "instances": 2,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "singleton": false,
     "persistent_disk": 0,
@@ -54,6 +54,32 @@
     "instance_type": "t2.micro",
     "valid_instance_types": [
       "t2.micro"
+    ],
+    "tile": "MySQL"
+  },
+  {
+    "vm": "Compilation",
+    "instances": 1,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "m3.xlarge",
+    "singleton": false,
+    "valid_instance_types": [
+      "m3.xlarge"
+    ],
+    "tile": "MySQL"
+  },
+  {
+    "vm": "Errands",
+    "instances": 4,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "t2.small",
+    "singleton": false,
+    "valid_instance_types": [
+      "t2.small"
     ],
     "tile": "MySQL"
   }

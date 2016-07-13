@@ -1,105 +1,105 @@
 [
   {
     "vm": "Push APM UI",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
-    "singleton": false,
+    "singleton": true,
     "persistent_disk": 0,
-    "instance_type": "t2.micro",
+    "instance_type": "micro",
     "valid_instance_types": [
-      "t2.micro"
+      "micro"
     ],
     "tile": "PCF Metrics"
   },
   {
     "vm": "Zookeeper",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
     "singleton": false,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
     ],
     "tile": "PCF Metrics"
   },
   {
     "vm": "Kafka",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
     "singleton": false,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
     ],
     "tile": "PCF Metrics"
   },
   {
     "vm": "Ingestor",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
     "singleton": false,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
     ],
     "tile": "PCF Metrics"
   },
   {
     "vm": "Network Metrics Data Store",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
     "singleton": false,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
     ],
     "tile": "PCF Metrics"
   },
   {
     "vm": "Container Metrics Data Store",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
     "singleton": false,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
     ],
     "tile": "PCF Metrics"
   },
   {
     "vm": "App Event Data Store",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
     "singleton": false,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
     ],
     "tile": "PCF Metrics"
   },
   {
     "vm": "APM API",
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "instances": 1,
-    "singleton": false,
+    "singleton": true,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
     ],
     "tile": "PCF Metrics"
   },
@@ -110,9 +110,22 @@
     "instances": 1,
     "singleton": false,
     "persistent_disk": 0,
-    "instance_type": "m3.xlarge",
+    "instance_type": "xlarge.disk",
     "valid_instance_types": [
-      "m3.xlarge"
+      "xlarge.disk"
+    ],
+    "tile": "PCF Metrics"
+  },
+  {
+    "vm": "Cleanup",
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instances": 1,
+    "singleton": true,
+    "persistent_disk": 0,
+    "instance_type": "small",
+    "valid_instance_types": [
+      "small"
     ],
     "tile": "PCF Metrics"
   }

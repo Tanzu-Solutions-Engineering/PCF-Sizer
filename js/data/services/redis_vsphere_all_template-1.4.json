@@ -1,11 +1,11 @@
 [
   {
     "vm": "Redis Broker (Shared VM Plan)",
-    "instances": 2,
+    "instances": 1,
     "persistent_disk": 10,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
-    "singleton": false,
+    "singleton": true,
     "instance_type": "medium",
     "valid_instance_types": [
       "medium"
@@ -16,12 +16,38 @@
     "vm": "Dedicated Node",
     "instances": 5,
     "persistent_disk": 5,
-    "dynamic_ips": 0,
+    "dynamic_ips": 1,
     "static_ips": 1,
     "singleton": false,
     "instance_type": "small",
     "valid_instance_types": [
       "small"
+    ],
+    "tile": "Redis"
+  },
+  {
+    "vm": "Compilation",
+    "instances": 2,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "medium",
+    "singleton": false,
+    "valid_instance_types": [
+      "medium"
+    ],
+    "tile": "Redis"
+  },
+  {
+    "vm": "Errands",
+    "instances": 3,
+    "persistent_disk": 0,
+    "dynamic_ips": 1,
+    "static_ips": 0,
+    "instance_type": "micro",
+    "singleton": true,
+    "valid_instance_types": [
+      "micro"
     ],
     "tile": "Redis"
   }

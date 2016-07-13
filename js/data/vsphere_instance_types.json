@@ -35,6 +35,13 @@
     "cost": 0
   },
   {
+    "name": "small.disk",
+    "cpu": 1,
+    "ram": 2,
+    "ephemeral_disk": 16,
+    "cost": 0
+  },
+  {
     "name": "medium",
     "cpu": 2,
     "ram": 4,

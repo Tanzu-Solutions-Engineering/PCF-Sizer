@@ -25,8 +25,8 @@
   	 * version
   	 */
     $scope.data.ersVersionOptions = [ //this can be removed once we pull in versions properly for ERS
-      {value: 1.7},
-      {value: 1.6}
+      {value: "1.7"},
+      {value: "1.6"}
     ];
 
     $scope.data.avgRamOptions = [
@@ -178,7 +178,6 @@
     $scope.data.selectedIaaS = _.find($scope.data.iaasSelectionList, {id: $scope.storage.selectedIaaS});
 
     $scope.data.elasticRuntimeConfig = {
-      ersVersion: $scope.data.ersVersionOptions[0],
       avgRam: $scope.data.avgRamOptions[1],
       avgAIDisk:  $scope.data.avgAIDiskOptions[0],
       instanceType: {},
@@ -350,6 +349,8 @@
     $scope.serviceVersionChanged = function(service) {
       var version = $scope.storage.services[service].version;
       $scope.addServiceVMs(service, version);
+      iaasService.generateResourceSummary();
+      iaasService.generateDiegoCellSummary();
     }
 
     $scope.fixedSizing($scope.storage.fixedSize);
