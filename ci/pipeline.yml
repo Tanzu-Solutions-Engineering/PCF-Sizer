@@ -6,7 +6,7 @@ jobs:
   - task: unit
     file: git-repo/ci/tasks/unit.yml
 
-- name: deploy-test
+- name: deploy-prod
   plan:
   - get: git-repo
     passed: [unit-tests]
@@ -18,8 +18,8 @@ jobs:
     timeout: 5m
   - put: cf-test
     params:
-      manifest: git-repo/manifest.yml
-      current_app_name: pcfsizer-dev
+      manifest: git-repo/manifest-prod.yml
+      current_app_name: pcfsizer
       path: pcfsizer
   - put: git-repo
     params:
