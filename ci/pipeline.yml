@@ -1,0 +1,11 @@
+
+
+
+
+resources:
+- name: git-repo
+  type: git
+  source:
+    uri: {{GIT_REPO}}
+    branch: master
+    private_key: {{GIT_PRIVATE_KEY}}

@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: node
+    tag: "6.3.0"
+
+inputs:
+  - name: git-repo
+
+outputs:
+  - name: pcfsizer
+
+run:
+  path: git-repo/ci/scripts/install-dependencies.sh
