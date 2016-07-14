@@ -1,34 +1,24 @@
 jobs:
 - name: unit-tests
-    plan:
-    - get: git-repo
-      trigger: true
-    - task: unit
-      file: git-repo/ci/tasks/unit.yml
+  plan:
+  - get: git-repo
+    trigger: true
+  - task: unit
+    file: git-repo/ci/tasks/unit.yml
 
 - name: deploy-test
   plan:
   - get: git-repo
     passed: [unit-tests]
     trigger: true
-  # - get: version
-  #   params: {bump: minor}
   - task: install-dependencies
     file: git-repo/ci/tasks/install-dependencies.yml
     timeout: 5m
   - put: cf-test
     params:
       manifest: git-repo/manifest.yml
-      current_app_name: pcfsizer
+      current_app_name: pcfsizer-dev
       path: pcfsizer
-  # - put: git-repo
-  #   params:
-  #     repository: git-repo
-  #     tag: version/number
-  # - put: version
-  #   params: {file: version/number}
-
-
 
 resources:
 - name: git-repo
@@ -46,13 +36,3 @@ resources:
     password: {{CF_PASS}}
     organization: {{CF_ORG}}
     space: {{CF_SPACE}}
-    skip_cert_check: true
-
-- name: version
-  type: semver
-  source:
-    bucket: {{S3_BUCKET}}
-    key: pcfsizer/current-version
-    access_key_id: {{S3_ACCESS_KEY_ID}}
-    secret_access_key: {{S3_SECRET_ACCESS_KEY}}
-    initial_version: 1.0.0
