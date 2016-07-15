@@ -1,6 +1,6 @@
 [
   {
-    "vm": "Cloud Server",
+    "vm": "Config Server",
     "instances": 1,
     "dynamic_ips": 0,
     "static_ips": 0,
