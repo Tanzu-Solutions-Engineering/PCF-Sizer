@@ -6,7 +6,7 @@ jobs:
   - task: unit
     file: git-repo/ci/tasks/unit.yml
 
-- name: deploy-test
+- name: deploy-dev
   plan:
   - get: git-repo
     passed: [unit-tests]
