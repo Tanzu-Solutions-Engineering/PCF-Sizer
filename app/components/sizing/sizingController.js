@@ -25,8 +25,8 @@
   	 * version
   	 */
     $scope.data.ersVersionOptions = [ //this can be removed once we pull in versions properly for ERS
-      {value: "1.7"},
-      {value: "1.6"}
+      // "1.8",
+      "1.7"
     ];
 
     $scope.data.avgRamOptions = [
@@ -348,6 +348,10 @@
       var version = $scope.storage.services[service].version;
       $scope.addServiceVMs(service, version);
       $scope.updateStuff();
+    }
+
+    $scope.pcfVersionChanged = function() {
+      $scope.fixedSizing($scope.storage.fixedSize);
     }
 
     $scope.fixedSizing($scope.storage.fixedSize);
