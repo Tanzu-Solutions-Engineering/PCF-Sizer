@@ -17,8 +17,8 @@
 
           storage.selectedIaaS = iaas;
           storage.fixedSize = size;
-          storage.services = {};
           if (iaasService.loadedConfig.iaas !== iaas) {
+            storage.services = {};
             return iaasService.loadIaaSTemplate(iaas).then(function() {
               return iaasService.loadTemplates(iaas).then(function() {
                 iaasService.loadedConfig.iaas = iaas;
@@ -79,7 +79,7 @@
         id: 'openstack',
         name: 'OpenStack',
         isDefault: false,
-        isDisabled: true,
+        isDisabled: false,
         pricingUrl: null
       }
     ];
@@ -113,7 +113,7 @@
     };
 
     $scope.getPhysicalCores = function() {
-    	return Math.ceil($scope.data.resourceSummary.cpu / $scope.storage.elasticRuntimeConfig.iaasCPUtoCoreRatio  );
+    	return Math.ceil($scope.data.resourceSummary.cpu / $scope.storage.elasticRuntimeConfig.iaasCPUtoCoreRatio);
     };
 
     $scope.isNavItemSelected = function(nav) {
@@ -125,7 +125,7 @@
       var types = [];
       var instanceTypes = iaasService.getInstanceTypes();
 
-      if (instanceTypes && instanceTypes.cost) {
+      if (instanceTypes && instanceTypes[0].cost) {
         instanceTypes.forEach(function(t) {
           Object.keys(t.cost).forEach(function(type) {
             types.push(type);
@@ -133,7 +133,7 @@
         });
         var uniqueTypes = _.uniq(types);
 
-        if ($scope.storage.pricingType === undefined) {
+        if (!$scope.storage.pricingType) {
             $scope.storage.pricingType = uniqueTypes[0];
         }
 

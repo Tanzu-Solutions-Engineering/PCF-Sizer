@@ -1,0 +1,128 @@
+{
+  "tile": "PCF Metrics",
+  "version": "1.0",
+  "size": "all",
+  "vms":
+  [
+    {
+      "vm": "Push APM UI",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": true,
+      "persistent_disk": 0,
+      "instance_type": "m1.small",
+      "valid_instance_types": [
+        "m1.small"
+      ]
+    },
+    {
+      "vm": "Zookeeper",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "Kafka",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "Ingestor",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "Network Metrics Data Store",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "Container Metrics Data Store",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "App Event Data Store",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "APM API",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": true,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "Compilation",
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "m1.xlarge",
+      "valid_instance_types": [
+        "m1.xlarge"
+      ]
+    },
+    {
+      "vm": "Cleanup",
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instances": 1,
+      "singleton": true,
+      "persistent_disk": 0,
+      "instance_type": "m1.small",
+      "valid_instance_types": [
+        "m1.small"
+      ]
+    }
+  ]
+}

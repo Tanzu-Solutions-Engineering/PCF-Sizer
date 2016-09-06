@@ -120,7 +120,8 @@
     $scope.data.iaasCPUtoCoreRatioOptions = [
       {text: "2:1", ratio:2},
       {text: "4:1", ratio:4},
-      {text: "8:1", ratio:8}
+      {text: "8:1", ratio:8},
+      {text: "16:1", ratio:16}
     ];
 
     $scope.data.installSizeSelectionList = [
@@ -265,6 +266,7 @@
     $scope.updateStuff = function() {
       $scope.setElasticRuntimeConfig();
       $scope.updateEstimatedApplicationSize();
+      iaasService.calculateDiegoCellCount();
       iaasService.generateResourceSummary();
       iaasService.generateDiegoCellSummary();
     };
@@ -316,7 +318,6 @@
       cellInfo.instanceInfo.cpu = $scope.data.elasticRuntimeConfig.instanceType.cpu;
       cellInfo.instanceInfo.ephemeral_disk = $scope.data.elasticRuntimeConfig.instanceType.disk;
       cellInfo.instanceInfo.ram = $scope.data.elasticRuntimeConfig.instanceType.ram;
-      iaasService.calculateDiegoCellCount();
       $scope.updateStuff();
     };
 
@@ -333,24 +334,20 @@
       vm.instanceInfo.cpu = instanceInfo.cpu;
       vm.instanceInfo.ram = instanceInfo.ram;
       vm.instanceInfo.ephemeral_disk = instanceInfo.ephemeral_disk;
-      iaasService.generateResourceSummary();
-      iaasService.generateDiegoCellSummary();
+      $scope.updateStuff();
     };
 
     $scope.serviceCountUpdated = function(service, vm) {
       var storedVM = _.find($scope.storage.services[service].vms, {name: vm.vm});
       storedVM.instances = vm.instances;
       $scope.storage.serviceAICount = iaasService.getServiceAICount();
-      iaasService.calculateDiegoCellCount();
-      iaasService.generateResourceSummary();
-      iaasService.generateDiegoCellSummary();
+      $scope.updateStuff();
     }
 
     $scope.serviceVersionChanged = function(service) {
       var version = $scope.storage.services[service].version;
       $scope.addServiceVMs(service, version);
-      iaasService.generateResourceSummary();
-      iaasService.generateDiegoCellSummary();
+      $scope.updateStuff();
     }
 
     $scope.fixedSizing($scope.storage.fixedSize);
