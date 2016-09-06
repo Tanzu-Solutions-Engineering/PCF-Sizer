@@ -125,8 +125,8 @@
       var types = [];
       var instanceTypes = iaasService.getInstanceTypes();
 
-      if (instanceTypes) {
-        iaasService.getInstanceTypes().forEach(function(t) {
+      if (instanceTypes && instanceTypes.cost) {
+        instanceTypes.forEach(function(t) {
           Object.keys(t.cost).forEach(function(type) {
             types.push(type);
           });
