@@ -1,6 +1,6 @@
 "use strict";
 (function() {
-    angular.module('SizerApp').controller('PCFSizingController', function($scope, $route, $routeParams, $location, $http, iaasService, sizingStorageService) {
+    angular.module('sizerApp').controller('PCFSizingController', function($scope, $route, $routeParams, $location, $http, iaasService, sizingStorageService) {
     $scope.data = {};
     $scope.data.aiPackOptions = [];
     $scope.setAIPackOptions = function() {

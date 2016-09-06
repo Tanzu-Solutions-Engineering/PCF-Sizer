@@ -1,9 +1,10 @@
 "use strict";
-var iaasService = angular.module('SizerApp').factory('iaasService', function(sizingStorageService, $http) {
+var iaasService = angular.module('sizerApp').factory('iaasService', function(sizingStorageService, $http) {
   var ramOverhead = 3;
   var diskOverhead = 20;
   var aisPerPack = 50;
   var instanceTypes = [];
+
   var iaasService = {
     vms: [],
     templateVms: [],
@@ -157,24 +158,34 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
     this.resourceSummary.ips = 0;
     this.resourceSummary.cores = 0;
     this.resourceSummary.vmTypes = [];
-    this.resourceSummary.cost = 0;
+    this.resourceSummary.totalCost = 0;
 
     for (var i=0; i < this.vms.length; i++) {
       var vm = this.vms[i];
       if (vm.instance_type) {
-        var cost = vm.instances * vm.instanceInfo.cost;
+        var cost = vm.instances * vm.instanceInfo.cost[sizingStorageService.data.pricingType];
         this.resourceSummary.ram += vm.instanceInfo.ram * vm.instances; //total ram
         this.resourceSummary.disk += (vm.persistent_disk + vm.instanceInfo.ephemeral_disk) * vm.instances; //total disk both ephemeral and persistent
         this.resourceSummary.cpu += vm.instanceInfo.cpu * vm.instances; //total cpu
         this.resourceSummary.ips += (vm.dynamic_ips + vm.static_ips) * vm.instances; //total IPs static and dynamic
-        this.resourceSummary.cost += cost;
+        this.resourceSummary.totalCost += cost;
 
         var type = _.find(this.resourceSummary.vmTypes, {name: vm.instance_type});
         if (type !== undefined) {
           type.count += vm.instances;
-          type.cost += cost;
+          type.totalCost += cost;
         } else {
-          this.resourceSummary.vmTypes.push({name: vm.instance_type, instanceInfo: vm.instanceInfo, count: vm.instances, cost: cost, cpu: vm.instanceInfo.cpu, ram: vm.instanceInfo.ram});
+          this.resourceSummary.vmTypes.push(
+            {
+              name: vm.instance_type,
+              instanceInfo: vm.instanceInfo,
+              count: vm.instances,
+              totalCost: cost,
+              cost: cost,
+              cpu: vm.instanceInfo.cpu,
+              ram: vm.instanceInfo.ram
+            }
+          );
         }
       }
     }

@@ -1,7 +1,7 @@
 "use strict";
 
 (function() {
-  angular.module('SizerApp').factory('sizingStorageService', function() {
+  angular.module('sizerApp').factory('sizingStorageService', function() {
     var service = {
       data: {
         aiPacks: 0,

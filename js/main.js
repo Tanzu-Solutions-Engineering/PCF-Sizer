@@ -1,6 +1,6 @@
 "use strict";
 (function() {
-  var sizerApp = angular.module('SizerApp', ['ui.bootstrap', 'ngRoute']);
+  var sizerApp = angular.module('sizerApp', ['ui.bootstrap', 'ngRoute']);
 
   sizerApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
@@ -119,7 +119,30 @@
     $scope.isNavItemSelected = function(nav) {
       var current = $location.path().split('/')[1];
       return current === nav;
-    }
-   });
+    };
 
+    $scope.getPricingTypes = function() {
+      var types = [];
+      var instanceTypes = iaasService.getInstanceTypes();
+
+      if (instanceTypes) {
+        iaasService.getInstanceTypes().forEach(function(t) {
+          Object.keys(t.cost).forEach(function(type) {
+            types.push(type);
+          });
+        });
+        var uniqueTypes = _.uniq(types);
+
+        if ($scope.storage.pricingType === undefined) {
+            $scope.storage.pricingType = uniqueTypes[0];
+        }
+
+        return uniqueTypes;
+      }
+    };
+
+    $scope.updatePricingType = function() {
+      iaasService.generateResourceSummary();
+    };
+  });
 })();

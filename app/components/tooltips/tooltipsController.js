@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('SizerApp').controller('ShekelToolTipsController', function($scope, $http) {
+angular.module('sizerApp').controller('ShekelToolTipsController', function($scope, $http) {
 
 
 	$scope.getToolTip = function(tipId) {
