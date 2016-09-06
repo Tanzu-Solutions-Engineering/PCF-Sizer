@@ -108,18 +108,6 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
     END methods for VMs loaded from templates
   */
 
-  iaasService.removeAllServiceVMs = function() {
-    _.remove(this.vms, function(n) {
-      return n.tile !== 'Elastic Runtime';
-    });
-  };
-
-  iaasService.removeAllServiceTemplateVMs = function() {
-    _.remove(this.templateVms, function(n) {
-      return n.tile !== 'Elastic Runtime';
-    });
-  };
-
   iaasService.getServices = function() {
     var serviceNames = _.map(_.uniqBy(this.templateVms, 'tile'), 'tile');
     var idx = serviceNames.indexOf('Elastic Runtime');
@@ -249,47 +237,30 @@ var iaasService = angular.module('SizerApp').factory('iaasService', function(siz
     });
   };
 
-  iaasService.processTemplates = function(versions) {
-    Object.keys(versions).forEach(function(version) {
-      var sizes = versions[version];
-      Object.keys(sizes).forEach(function(size) {
-        var vms = sizes[size];
-        vms.forEach(function(vm) {
-          vm.instanceInfo = {};
-          angular.extend(vm.instanceInfo, iaasService.getInstanceTypeInfo(vm.instance_type));
-          vm.tshirt = size;
-          vm.version = version;
-          iaasService.addTemplateVM(vm);
-        });
+  iaasService.processTemplates = function(tiles) {
+    tiles.forEach(function(t) {
+
+      t.vms.forEach(function(vm) {
+        vm.tile = t.tile;
+        vm.instanceInfo = {};
+        angular.extend(vm.instanceInfo, iaasService.getInstanceTypeInfo(vm.instance_type));
+        vm.tshirt = t.size;
+        vm.version = t.version;
+        iaasService.addTemplateVM(vm);
       });
     });
   };
 
-  iaasService.loadERSTemplates = function(iaas) {
+  iaasService.loadTemplates = function(iaas) {
     var t = this;
-    var url = ['/ers', iaas].join('/');
-    t.removeVMs('Elastic Runtime');
-    t.removeTemplateVMs('Elastic Runtime');
+    var url = ['/tiles', iaas].join('/');
+    t.resetVMs();
+    t.resetTemplateVMs();
     return $http.get(url)
     .success(function(data) {
       t.processTemplates(data);
     }).error(function(data) {
       alert("Failed to get PCF Template JSON template");
-    });
-  };
-
-  iaasService.loadServiceTemplates = function(iaas) {
-    var t = this;
-    var url = ['/services', iaas].join('/');
-    t.removeAllServiceVMs();
-    t.removeAllServiceTemplateVMs();
-    return $http.get(url)
-    .success(function(data) {
-      Object.keys(data).forEach(function(tileName) {
-        t.processTemplates(data[tileName]);
-      });
-    }).error(function(data) {
-      alert("Failed to get " + tileName + " " + tileVersion + " Service Template JSON template");
     });
   };
 

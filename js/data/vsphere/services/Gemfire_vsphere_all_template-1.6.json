@@ -1,0 +1,116 @@
+{
+  "tile": "Pivotal Gemfire",
+  "version": "1.6",
+  "size": "all",
+  "vms":
+  [
+    {
+      "vm": "GemFire Broker",
+      "instances": 1,
+      "persistent_disk": 5,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "singleton": true,
+      "instance_type": "medium",
+      "valid_instance_types": [
+        "medium"
+      ]
+    },
+    {
+      "vm": "GemFire locator (Plan 1)",
+      "instances": 2,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "valid_instance_types": [
+        "micro"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "GemFire locator (Plan 2)",
+      "instances": 2,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "valid_instance_types": [
+        "micro"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "GemFire locator (Plan 3)",
+      "instances": 2,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "valid_instance_types": [
+        "micro"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "GemFire server (Plan 1)",
+      "instances": 3,
+      "persistent_disk": 5,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "medium",
+      "valid_instance_types": [
+        "medium"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "GemFire server (Plan 2)",
+      "instances": 5,
+      "persistent_disk": 10,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "medium",
+      "valid_instance_types": [
+        "medium"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "GemFire server (Plan 3)",
+      "instances": 7,
+      "persistent_disk": 10,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "medium",
+      "valid_instance_types": [
+        "medium"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "Compilation",
+      "instances": 2,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "xlarge",
+      "singleton": true,
+      "valid_instance_types": [
+        "xlarge"
+      ]
+    },
+    {
+      "vm": "Errands",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "small",
+      "singleton": true,
+      "valid_instance_types": [
+        "small"
+      ]
+    }
+  ]
+}

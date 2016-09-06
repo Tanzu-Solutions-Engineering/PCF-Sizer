@@ -1,0 +1,65 @@
+{
+  "tile": "Spring Cloud Services",
+  "version": "1.0",
+  "size": "all",
+  "vms":
+  [
+    {
+      "vm": "Config Server",
+      "instances": 1,
+      "dynamic_ips": 0,
+      "static_ips": 0,
+      "singleton": false,
+      "persistent_disk": 0,
+      "notes": "SCS does not actually deploy a VM, but we account for it as one so people can add / remove resources.",
+      "instance_type": null,
+      "deployed_application": true
+    },
+    {
+      "vm": "Circuit Breaker",
+      "instances": 1,
+      "dynamic_ips": 0,
+      "static_ips": 0,
+      "singleton": false,
+      "persistent_disk": 0,
+      "notes": "SCS does not actually deploy a VM, but we account for it as one so people can add / remove resources.",
+      "instance_type": null,
+      "deployed_application": true
+    },
+    {
+      "vm": "Service Registry",
+      "instances": 1,
+      "dynamic_ips": 0,
+      "static_ips": 0,
+      "singleton": false,
+      "persistent_disk": 0,
+      "notes": "SCS does not actually deploy a VM, but we account for it as one so people can add / remove resources.",
+      "instance_type": null,
+      "deployed_application": true
+    },
+    {
+      "vm": "Compilation",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": true,
+      "valid_instance_types": [
+        "micro"
+      ]
+    },
+    {
+      "vm": "Errands",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": true,
+      "valid_instance_types": [
+        "micro"
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@
       controller: 'PCFSizingController',
       controllerAs: 'vm',
       resolve: {
-        loadErsTemplates: function(iaasService, $route, sizingStorageService) {
+        loadTemplates: function(iaasService, $route, sizingStorageService) {
           var storage = sizingStorageService.data;
           var iaas = $route.current.params.iaas;
           var version = $route.current.params.version;
@@ -20,10 +20,9 @@
           storage.services = {};
           if (iaasService.loadedConfig.iaas !== iaas) {
             return iaasService.loadIaaSTemplate(iaas).then(function() {
-              return iaasService.loadERSTemplates(iaas).then(function() {
+              return iaasService.loadTemplates(iaas).then(function() {
                 iaasService.loadedConfig.iaas = iaas;
                 iaasService.loadedConfig.ersFixedSize = size;
-                return iaasService.loadServiceTemplates(storage.selectedIaaS);
               });
             });
           }

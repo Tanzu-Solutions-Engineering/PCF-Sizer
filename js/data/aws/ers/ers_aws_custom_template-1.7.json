@@ -1,0 +1,190 @@
+{
+  "tile": "Elastic Runtime",
+  "version": "1.7",
+  "size": "custom",
+  "vms":
+  [
+    {
+      "vm": "Ops Manager VM",
+      "instances": 1,
+      "persistent_disk": 50,
+      "dynamic_ips": 0,
+      "static_ips": 1,
+      "instance_type": "m3.xlarge",
+      "singleton": true
+    },
+    {
+      "vm": "Ops Manager Director",
+      "instances": 1,
+      "persistent_disk": 50,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "m3.xlarge",
+      "singleton": true
+    },
+    {
+      "vm": "Consul",
+      "instances": 5,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "NATS",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "etcd",
+      "instances": 5,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "Diego BBS",
+      "instances": 5,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "S3 Blob Store",
+      "instances": 1,
+      "ephemeral_disk": 0,
+      "persistent_disk": 0,
+      "dynamic_ips": 0,
+      "static_ips": 0,
+      "instance_type": null,
+      "singleton": false
+    },
+    {
+      "vm": "Router",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "RDS",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 0,
+      "static_ips": 0,
+      "instance_type": "db.r3.large",
+      "singleton": true
+    },
+    {
+      "vm": "Cloud Controller",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "m3.xlarge",
+      "singleton": false
+    },
+    {
+      "vm": "Clock Global",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "t2.small",
+      "singleton": true
+    },
+    {
+      "vm": "Cloud Controller Worker",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "UAA",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "Diego Brain",
+      "instances": 5,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "m3.medium",
+      "singleton": false
+    },
+    {
+      "vm": "Diego Cell",
+      "instances": 15,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "m3.2xlarge",
+      "valid_instance_types": [
+        "m3.xlarge",
+        "m3.2xlarge"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "Doppler Server",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "Loggregator Traffic Controller",
+      "instances": 5,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "t2.small",
+      "singleton": false
+    },
+    {
+      "vm": "Compilation",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "m3.xlarge",
+      "singleton": false,
+      "valid_instance_types": [
+        "m3.xlarge"
+      ]
+    },
+    {
+      "vm": "Errands",
+      "instances": 13,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "t2.micro",
+      "singleton": false,
+      "valid_instance_types": [
+        "t2.micro"
+      ]
+    }
+  ]
+}

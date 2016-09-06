@@ -13,91 +13,25 @@ app.get('/buildnumber', function(req, res) {
     res.send(vcapApplication);
 });
 
-app.get('/ers/:iaas', function(req, res){
-    var matchingFiles = glob.sync('js/data/ers_' + req.params['iaas']  + '_*.json');
-    var versions = [];
-    matchingFiles.forEach(function(file) {
-      var version = file.split('-')[1].replace('.json', '');
-      if (-1 === versions.indexOf(version)) {
-        versions.push(version);
-      }
-    });
+app.get('/tiles/:iaas', function(req, res) {
+  var runtime = glob.sync('js/data/' + req.params['iaas'] + '/ers/*.json');
+  var services = glob.sync('js/data/' + req.params['iaas'] + '/services/*.json');
 
-    var json = {};
-    versions.forEach(function(version) {
-      var perVersionJson = {};
-      matchingFiles.forEach(function(file) {
-        var size = file.split('_')[2];
-        var version = file.split('-')[1].replace('.json', '');
-        perVersionJson[size] = JSON.parse(fs.readFileSync(file));
-      });
-      json[version] = perVersionJson;
-    });
+  var json = [];
 
-    res.status(200).json(json);
-});
-
-// app.get('/services/:service/versions', function(req, res){
-//     var matchingFiles = glob.sync('js/data/services/' + req.params['service']  + '_*-*.json');
-//     var versions = [];
-//     matchingFiles.forEach(function(file) {
-//         versions.push(file.split('-')[1].replace('.json', ''));
-//     });
-//     res.send(versions)
-// });
-app.get('/services/:iaas', function(req, res) {
-  var serviceJSONs = glob.sync('js/data/services/*_' + req.params['iaas'] + '*_*.json');
-
-  var json = {};
-  var services = [];
-  serviceJSONs.forEach(function(file) {
-    var withPath = file.split('-')[0];
-    var serviceName = withPath.split('/')[3].split('_')[0];
-    if(-1 == services.indexOf(serviceName)) {
-      services.push(serviceName)
-    }
+  runtime.forEach(function(file) {
+    json.push(JSON.parse(fs.readFileSync(file)));
   });
 
-  services.forEach(function(service) {
-    var files = glob.sync('js/data/services/' + service + '_' + req.params['iaas'] + '*.json');
-    var perVersionJson = {};
-    files.forEach(function(file) {
-      var withPath = file.split('-')[0];
-      var version = file.split('-')[1].replace('.json', '');
-      var sizeFiles = glob.sync('js/data/services/' + service + '_' + req.params['iaas'] + '_*' + version + '.json');
-      var sizeJson = {};
-      sizeFiles.forEach(function(file) {
-        var size = file.split('_')[2];
-        sizeJson[size] = JSON.parse(fs.readFileSync(file))
-      });
-      perVersionJson[version] = sizeJson;
-    });
-    json[service] = perVersionJson;
+  services.forEach(function(file) {
+    json.push(JSON.parse(fs.readFileSync(file)));
   });
 
   res.status(200).json(json);
 });
 
-app.get('/services', function(req, res) {
-    var services = [];
-    var serviceJSONs = glob.sync('js/data/services/*.json');
-    serviceJSONs.forEach(function(file) {
-        var withPath = file.split('-')[0];
-        var serviceName = withPath.split('/')[3];
-        if(-1 == services.indexOf(serviceName)) {
-            services.push(serviceName)
-        }
-    });
-    res.status(200).json(services);
-});
-
-app.get('/tile/:iaas/:name/:version', function(req, res) {
-    var filePath = '/js/data/services/' + req.params['name'] + "_" + req.params['iaas'] + "-" + req.params['version']+ ".json";
-    res.contentType('application/json').redirect(filePath);
-});
-
 app.get('/instanceTypes/:iaas', function(req, res) {
-    var filePath = '/js/data/' + req.params['iaas'] + "_" + "instance_types.json";
+    var filePath = '/js/data/' + req.params['iaas'] + "/instance_types.json";
     res.contentType('application/json').redirect(filePath);
 });
 

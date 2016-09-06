@@ -1,0 +1,44 @@
+{
+  "tile": "Ops Metrics",
+  "version": "1.6",
+  "size": "all",
+  "vms":
+  [
+    {
+      "vm": "JMX Provider",
+      "instances": 1,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "singleton": true,
+      "persistent_disk": 1,
+      "instance_type": "medium",
+      "valid_instance_types": [
+        "medium"
+      ]
+    },
+    {
+      "vm": "OpenTSDB Firehose Nozzle",
+      "instances": 2,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "singleton": false,
+      "persistent_disk": 1,
+      "instance_type": "medium",
+      "valid_instance_types": [
+        "medium"
+      ]
+    },
+    {
+      "vm": "Compilation",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "singleton": false,
+      "instance_type": "small.disk",
+      "valid_instance_types": [
+        "small.disk"
+      ]
+    }
+  ]
+}

@@ -12,10 +12,17 @@
         </div>
         <div class="col-md-16" ng-show="storage.services[service.name].configure">
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-3">
               <label>Version
               <select class="form-control" ng-model="storage.services[service.name].version"
                   ng-options="opt as opt for opt in service.versions" ng-change="serviceVersionChanged(service.name)">
+              </select>
+              </label>
+            </div>
+            <div class="col-md-5">
+              <label># of Clusters
+              <select class="form-control" ng-model="storage.services[service.name].clusterCount"
+                  ng-options="count for count in data.numberOfInstances" ng-change="serviceVersionChanged(service.name)">
               </select>
               </label>
             </div>
