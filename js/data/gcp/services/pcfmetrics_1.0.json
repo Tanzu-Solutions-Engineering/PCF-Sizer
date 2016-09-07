@@ -1,0 +1,128 @@
+{
+  "tile": "PCF Metrics",
+  "version": "1.0",
+  "size": "all",
+  "vms":
+  [
+    {
+      "vm": "Push APM UI",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": true,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-1",
+      "valid_instance_types": [
+        "n1-standard-1"
+      ]
+    },
+    {
+      "vm": "Zookeeper",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "Kafka",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "Ingestor",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "Network Metrics Data Store",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "Container Metrics Data Store",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "App Event Data Store",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "APM API",
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instances": 1,
+      "singleton": true,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "Compilation",
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instances": 1,
+      "singleton": false,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-4",
+      "valid_instance_types": [
+        "n1-standard-4"
+      ]
+    },
+    {
+      "vm": "Cleanup",
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instances": 1,
+      "singleton": true,
+      "persistent_disk": 0,
+      "instance_type": "n1-standard-1",
+      "valid_instance_types": [
+        "n1-standard-1"
+      ]
+    }
+  ]
+}

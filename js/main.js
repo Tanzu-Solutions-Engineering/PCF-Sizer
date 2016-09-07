@@ -92,7 +92,7 @@
         id: 'gcp',
         name: 'GCP',
         isDefault: false,
-        isDisabled: true,
+        isDisabled: false,
         pricingUrl: null,
         showPricingTypes: true,
         showSystemResourcesUsed: false,

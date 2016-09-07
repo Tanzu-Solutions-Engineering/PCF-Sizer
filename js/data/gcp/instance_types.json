@@ -1,0 +1,57 @@
+[
+  {
+    "name": "n1-standard-1",
+    "cpu": 1,
+    "ram": 3.75,
+    "ephemeral_disk": 4,
+    "cost": {
+      "Typical": 0.038,
+      "Full Sustained": 0.035,
+      "Preemptible": 0.010
+    }
+  },
+  {
+    "name": "n1-standard-2",
+    "cpu": 2,
+    "ram": 7.5,
+    "ephemeral_disk": 16,
+    "cost": {
+      "Typical": 0.076,
+      "Full Sustained": 0.070,
+      "Preemptible": 0.020
+    }
+  },
+  {
+    "name": "n1-standard-4",
+    "cpu": 4,
+    "ram": 15,
+    "ephemeral_disk": 32,
+    "cost": {
+      "Typical": 0.152,
+      "Full Sustained": 0.140,
+      "Preemptible": 0.040
+    }
+  },
+  {
+    "name": "n1-standard-8",
+    "cpu": 8,
+    "ram": 30,
+    "ephemeral_disk": 64,
+    "cost": {
+      "Typical": 0.304,
+      "Full Sustained": 0.280,
+      "Preemptible": 0.080
+    }
+  },
+  {
+    "name": "n1-standard-16",
+    "cpu": 16,
+    "ram": 60,
+    "ephemeral_disk": 128,
+    "cost": {
+      "Typical": 0.608,
+      "Full Sustained": 0.560,
+      "Preemptible": 0.160
+    }
+  }
+]
