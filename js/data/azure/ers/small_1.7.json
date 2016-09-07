@@ -1,0 +1,197 @@
+{
+  "tile": "Elastic Runtime",
+  "version": "1.7",
+  "size": "small",
+  "vms":
+  [
+    {
+      "vm": "BOSH Director",
+      "instances": 1,
+      "persistent_disk": 50,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": true
+    },
+    {
+      "vm": "Consul",
+      "instances": 3,
+      "persistent_disk": 2,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "NATS",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "etcd",
+      "instances": 3,
+      "persistent_disk": 2,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "Diego BBS",
+      "instances": 3,
+      "persistent_disk": 2,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "NFS Server",
+      "instances": 1,
+      "persistent_disk": 100,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "Router",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "MySQL Proxy",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "MySQL Server",
+      "instances": 3,
+      "persistent_disk": 100,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "MySQL Backup & Prepare",
+      "instances": 1,
+      "persistent_disk": 250,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS2",
+      "singleton": false
+    },
+    {
+      "vm": "Cloud Controller",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "Clock Global",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": true
+    },
+    {
+      "vm": "Cloud Controller Worker",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "UAA",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "Diego Brain",
+      "instances": 3,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "Diego Cell",
+      "instances": 3,
+      "persistent_disk": 64,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS12",
+      "valid_instance_types": [
+        "Standard_DS12"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "Doppler Server",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "Loggregator Traffic Controller",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "Standard_DS1",
+      "singleton": false
+    },
+    {
+      "vm": "Compilation",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false,
+      "valid_instance_types": [
+        "Standard_DS1"
+      ]
+    },
+    {
+      "vm": "Errands",
+      "instances": 13,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "Standard_DS1",
+      "singleton": false,
+      "valid_instance_types": [
+        "Standard_DS1"
+      ]
+    }
+  ]
+}

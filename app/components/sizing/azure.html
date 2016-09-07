@@ -1,24 +1,23 @@
-<div>
-      <h3>Minimum Resources on Azure</h3>
-      <div class="panel panel-alt panel-empty">
-          <table class="table table-light">
-              <tr>
-                <td>
-                <p>Your Azure account must have the following resources before you install Pivotal Cloud Foundry® </p>
-                <ul>
-                  <li>Pay-as-you-go subscription on your Azure account.</li>
-                  <li>1 Storage Account</li>
-                  <li>Sufficiently high quota limits (Recommended: 100 cores) on your Azure account. </li>
-                  <li>Installing Pivotal Cloud Foundry® requires more than the default 20 cores</li>
-                  <li>3 Public IPs</li>
-                  <li>1 “jumpbox” VM that runs the deployment using BOSH</li>
-                  <li>The deployment uses a total of 53 VMs, of which 38 are up and running at the end of the deployment.
-                  The other 15 VMs are created to run jobs and errands and are subsequently destroyed</li>
-                </ul>
-
-                <p>For more details on the minimum starting requirements refer to the documentation <a href="http://docs.pivotal.io/pivotalcf/customizing/pcf_azure.html#prereqs"/></p>
-                </td>
-              </tr>
-          </table>
-      </div>
+<div ng-if="storage.selectedIaaS == 'azure'" class="animate-if">
+  <div class="panel panel-primary">
+    <div class="panel-heading bg-brand-6">Notes for Azure</div>
+    <table class="table table-light">
+      <tr>
+        <td>
+          <p>For more details on the minimum starting requirements refer to the
+            <a target="_blank" href="http://docs.pivotal.io/pivotalcf/customizing/requirements.html#azure">documentation</a></p>
+          <p>Your Azure account must have the following resources before you install Pivotal Cloud Foundry® </p>
+          <ul>
+            <li>Pay-as-you-go subscription on your Azure account.</li>
+            <li>1 Storage Account</li>
+            <li>Sufficiently high quota limits (Recommended: 100 cores) on your Azure account. </li>
+            <li>Installing Pivotal Cloud Foundry® requires more than the default 20 cores</li>
+            <li>3 Public IPs</li>
+            <li>1 “jumpbox” VM that runs the deployment using BOSH</li>
+          </ul>
+          <p>For more details on the minimum starting requirements refer to the documentation <a href="http://docs.pivotal.io/pivotalcf/customizing/pcf_azure.html#prereqs"/></p>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

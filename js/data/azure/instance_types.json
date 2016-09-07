@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Standard_DS1",
+    "cpu": 1,
+    "ram": 3.5,
+    "ephemeral_disk": 50,
+    "cost": {
+      "On Demand": 0.077
+    }
+  },
+  {
+    "name": "Standard_DS2",
+    "cpu": 2,
+    "ram": 7,
+    "ephemeral_disk": 100,
+    "cost": {
+      "On Demand": 0.154
+    }
+  },
+  {
+    "name": "Standard_DS11",
+    "cpu": 2,
+    "ram": 14,
+    "ephemeral_disk": 100,
+    "cost": {
+      "On Demand": 0.195
+    }
+  },
+  {
+    "name": "Standard_DS12",
+    "cpu": 4,
+    "ram": 28,
+    "ephemeral_disk": 200,
+    "cost": {
+      "On Demand": 0.39
+    }
+  }
+]

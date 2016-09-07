@@ -63,12 +63,19 @@
         isDisabled: false,
         pricingUrl: 'https://aws.amazon.com/ec2/pricing/'
       },
+      // {
+      //   id: 'aws-dedicated',
+      //   name: 'AWS Dedicated',
+      //   isDefault: false,
+      //   isDisabled: true,
+      //   pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/'
+      // },
       {
         id: 'azure',
         name: 'Azure',
         isDefault: false,
-        isDisabled: true,
-        pricingUrl: null
+        isDisabled: false,
+        pricingUrl: 'https://azure.microsoft.com/en-us/pricing/details/virtual-machines/'
       },{
         id: 'gcp',
         name: 'GCP',

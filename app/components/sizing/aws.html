@@ -1,81 +1,26 @@
-  <div >
-    <span ng-if="fixedSize == '0'" class="animate-if">
-      <h3>Minimum Resources for Small Size on AWS</h3>
-      <div class="panel panel-alt panel-empty">
-          <table class="table table-light">
-              <tr>
-                <td>
-                  <p>The following are the minimum resource requirements for maintaining a Pivotal Cloud Foundry® (PCF) deployment with Ops Manager and Elastic Runtime on Amazon Web Services infrastructure:</p>
-                  <ul>
-                    <li>1 Elastic Load Balancer</li>
-                    <li>1 Relational Database Service. We recommend at least a db.m3.xlarge instance with 100 GB of allocated storage.
-                    </li>
-                    <li>5 S3 Buckets</li>
-                    <li>EC2 Instances: </li>
-                      <ul>
-                      <li>13 t2.micro</li>
-                      <li>15 t2.small</li>
-                      <li>2 m3.medium</li>
-                      <li>6 m3.xlarge</li>
-                      <li>3 m3.2xlarge</li>
-                    </ul>
-                  </ul>
-                </td>
-              </tr>
-          </table>
-      </div>
-    </span>
-    <span ng-if="fixedSize == '1'" class="animate-if">
-      <h3>Minimum Resources for Medium Size on AWS</h3>
-      <div class="panel panel-alt panel-empty">
-        <table class="table table-light">
-            <tr>
-              <td>
-                <p>The following are the minimum resource requirements for maintaining a Pivotal Cloud Foundry® (PCF) deployment with Ops Manager and Elastic Runtime on Amazon Web Services infrastructure:</p>
-                <ul>
-                  <li>1 Elastic Load Balancer</li>
-                  <li>1 Relational Database Service. We recommend at least a db.m3.xlarge instance with 100 GB of allocated storage.
-                  </li>
-                  <li>5 S3 Buckets</li>
-                  <li>EC2 Instances: </li>
-                    <ul>
-                    <li>13 t2.micro</li>
-                    <li>15 t2.small</li>
-                    <li>2 m3.medium</li>
-                    <li>6 m3.xlarge</li>
-                    <li>3 m3.2xlarge</li>
-                  </ul>
-                </ul>
-              </td>
-            </tr>
-        </table>
-      </div>
-    </span>
-    <span ng-if="fixedSize == '2'" class="animate-if">
-      <h3>Minimum Resources for Large Size on AWS</h3>
-      <div class="panel panel-alt panel-empty">
-        <table class="table table-light">
-            <tr>
-              <td>
-                <p>The following are the minimum resource requirements for maintaining a Pivotal Cloud Foundry® (PCF) deployment with Ops Manager and Elastic Runtime on Amazon Web Services infrastructure:</p>
-                <ul>
-                  <li>1 Elastic Load Balancer</li>
-                  <li>1 Relational Database Service. We recommend at least a db.m3.xlarge instance with 100 GB of allocated storage.
-                  </li>
-                  <li>5 S3 Buckets</li>
-                  <li>EC2 Instances: </li>
-                    <ul>
-                    <li>13 t2.micro</li>
-                    <li>15 t2.small</li>
-                    <li>2 m3.medium</li>
-                    <li>6 m3.xlarge</li>
-                    <li>3 m3.2xlarge</li>
-                  </ul>
-                </ul>
-              </td>
-            </tr>
-        </table>
-      </div>
-    </span>
-
+<div ng-if="storage.selectedIaaS == 'aws' || storage.selectedIaaS == 'aws-dedicated'" class="animate-if">
+  <div class="panel panel-primary">
+    <div class="panel-heading bg-brand-6">Notes for AWS</div>
+    <table class="table table-light">
+      <tr>
+        <td>
+          <p>For more details on the minimum starting requirements refer to the
+            <a target="_blank" href="http://docs.pivotal.io/pivotalcf/customizing/requirements.html#aws">documentation</a></p>
+          <p>Your AWS account must have the following resources before you install Pivotal Cloud Foundry® </p>
+          <ul>
+            <li>1 Elastic Load Balancer</li>
+            <li>1 Relational Database Service. We recommend at least a db.m3.xlarge instance with 100 GB of allocated storage</li>
+            <li>5 S3 Buckets</li>
+            <li>An AWS account that can accommodate the minimum resource requirements for a PCF installation.</li>
+            <li>The appropriate region selected within your AWS account. See the Amazon documentation on regions and availability zones for help selecting the correct region for your deployment.</li>
+            <li>The AWS CLI installed on your machine, and configured with user credentials that have admin access to your AWS account.</li>
+            <li>Sufficiently high instance limits (or no instance limits) on your AWS account. Installing Pivotal Cloud Foundry requires more than the default 20 concurrent instances.</li>
+            <li>A key pair to use with your Pivotal Cloud Foundry deployment. Create a key pair in AWS.</li>
+            <li>A registered wildcard domain for your PCF installation. You will need this registered domain when configuring your SSL certificate and Cloud Controller. See the AWS docs on Creating a Server Certificate for more information.</li>
+            <li>An SSL certificate for your PCF domain. This can be a self-signed certificate, but Pivotal only recommends using a self-signed certificate for testing and development. You should obtain a certificate from your Certificate Authority for use in production. See the AWS docs on SSL certificates for more information.</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
   </div>
+</div>

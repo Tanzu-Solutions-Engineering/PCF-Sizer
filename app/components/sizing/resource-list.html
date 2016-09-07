@@ -30,16 +30,16 @@
                 <td width="70%">Foundation Physical Cores (2GHz or >) #</td>
                 <td width="30%">{{getPhysicalCores()}}</td>
             </tr>
-            <tr ng-show="data.selectedIaaS.id === 'aws'">
+            <tr ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'azure'">
                 <td width="70%"><a target="_blank" href="{{data.selectedIaaS.pricingUrl}}">Instance Types</a></td>
                 <td width="30%"></td>
             </tr>
-            <tr ng-repeat="type in data.resourceSummary.vmTypes" ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'openstack'">
+            <tr ng-repeat="type in data.resourceSummary.vmTypes" ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'openstack' || data.selectedIaaS.id === 'azure'">
 
-                <td width="70%">{{type.name}} ({{type.cpu}} CPU, {{type.ram}}GB RAM<span ng-show="data.selectedIaaS.id === 'aws'"> , {{type.cost | currency}}/hr</span>)</td>
-                <td width="30%">{{type.count}} <span ng-show="data.selectedIaaS.id === 'aws'">({{type.totalCost | currency}}/hr)</span></td>
+                <td width="70%">{{type.name}} ({{type.cpu}} CPU, {{type.ram}}GB RAM<span ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'azure'"> , {{type.cost | currency}}/hr</span>)</td>
+                <td width="30%">{{type.count}} <span ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'azure'">({{type.totalCost | currency}}/hr)</span></td>
             </tr>
-            <tr ng-show="data.selectedIaaS.id === 'aws'">
+            <tr ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'azure'">
                 <td width="70%">Total Cost</td>
                 <td width="30%">{{data.resourceSummary.totalCost | currency}}/hr</td>
             </tr>
