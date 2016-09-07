@@ -63,13 +63,13 @@
         isDisabled: false,
         pricingUrl: 'https://aws.amazon.com/ec2/pricing/'
       },
-      // {
-      //   id: 'aws-dedicated',
-      //   name: 'AWS Dedicated',
-      //   isDefault: false,
-      //   isDisabled: true,
-      //   pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/'
-      // },
+      {
+        id: 'aws-dedicated',
+        name: 'AWS Dedicated',
+        isDefault: false,
+        isDisabled: false,
+        pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/'
+      },
       {
         id: 'azure',
         name: 'Azure',

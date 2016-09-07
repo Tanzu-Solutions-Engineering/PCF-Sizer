@@ -1,0 +1,68 @@
+[
+  {
+    "name": "m3.medium",
+    "cpu": 1,
+    "ram": 3.75,
+    "ephemeral_disk": 4,
+    "cost": {
+      "On-Demand": 0.074,
+      "1-Year Term": 0.044,
+      "3-Year Term": 0.029
+    }
+  },
+  {
+    "name": "m3.large",
+    "cpu": 2,
+    "ram": 7.5,
+    "ephemeral_disk": 16,
+    "cost": {
+      "On-Demand": 0.146,
+      "1-Year Term": 0.090,
+      "3-Year Term": 0.058
+    }
+  },
+  {
+    "name": "m3.xlarge",
+    "cpu": 4,
+    "ram": 15,
+    "ephemeral_disk": 32,
+    "cost": {
+      "On-Demand": 0.293,
+      "1-Year Term": 0.179,
+      "3-Year Term": 0.115
+    }
+  },
+  {
+    "name": "m3.2xlarge",
+    "cpu": 8,
+    "ram": 30,
+    "ephemeral_disk": 64,
+    "cost": {
+      "On-Demand": 0.585,
+      "1-Year Term": 0.357,
+      "3-Year Term": 0.230
+    }
+  },
+  {
+    "name": "db.r3.large",
+    "cpu": 2,
+    "ram": 15,
+    "ephemeral_disk": 0,
+    "cost": {
+      "On-Demand": 0.290,
+      "1-Year Term": 0.158,
+      "3-Year Term": 0.101
+    }
+  },
+  {
+    "name": "r3.4xlarge",
+    "cpu": 4,
+    "ram": 15,
+    "ephemeral_disk": 32,
+    "cost": {
+      "On-Demand": 1.463,
+      "1-Year Term": 0.776,
+      "3-Year Term": 0.513
+    }
+  }
+]

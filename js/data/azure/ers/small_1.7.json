@@ -15,7 +15,7 @@
     },
     {
       "vm": "Consul",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 2,
       "dynamic_ips": 1,
       "static_ips": 1,
@@ -24,7 +24,7 @@
     },
     {
       "vm": "NATS",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
@@ -33,7 +33,7 @@
     },
     {
       "vm": "etcd",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 2,
       "dynamic_ips": 1,
       "static_ips": 0,
@@ -42,7 +42,7 @@
     },
     {
       "vm": "Diego BBS",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 2,
       "dynamic_ips": 1,
       "static_ips": 0,
@@ -60,7 +60,7 @@
     },
     {
       "vm": "Router",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
@@ -69,7 +69,7 @@
     },
     {
       "vm": "MySQL Proxy",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
@@ -96,7 +96,7 @@
     },
     {
       "vm": "Cloud Controller",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
@@ -114,7 +114,7 @@
     },
     {
       "vm": "Cloud Controller Worker",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
@@ -123,7 +123,7 @@
     },
     {
       "vm": "UAA",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
@@ -132,7 +132,7 @@
     },
     {
       "vm": "Diego Brain",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
@@ -141,7 +141,7 @@
     },
     {
       "vm": "Diego Cell",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 64,
       "dynamic_ips": 1,
       "static_ips": 0,
@@ -153,7 +153,7 @@
     },
     {
       "vm": "Doppler Server",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
@@ -162,7 +162,7 @@
     },
     {
       "vm": "Loggregator Traffic Controller",
-      "instances": 3,
+      "instances": 1,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,

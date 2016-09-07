@@ -5,21 +5,12 @@
   "vms":
   [
     {
-      "vm": "vCenter",
-      "instances": 1,
-      "persistent_disk": 120,
-      "dynamic_ips": 0,
-      "static_ips": 1,
-      "instance_type": "vCenter",
-      "singleton": true
-    },
-    {
       "vm": "Ops Manager VM",
       "instances": 1,
-      "persistent_disk": 160,
+      "persistent_disk": 50,
       "dynamic_ips": 0,
       "static_ips": 1,
-      "instance_type": "OpsManager",
+      "instance_type": "m3.xlarge",
       "singleton": true
     },
     {
@@ -28,7 +19,7 @@
       "persistent_disk": 50,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "medium.disk",
+      "instance_type": "m3.xlarge",
       "singleton": true
     },
     {
@@ -37,16 +28,16 @@
       "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
-      "vm": "NATS - Message Bus",
+      "vm": "NATS",
       "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
@@ -55,8 +46,8 @@
       "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "micro",
-      "singleton": true
+      "instance_type": "m3.medium",
+      "singleton": false
     },
     {
       "vm": "Diego BBS",
@@ -64,16 +55,17 @@
       "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
-      "vm": "NFS Server || Blob Store",
+      "vm": "S3 Blob Store",
       "instances": 1,
-      "persistent_disk": 100,
-      "dynamic_ips": 1,
-      "static_ips": 1,
-      "instance_type": "micro",
+      "ephemeral_disk": 0,
+      "persistent_disk": 0,
+      "dynamic_ips": 0,
+      "static_ips": 0,
+      "instance_type": null,
       "singleton": false
     },
     {
@@ -82,7 +74,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
@@ -91,7 +83,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "small",
+      "instance_type": "m3.large",
       "singleton": false
     },
     {
@@ -100,7 +92,7 @@
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "large.disk",
+      "instance_type": "m3.xlarge",
       "singleton": false
     },
     {
@@ -109,7 +101,7 @@
       "persistent_disk": 250,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "xlarge.disk",
+      "instance_type": "m3.2xlarge",
       "singleton": false
     },
     {
@@ -118,16 +110,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "medium.disk",
-      "singleton": false
-    },
-    {
-      "vm": "HA Proxy",
-      "instances": 1,
-      "persistent_disk": 0,
-      "dynamic_ips": 1,
-      "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "m3.xlarge",
       "singleton": false
     },
     {
@@ -136,7 +119,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": true
     },
     {
@@ -145,7 +128,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
@@ -154,7 +137,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
@@ -163,7 +146,7 @@
       "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "small",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
@@ -172,10 +155,10 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "2xlarge",
+      "instance_type": "m3.2xlarge",
       "valid_instance_types": [
-        "2xlarge.cpu",
-        "2xlarge"
+        "m3.xlarge",
+        "m3.2xlarge"
       ],
       "singleton": false
     },
@@ -185,7 +168,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
@@ -194,7 +177,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false
     },
     {
@@ -203,10 +186,10 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "medium",
+      "instance_type": "m3.xlarge",
       "singleton": false,
       "valid_instance_types": [
-        "medium"
+        "m3.xlarge"
       ]
     },
     {
@@ -215,10 +198,10 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "micro",
+      "instance_type": "m3.medium",
       "singleton": false,
       "valid_instance_types": [
-        "micro"
+        "m3.medium"
       ]
     }
   ]

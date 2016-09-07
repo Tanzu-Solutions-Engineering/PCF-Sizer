@@ -7,7 +7,7 @@
           <tr>
             <th>VM/Application</th>
             <th>Qty</th>
-            <th ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'openstack'">Instance Type</th>
+            <th ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'aws-dedicated' || data.selectedIaaS.id === 'openstack'">Instance Type</th>
             <th ng-show="data.selectedIaaS.id === 'vsphere' || data.selectedIaaS.id === 'openstack'">RAM</th>
             <th ng-show="data.selectedIaaS.id === 'vsphere' || data.selectedIaaS.id === 'openstack'">vCPU</th>
             <th ng-show="data.selectedIaaS.id === 'vsphere' || data.selectedIaaS.id === 'openstack'">Total RAM</th>
@@ -21,7 +21,7 @@
         <tr ng-repeat="vm in getVMs(tile)">
             <td>{{vm.vm}}</td>
             <td>{{vm.instances}}</td>
-            <td ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'openstack'">{{vm.instance_type}}  <span ng-if="vm.instance_type">({{vm.instanceInfo.cpu}} CPU, {{vm.instanceInfo.ram}}GB RAM)</span></td>
+            <td ng-show="data.selectedIaaS.id === 'aws' || data.selectedIaaS.id === 'aws-dedicated' || data.selectedIaaS.id === 'openstack'">{{vm.instance_type}}  <span ng-if="vm.instance_type">({{vm.instanceInfo.cpu}} CPU, {{vm.instanceInfo.ram}}GB RAM)</span></td>
             <td ng-show="data.selectedIaaS.id === 'vsphere' || data.selectedIaaS.id === 'openstack'"><span ng-if="vm.instance_type">{{vm.instanceInfo.ram}}</span></td>
             <td ng-show="data.selectedIaaS.id === 'vsphere' || data.selectedIaaS.id === 'openstack'"><span ng-if="vm.instance_type">{{vm.instanceInfo.cpu}}</span></td>
             <td ng-show="data.selectedIaaS.id === 'vsphere' || data.selectedIaaS.id === 'openstack'"><span ng-if="vm.instance_type">{{vm.instanceInfo.ram * vm.instances}}</span></td>

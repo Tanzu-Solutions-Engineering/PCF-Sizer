@@ -96,8 +96,8 @@
     },
     {
       "vm": "MySQL Server",
-      "instances": 1,
-      "persistent_disk": 50,
+      "instances": 3,
+      "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 0,
       "instance_type": "large.disk",
