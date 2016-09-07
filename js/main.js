@@ -54,40 +54,58 @@
         name: 'vSphere',
         isDefault: true,
         isDisabled: false,
-        pricingUrl: null
+        pricingUrl: null,
+        showPricingTypes: false,
+        showSystemResourcesUsed: true,
+        showInstanceFlavorsUsed: false
       },
       {
         id: 'aws',
         name: 'AWS',
         isDefault: false,
         isDisabled: false,
-        pricingUrl: 'https://aws.amazon.com/ec2/pricing/'
+        pricingUrl: 'https://aws.amazon.com/ec2/pricing/',
+        showPricingTypes: true,
+        showSystemResourcesUsed: false,
+        showInstanceFlavorsUsed: true
       },
       {
         id: 'aws-dedicated',
         name: 'AWS Dedicated',
         isDefault: false,
         isDisabled: false,
-        pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/'
+        pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/',
+        showPricingTypes: true,
+        showSystemResourcesUsed: false,
+        showInstanceFlavorsUsed: true
       },
       {
         id: 'azure',
         name: 'Azure',
         isDefault: false,
         isDisabled: false,
-        pricingUrl: 'https://azure.microsoft.com/en-us/pricing/details/virtual-machines/'
+        pricingUrl: 'https://azure.microsoft.com/en-us/pricing/details/virtual-machines/',
+        showPricingTypes: true,
+        showSystemResourcesUsed: false,
+        showInstanceFlavorsUsed: true
       },{
         id: 'gcp',
         name: 'GCP',
         isDefault: false,
         isDisabled: true,
-        pricingUrl: null
+        pricingUrl: null,
+        showPricingTypes: true,
+        showSystemResourcesUsed: false,
+        showInstanceFlavorsUsed: true
       },{
         id: 'openstack',
         name: 'OpenStack',
         isDefault: false,
         isDisabled: false,
-        pricingUrl: null
+        pricingUrl: null,
+        showPricingTypes: false,
+        showSystemResourcesUsed: true,
+        showInstanceFlavorsUsed: true
       }
     ];
 
