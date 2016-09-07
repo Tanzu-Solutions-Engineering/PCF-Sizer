@@ -93,7 +93,7 @@
         name: 'GCP',
         isDefault: false,
         isDisabled: false,
-        pricingUrl: null,
+        pricingUrl: 'https://cloud.google.com/compute/pricing',
         showPricingTypes: true,
         showSystemResourcesUsed: false,
         showInstanceFlavorsUsed: true
