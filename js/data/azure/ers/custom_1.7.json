@@ -82,7 +82,7 @@
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "Standard_DS11",
       "singleton": false
     },
     {
@@ -91,7 +91,7 @@
       "persistent_disk": 250,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS2",
+      "instance_type": "Standard_DS12",
       "singleton": false
     },
     {
