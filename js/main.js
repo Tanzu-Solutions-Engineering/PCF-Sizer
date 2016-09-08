@@ -4,12 +4,12 @@
 
   sizerApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
-    .when('/sizing/:iaas/:version/:size', {
+    .when('/sizing/:iaas/:version?/:size?', {
       templateUrl: 'app/components/sizing/sizing.html',
       controller: 'PCFSizingController',
       controllerAs: 'vm',
       resolve: {
-        loadTemplates: function(iaasService, $route, sizingStorageService) {
+        loadTemplates: function(iaasService, $route, sizingStorageService, $location, $q) {
           var storage = sizingStorageService.data;
           var iaas = $route.current.params.iaas;
           var version = $route.current.params.version;
@@ -17,18 +17,44 @@
 
           storage.selectedIaaS = iaas;
           storage.fixedSize = size;
-          if (iaasService.loadedConfig.iaas !== iaas) {
-            storage.services = {};
-            return iaasService.loadIaaSTemplate(iaas).then(function() {
-              return iaasService.loadTemplates(iaas).then(function() {
+          storage.elasticRuntimeConfig.ersVersion = version;
+
+          storage.services = {};
+          return iaasService.loadIaaSTemplate(iaas).then(function() {
+            return iaasService.loadTemplates(iaas).then(function() {
+              return $q(function(resolve, reject) {
                 iaasService.loadedConfig.iaas = iaas;
                 iaasService.loadedConfig.ersFixedSize = size;
+                var availableVersions = iaasService.getPCFVersions();
+
+                if (availableVersions.indexOf(version) === -1) {
+                  storage.elasticRuntimeConfig.ersVersion = availableVersions[0];
+                  reject('bad version');
+                  $location.path(['/sizing', iaas, availableVersions[0], size].join('/'));
+                  return;
+                } else {
+                  if (!_.find(iaasService.pcfInstallSizes[version], {size: size})) {
+                    var newSize = iaasService.pcfInstallSizes[version].sort(function(a, b) { return a.priority - b.priority })[0].size;
+                    reject('bad size');
+                    $location.path(['/sizing', iaas, version, newSize].join('/'));
+                    return;
+                  }
+                }
+
+                resolve();
               });
             });
-          }
+          }, function(error) {
+            return $q(function(resolve, reject) {
+              console.log(error);
+              reject('could not load');
+              $location.path(['/sizing', 'vsphere'].join('/'));
+              return;
+            })
+          });
         }
       }
-    }).otherwise({redirectTo:'/sizing/vsphere/1.7/small'});
+    }).otherwise({redirectTo:'/sizing/vsphere'});
     $locationProvider.html5Mode(false);
   });
 

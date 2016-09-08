@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var glob = require('glob');
 var fs = require('fs');
-var _ = require('lodash');
 
 app.use(express.static('.'));
 

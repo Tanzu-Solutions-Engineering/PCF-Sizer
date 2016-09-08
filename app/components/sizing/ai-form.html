@@ -4,28 +4,19 @@
     <div>
       <div class="">
         <ul class="nav nav-tabs">
-          <li ng-class="{'active': storage.fixedSize === 'small'}">
-            <a href ng-click="changeSize('small')">Small</a>
-          </li>
-          <li ng-class="{'active': storage.fixedSize === 'medium'}">
-            <a href ng-click="changeSize('medium')">Medium</a>
-          </li>
-          <li ng-class="{'active': storage.fixedSize === 'large'}">
-            <a href ng-click="changeSize('large')">Large</a>
-          </li>
-          <li ng-class="{'active': storage.fixedSize === 'custom'}">
-            <a href ng-click="changeSize('custom')">Custom</a>
+          <li ng-repeat="s in data.installSizeSelectionList[storage.elasticRuntimeConfig.ersVersion] | orderBy: 'priority'" ng-class="{'active': storage.fixedSize === s.size}">
+            <a href ng-click="changeSize(s.size)">{{s.displayName}}</a>
           </li>
         </ul>
       </div>
-      <div class="">
+      <div>
         <p>{{data.sizingDescription}}</p>
 
         <div class="row">
           <label class="col-md-10">AI Packs</label>
           <div class="col-md-4">
-            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.aiPacks.label}}</span>
-            <span ng-show="storage.fixedSize === 'custom'">
+            <span ng-hide="data.selectedSize.canCustomize">{{data.elasticRuntimeConfig.aiPacks.label}}</span>
+            <span ng-show="data.selectedSize.canCustomize">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.aiPacks"
                   ng-options="opt as opt.label for opt in data.aiPackOptions" ng-change="customSizeDropdownUpdated()">
               </select>
@@ -35,10 +26,10 @@
         <div class="row">
           <label class="col-md-10">AI Average RAM (GB)</label>
           <div class="col-md-4">
-            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.avgRam.value}}</span>
-            <span ng-show="storage.fixedSize === 'custom'">
-              <select class="form-control" ng-model="data.elasticRuntimeConfig.avgRam"
-                  ng-options="opt as opt.value for opt in data.avgRamOptions" ng-change="customSizeDropdownUpdated()">
+            <span ng-hide="data.selectedSize.canCustomize">{{data.elasticRuntimeConfig.avgAIRam.value}}</span>
+            <span ng-show="data.selectedSize.canCustomize">
+              <select class="form-control" ng-model="data.elasticRuntimeConfig.avgAIRam"
+                  ng-options="opt as opt.value for opt in data.avgAIRamOptions" ng-change="customSizeDropdownUpdated()">
               </select>
             </span>
           </div>
@@ -46,8 +37,8 @@
         <div class="row">
           <label class="col-md-10">AI Average Storage (GB)</label>
           <div class="col-md-4">
-            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.avgAIDisk.value}}</span>
-            <span ng-show="storage.fixedSize === 'custom'">
+            <span ng-hide="data.selectedSize.canCustomize">{{data.elasticRuntimeConfig.avgAIDisk.value}}</span>
+            <span ng-show="data.selectedSize.canCustomize">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.avgAIDisk"
                   ng-options="opt as opt.value for opt in data.avgAIDiskOptions" ng-change="customSizeDropdownUpdated()">
               </select>
@@ -58,8 +49,8 @@
         <div class="row">
           <label class="col-md-10">Cell Instance Type</label>
           <div class="col-md-4">
-            <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.instanceType.instance_type}}</span>
-            <span ng-show="storage.fixedSize === 'custom'">
+            <span ng-hide="data.selectedSize.canCustomize">{{data.elasticRuntimeConfig.instanceType.instance_type}}</span>
+            <span ng-show="data.selectedSize.canCustomize">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.instanceType"
                   ng-options="opt as opt.instance_type for opt in data.instanceTypes" ng-change="customSizeDropdownUpdated()">
               </select>
@@ -80,15 +71,15 @@
         <div class="row">
             <label class="col-md-10">Availability Zone</label>
             <div class="col-md-4">
-              <span ng-hide="storage.fixedSize === 'custom'">{{data.elasticRuntimeConfig.azCount}}</span>
-              <span ng-show="storage.fixedSize === 'custom'">
+              <span ng-hide="data.selectedSize.canCustomize">{{data.elasticRuntimeConfig.azCount}}</span>
+              <span ng-show="data.selectedSize.canCustomize">
                 <select class="form-control" ng-model="data.elasticRuntimeConfig.azCount"
                     ng-options="opt as opt for opt in data.availabilityZones" ng-change="customSizeDropdownUpdated()">
                 </select>
               </span>
             </div>
         </div>
-        <div class="row" ng-show="storage.fixedSize === 'custom'">
+        <div class="row" ng-show="data.selectedSize.canCustomize">
             <label class="col-md-10">Extra Cells per AZ</label>
             <div class="col-md-4">
               <select class="form-control" ng-model="data.elasticRuntimeConfig.extraRunnersPerAZ"

@@ -1,5 +1,5 @@
 "use strict";
-var iaasService = angular.module('sizerApp').factory('iaasService', function(sizingStorageService, $http) {
+var iaasService = angular.module('sizerApp').factory('iaasService', function(sizingStorageService, $http, $q) {
   var ramOverhead = 3;
   var diskOverhead = 20;
   var aisPerPack = 50;
@@ -31,6 +31,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       cellsPerAZ: 0,
       totalRam: 0
     },
+    pcfInstallSizes: {}
   };
 
   iaasService.getRamOverhead = function() {
@@ -89,6 +90,10 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
     this.templateVms = [];
   };
 
+  iaasService.resetInstallSizes = function() {
+    this.pcfInstallSizes = [];
+  }
+
   iaasService.removeTemplateVMs = function(tile) {
     _.remove(this.templateVms, {tile: tile});
   };
@@ -103,6 +108,10 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
   iaasService.getTemplateVMVersions = function(tile) {
     return _.map(_.uniqBy(_.filter(this.templateVms, {tile: tile}), 'version'), 'version');
+  }
+
+  iaasService.getPCFVersions = function() {
+    return Object.keys(this.pcfInstallSizes);
   }
 
   /**
@@ -243,17 +252,46 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.loadIaaSTemplate = function(iaas) {
-    var url = ['/instanceTypes', iaas].join('/');
-    return $http.get(url)
-    .success(function(data) {
-      iaasService.instanceTypes = data;
-    }).error(function(data) {
-      alert("Failed to get PCF Iaas Types");
+    return $q(function(resolve, reject) {
+      if (iaasService.loadedConfig.iaas === iaas) {
+        resolve();
+        return;
+      }
+
+      var url = ['/instanceTypes', iaas].join('/');
+      return $http.get(url)
+      .success(function(data) {
+        iaasService.instanceTypes = data;
+        resolve();
+      }).error(function(data) {
+        reject("Failed to get PCF Iaas Types");
+      });
     });
   };
 
   iaasService.processTemplates = function(tiles) {
     tiles.forEach(function(t) {
+      if (t.tile === 'Elastic Runtime') {
+
+        if (!iaasService.pcfInstallSizes[t.version]) {
+          iaasService.pcfInstallSizes[t.version] = [];
+        }
+
+        iaasService.pcfInstallSizes[t.version].push({
+          size: t.size,
+          priority: t.priority,
+          displayName: t.display_name,
+          description: t.description,
+          isDefault: t.is_default,
+          avgAIRam: t.avg_ai_ram,
+          avgAIDisk: t.avg_ai_disk,
+          aiPacks: t.ai_packs,
+          azCount: t.az_count,
+          extraRunnersPerAZ : t.extra_runners_per_az,
+          isDisabled: t.is_disabled,
+          canCustomize: t.can_customize
+        })
+      }
 
       t.vms.forEach(function(vm) {
         vm.tile = t.tile;
@@ -267,15 +305,23 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   };
 
   iaasService.loadTemplates = function(iaas) {
-    var t = this;
-    var url = ['/tiles', iaas].join('/');
-    t.resetVMs();
-    t.resetTemplateVMs();
-    return $http.get(url)
-    .success(function(data) {
-      t.processTemplates(data);
-    }).error(function(data) {
-      alert("Failed to get PCF Template JSON template");
+    return $q(function(resolve, reject) {
+      if (iaasService.loadedConfig.iaas === iaas) {
+        resolve();
+        return;
+      }
+
+      var url = ['/tiles', iaas].join('/');
+      iaasService.resetVMs();
+      iaasService.resetTemplateVMs();
+      iaasService.resetInstallSizes();
+      return $http.get(url)
+      .success(function(data) {
+        iaasService.processTemplates(data);
+        resolve();
+      }).error(function(data) {
+        reject("Failed to get PCF Template JSON template");
+      });
     });
   };
 

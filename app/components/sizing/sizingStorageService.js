@@ -13,7 +13,7 @@
           avgAIRAM: 0,
           avgAIDisk: 0,
           compilationJobs: 0,
-          ersVersion: "1.7"
+          ersVersion: ''
         },
         services: {},
         fixedSize: 'small'

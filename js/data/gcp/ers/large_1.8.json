@@ -1,6 +1,6 @@
 {
   "tile": "Elastic Runtime",
-  "version": "1.7",
+  "version": "1.8",
   "size": "large",
   "display_name": "Large",
   "description": "Large Size of PCF Foundation and Elastic Runtime for Multiple Dev/Test/Production Env",
@@ -16,12 +16,21 @@
   "vms":
   [
     {
-      "vm": "BOSH Director",
+      "vm": "Ops Manager VM",
+      "instances": 1,
+      "persistent_disk": 50,
+      "dynamic_ips": 0,
+      "static_ips": 1,
+      "instance_type": "n1-standard-4",
+      "singleton": true
+    },
+    {
+      "vm": "Ops Manager Director",
       "instances": 1,
       "persistent_disk": 50,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-4",
       "singleton": true
     },
     {
@@ -30,7 +39,7 @@
       "persistent_disk": 2,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -39,7 +48,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -48,7 +57,7 @@
       "persistent_disk": 2,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -57,7 +66,7 @@
       "persistent_disk": 2,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -66,7 +75,7 @@
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -75,7 +84,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -84,7 +93,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -93,7 +102,7 @@
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS11",
+      "instance_type": "n1-standard-4",
       "singleton": false
     },
     {
@@ -102,7 +111,7 @@
       "persistent_disk": 250,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS12",
+      "instance_type": "n1-standard-8",
       "singleton": false
     },
     {
@@ -111,7 +120,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -120,7 +129,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": true
     },
     {
@@ -129,7 +138,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -138,7 +147,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -147,7 +156,7 @@
       "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -156,9 +165,9 @@
       "persistent_disk": 64,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS12",
+      "instance_type": "n1-highmem-4",
       "valid_instance_types": [
-        "Standard_DS12"
+        "n1-highmem-4"
       ],
       "singleton": false
     },
@@ -168,7 +177,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -177,7 +186,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false
     },
     {
@@ -186,10 +195,10 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false,
       "valid_instance_types": [
-        "Standard_DS1"
+        "n1-standard-1"
       ]
     },
     {
@@ -198,10 +207,10 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS1",
+      "instance_type": "n1-standard-1",
       "singleton": false,
       "valid_instance_types": [
-        "Standard_DS1"
+        "n1-standard-1"
       ]
     }
   ]

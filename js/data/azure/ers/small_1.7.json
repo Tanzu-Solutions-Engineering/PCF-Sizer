@@ -2,6 +2,17 @@
   "tile": "Elastic Runtime",
   "version": "1.7",
   "size": "small",
+  "display_name": "Small",
+  "description": "Small Size of PCF Foundation and Elastic Runtime for POC and Evalution",
+  "is_default": true,
+  "avg_ai_ram": 1,
+  "avg_ai_disk": 1,
+  "ai_packs": 1,
+  "az_count": 1,
+  "extra_runners_per_az" : 0,
+  "is_disabled": false,
+  "can_customize": false,
+  "priority": 1,
   "vms":
   [
     {

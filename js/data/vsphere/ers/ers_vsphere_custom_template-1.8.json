@@ -1,16 +1,36 @@
 {
   "tile": "Elastic Runtime",
-  "version": "1.7",
-  "size": "large",
+  "version": "1.8",
+  "size": "custom",
+  "display_name": "Custom",
+  "description": "Custom Size of PCF Foundation and Elastic Runtime where you can choose the AI Pack Size",
+  "avg_ai_ram": 2,
+  "avg_ai_disk": 4,
+  "ai_packs": 4,
+  "az_count": 3,
+  "extra_runners_per_az": 0,
+  "is_default": false,
+  "is_disabled": false,
+  "can_customize": true,
+  "priority": 4,
   "vms":
   [
     {
-      "vm": "Ops Manager VM",
+      "vm": "vCenter",
       "instances": 1,
-      "persistent_disk": 50,
+      "persistent_disk": 120,
       "dynamic_ips": 0,
       "static_ips": 1,
-      "instance_type": "n1-standard-4",
+      "instance_type": "vCenter",
+      "singleton": true
+    },
+    {
+      "vm": "Ops Manager VM",
+      "instances": 1,
+      "persistent_disk": 160,
+      "dynamic_ips": 0,
+      "static_ips": 1,
+      "instance_type": "OpsManager",
       "singleton": true
     },
     {
@@ -19,61 +39,61 @@
       "persistent_disk": 50,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-4",
+      "instance_type": "medium.disk",
       "singleton": true
     },
     {
       "vm": "Consul",
-      "instances": 3,
-      "persistent_disk": 2,
+      "instances": 5,
+      "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
-      "vm": "NATS",
-      "instances": 3,
+      "vm": "NATS - Message Bus",
+      "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
       "vm": "etcd",
-      "instances": 3,
-      "persistent_disk": 2,
+      "instances": 5,
+      "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
-      "singleton": false
+      "instance_type": "micro",
+      "singleton": true
     },
     {
       "vm": "Diego BBS",
-      "instances": 3,
-      "persistent_disk": 2,
+      "instances": 5,
+      "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
-      "vm": "NFS Server",
+      "vm": "NFS Server || Blob Store",
       "instances": 1,
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
       "vm": "Router",
-      "instances": 3,
+      "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
@@ -82,7 +102,7 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-1",
+      "instance_type": "small",
       "singleton": false
     },
     {
@@ -91,7 +111,7 @@
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-4",
+      "instance_type": "large.disk",
       "singleton": false
     },
     {
@@ -100,16 +120,25 @@
       "persistent_disk": 250,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-8",
+      "instance_type": "xlarge.disk",
       "singleton": false
     },
     {
       "vm": "Cloud Controller",
-      "instances": 3,
+      "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "medium.disk",
+      "singleton": false
+    },
+    {
+      "vm": "HA Proxy",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
       "singleton": false
     },
     {
@@ -118,64 +147,65 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": true
     },
     {
       "vm": "Cloud Controller Worker",
-      "instances": 3,
+      "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
       "vm": "UAA",
-      "instances": 3,
+      "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
       "vm": "Diego Brain",
-      "instances": 3,
+      "instances": 5,
       "persistent_disk": 1,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "small",
       "singleton": false
     },
     {
       "vm": "Diego Cell",
-      "instances": 16,
-      "persistent_disk": 64,
+      "instances": 15,
+      "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-highmem-4",
+      "instance_type": "2xlarge",
       "valid_instance_types": [
-        "n1-highmem-4"
+        "2xlarge.cpu",
+        "2xlarge"
       ],
       "singleton": false
     },
     {
       "vm": "Doppler Server",
-      "instances": 3,
+      "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
       "vm": "Loggregator Traffic Controller",
-      "instances": 3,
+      "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false
     },
     {
@@ -184,10 +214,10 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "medium",
       "singleton": false,
       "valid_instance_types": [
-        "n1-standard-1"
+        "medium"
       ]
     },
     {
@@ -196,10 +226,10 @@
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-standard-1",
+      "instance_type": "micro",
       "singleton": false,
       "valid_instance_types": [
-        "n1-standard-1"
+        "micro"
       ]
     }
   ]

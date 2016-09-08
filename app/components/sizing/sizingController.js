@@ -24,12 +24,9 @@
   	 * code defaults to index 0, which should always return the latest
   	 * version
   	 */
-    $scope.data.ersVersionOptions = [ //this can be removed once we pull in versions properly for ERS
-      // "1.8",
-      "1.7"
-    ];
+    $scope.data.ersVersionOptions = iaasService.getPCFVersions();
 
-    $scope.data.avgRamOptions = [
+    $scope.data.avgAIRamOptions = [
       { value: .5 },
       { value: 1  },
       { value: 1.5},
@@ -124,62 +121,12 @@
       {text: "16:1", ratio:16}
     ];
 
-    $scope.data.installSizeSelectionList = [
-      {
-        id: 'small',
-        name: 'Small',
-        description: 'Small Size of PCF Foundation and Elastic Runtime for POC and Evalution',
-        isDefault: true,
-        avgRam: 1,
-        avgAIDisk: 1,
-        aiPacks: 1,
-        azCount: 1,
-        extraRunnersPerAZ : 0,
-        isDisabled: false
-      },
-      {
-        id: 'medium',
-        name: 'Medium',
-        description: 'Medium Size of PCF Foundation and Elastic Runtime for Dev and Test Env',
-        avgRam: 1.5,
-        avgAIDisk: 2,
-        aiPacks: 2,
-        azCount: 3,
-        extraRunnersPerAZ : 0,
-        isDefault: false,
-        isDisabled: false
-      },
-      {
-        id: 'large',
-        name: 'Large',
-        description: 'Large Size of PCF Foundation and Elastic Runtime for Multiple Dev/Test/Production Env',
-        avgRam: 2,
-        avgAIDisk: 3,
-        aiPacks: 4,
-        azCount: 3,
-        extraRunnersPerAZ : 0,
-        isDefault: false,
-        isDisabled: false
-      },
-      {
-        id: 'custom',
-        name: 'Custom',
-        description: 'Custom Size of PCF Foundation and Elastic Runtime where you can choose the AI Pack Size',
-        avgRam: 2,
-        avgAIDisk: 4,
-        aiPacks: 4,
-        azCount: 3,
-        extraRunnersPerAZ : 0,
-        isDefault: false,
-        isDisabled: false
-      }
-    ];
-
+    $scope.data.installSizeSelectionList = iaasService.pcfInstallSizes;
     $scope.storage = sizingStorageService.data;
     $scope.data.selectedIaaS = _.find($scope.data.iaasSelectionList, {id: $scope.storage.selectedIaaS});
 
     $scope.data.elasticRuntimeConfig = {
-      avgRam: $scope.data.avgRamOptions[1],
+      avgAIRam: $scope.data.avgAIRamOptions[1],
       avgAIDisk:  $scope.data.avgAIDiskOptions[0],
       instanceType: {},
       runnerDisk: 0,
@@ -226,7 +173,7 @@
       $scope.data.elasticRuntimeConfig.runnerDisk = $scope.data.elasticRuntimeConfig.instanceType.disk;
       $scope.data.elasticRuntimeConfig.runnerRAM = $scope.data.elasticRuntimeConfig.instanceType.ram;
       $scope.storage.elasticRuntimeConfig.diegoCellInstanceType = $scope.data.elasticRuntimeConfig.instanceType.instance_type;
-      $scope.storage.elasticRuntimeConfig.avgAIRAM = $scope.data.elasticRuntimeConfig.avgRam.value;
+      $scope.storage.elasticRuntimeConfig.avgAIRAM = $scope.data.elasticRuntimeConfig.avgAIRam.value;
       $scope.storage.elasticRuntimeConfig.avgAIDisk = $scope.data.elasticRuntimeConfig.avgAIDisk.value;
       $scope.storage.elasticRuntimeConfig.azCount = $scope.data.elasticRuntimeConfig.azCount;
       $scope.storage.elasticRuntimeConfig.extraRunnersPerAZ = $scope.data.elasticRuntimeConfig.extraRunnersPerAZ;
@@ -245,10 +192,11 @@
       $scope.data.instanceTypes = $scope.getAvailableCellTypes();
       var cellInfo = iaasService.getDiegoCellInfo();
       $scope.data.elasticRuntimeConfig.instanceType = _.find($scope.data.instanceTypes, {instance_type: cellInfo.instance_type});
-      var selectedSize = _.find($scope.data.installSizeSelectionList, { id: size });
+      var selectedSize = _.find($scope.data.installSizeSelectionList[$scope.storage.elasticRuntimeConfig.ersVersion], {size: size});
+      $scope.data.selectedSize = selectedSize
       $scope.data.sizingDescription = selectedSize.description;
-      $scope.data.elasticRuntimeConfig.avgRam = _.find($scope.data.avgRamOptions, function(o) {
-        if (o.value === selectedSize.avgRam) { return o; }
+      $scope.data.elasticRuntimeConfig.avgAIRam = _.find($scope.data.avgAIRamOptions, function(o) {
+        if (o.value === selectedSize.avgAIRam) { return o; }
       });
       $scope.data.elasticRuntimeConfig.avgAIDisk = _.find($scope.data.avgAIDiskOptions, function(o) {
         if (o.value === selectedSize.avgAIDisk) { return o; }
