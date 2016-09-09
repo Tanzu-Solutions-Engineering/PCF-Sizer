@@ -114,6 +114,26 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
     return Object.keys(this.pcfInstallSizes);
   }
 
+  iaasService.getPricingTypes = function() {
+    var types = [];
+    var instanceTypes = this.getInstanceTypes();
+
+    if (instanceTypes && instanceTypes[0].cost) {
+      instanceTypes.forEach(function(t) {
+        Object.keys(t.cost).forEach(function(type) {
+          types.push(type);
+        });
+      });
+      var uniqueTypes = _.uniq(types);
+
+      if (!sizingStorageService.data.pricingType) {
+          sizingStorageService.data.pricingType = uniqueTypes[0];
+      }
+
+      return uniqueTypes;
+    }
+  };
+
   /**
     END methods for VMs loaded from templates
   */

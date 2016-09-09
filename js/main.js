@@ -173,23 +173,7 @@
     };
 
     $scope.getPricingTypes = function() {
-      var types = [];
-      var instanceTypes = iaasService.getInstanceTypes();
-
-      if (instanceTypes && instanceTypes[0].cost) {
-        instanceTypes.forEach(function(t) {
-          Object.keys(t.cost).forEach(function(type) {
-            types.push(type);
-          });
-        });
-        var uniqueTypes = _.uniq(types);
-
-        if (!$scope.storage.pricingType) {
-            $scope.storage.pricingType = uniqueTypes[0];
-        }
-
-        return uniqueTypes;
-      }
+      return iaasService.getPricingTypes();
     };
 
     $scope.updatePricingType = function() {
