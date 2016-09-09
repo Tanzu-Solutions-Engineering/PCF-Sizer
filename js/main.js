@@ -154,8 +154,7 @@
     };
 
     $scope.getTileNames = function() { //gets all the unique tile names
-      var tiles = _.map(_.uniqBy($scope.getVMs(), 'tile'), 'tile')
-      tiles.sort();
+      var tiles = _.map(_.uniqBy($scope.getVMs(), 'tile'), 'tile').sort();
       return tiles;
     }
 
