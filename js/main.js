@@ -1,8 +1,13 @@
 "use strict";
 (function() {
-  var sizerApp = angular.module('sizerApp', ['ui.bootstrap', 'ngRoute']);
+  var sizerApp = angular.module('sizerApp', ['ui.bootstrap', 'ngRoute', 'LocalStorageModule']);
 
-  sizerApp.config(function($routeProvider, $locationProvider) {
+  sizerApp.config(function($routeProvider, $locationProvider, localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('pcfsizer')
+      .setStorageType('sessionStorage')
+      .setNotify(true, true);
+
     $routeProvider
     .when('/sizing/:iaas/:version?/:size?', {
       templateUrl: 'app/components/sizing/sizing.html',

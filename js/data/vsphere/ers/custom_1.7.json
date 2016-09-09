@@ -84,7 +84,7 @@
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "small",
       "singleton": false
     },
     {

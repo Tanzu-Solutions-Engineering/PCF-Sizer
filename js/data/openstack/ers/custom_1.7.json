@@ -43,7 +43,7 @@
       "singleton": false
     },
     {
-      "vm": "NATS",
+      "vm": "NATS - Message Bus",
       "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
@@ -107,12 +107,30 @@
       "singleton": false
     },
     {
+      "vm": "MySQL Backup & Prepare",
+      "instances": 1,
+      "persistent_disk": 250,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "m1.xlarge",
+      "singleton": false
+    },
+    {
       "vm": "Cloud Controller",
       "instances": 5,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
       "instance_type": "m1.xlarge",
+      "singleton": false
+    },
+    {
+      "vm": "HA Proxy",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "m1.small",
       "singleton": false
     },
     {

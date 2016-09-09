@@ -84,7 +84,7 @@
       "persistent_disk": 100,
       "dynamic_ips": 1,
       "static_ips": 1,
-      "instance_type": "micro",
+      "instance_type": "small",
       "singleton": false
     },
     {
@@ -112,6 +112,15 @@
       "dynamic_ips": 1,
       "static_ips": 0,
       "instance_type": "large.disk",
+      "singleton": false
+    },
+    {
+      "vm": "MySQL Backup & Prepare",
+      "instances": 1,
+      "persistent_disk": 250,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "xlarge.disk",
       "singleton": false
     },
     {
