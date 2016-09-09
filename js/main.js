@@ -74,66 +74,7 @@
     $scope.data.cellDetailSummary = iaasService.getDiegoCellSummary();
     $scope.data.resourceSummary = iaasService.getResourceSummary();
 
-    $scope.data.iaasSelectionList = [
-      {
-        id: 'vsphere',
-        name: 'vSphere',
-        isDefault: true,
-        isDisabled: false,
-        pricingUrl: null,
-        showPricingTypes: false,
-        showSystemResourcesUsed: true,
-        showInstanceFlavorsUsed: false
-      },
-      {
-        id: 'aws',
-        name: 'AWS',
-        isDefault: false,
-        isDisabled: false,
-        pricingUrl: 'https://aws.amazon.com/ec2/pricing/',
-        showPricingTypes: true,
-        showSystemResourcesUsed: false,
-        showInstanceFlavorsUsed: true
-      },
-      {
-        id: 'aws-dedicated',
-        name: 'AWS Dedicated',
-        isDefault: false,
-        isDisabled: false,
-        pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/',
-        showPricingTypes: true,
-        showSystemResourcesUsed: false,
-        showInstanceFlavorsUsed: true
-      },
-      {
-        id: 'azure',
-        name: 'Azure',
-        isDefault: false,
-        isDisabled: false,
-        pricingUrl: 'https://azure.microsoft.com/en-us/pricing/details/virtual-machines/',
-        showPricingTypes: true,
-        showSystemResourcesUsed: false,
-        showInstanceFlavorsUsed: true
-      },{
-        id: 'gcp',
-        name: 'GCP',
-        isDefault: false,
-        isDisabled: false,
-        pricingUrl: 'https://cloud.google.com/compute/pricing',
-        showPricingTypes: true,
-        showSystemResourcesUsed: false,
-        showInstanceFlavorsUsed: true
-      },{
-        id: 'openstack',
-        name: 'OpenStack',
-        isDefault: false,
-        isDisabled: false,
-        pricingUrl: null,
-        showPricingTypes: false,
-        showSystemResourcesUsed: true,
-        showInstanceFlavorsUsed: true
-      }
-    ];
+    $scope.data.iaasSelectionList = iaasService.iaasSelectionList;
 
     $scope.changeIaaS = function(iaas) {
       $scope.storage.selectedIaaS = iaas.id;

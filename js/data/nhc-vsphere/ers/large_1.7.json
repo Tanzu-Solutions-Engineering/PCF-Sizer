@@ -1,0 +1,227 @@
+{
+  "tile": "Elastic Runtime",
+  "version": "1.7",
+  "size": "large",
+  "display_name": "Large",
+  "description": "Large Size of PCF Foundation and Elastic Runtime for Multiple Dev/Test/Production Env",
+  "avg_ai_ram": 2,
+  "avg_ai_disk": 3,
+  "ai_packs": 4,
+  "az_count": 3,
+  "extra_runners_per_az": 0,
+  "is_default": false,
+  "is_disabled": false,
+  "can_customize": false,
+  "priority": 3,
+  "vms":
+  [
+    {
+      "vm": "vCenter",
+      "instances": 1,
+      "persistent_disk": 120,
+      "dynamic_ips": 0,
+      "static_ips": 1,
+      "instance_type": "vCenter",
+      "singleton": true
+    },
+    {
+      "vm": "Ops Manager VM",
+      "instances": 1,
+      "persistent_disk": 160,
+      "dynamic_ips": 0,
+      "static_ips": 1,
+      "instance_type": "OpsManager",
+      "singleton": true
+    },
+    {
+      "vm": "Ops Manager Director",
+      "instances": 1,
+      "persistent_disk": 50,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "medium.disk",
+      "singleton": true
+    },
+    {
+      "vm": "Consul",
+      "instances": 3,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "NATS - Message Bus",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "etcd",
+      "instances": 3,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": true
+    },
+    {
+      "vm": "Diego BBS",
+      "instances": 3,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "NFS Server || Blob Store",
+      "instances": 1,
+      "persistent_disk": 100,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "Router",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "MySQL Proxy",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "small",
+      "singleton": false
+    },
+    {
+      "vm": "MySQL Server",
+      "instances": 3,
+      "persistent_disk": 100,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "large.disk",
+      "singleton": false
+    },
+    {
+      "vm": "Cloud Controller",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "medium.disk",
+      "singleton": false
+    },
+    {
+      "vm": "HA Proxy",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "Clock Global",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": true
+    },
+    {
+      "vm": "Cloud Controller Worker",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "UAA",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "Diego Brain",
+      "instances": 3,
+      "persistent_disk": 1,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "small",
+      "singleton": false
+    },
+    {
+      "vm": "Diego Cell",
+      "instances": 15,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "2xlarge",
+      "valid_instance_types": [
+        "2xlarge.cpu",
+        "2xlarge"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "Doppler Server",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "Loggregator Traffic Controller",
+      "instances": 3,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 1,
+      "instance_type": "micro",
+      "singleton": false
+    },
+    {
+      "vm": "Compilation",
+      "instances": 1,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "medium",
+      "singleton": false,
+      "valid_instance_types": [
+        "medium"
+      ]
+    },
+    {
+      "vm": "Errands",
+      "instances": 13,
+      "persistent_disk": 0,
+      "dynamic_ips": 1,
+      "static_ips": 0,
+      "instance_type": "micro",
+      "singleton": false,
+      "valid_instance_types": [
+        "micro"
+      ]
+    }
+  ]
+}

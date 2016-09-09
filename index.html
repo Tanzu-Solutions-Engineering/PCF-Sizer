@@ -12,6 +12,7 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
   <script src="js/main.js"></script>
   <script async="" src="https://www.google-analytics.com/analytics.js"></script>
@@ -64,8 +65,8 @@
             </div>
             <div class="col-md-8" id="sideSummary">
               <div ng-include="'app/components/sizing/resource-list.html'"></div>
-              <div ng-include="'app/components/sizing/url-detail.html'"></div>
               <div ng-include="'app/components/sizing/cell-detail.html'"></div>
+              <div ng-include="'app/components/sizing/url-detail.html'"></div>
               <div ng-include="'app/components/sizing/vsphere.html'"></div>
               <div ng-include="'app/components/sizing/aws.html'"></div>
               <div ng-include="'app/components/sizing/azure.html'"></div>

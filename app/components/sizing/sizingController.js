@@ -123,7 +123,7 @@
 
     $scope.data.installSizeSelectionList = iaasService.pcfInstallSizes;
     $scope.storage = sizingStorageService.data;
-    $scope.data.selectedIaaS = _.find($scope.data.iaasSelectionList, {id: $scope.storage.selectedIaaS});
+    $scope.data.selectedIaaS = _.find(iaasService.iaasSelectionList, {id: $scope.storage.selectedIaaS});
 
     $scope.data.elasticRuntimeConfig = {
       avgAIRam: $scope.data.avgAIRamOptions[1],

@@ -31,8 +31,95 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       cellsPerAZ: 0,
       totalRam: 0
     },
-    pcfInstallSizes: {}
+    pcfInstallSizes: []
   };
+
+  iaasService.iaasSelectionList =[
+    {
+      id: 'vsphere',
+      name: 'vSphere',
+      isDefault: true,
+      isDisabled: false,
+      pricingUrl: null,
+      showPricingTypes: false,
+      iaasTuning: true,
+      showSystemResourcesUsed: true,
+      showInstanceFlavorsUsed: false
+    },
+    {
+      id: 'aws',
+      name: 'AWS',
+      isDefault: false,
+      isDisabled: false,
+      pricingUrl: 'https://aws.amazon.com/ec2/pricing/',
+      showPricingTypes: true,
+      iaasTuning: false,
+      showSystemResourcesUsed: false,
+      showInstanceFlavorsUsed: true
+    },
+    {
+      id: 'aws-dedicated',
+      name: 'AWS Dedicated',
+      isDefault: false,
+      isDisabled: false,
+      pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/',
+      showPricingTypes: true,
+      iaasTuning: false,
+      showSystemResourcesUsed: false,
+      showInstanceFlavorsUsed: true
+    },
+    {
+      id: 'azure',
+      name: 'Azure',
+      isDefault: false,
+      isDisabled: false,
+      pricingUrl: 'https://azure.microsoft.com/en-us/pricing/details/virtual-machines/',
+      showPricingTypes: true,
+      iaasTuning: false,
+      showSystemResourcesUsed: false,
+      showInstanceFlavorsUsed: true
+    },{
+      id: 'gcp',
+      name: 'GCP',
+      isDefault: false,
+      isDisabled: false,
+      pricingUrl: 'https://cloud.google.com/compute/pricing',
+      showPricingTypes: true,
+      iaasTuning: false,
+      showSystemResourcesUsed: false,
+      showInstanceFlavorsUsed: true
+    },{
+      id: 'openstack',
+      name: 'OpenStack',
+      isDefault: false,
+      isDisabled: false,
+      pricingUrl: null,
+      showPricingTypes: false,
+      iaasTuning: true,
+      showSystemResourcesUsed: true,
+      showInstanceFlavorsUsed: true
+    },{
+      id: 'nhc-vsphere',
+      name: 'NHC vSphere',
+      isDefault: false,
+      isDisabled: false,
+      pricingUrl: null,
+      showPricingTypes: false,
+      iaasTuning: true,
+      showSystemResourcesUsed: true,
+      showInstanceFlavorsUsed: false
+    },{
+      id: 'nhc-openstack',
+      name: 'NHC OpenStack',
+      isDefault: false,
+      isDisabled: false,
+      pricingUrl: null,
+      showPricingTypes: false,
+      iaasTuning: true,
+      showSystemResourcesUsed: true,
+      showInstanceFlavorsUsed: true
+    }
+  ];
 
   iaasService.getRamOverhead = function() {
     return ramOverhead;
