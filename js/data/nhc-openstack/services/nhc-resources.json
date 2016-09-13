@@ -27,6 +27,30 @@
         "m1.nhc-mnr"
       ],
       "singleton": true
+    },
+    {
+      "vm": "NHC S3 Proxy",
+      "instances": 2,
+      "persistent_disk": 0,
+      "dynamic_ips": 0,
+      "static_ips": 1,
+      "instance_type": "m1.medium",
+      "valid_instance_types": [
+        "m1.medium"
+      ],
+      "singleton": false
+    },
+    {
+      "vm": "NHC S3 Storage",
+      "instances": 3,
+      "persistent_disk": 200,
+      "dynamic_ips": 0,
+      "static_ips": 1,
+      "instance_type": "m1.medium",
+      "valid_instance_types": [
+        "m1.medium"
+      ],
+      "singleton": false
     }
   ]
 }
