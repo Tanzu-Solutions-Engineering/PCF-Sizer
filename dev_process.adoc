@@ -1,0 +1,83 @@
+= Development Workflow
+
+. Checkout new branch based on the develop branch
+
+ $ git checkout -b mybranch origin/develop
+
+. (Optional) push local branch to GitHub for collaboration
+
+ $ git push --set-upstream origin mybranch
+
+. Code feature, add file to be commited
+
+ $ git add myfileIchanged.js
+
+. Commit to branch as needed
+
+ $ git commit -m 'added foo'
+
+. *(Not required if single commit already)* Squash commits into one commit when ready for pull request with 4 easy steps
+  - Checkout develop branch and pull the latest changes
+  
+ $ git checkout develop && git pull
+ 
+  - Checkout your branch again, and merge the develop branch into it
+ 
+ $ git checkout mybranch && git merge develop
+ 
+  - Soft reset to the last commit from the develop branch (this leaves your changes ready to commit again)
+ 
+ $ git reset --soft origin/develop
+ 
+  - Make a final commit that will be used for the pull request
+   
+ $ git commit -m 'my actual commit'
+ $ git push --set-upstream origin mybranch
+ 
++
+[NOTE]
+====
+If you have already pushed your branch to GitHub before resetting the branch, you may have to use a *_force_* push *(If anyone else is using the branch, they will need to pull before making any other changes)*
+
+ $ git push -f
+====
+
+. Submit a pull request for your branch
+
++
+[TIP]
+====
+.To submit a pull request in GitHub
+- On the GitHub project page, click *_New pull request_*
+- Select *_"develop"_* for the *_base branch_*, and *_"your branch"_* for the *_compare branch_*
+- Enter useful comments, reference the story being worked on or general bug fix
+- Click *_Create pull request_*
+====
+
+. Once the pull request has been reviewed, merge pull request to develop branch
+  - In the pull request, click *_Merge pull request_*, then click *_Close pull request_*
+
++  
+[NOTE]
+====
+Any commits to the develop branch will kick off a link:https://app.wercker.com/#applications/56f53e3fddbe08b1090220e3[Wercker] job that will deploy the application to a PCF development environment
+====
+
+. When features are ready to go to production, merge *_develop_* to *_master_*
+  * Option 1 - Create pull request in GitHub to merge develop into master
+  - On the GitHub project page, click *_New pull request_*
+  - Select *_"develop"_* for the *_base branch_*, and *_"your branch"_* for the *_compare branch_*
+  - Enter useful comments, reference the story being worked on or general bug fix
+  - Click *_Create pull request_*
+  
+  * Option 2 - use CLI to merge develop into master
+
+ $ git checkout develop && git pull
+ $ git checkout master && git pull
+ $ git merge develop && git push
+ 
++
+[NOTE]
+====
+Any commits to the master branch will kick off a link:https://app.wercker.com/#applications/56f53e3fddbe08b1090220e3[Wercker] job that will deploy the application to Production in a PCF environment
+====
