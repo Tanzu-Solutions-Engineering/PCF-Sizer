@@ -7,7 +7,7 @@
     {
       "vm": "NHC Installer",
       "instances": 1,
-      "persistent_disk": 0,
+      "persistent_disk": 200,
       "dynamic_ips": 0,
       "static_ips": 1,
       "singleton": true,

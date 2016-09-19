@@ -36,7 +36,7 @@
             </tr>
             <tr ng-repeat="type in data.resourceSummary.vmTypes" ng-show="data.selectedIaaS.showInstanceFlavorsUsed">
 
-                <td width="70%">{{type.name}} ({{type.cpu}} CPU, {{type.ram}}GB RAM<span ng-show="data.selectedIaaS.showPricingTypes"> , {{type.cost | currency}}/hr</span>)</td>
+                <td width="70%">{{type.name}} ({{type.cpu}} vCPU, {{type.ram}}GB RAM<span ng-show="data.selectedIaaS.showPricingTypes"> , {{type.cost | currency}}/hr</span>)</td>
                 <td width="30%">{{type.count}} <span ng-show="data.selectedIaaS.showPricingTypes">({{type.totalCost | currency}}/hr)</span></td>
             </tr>
             <tr ng-show="data.selectedIaaS.showPricingTypes">

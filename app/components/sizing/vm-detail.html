@@ -21,7 +21,7 @@
         <tr ng-repeat="vm in getVMs(tile)">
             <td>{{vm.vm}}</td>
             <td>{{vm.instances}}</td>
-            <td ng-show="data.selectedIaaS.showInstanceFlavorsUsed">{{vm.instance_type}}  <span ng-if="vm.instance_type">({{vm.instanceInfo.cpu}} CPU, {{vm.instanceInfo.ram}}GB RAM)</span></td>
+            <td ng-show="data.selectedIaaS.showInstanceFlavorsUsed">{{vm.instance_type}}  <span ng-if="vm.instance_type">({{vm.instanceInfo.cpu}} vCPU, {{vm.instanceInfo.ram}}GB RAM)</span></td>
             <td ng-show="data.selectedIaaS.showSystemResourcesUsed"><span ng-if="vm.instance_type">{{vm.instanceInfo.ram}}</span></td>
             <td ng-show="data.selectedIaaS.showSystemResourcesUsed"><span ng-if="vm.instance_type">{{vm.instanceInfo.cpu}}</span></td>
             <td ng-show="data.selectedIaaS.showSystemResourcesUsed"><span ng-if="vm.instance_type">{{vm.instanceInfo.ram * vm.instances}}</span></td>

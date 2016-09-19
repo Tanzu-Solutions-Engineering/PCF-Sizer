@@ -44,7 +44,7 @@
                   </td>
                   <td>
                     <select class="form-control" ng-model="vm.instance_type" ng-change="serviceUpdated(service.name, vm)" ng-show="vm.instance_type">
-                        <option value="{{type}}" ng-repeat="type in vm.valid_instance_types">{{getInstanceTypeInfo(type).name}} ({{getInstanceTypeInfo(type).cpu}} CPU, {{getInstanceTypeInfo(type).ram}} RAM)</option>
+                        <option value="{{type}}" ng-repeat="type in vm.valid_instance_types">{{getInstanceTypeInfo(type).name}} ({{getInstanceTypeInfo(type).cpu}} vCPU, {{getInstanceTypeInfo(type).ram}} RAM)</option>
                     </select>
                   </td>
                   <td>
