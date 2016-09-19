@@ -55,6 +55,17 @@
     }
   },
   {
+    "name": "n1-highmem-2",
+    "cpu": 2,
+    "ram": 13,
+    "ephemeral_disk": 64,
+    "cost": {
+      "Typical": 0.096,
+      "Full Sustained": 0.088,
+      "Preemptible": 0.025
+    }
+  },
+  {
     "name": "n1-highmem-4",
     "cpu": 4,
     "ram": 26,

@@ -103,5 +103,19 @@
     "ram": 32,
     "ephemeral_disk": 64,
     "cost": null
+  },
+  {
+    "name": "nhc.small",
+    "cpu": 1,
+    "ram": 4,
+    "ephemeral_disk": 8,
+    "cost": null
+  },
+  {
+    "name": "nhc.large",
+    "cpu": 8,
+    "ram": 16,
+    "ephemeral_disk": 64,
+    "cost": null
   }
 ]

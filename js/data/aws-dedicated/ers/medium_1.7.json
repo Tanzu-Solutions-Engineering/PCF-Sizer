@@ -162,11 +162,11 @@
     },
     {
       "vm": "Diego Cell",
-      "instances": 15,
+      "instances": 17,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "m3.2xlarge",
+      "instance_type": "m3.xlarge",
       "valid_instance_types": [
         "m3.xlarge",
         "m3.2xlarge"

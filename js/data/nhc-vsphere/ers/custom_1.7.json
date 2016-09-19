@@ -185,7 +185,7 @@
       "static_ips": 0,
       "instance_type": "2xlarge",
       "valid_instance_types": [
-        "2xlarge.cpu",
+        "xlarge",
         "2xlarge"
       ],
       "singleton": false

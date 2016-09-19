@@ -152,12 +152,13 @@
     },
     {
       "vm": "Diego Cell",
-      "instances": 15,
+      "instances": 14,
       "persistent_disk": 64,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "Standard_DS12",
+      "instance_type": "Standard_DS11",
       "valid_instance_types": [
+        "Standard_DS11",
         "Standard_DS12"
       ],
       "singleton": false

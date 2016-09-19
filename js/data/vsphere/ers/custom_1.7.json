@@ -179,13 +179,13 @@
     },
     {
       "vm": "Diego Cell",
-      "instances": 15,
+      "instances": 19,
       "persistent_disk": 0,
       "dynamic_ips": 1,
       "static_ips": 0,
       "instance_type": "2xlarge",
       "valid_instance_types": [
-        "2xlarge.cpu",
+        "xlarge",
         "2xlarge"
       ],
       "singleton": false

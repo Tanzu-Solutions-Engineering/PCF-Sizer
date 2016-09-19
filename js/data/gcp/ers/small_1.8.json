@@ -161,12 +161,13 @@
     },
     {
       "vm": "Diego Cell",
-      "instances": 16,
+      "instances": 5,
       "persistent_disk": 64,
       "dynamic_ips": 1,
       "static_ips": 0,
-      "instance_type": "n1-highmem-4",
+      "instance_type": "n1-highmem-2",
       "valid_instance_types": [
+        "n1-highmem-2",
         "n1-highmem-4"
       ],
       "singleton": false

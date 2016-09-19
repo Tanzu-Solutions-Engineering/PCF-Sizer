@@ -7,13 +7,13 @@
     {
       "vm": "NHC Installer",
       "instances": 1,
-      "persistent_disk": 200,
+      "persistent_disk": 0,
       "dynamic_ips": 0,
       "static_ips": 1,
       "singleton": true,
-      "instance_type": "small.disk",
+      "instance_type": "nhc.small",
       "valid_instance_types": [
-        "small.disk"
+        "nhc.small"
       ]
     },
     {
@@ -22,9 +22,9 @@
       "persistent_disk": 100,
       "dynamic_ips": 0,
       "static_ips": 1,
-      "instance_type": "xlarge",
+      "instance_type": "nhc.large",
       "valid_instance_types": [
-        "xlarge"
+        "nhc.large"
       ],
       "singleton": true
     },
@@ -33,7 +33,7 @@
       "instances": 1,
       "persistent_disk": 1500,
       "dynamic_ips": 0,
-      "static_ips": 0,
+      "static_ips": 1,
       "instance_type": "micro",
       "valid_instance_types": [
         "micro"
