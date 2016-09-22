@@ -20,7 +20,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       cpu: 0,
       ips: 0,
       vmTypes: [],
-      cost: 0
+      cost: 0,
+      totalVMs: 0
     },
     diegoCellSummary: {
       availableCellRam: 0,
@@ -275,8 +276,10 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
     this.resourceSummary.cores = 0;
     this.resourceSummary.vmTypes = [];
     this.resourceSummary.totalCost = 0;
+    this.resourceSummary.totalVMs = 0;
 
     for (var i=0; i < this.vms.length; i++) {
+
       var vm = this.vms[i];
       if (vm.instance_type) {
         var cost = 0;
@@ -284,6 +287,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
             var cost = vm.instances * vm.instanceInfo.cost[sizingStorageService.data.pricingType];
         }
 
+        this.resourceSummary.totalVMs = this.resourceSummary.totalVMs + vm.instances;
         this.resourceSummary.ram += vm.instanceInfo.ram * vm.instances; //total ram
         this.resourceSummary.disk += (vm.persistent_disk + vm.instanceInfo.ephemeral_disk) * vm.instances; //total disk both ephemeral and persistent
         this.resourceSummary.cpu += vm.instanceInfo.cpu * vm.instances; //total cpu
