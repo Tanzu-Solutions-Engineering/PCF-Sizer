@@ -187,9 +187,9 @@
     },
     {
       "vm": "Errands",
-      "instances": 13,
+      "instances": 1,
       "persistent_disk": 0,
-      "dynamic_ips": 1,
+      "dynamic_ips": 13,
       "static_ips": 0,
       "instance_type": "t2.micro",
       "singleton": false,

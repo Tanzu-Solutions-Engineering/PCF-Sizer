@@ -1,0 +1,584 @@
+{
+  "vsphere": [
+    {
+      "name": "vCenter",
+      "cpu": 2,
+      "ram": 12,
+      "ephemeralDisk": 0,
+      "cost": null
+    },
+    {
+      "name": "OpsManager",
+      "cpu": 4,
+      "ram": 8,
+      "ephemeralDisk": 32,
+      "cost": null
+    },
+    {
+      "name": "nano",
+      "cpu": 1,
+      "ram": 0.5,
+      "ephemeralDisk": 1,
+      "cost": null
+    },
+    {
+      "name": "micro",
+      "cpu": 1,
+      "ram": 1,
+      "ephemeralDisk": 2,
+      "cost": null
+    },
+    {
+      "name": "small",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeralDisk": 4,
+      "cost": null
+    },
+    {
+      "name": "small.disk",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeralDisk": 16,
+      "cost": null
+    },
+    {
+      "name": "medium",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeralDisk": 8,
+      "cost": null
+    },
+    {
+      "name": "medium.disk",
+      "cpu": 4,
+      "ram": 4,
+      "ephemeralDisk": 32,
+      "cost": null
+    },
+    {
+      "name": "medium.mem",
+      "cpu": 1,
+      "ram": 8,
+      "ephemeralDisk": 8,
+      "cost": null
+    },
+    {
+      "name": "large",
+      "cpu": 2,
+      "ram": 8,
+      "ephemeralDisk": 16,
+      "cost": null
+    },
+    {
+      "name": "large.disk",
+      "cpu": 2,
+      "ram": 8,
+      "ephemeralDisk": 64,
+      "cost": null
+    },
+    {
+      "name": "large.cpu",
+      "cpu": 4,
+      "ram": 4,
+      "ephemeralDisk": 16,
+      "cost": null
+    },
+    {
+      "name": "xlarge",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeralDisk": 32,
+      "cost": null
+    },
+    {
+      "name": "xlarge.disk",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeralDisk": 128,
+      "cost": null
+    },
+    {
+      "name": "2xlarge.cpu",
+      "cpu": 16,
+      "ram": 16,
+      "ephemeralDisk": 64,
+      "cost": null
+    },
+    {
+      "name": "2xlarge.disk",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeralDisk": 256,
+      "cost": null
+    },
+    {
+      "name": "2xlarge",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeralDisk": 64,
+      "cost": null
+    }
+  ],
+  "aws": [
+    {
+      "name": "t2.micro",
+      "cpu": 1,
+      "ram": 1,
+      "ephemeral_disk": 1,
+      "cost": {
+        "On-Demand": 0.013,
+        "1-Year Term": 0.004,
+        "3-Year Term": 0.003
+      }
+    },
+    {
+      "name": "t2.small",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 2,
+      "cost": {
+        "On-Demand": 0.026,
+        "1-Year Term": 0.017,
+        "3-Year Term": 0.012
+      }
+    },
+    {
+      "name": "m3.medium",
+      "cpu": 1,
+      "ram": 3.75,
+      "ephemeral_disk": 4,
+      "cost": {
+        "On-Demand": 0.067,
+        "1-Year Term": 0.040,
+        "3-Year Term": 0.026
+      }
+    },
+    {
+      "name": "m3.large",
+      "cpu": 2,
+      "ram": 7.5,
+      "ephemeral_disk": 16,
+      "cost": {
+        "On-Demand": 0.133,
+        "1-Year Term": 0.081,
+        "3-Year Term": 0.052
+      }
+    },
+    {
+      "name": "m3.xlarge",
+      "cpu": 4,
+      "ram": 15,
+      "ephemeral_disk": 32,
+      "cost": {
+        "On-Demand": 0.266,
+        "1-Year Term": 0.163,
+        "3-Year Term": 0.105
+      }
+    },
+    {
+      "name": "m3.2xlarge",
+      "cpu": 8,
+      "ram": 30,
+      "ephemeral_disk": 64,
+      "cost": {
+        "On-Demand": 0.532,
+        "1-Year Term": 0.324,
+        "3-Year Term": 0.209
+      }
+    },
+    {
+      "name": "db.r3.large",
+      "cpu": 2,
+      "ram": 15,
+      "ephemeral_disk": 0,
+      "cost": {
+        "On-Demand": 0.290,
+        "1-Year Term": 0.158,
+        "3-Year Term": 0.101
+      }
+    },
+    {
+      "name": "r3.4xlarge",
+      "cpu": 4,
+      "ram": 15,
+      "ephemeral_disk": 32,
+      "cost": {
+        "On-Demand": 1.33,
+        "1-Year Term": 0.706,
+        "3-Year Term": 0.467
+      }
+    }
+  ],
+  "aws-dedicated": [
+    {
+      "name": "m3.medium",
+      "cpu": 1,
+      "ram": 3.75,
+      "ephemeral_disk": 4,
+      "cost": {
+        "On-Demand": 0.074,
+        "1-Year Term": 0.044,
+        "3-Year Term": 0.029
+      }
+    },
+    {
+      "name": "m3.large",
+      "cpu": 2,
+      "ram": 7.5,
+      "ephemeral_disk": 16,
+      "cost": {
+        "On-Demand": 0.146,
+        "1-Year Term": 0.090,
+        "3-Year Term": 0.058
+      }
+    },
+    {
+      "name": "m3.xlarge",
+      "cpu": 4,
+      "ram": 15,
+      "ephemeral_disk": 32,
+      "cost": {
+        "On-Demand": 0.293,
+        "1-Year Term": 0.179,
+        "3-Year Term": 0.115
+      }
+    },
+    {
+      "name": "m3.2xlarge",
+      "cpu": 8,
+      "ram": 30,
+      "ephemeral_disk": 64,
+      "cost": {
+        "On-Demand": 0.585,
+        "1-Year Term": 0.357,
+        "3-Year Term": 0.230
+      }
+    },
+    {
+      "name": "db.r3.large",
+      "cpu": 2,
+      "ram": 15,
+      "ephemeral_disk": 0,
+      "cost": {
+        "On-Demand": 0.290,
+        "1-Year Term": 0.158,
+        "3-Year Term": 0.101
+      }
+    },
+    {
+      "name": "r3.4xlarge",
+      "cpu": 4,
+      "ram": 15,
+      "ephemeral_disk": 32,
+      "cost": {
+        "On-Demand": 1.463,
+        "1-Year Term": 0.776,
+        "3-Year Term": 0.513
+      }
+    }
+  ],
+  "azure": [
+    {
+      "name": "Standard_DS1",
+      "cpu": 1,
+      "ram": 3.5,
+      "ephemeral_disk": 50,
+      "cost": {
+        "On Demand": 0.077
+      }
+    },
+    {
+      "name": "Standard_DS2",
+      "cpu": 2,
+      "ram": 7,
+      "ephemeral_disk": 100,
+      "cost": {
+        "On Demand": 0.154
+      }
+    },
+    {
+      "name": "Standard_DS11_v2",
+      "cpu": 2,
+      "ram": 14,
+      "ephemeral_disk": 100,
+      "cost": {
+        "On Demand": 0.195
+      }
+    },
+    {
+      "name": "Standard_DS12_v2",
+      "cpu": 4,
+      "ram": 28,
+      "ephemeral_disk": 200,
+      "cost": {
+        "On Demand": 0.39
+      }
+    },
+    {
+      "name": "Standard_F1s",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 4,
+      "cost": {
+        "On Demand": 0.111
+      }
+    },
+    {
+      "name": "Standard_F2s",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeral_disk": 8,
+      "cost": {
+        "On Demand": 0.221
+      }
+    },
+    {
+      "name": "Standard_F4s",
+      "cpu": 4,
+      "ram": 8,
+      "ephemeral_disk": 16,
+      "cost": {
+        "On Demand": 0.442
+      }
+    }
+  ],
+  "gcp": [
+    {
+      "name": "OpsManager",
+      "cpu": 1,
+      "ram": 3.75,
+      "ephemeral_disk": 4,
+      "cost": {
+        "Typical": 0.038,
+        "Full Sustained": 0.035,
+        "Preemptible": 0.010
+      }
+    },
+    {
+      "name": "medium.disk",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeral_disk": 32,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    },
+    {
+      "name": "large.cpu",
+      "cpu": 4,
+      "ram": 4,
+      "ephemeral_disk": 16,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    },
+    
+  ],
+  "nhc-openstack": [
+    {
+      "name": "m1.small",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 24,
+      "cost": null
+    },
+    {
+      "name": "m1.medium",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeral_disk": 40,
+      "cost": null
+    },
+    {
+      "name": "m1.large",
+      "cpu": 4,
+      "ram": 8,
+      "ephemeral_disk": 80,
+      "cost": null
+    },
+    {
+      "name": "m1.xlarge",
+      "cpu": 8,
+      "ram": 16,
+      "ephemeral_disk": 160,
+      "cost": null
+    },
+    {
+      "name": "m1.large-diego-cell",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeral_disk": 32,
+      "cost": null
+    },
+    {
+      "name": "m1.xlarge-diego-cell",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeral_disk": 64,
+      "cost": null
+    },
+    {
+      "name": "m1.nhc-mnr",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeral_disk": 40,
+      "cost": null
+    }
+  ],
+  "nhc-vsphere": [
+    {
+      "name": "vCenter",
+      "cpu": 2,
+      "ram": 12,
+      "ephemeral_disk": 0,
+      "cost": null
+    },
+    {
+      "name": "OpsManager",
+      "cpu": 4,
+      "ram": 8,
+      "ephemeral_disk": 32,
+      "cost": null
+    },
+    {
+      "name": "nano",
+      "cpu": 1,
+      "ram": 0.5,
+      "ephemeral_disk": 1,
+      "cost": null
+    },
+    {
+      "name": "micro",
+      "cpu": 1,
+      "ram": 1,
+      "ephemeral_disk": 2,
+      "cost": null
+    },
+    {
+      "name": "small",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 4,
+      "cost": null
+    },
+    {
+      "name": "small.disk",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 16,
+      "cost": null
+    },
+    {
+      "name": "medium",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeral_disk": 8,
+      "cost": null
+    },
+    {
+      "name": "medium.disk",
+      "cpu": 4,
+      "ram": 4,
+      "ephemeral_disk": 32,
+      "cost": null
+    },
+    {
+      "name": "medium.mem",
+      "cpu": 1,
+      "ram": 8,
+      "ephemeralDisk": 8,
+      "cost": null
+    },
+    {
+      "name": "large",
+      "cpu": 2,
+      "ram": 8,
+      "ephemeral_disk": 16,
+      "cost": null
+    },
+    {
+      "name": "large.disk",
+      "cpu": 2,
+      "ram": 8,
+      "ephemeral_disk": 64,
+      "cost": null
+    },
+    {
+      "name": "large.cpu",
+      "cpu": 4,
+      "ram": 4,
+      "ephemeralDisk": 16,
+      "cost": null
+    },
+    {
+      "name": "xlarge",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeral_disk": 32,
+      "cost": null
+    },
+    {
+      "name": "xlarge.disk",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeral_disk": 128,
+      "cost": null
+    },
+    {
+      "name": "2xlarge.cpu",
+      "cpu": 16,
+      "ram": 16,
+      "ephemeral_disk": 64,
+      "cost": null
+    },
+    {
+      "name": "2xlarge.disk",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeral_disk": 256,
+      "cost": null
+    },
+    {
+      "name": "2xlarge",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeral_disk": 64,
+      "cost": null
+    }
+  ],
+  "openstack": [
+    {
+      "name": "m1.small",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 24,
+      "cost": null
+    },
+    {
+      "name": "m1.medium",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeral_disk": 40,
+      "cost": null
+    },
+    {
+      "name": "m1.large",
+      "cpu": 4,
+      "ram": 8,
+      "ephemeral_disk": 80,
+      "cost": null
+    },
+    {
+      "name": "m1.xlarge",
+      "cpu": 8,
+      "ram": 16,
+      "ephemeral_disk": 160,
+      "cost": null
+    }
+  ]
+}

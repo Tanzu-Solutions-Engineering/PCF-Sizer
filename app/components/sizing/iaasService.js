@@ -284,7 +284,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       if (vm.instance_type) {
         var cost = 0;
         if (sizingStorageService.data.pricingType) {
-            var cost = vm.instances * vm.instanceInfo.cost[sizingStorageService.data.pricingType];
+          var cost = vm.instances * vm.instanceInfo.cost[sizingStorageService.data.pricingType];
         }
 
         this.resourceSummary.totalVMs = this.resourceSummary.totalVMs + vm.instances;
@@ -422,7 +422,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
         return;
       }
 
-      var url = ['/tiles', iaas].join('/');
+      var url = ['/v2/tiles', iaas].join('/');
       iaasService.resetVMs();
       iaasService.resetTemplateVMs();
       iaasService.resetInstallSizes();

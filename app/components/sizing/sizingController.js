@@ -157,6 +157,9 @@
       var choices = [];
       vm.valid_instance_types.forEach(function(type) {
         var specs = iaasService.getInstanceTypeInfo(type);
+        if (!specs) {
+          console.log("missing info for ", type);
+        }
         choices.push({
           instance_type: type,
           cpu: specs.cpu,
