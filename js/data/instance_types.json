@@ -356,10 +356,43 @@
       }
     },
     {
+      "name": "micro",
+      "cpu": 1,
+      "ram": 1,
+      "ephemeral_disk": 8,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    },
+    {
+      "name": "small",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeral_disk": 8,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    },
+    {
       "name": "medium.disk",
       "cpu": 2,
       "ram": 4,
       "ephemeral_disk": 32,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    },
+    {
+      "name": "medium.mem",
+      "cpu": 1,
+      "ram": 6,
+      "ephemeral_disk": 8,
       "cost": {
         "Typical": 0,
         "Full Sustained": 0,
@@ -377,7 +410,39 @@
         "Preemptible": 0
       }
     },
-    
+    {
+      "name": "large.disk",
+      "cpu": 2,
+      "ram": 8,
+      "ephemeral_disk": 16,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    },
+    {
+      "name": "xlarge",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeral_disk": 32,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    },
+    {
+      "name": "2xlarge",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeral_disk": 64,
+      "cost": {
+        "Typical": 0,
+        "Full Sustained": 0,
+        "Preemptible": 0
+      }
+    }
   ],
   "nhc-openstack": [
     {
