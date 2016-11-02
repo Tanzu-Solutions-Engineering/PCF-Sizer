@@ -26,7 +26,7 @@
             <td ng-show="data.selectedIaaS.showSystemResourcesUsed"><span ng-if="vm.instance_type">{{vm.instanceInfo.cpu}}</span></td>
             <td ng-show="data.selectedIaaS.showSystemResourcesUsed"><span ng-if="vm.instance_type">{{vm.instanceInfo.ram * vm.instances}}</span></td>
             <td ng-show="data.selectedIaaS.showSystemResourcesUsed"><span ng-if="vm.instance_type">{{vm.instanceInfo.cpu * vm.instances}}</span></td>
-            <td><span ng-if="vm.instance_type">{{vm.instanceInfo.ephemeral_disk * vm.instances}}</span></td>
+            <td><span ng-if="vm.instance_type">{{vm.instanceInfo.ephemeralDisk * vm.instances}}</span></td>
             <td><span ng-if="vm.instance_type">{{vm.persistent_disk * vm.instances}}</span></td>
             <td><span ng-if="vm.instance_type">{{vm.static_ips * vm.instances}}</span></td>
             <td><span ng-if="vm.instance_type">{{vm.dynamic_ips * vm.instances}}</span></td>

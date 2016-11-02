@@ -1,0 +1,664 @@
+{
+  "name": "Pivotal Gemfire",
+  "version": "1.6",
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "GemFire Broker",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 5
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium",
+              "large"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "GemFire locator (Plan 1)",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 2,
+          "persistentDisk": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t2.micro",
+            "validInstanceTypes": [
+              "t2.micro"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.medium",
+            "validInstanceTypes": [
+              "m3.medium"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F1s",
+            "validInstanceTypes": [
+              "Standard_F1s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small",
+              "m1.medium",
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small",
+              "m1.medium",
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "GemFire locator (Plan 2)",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 2,
+          "persistentDisk": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t2.micro",
+            "validInstanceTypes": [
+              "t2.micro"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.medium",
+            "validInstanceTypes": [
+              "m3.medium"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F1s",
+            "validInstanceTypes": [
+              "Standard_F1s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small"
+            ,"validInstanceTypes": [
+              "m1.small",
+              "m1.medium",
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small",
+              "m1.medium",
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "GemFire locator (Plan 3)",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 2,
+          "persistentDisk": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t2.micro",
+            "validInstanceTypes": [
+              "t2.micro"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.medium",
+            "validInstanceTypes": [
+              "m3.medium"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F1s",
+            "validInstanceTypes": [
+              "Standard_F1s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small"
+            ,"validInstanceTypes": [
+              "m1.small",
+              "m1.medium",
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small",
+              "m1.medium",
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "GemFire server (Plan 1)",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 3,
+          "persistentDisk": 10
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium",
+              "m1.large",
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium",
+              "m1.large",
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "GemFire server (Plan 2)",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 5,
+          "persistentDisk": 10
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium",
+              "m1.large",
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium",
+              "m1.large",
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "GemFire server (Plan 3)",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 7,
+          "persistentDisk": 10
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium",
+              "m1.large",
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium",
+              "m1.large",
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        }
+      }
+    },
+
+    {
+      "vm": "Errands",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 7,
+          "persistentDisk": 10
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t2.small",
+            "validInstanceTypes": [
+              "t2.small"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.medium",
+            "validInstanceTypes": [
+              "m3.medium"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F1s",
+            "validInstanceTypes": [
+              "Standard_F1s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

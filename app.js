@@ -33,9 +33,11 @@ app.get('/tiles/:iaas', function(req, res) {
 });
 
 app.get('/v2/tiles/:iaas', function(req, res) {
-  const runtime = glob.sync('js/data/tiles/*.json');
+  const runtime = glob.sync('js/data/tiles/ert/*.json');
   const iaas = req.params['iaas'];
-  var services = glob.sync('js/data/' + req.params['iaas'] + '/services/*.json');
+
+  const services = glob.sync('js/data/tiles/services/*.json');
+  // var services = glob.sync('js/data/' + req.params['iaas'] + '/services/*.json');
 
   var json = [];
 
@@ -84,42 +86,100 @@ app.get('/v2/tiles/:iaas', function(req, res) {
   });
 
   services.forEach(function(file) {
-    json.push(JSON.parse(fs.readFileSync(file)));
-  });
-  res.status(200).json(json);
-});
-
-app.get('/missingInstanceTypeCheck/:iaas/:version', function(req, res) {
-  const version = req.params['version'];
-  const runtime = glob.sync('js/data/tiles/*' + version + '.json');
-  const instanceTypes = JSON.parse(fs.readFileSync('js/data/instance_types.json'));
-  const iaas = req.params['iaas'];
-
-  var vmTypes = [];
-
-  runtime.forEach(function(file) {
     let tile = JSON.parse(fs.readFileSync(file));
     if (tile.supportedIaaS.indexOf(iaas) === -1) {
       return;
     }
-
     tile.sizes.forEach((s) => {
+      let tileInfo = {
+        tile: tile.name,
+        version: tile.version,
+        size: s.size,
+        vms: []
+      };
+
       tile.jobs.forEach((job) => {
         if (job.iaas[iaas]) {
-          if (!_.find(instanceTypes[iaas], {name: getJobInstanceType(job, iaas, s.size)})) {
-            vmTypes.push(getJobInstanceType(job, iaas, s.size));
-          }
-
-          if (getJobValidInstanceTypes(job, iaas, s.size)) {
-            getJobValidInstanceTypes(job, iaas, s.size).forEach((vm) => {
-              if (!_.find(instanceTypes[iaas], {name: vm}))
-                vmTypes.push(vm);
-            });
-          }
+          let jobInfo = {
+            vm: job.vm,
+            dynamic_ips: job.dynamicIPs,
+            static_ips: job.staticIPs,
+            singleton: job.singleton,
+            temporary: job.temporary || false,
+            instances: getJobInstances(job, s.size),
+            persistent_disk: getJobPersistentDisk(job, iaas, s.size),
+            instance_type: getJobInstanceType(job, iaas, s.size),
+            valid_instance_types: getJobValidInstanceTypes(job, iaas, s.size)
+          };
+          tileInfo.vms.push(jobInfo);
         }
       });
+      json.push(tileInfo);
     });
   });
+
+  res.status(200).json(json);
+});
+
+app.get('/missingInstanceTypeCheck', function(req, res) {
+  const runtime = glob.sync('js/data/tiles/ert/*.json');
+  const services = glob.sync('js/data/tiles/services/*.json');
+  const instanceTypes = JSON.parse(fs.readFileSync('js/data/instance_types.json'));
+
+  var vmTypes = [];
+  Object.keys(instanceTypes).forEach((iaas) => {
+    runtime.forEach((file) => {
+      let tile = JSON.parse(fs.readFileSync(file));
+      if (tile.supportedIaaS.indexOf(iaas) === -1) {
+        return;
+      }
+
+      tile.sizes.forEach((s) => {
+        tile.jobs.forEach((job) => {
+          if (job.iaas[iaas]) {
+            if (!_.find(instanceTypes[iaas], {name: getJobInstanceType(job, iaas, s.size)})) {
+              vmTypes.push("IaaS: " + iaas + ", Job: " + job.vm + ", Instance Type " + getJobInstanceType(job, iaas, s.size) + ", Tile: " + tile.name);
+            }
+
+            if (getJobValidInstanceTypes(job, iaas, s.size)) {
+              getJobValidInstanceTypes(job, iaas, s.size).forEach((vm) => {
+                if (!_.find(instanceTypes[iaas], {name: vm})){
+                  vmTypes.push("IaaS: " + iaas + ", Instance Type: " + vm + ", Tile: " + tile.name);
+                }
+              });
+            }
+          }
+        });
+      });
+    });
+
+    services.forEach(function(file) {
+      let tile = JSON.parse(fs.readFileSync(file));
+      if (tile.supportedIaaS.indexOf(iaas) === -1) {
+        return;
+      }
+
+      tile.sizes.forEach((s) => {
+        tile.jobs.forEach((job) => {
+          if (job.iaas[iaas]) {
+            if (!_.find(instanceTypes[iaas], {name: getJobInstanceType(job, iaas, s.size)})) {
+              vmTypes.push("IaaS: " + iaas + ", Job: " + job.vm + ", Instance Type " + getJobInstanceType(job, iaas, s.size) + ", Tile: " + tile.name);
+            }
+
+            if (getJobValidInstanceTypes(job, iaas, s.size)) {
+              getJobValidInstanceTypes(job, iaas, s.size).forEach((vm) => {
+                if (!_.find(instanceTypes[iaas], {name: vm})) {
+                  vmTypes.push("IaaS: " + iaas + ", Instance Type: " + vm + ", Tile: " + tile.name);
+                }
+              });
+            }
+          }
+        });
+      });
+    });
+  })
+
+
 
   res.status(200).json(_.uniq(vmTypes));
 });

@@ -456,30 +456,6 @@
       }
     },
     {
-      "vm": "S3 Blob Store",
-      "dynamicIPs": 0,
-      "staticIPs": 0,
-      "singleton": false,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 0
-        }
-      },
-      "iaas": {
-        "aws": {
-          "all": {
-            "instanceType": null
-          }
-        },
-        "openstack": {
-          "all": {
-            "instanceType": null
-          }
-        }
-      }
-    },
-    {
       "vm": "Router",
       "dynamicIPs": 1,
       "staticIPs": 1,

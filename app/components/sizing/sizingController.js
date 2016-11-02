@@ -144,7 +144,7 @@
       if (cell !== undefined) {
         var instanceType = _.find(iaasService.getInstanceTypes(), {name: cell.instance_type});
         $scope.data.elasticRuntimeConfig.runnerRam = instanceType.ram;
-        $scope.data.elasticRuntimeConfig.runnerDisk = instanceType.ephemeral_disk;
+        $scope.data.elasticRuntimeConfig.runnerDisk = instanceType.ephemeralDisk;
       }
     };
 
@@ -165,7 +165,7 @@
           cpu: specs.cpu,
           ram: specs.ram,
           cost: specs.cost,
-          disk: specs.ephemeral_disk
+          disk: specs.ephemeralDisk
         });
       });
       return choices;
@@ -270,7 +270,7 @@
       var cellInfo = iaasService.getDiegoCellInfo();
       cellInfo.instance_type = $scope.data.elasticRuntimeConfig.instanceType.instance_type;
       cellInfo.instanceInfo.cpu = $scope.data.elasticRuntimeConfig.instanceType.cpu;
-      cellInfo.instanceInfo.ephemeral_disk = $scope.data.elasticRuntimeConfig.instanceType.disk;
+      cellInfo.instanceInfo.ephemeralDisk = $scope.data.elasticRuntimeConfig.instanceType.disk;
       cellInfo.instanceInfo.ram = $scope.data.elasticRuntimeConfig.instanceType.ram;
       $scope.updateStuff();
     };
@@ -279,6 +279,7 @@
       var instanceInfo = iaasService.getInstanceTypeInfo(vm.instance_type);
       var storedVM = _.find($scope.storage.services[service].vms, {name: vm.vm});
       //update storage
+      // console.log(storedVM.instances, vm.instances);
       storedVM.instances = vm.instances;
       storedVM.instance_type = vm.instance_type;
       storedVM.persistent_disk = vm.persistent_disk;
@@ -287,7 +288,7 @@
       vm.instanceInfo.name = instanceInfo.name;
       vm.instanceInfo.cpu = instanceInfo.cpu;
       vm.instanceInfo.ram = instanceInfo.ram;
-      vm.instanceInfo.ephemeral_disk = instanceInfo.ephemeral_disk;
+      vm.instanceInfo.ephemeralDisk = instanceInfo.ephemeralDisk;
       $scope.updateStuff();
     };
 

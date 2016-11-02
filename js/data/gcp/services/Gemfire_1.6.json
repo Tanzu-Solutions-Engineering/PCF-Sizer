@@ -1,20 +1,63 @@
 {
   "tile": "Pivotal Gemfire",
   "version": "1.6",
+  "supportedIaaS": ["azure", "gcp", "nhc-vsphere", "vsphere"],
   "size": "all",
   "vms":
   [
     {
       "vm": "GemFire Broker",
-      "instances": 1,
-      "persistent_disk": 5,
-      "dynamic_ips": 1,
-      "static_ips": 1,
+      "dynamicIPs": 1,
+      "staticIPs": 1,
       "singleton": true,
-      "instance_type": "n1-standard-1",
-      "valid_instance_types": [
-        "n1-standard-1"
-      ]
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 5
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.disk"
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.xlarge"
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.xlarge"
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s"
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium.disk"
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge"
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.xlarge"
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium.disk"
+          }
+        }
+      }
     },
     {
       "vm": "GemFire locator (Plan 1)",

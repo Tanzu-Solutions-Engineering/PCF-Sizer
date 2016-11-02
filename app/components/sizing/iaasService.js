@@ -284,12 +284,12 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       if (vm.instance_type) {
         var cost = 0;
         if (sizingStorageService.data.pricingType) {
-          var cost = vm.instances * vm.instanceInfo.cost[sizingStorageService.data.pricingType];
+          cost = vm.instances * vm.instanceInfo.cost[sizingStorageService.data.pricingType];
         }
 
         this.resourceSummary.totalVMs = this.resourceSummary.totalVMs + vm.instances;
         this.resourceSummary.ram += vm.instanceInfo.ram * vm.instances; //total ram
-        this.resourceSummary.disk += (vm.persistent_disk + vm.instanceInfo.ephemeral_disk) * vm.instances; //total disk both ephemeral and persistent
+        this.resourceSummary.disk += (vm.persistent_disk + vm.instanceInfo.ephemeralDisk) * vm.instances; //total disk both ephemeral and persistent
         this.resourceSummary.cpu += vm.instanceInfo.cpu * vm.instances; //total cpu
         this.resourceSummary.ips += (vm.dynamic_ips + vm.static_ips) * vm.instances; //total IPs static and dynamic
         this.resourceSummary.totalCost += cost;
@@ -321,7 +321,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
     var cell = this.getDiegoCellInfo();
     this.diegoCellSummary.totalRam = cell.instances * cell.instanceInfo.ram;
     this.diegoCellSummary.useableCellRam = cell.instanceInfo.ram - ramOverhead;
-    this.diegoCellSummary.useableCellDisk = cell.instanceInfo.ephemeral_disk - diskOverhead;
+    this.diegoCellSummary.useableCellDisk = cell.instanceInfo.ephemeralDisk - diskOverhead;
     this.diegoCellSummary.availableCellRam = cell.instances * this.diegoCellSummary.useableCellRam;
     this.diegoCellSummary.availableCellRam -= this.getTotalAIRam();
     this.diegoCellSummary.availableCellDisk = cell.instances * this.diegoCellSummary.useableCellDisk;
@@ -335,7 +335,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
     var ram = this.getTotalAIRam();
     var disk = this.getTotalAIDisk();
     var numbersOfCellsBasedOnRam = ram / (cellInfo.instanceInfo.ram - this.getRamOverhead());
-    var numbersOfCellsBasedOnDisk = disk / (cellInfo.instanceInfo.ephemeral_disk - this.getDiskOverhead());
+    var numbersOfCellsBasedOnDisk = disk / (cellInfo.instanceInfo.ephemeralDisk - this.getDiskOverhead());
     cellInfo.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
     cellInfo.instances += (sizingStorageService.data.elasticRuntimeConfig.azCount * sizingStorageService.data.elasticRuntimeConfig.extraRunnersPerAZ);
   }
