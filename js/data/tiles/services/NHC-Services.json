@@ -1,0 +1,80 @@
+{
+  "name": "NHC Services",
+  "version": "1",
+  "supportedIaaS": ["nhc-vsphere"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "NHC Installer",
+      "staticIPs": 0,
+      "dynamicIPs": 1,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 0
+        }
+      },
+      "iaas": {
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "nhc.small",
+            "validInstanceTypes": [
+              "nhc.small"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "NHC M&R",
+      "staticIPs": 0,
+      "dynamicIPs": 1,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 100
+        }
+      },
+      "iaas": {
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "nhc.large",
+            "validInstanceTypes": [
+              "nhc.large"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "NHC Backup",
+      "staticIPs": 0,
+      "dynamicIPs": 1,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 1500
+        }
+      },
+      "iaas": {
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

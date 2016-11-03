@@ -458,6 +458,15 @@
       }
     },
     {
+      "name": "micro.cpu",
+      "cpu": 2,
+      "ram": 2,
+      "ephemeralDisk": 8,
+      "cost": {
+        "Typical": 0.057
+      }
+    },
+    {
       "name": "small",
       "cpu": 1,
       "ram": 2,
@@ -742,6 +751,20 @@
       "cpu": 8,
       "ram": 32,
       "ephemeralDisk": 64,
+      "cost": null
+    },
+    {
+      "name": "nhc.small",
+      "cpu": 1,
+      "ram": 4,
+      "ephemeral_disk": 8,
+      "cost": null
+    },
+    {
+      "name": "nhc.large",
+      "cpu": 8,
+      "ram": 16,
+      "ephemeral_disk": 64,
       "cost": null
     }
   ],

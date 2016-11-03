@@ -94,7 +94,7 @@
     {
       "vm": "Backup Prepare Node",
       "dynamicIPs": 1,
-      "staticIPs": 1,
+      "staticIPs": 0,
       "singleton": true,
       "tooltip" : "The Backup Prepare Node is for backing up",
       "defaults": {
@@ -252,7 +252,7 @@
     {
       "vm": "Monitoring",
       "dynamicIPs": 1,
-      "staticIPs": 0,
+      "staticIPs": 1,
       "singleton": false,
       "tooltip" : "Tooltip for Monitoring",
       "defaults": {
@@ -331,7 +331,7 @@
     {
       "vm": "Broker",
       "dynamicIPs": 1,
-      "staticIPs": 1,
+      "staticIPs": 0,
       "singleton": false,
       "tooltip" : "Tooltip for Service Broker",
       "defaults": {

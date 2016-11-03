@@ -1,6 +1,6 @@
 {
-  "name": "RabbitMQ",
-  "version": "1.7",
+  "name": "JFrog Artifactory",
+  "version": "1.0",
   "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
   "sizes": [
     {
@@ -11,54 +11,132 @@
   "jobs":
   [
     {
-      "vm": "RabbitMQ node",
+      "vm": "NGINX Server",
       "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": false,
       "defaults": {
         "all": {
-          "instances": 2,
+          "instances": 1,
+          "persistentDisk": 0
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "c4.large",
+            "validInstanceTypes": [
+              "c4.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "c4.large",
+            "validInstanceTypes": [
+              "c4.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "micro.cpu",
+            "validInstanceTypes": [
+              "micro.cpu"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "NFS Server",
+      "staticIPs": 1,
+      "dynamicIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1,
           "persistentDisk": 10
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "large",
+            "instanceType": "medium",
             "validInstanceTypes": [
-              "large"
+              "medium"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "r3.large",
+            "instanceType": "m3.large",
             "validInstanceTypes": [
-              "r3.large"
+              "m3.large"
             ]
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "r3.large",
+            "instanceType": "m3.large",
             "validInstanceTypes": [
-              "r3.large"
+              "m3.large"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_DS11_v2",
+            "instanceType": "Standard_F2s",
             "validInstanceTypes": [
-              "Standard_DS11_v2"
+              "Standard_F2s"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "large",
+            "instanceType": "medium",
             "validInstanceTypes": [
-              "large"
+              "medium"
             ]
           }
         },
@@ -80,173 +158,17 @@
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "large",
+            "instanceType": "medium",
             "validInstanceTypes": [
-              "large"
+              "medium"
             ]
           }
         }
       }
     },
     {
-      "vm": "HAProxy for RabbitMQ",
+      "vm": "Artifactory HA Nodes",
       "staticIPs": 1,
-      "dynamicIPs": 1,
-      "singleton": false,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 0
-        }
-      },
-      "iaas": {
-        "vsphere": {
-          "all": {
-            "instanceType": "small",
-            "validInstanceTypes": [
-              "small"
-            ]
-          }
-        },
-        "aws": {
-          "all": {
-            "instanceType": "t2.small",
-            "validInstanceTypes": [
-              "t2.small"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.medium",
-            "validInstanceTypes": [
-              "m3.medium"
-            ]
-          }
-        },
-        "azure": {
-          "all": {
-            "instanceType": "Standard_F1s",
-            "validInstanceTypes": [
-              "Standard_F1s"
-            ]
-          }
-        },
-        "gcp": {
-          "all": {
-            "instanceType": "small",
-            "validInstanceTypes": [
-              "small"
-            ]
-          }
-        },
-        "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "small",
-            "validInstanceTypes": [
-              "small"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "vm": "RabbitMQ Service Broker",
-      "staticIPs": 1,
-      "dynamicIPs": 1,
-      "singleton": false,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 0
-        }
-      },
-      "iaas": {
-        "vsphere": {
-          "all": {
-            "instanceType": "small",
-            "validInstanceTypes": [
-              "small"
-            ]
-          }
-        },
-        "aws": {
-          "all": {
-            "instanceType": "t2.small",
-            "validInstanceTypes": [
-              "t2.small"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.medium",
-            "validInstanceTypes": [
-              "m3.medium"
-            ]
-          }
-        },
-        "azure": {
-          "all": {
-            "instanceType": "Standard_F1s",
-            "validInstanceTypes": [
-              "Standard_F1s"
-            ]
-          }
-        },
-        "gcp": {
-          "all": {
-            "instanceType": "small",
-            "validInstanceTypes": [
-              "small"
-            ]
-          }
-        },
-        "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "small",
-            "validInstanceTypes": [
-              "small"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "vm": "Errands",
-      "staticIPs": 0,
       "dynamicIPs": 1,
       "singleton": false,
       "defaults": {
@@ -258,65 +180,65 @@
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "micro",
+            "instanceType": "medium",
             "validInstanceTypes": [
-              "micro"
+              "medium"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "t2.micro",
+            "instanceType": "m3.large",
             "validInstanceTypes": [
-              "t2.micro"
+              "m3.large"
             ]
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.medium",
+            "instanceType": "m3.large",
             "validInstanceTypes": [
-              "m3.medium"
+              "m3.large"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
+            "instanceType": "Standard_F2s",
             "validInstanceTypes": [
-              "Standard_F1s"
+              "Standard_F2s"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "micro",
+            "instanceType": "medium",
             "validInstanceTypes": [
-              "micro"
+              "medium"
             ]
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.small",
+            "instanceType": "m1.large",
             "validInstanceTypes": [
-              "m1.small"
+              "m1.large"
             ]
           }
         },
         "nhc-openstack": {
           "all": {
-            "instanceType": "m1.small",
+            "instanceType": "m1.large",
             "validInstanceTypes": [
-              "m1.small"
+              "m1.large"
             ]
           }
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "micro",
+            "instanceType": "medium",
             "validInstanceTypes": [
-              "micro"
+              "medium"
             ]
           }
         }

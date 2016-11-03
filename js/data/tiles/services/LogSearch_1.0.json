@@ -168,7 +168,7 @@
     },
     {
       "vm": "Maintenance",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": true,
       "defaults": {
@@ -246,7 +246,7 @@
     },
     {
       "vm": "Queue",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": true,
       "defaults": {
@@ -324,7 +324,7 @@
     },
     {
       "vm": "Log Parser",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": false,
       "defaults": {
@@ -402,7 +402,7 @@
     },
     {
       "vm": "Ingestor",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": true,
       "defaults": {
@@ -480,7 +480,7 @@
     },
     {
       "vm": "Kibana",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": false,
       "defaults": {
@@ -558,7 +558,7 @@
     },
     {
       "vm": "Cluster Monitor",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": false,
       "defaults": {
@@ -636,7 +636,7 @@
     },
     {
       "vm": "Router",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": true,
       "defaults": {
@@ -714,7 +714,7 @@
     },
     {
       "vm": "Firehose to Syslog",
-      "staticIPs": 0,
+      "staticIPs": 1,
       "dynamicIPs": 1,
       "singleton": false,
       "defaults": {

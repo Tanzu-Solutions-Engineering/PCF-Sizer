@@ -1,0 +1,170 @@
+{
+  "name": "GitLab",
+  "version": "1.1",
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "File Server",
+      "staticIPs": 1,
+      "dynamicIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 1024
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "large",
+            "validInstanceTypes": [
+              "large"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "r3.large",
+            "validInstanceTypes": [
+              "r3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "r3.large",
+            "validInstanceTypes": [
+              "r3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_DS11_v2",
+            "validInstanceTypes": [
+              "Standard_DS11_v2"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "large",
+            "validInstanceTypes": [
+              "large"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "large",
+            "validInstanceTypes": [
+              "large"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "GitLab EE",
+      "staticIPs": 1,
+      "dynamicIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 2,
+          "persistentDisk": 0
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.disk",
+            "validInstanceTypes": [
+              "medium.disk"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium.disk",
+            "validInstanceTypes": [
+              "medium.disk"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.large",
+            "validInstanceTypes": [
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.large",
+            "validInstanceTypes": [
+              "m1.large"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium.disk",
+            "validInstanceTypes": [
+              "medium.disk"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
