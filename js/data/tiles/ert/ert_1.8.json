@@ -906,7 +906,7 @@
             "instanceType": "Standard_F1s"
           }
         },
-        "azure": {
+        "gcp": {
           "all": {
             "instanceType": "micro"
           }
@@ -1469,7 +1469,7 @@
             "instanceType": "Standard_F1s"
           }
         },
-        "azure": {
+        "gcp": {
           "all": {
             "instanceType": "micro"
           }

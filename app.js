@@ -15,29 +15,10 @@ app.get('/buildnumber', function(req, res) {
     res.send(vcapApplication);
 });
 
-app.get('/tiles/:iaas', function(req, res) {
-  var runtime = glob.sync('js/data/' + req.params['iaas'] + '/ers/*.json');
-  var services = glob.sync('js/data/' + req.params['iaas'] + '/services/*.json');
-
-  var json = [];
-
-  runtime.forEach(function(file) {
-    json.push(JSON.parse(fs.readFileSync(file)));
-  });
-
-  services.forEach(function(file) {
-    json.push(JSON.parse(fs.readFileSync(file)));
-  });
-
-  res.status(200).json(json);
-});
-
 app.get('/v2/tiles/:iaas', function(req, res) {
   const runtime = glob.sync('js/data/tiles/ert/*.json');
   const iaas = req.params['iaas'];
-
   const services = glob.sync('js/data/tiles/services/*.json');
-  // var services = glob.sync('js/data/' + req.params['iaas'] + '/services/*.json');
 
   var json = [];
 
