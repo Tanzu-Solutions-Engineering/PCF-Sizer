@@ -29,6 +29,14 @@
               "nhc.small"
             ]
           }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
         }
       }
     },
@@ -51,6 +59,58 @@
               "nhc.large"
             ]
           }
+        },
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.nhc-mnr",
+            "validInstanceTypes": [
+              "m1.nhc-mnr"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "NHC S3 Proxy",
+      "staticIPs": 0,
+      "dynamicIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 2,
+          "persistentDisk": 0
+        }
+      },
+      "iaas": {
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "NHC S3 Storage",
+      "staticIPs": 0,
+      "dynamicIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 3,
+          "persistentDisk": 200
+        }
+      },
+      "iaas": {
+        "nhc-openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
         }
       }
     },
@@ -71,6 +131,14 @@
             "instanceType": "micro",
             "validInstanceTypes": [
               "micro"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
             ]
           }
         }
