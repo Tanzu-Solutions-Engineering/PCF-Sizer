@@ -1,7 +1,7 @@
 {
   "name": "NHC Services",
   "version": "1",
-  "supportedIaaS": ["nhc-vsphere"],
+  "supportedIaaS": ["nhc-vsphere", "nhc-openstack"],
   "sizes": [
     {
       "size": "all",
