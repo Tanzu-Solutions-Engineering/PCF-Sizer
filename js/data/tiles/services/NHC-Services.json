@@ -134,7 +134,7 @@
             ]
           }
         },
-        "nhc-vsphere": {
+        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
