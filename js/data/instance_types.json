@@ -573,6 +573,15 @@
       "cost": {
         "Typical": 0.315
       }
+    },
+    {
+      "name": "2xlarge.disk",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeralDisk": 256,
+      "cost": {
+        "Typical": 0.413
+      }
     }
   ],
   "nhc-openstack": [

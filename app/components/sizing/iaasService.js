@@ -1,7 +1,7 @@
 "use strict";
 var iaasService = angular.module('sizerApp').factory('iaasService', function(sizingStorageService, $http, $q) {
   var ramOverhead = 3;
-  var diskOverhead = 20;
+  var diskOverhead = 4;
   var aisPerPack = 50;
   var instanceTypes = [];
 
@@ -128,6 +128,10 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
   iaasService.getDiskOverhead = function() {
     return diskOverhead;
+  }
+
+  iaasService.getUsedCellDisk = function(instanceInfo) {
+    return instanceInfo.ephemeralDisk - iaasService.getDiskOverhead() - instanceInfo.ram;
   }
 
   iaasService.getAIsPerPack = function() {
@@ -320,8 +324,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   iaasService.generateDiegoCellSummary = function() {
     var cell = this.getDiegoCellInfo();
     this.diegoCellSummary.totalRam = cell.instances * cell.instanceInfo.ram;
-    this.diegoCellSummary.useableCellRam = cell.instanceInfo.ram - ramOverhead;
-    this.diegoCellSummary.useableCellDisk = cell.instanceInfo.ephemeralDisk - diskOverhead;
+    this.diegoCellSummary.useableCellRam = cell.instanceInfo.ram - this.getRamOverhead();
+    this.diegoCellSummary.useableCellDisk = this.getUsedCellDisk(cell.instanceInfo);
     this.diegoCellSummary.availableCellRam = cell.instances * this.diegoCellSummary.useableCellRam;
     this.diegoCellSummary.availableCellRam -= this.getTotalAIRam();
     this.diegoCellSummary.availableCellDisk = cell.instances * this.diegoCellSummary.useableCellDisk;
@@ -331,13 +335,13 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   };
 
   iaasService.calculateDiegoCellCount = function() {
-    var cellInfo = this.getDiegoCellInfo();
+    var cell = this.getDiegoCellInfo();
     var ram = this.getTotalAIRam();
     var disk = this.getTotalAIDisk();
-    var numbersOfCellsBasedOnRam = ram / (cellInfo.instanceInfo.ram - this.getRamOverhead());
-    var numbersOfCellsBasedOnDisk = disk / (cellInfo.instanceInfo.ephemeralDisk - this.getDiskOverhead());
-    cellInfo.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
-    cellInfo.instances += (sizingStorageService.data.elasticRuntimeConfig.azCount * sizingStorageService.data.elasticRuntimeConfig.extraRunnersPerAZ);
+    var numbersOfCellsBasedOnRam = ram / (cell.instanceInfo.ram - this.getRamOverhead());
+    var numbersOfCellsBasedOnDisk = disk / (this.getUsedCellDisk(cell.instanceInfo));
+    cell.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
+    cell.instances += (sizingStorageService.data.elasticRuntimeConfig.azCount * sizingStorageService.data.elasticRuntimeConfig.extraRunnersPerAZ);
   }
 
   iaasService.getTotalAIRam = function() {
