@@ -4,9 +4,14 @@ const express = require('express');
 const app = express();
 const glob = require('glob');
 const fs = require('fs');
+const path = require('path');
 const _ = require('lodash');
 
-app.use(express.static('.'));
+app.use(express.static('public'));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
+})
 
 app.get('/buildnumber', function(req, res) {
     var vcapApplication = process.env.VCAP_APPLICATION
@@ -16,9 +21,9 @@ app.get('/buildnumber', function(req, res) {
 });
 
 app.get('/v2/tiles/:iaas', function(req, res) {
-  const runtime = glob.sync('js/data/tiles/ert/*.json');
+  const runtime = glob.sync('data/tiles/ert/*.json');
   const iaas = req.params['iaas'];
-  const services = glob.sync('js/data/tiles/services/*.json');
+  const services = glob.sync('data/tiles/services/*.json');
 
   var json = [];
 
@@ -103,9 +108,9 @@ app.get('/v2/tiles/:iaas', function(req, res) {
 });
 
 app.get('/missingInstanceTypeCheck', function(req, res) {
-  const runtime = glob.sync('js/data/tiles/ert/*.json');
-  const services = glob.sync('js/data/tiles/services/*.json');
-  const instanceTypes = JSON.parse(fs.readFileSync('js/data/instance_types.json'));
+  const runtime = glob.sync('data/tiles/ert/*.json');
+  const services = glob.sync('data/tiles/services/*.json');
+  const instanceTypes = JSON.parse(fs.readFileSync('data/instance_types.json'));
 
   var vmTypes = [];
   Object.keys(instanceTypes).forEach((iaas) => {
@@ -166,7 +171,7 @@ app.get('/missingInstanceTypeCheck', function(req, res) {
 });
 
 app.get('/instanceTypes/:iaas', function(req, res) {
-    const instanceTypes = JSON.parse(fs.readFileSync('js/data/instance_types.json'));
+    const instanceTypes = JSON.parse(fs.readFileSync('data/instance_types.json'));
     const iaas = req.params['iaas'];
 
     res.status(200).json(instanceTypes[iaas]);

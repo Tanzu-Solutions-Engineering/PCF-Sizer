@@ -105,13 +105,14 @@
         },
         "aws": {
           "all": {
-            "instanceType": "m3.xlarge",
+            "instanceType": "m3.large",
             "persistentDisk": 50
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.xlarge"
+            "instanceType": "m3.large",
+            "persistentDisk": 50
           }
         },
         "azure": {
@@ -160,12 +161,12 @@
         },
         "aws": {
           "all": {
-            "instanceType": "m3.xlarge"
+            "instanceType": "c4.large"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.xlarge"
+            "instanceType": "c4.large"
           }
         },
         "azure": {
@@ -214,12 +215,12 @@
         },
         "aws": {
           "all": {
-            "instanceType": "m3.xlarge"
+            "instanceType": "c4.xlarge"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.xlarge"
+            "instanceType": "c4.xlarge"
           }
         },
         "azure": {
@@ -277,7 +278,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -340,7 +341,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -403,7 +404,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -466,7 +467,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -661,7 +662,7 @@
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.2xlarge"
+            "instanceType": "m3.medium"
           }
         },
         "azure": {
@@ -738,12 +739,12 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "m3.large"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.medium"
+            "instanceType": "m3.large"
           }
         },
         "azure": {
@@ -801,12 +802,12 @@
         },
         "aws": {
           "all": {
-            "instanceType": "m3.xlarge"
+            "instanceType": "m3.large"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.xlarge"
+            "instanceType": "m3.large"
           }
         },
         "azure": {
@@ -903,7 +904,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -1010,7 +1011,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -1073,7 +1074,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -1136,7 +1137,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -1199,7 +1200,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "m3.medium"
+            "instanceType": "t2.small"
           }
         },
         "aws-dedicated": {
@@ -1272,32 +1273,32 @@
         },
         "aws": {
           "all": {
-            "instanceType": "m3.xlarge",
+            "instanceType": "r3.xlarge",
             "validInstanceTypes": [
-              "m3.xlarge",
-              "m3.2xlarge"
+              "r3.xlarge",
+              "r3.2xlarge"
             ]
           },
           "large": {
-            "instanceType": "m3.2xlarge"
+            "instanceType": "r3.2xlarge"
           },
           "custom": {
-            "instanceType": "m3.2xlarge"
+            "instanceType": "r3.2xlarge"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.2xlarge",
+            "instanceType": "r3.2xlarge",
             "validInstanceTypes": [
-              "m3.xlarge",
-              "m3.2xlarge"
+              "r3.xlarge",
+              "r3.2xlarge"
             ]
           },
           "large": {
-            "instanceType": "m3.2xlarge"
+            "instanceType": "r3.2xlarge"
           },
           "custom": {
-            "instanceType": "m3.2xlarge"
+            "instanceType": "r3.2xlarge"
           }
         },
         "azure": {
@@ -1393,7 +1394,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {
@@ -1456,7 +1457,7 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.small"
+            "instanceType": "t2.micro"
           }
         },
         "aws-dedicated": {

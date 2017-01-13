@@ -209,11 +209,22 @@
       "name": "r3.large",
       "cpu": 2,
       "ram": 15,
-      "ephemeralDisk": 16,
+      "ephemeralDisk": 64,
       "cost": {
         "On-Demand": 0.166,
         "1-Year Term": 0.088,
         "3-Year Term": 0.058
+      }
+    },
+    {
+      "name": "r3.xlarge",
+      "cpu": 4,
+      "ram": 30.5,
+      "ephemeralDisk": 128,
+      "cost": {
+        "On-Demand": 0.333,
+        "1-Year Term": 0.176,
+        "3-Year Term": 0.117
       }
     },
     {
@@ -268,9 +279,9 @@
       "ram": 3.75,
       "ephemeralDisk": 4,
       "cost": {
-        "On-Demand": 0.074,
-        "1-Year Term": 0.044,
-        "3-Year Term": 0.029
+        "On-Demand": 0.0815,
+        "1-Year Term": 0.046875,
+        "3-Year Term": 0.030375
       }
     },
     {
@@ -279,9 +290,9 @@
       "ram": 7.5,
       "ephemeralDisk": 16,
       "cost": {
-        "On-Demand": 0.146,
-        "1-Year Term": 0.090,
-        "3-Year Term": 0.058
+        "On-Demand": 0.163,
+        "1-Year Term": 0.09375,
+        "3-Year Term": 0.06075
       }
     },
     {
@@ -290,9 +301,9 @@
       "ram": 15,
       "ephemeralDisk": 32,
       "cost": {
-        "On-Demand": 0.293,
-        "1-Year Term": 0.179,
-        "3-Year Term": 0.115
+        "On-Demand": 0.326,
+        "1-Year Term": 0.1875,
+        "3-Year Term": 0.1215
       }
     },
     {
@@ -301,9 +312,9 @@
       "ram": 30,
       "ephemeralDisk": 64,
       "cost": {
-        "On-Demand": 0.585,
-        "1-Year Term": 0.357,
-        "3-Year Term": 0.230
+        "On-Demand": 0.652,
+        "1-Year Term": 0.375,
+        "3-Year Term": 0.243
       }
     },
     {
@@ -318,13 +329,46 @@
       }
     },
     {
+      "name": "r3.large",
+      "cpu": 2,
+      "ram": 15,
+      "ephemeralDisk": 16,
+      "cost": {
+        "On-Demand": 0.182875,
+        "1-Year Term": 0.0970625,
+        "3-Year Term": 0.064125
+      }
+    },
+    {
+      "name": "r3.xlarge",
+      "cpu": 4,
+      "ram": 30.5,
+      "ephemeralDisk": 128,
+      "cost": {
+        "On-Demand": 0.36575,
+        "1-Year Term": 0.194125,
+        "3-Year Term": 0.12825
+      }
+    },
+    {
+      "name": "r3.2xlarge",
+      "cpu": 8,
+      "ram": 61,
+      "ephemeralDisk": 128,
+      "cost": {
+        "On-Demand": 0.7315,
+        "1-Year Term": 0.38825,
+        "3-Year Term": 0.2565
+      }
+    },
+    {
       "name": "r3.4xlarge",
       "cpu": 4,
       "ram": 15,
-      "ephemeralDisk": 32,
+      "ephemeralDisk": 512,
       "cost": {
         "On-Demand": 1.463,
-        "1-Year Term": 0.776,
+        "1-Year Term": 0.7765,
         "3-Year Term": 0.513
       }
     },
@@ -334,9 +378,9 @@
       "ram": 3.75,
       "ephemeralDisk": 8,
       "cost": {
-        "On-Demand": 0.115,
-        "1-Year Term": 0.072,
-        "3-Year Term": 0.045
+        "On-Demand": 0.109375,
+        "1-Year Term": 0.0650625,
+        "3-Year Term": 0.0426875
       }
     },
     {
@@ -345,31 +389,9 @@
       "ram": 7.5,
       "ephemeralDisk": 16,
       "cost": {
-        "On-Demand": 0.23,
-        "1-Year Term": 0.145,
-        "3-Year Term": 0.090
-      }
-    },
-    {
-      "name": "r3.large",
-      "cpu": 2,
-      "ram": 15,
-      "ephemeralDisk": 16,
-      "cost": {
-        "On-Demand": 0.183,
-        "1-Year Term": 0.097,
-        "3-Year Term": 0.064
-      }
-    },
-    {
-      "name": "r3.2xlarge",
-      "cpu": 8,
-      "ram": 61,
-      "ephemeralDisk": 128,
-      "cost": {
-        "On-Demand": 0.732,
-        "1-Year Term": 0.388,
-        "3-Year Term": 0.257
+        "On-Demand": 0.21875,
+        "1-Year Term": 0.130125,
+        "3-Year Term": 0.085375
       }
     }
   ],
