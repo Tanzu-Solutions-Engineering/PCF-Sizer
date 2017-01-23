@@ -1,7 +1,7 @@
 {
   "name": "Elastic Runtime",
   "version": "1.9",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "small",
@@ -130,11 +130,6 @@
             "instanceType": "m1.xlarge"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "OpsManager"
@@ -184,11 +179,6 @@
             "instanceType": "m1.xlarge"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium.disk"
@@ -234,11 +224,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.xlarge"
           }
@@ -301,11 +286,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -360,11 +340,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -427,11 +402,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -486,11 +456,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -582,11 +547,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -631,11 +591,6 @@
             "instanceType": "m1.large"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.large"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "large.disk"
@@ -676,11 +631,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.xlarge"
           }
@@ -762,11 +712,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium.disk"
@@ -825,11 +770,6 @@
             "instanceType": "m1.xlarge"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium.disk"
@@ -864,11 +804,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -899,17 +834,17 @@
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "micro"
+            "instanceType": "xlarge.cpu"
           }
         },
         "aws": {
           "all": {
-            "instanceType": "t2.micro"
+            "instanceType": "c4.xlarge"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.medium"
+            "instanceType": "c4.xlarge"
           }
         },
         "azure": {
@@ -919,22 +854,17 @@
         },
         "gcp": {
           "all": {
-            "instanceType": "micro"
+            "instanceType": "xlarge.cpu"
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
+            "instanceType": "m1.large"
           }
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "micro"
+            "instanceType": "xlarge.cpu"
           }
         }
       }
@@ -976,11 +906,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -1030,11 +955,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -1097,11 +1017,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -1156,11 +1071,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -1223,11 +1133,6 @@
             "instanceType": "m1.medium"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.medium"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "small"
@@ -1265,10 +1170,10 @@
             ]
           },
           "large": {
-            "instanceType": "2xlarge.disk"
+            "instanceType": "xlarge.disk"
           },
           "custom": {
-            "instanceType": "2xlarge.disk"
+            "instanceType": "xlarge.disk"
           }
         },
         "aws": {
@@ -1280,25 +1185,25 @@
             ]
           },
           "large": {
-            "instanceType": "r3.2xlarge"
+            "instanceType": "r3.xlarge"
           },
           "custom": {
-            "instanceType": "r3.2xlarge"
+            "instanceType": "r3.xlarge"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "r3.2xlarge",
+            "instanceType": "r3.xlarge",
             "validInstanceTypes": [
               "r3.xlarge",
               "r3.2xlarge"
             ]
           },
           "large": {
-            "instanceType": "r3.2xlarge"
+            "instanceType": "r3.xlarge"
           },
           "custom": {
-            "instanceType": "r3.2xlarge"
+            "instanceType": "r3.xlarge"
           }
         },
         "azure": {
@@ -1340,15 +1245,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.large-diego-cell",
-            "validInstanceTypes": [
-              "m1.large-diego-cell",
-              "m1.xlarge-diego-cell"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "xlarge.disk",
@@ -1358,10 +1254,10 @@
             ]
           },
           "large": {
-            "instanceType": "2xlarge.disk"
+            "instanceType": "xlarge.disk"
           },
           "custom": {
-            "instanceType": "2xlarge.disk"
+            "instanceType": "xlarge.disk"
           }
         }
       }
@@ -1417,11 +1313,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -1452,42 +1343,37 @@
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "micro"
+            "instanceType": "medium"
           }
         },
         "aws": {
           "all": {
-            "instanceType": "t2.micro"
+            "instanceType": "c4.large"
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.medium"
+            "instanceType": "c4.large"
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s"
+            "instanceType": "Standard_F2s"
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "micro"
+            "instanceType": "medium"
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
+            "instanceType": "m1.medium"
           }
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "micro"
+            "instanceType": "medium"
           }
         }
       }
@@ -1543,11 +1429,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -1597,11 +1478,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }

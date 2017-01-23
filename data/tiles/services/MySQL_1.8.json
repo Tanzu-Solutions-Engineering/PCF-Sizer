@@ -1,7 +1,7 @@
 {
   "name": "MySQL",
   "version": "1.8",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "all",
@@ -64,15 +64,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.large",
-            "validInstanceTypes": [
-              "m1.large",
-              "m1.xlarge"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.large",
             "validInstanceTypes": [
@@ -152,14 +143,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro",
@@ -224,14 +207,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
@@ -310,14 +285,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro",
@@ -389,14 +356,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "small.disk",
@@ -460,14 +419,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [

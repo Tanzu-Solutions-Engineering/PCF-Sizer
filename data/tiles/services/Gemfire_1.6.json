@@ -1,7 +1,7 @@
 {
   "name": "Pivotal Gemfire",
   "version": "1.6",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "all",
@@ -64,14 +64,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.medium",
             "validInstanceTypes": [
@@ -142,16 +134,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small",
-              "m1.medium",
-              "m1.large"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
@@ -233,16 +215,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small",
-              "m1.medium",
-              "m1.large"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro",
@@ -315,16 +287,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small",
-              "m1.medium",
-              "m1.large"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro",
@@ -388,16 +350,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium",
-              "m1.large",
-              "m1.xlarge"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.medium",
             "validInstanceTypes": [
@@ -479,16 +431,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium",
-              "m1.large",
-              "m1.xlarge"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium",
@@ -552,16 +494,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium",
-              "m1.large",
-              "m1.xlarge"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.medium",
             "validInstanceTypes": [
@@ -635,14 +567,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [

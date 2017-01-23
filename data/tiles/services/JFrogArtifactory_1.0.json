@@ -1,7 +1,7 @@
 {
   "name": "JFrog Artifactory",
   "version": "1.0",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "all",
@@ -63,14 +63,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.medium",
             "validInstanceTypes": [
@@ -148,14 +140,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.large",
-            "validInstanceTypes": [
-              "m1.large"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium",
@@ -219,14 +203,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.large",
-            "validInstanceTypes": [
-              "m1.large"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.large",
             "validInstanceTypes": [

@@ -1,7 +1,7 @@
 {
   "name": "Redis",
   "version": "1.6",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "all",
@@ -63,14 +63,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.medium",
             "validInstanceTypes": [
@@ -148,14 +140,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro.ram",
@@ -219,14 +203,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [

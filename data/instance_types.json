@@ -99,6 +99,13 @@
       "cost": null
     },
     {
+      "name": "xlarge.cpu",
+      "cpu": 8,
+      "ram": 8,
+      "ephemeralDisk": 32,
+      "cost": null
+    },
+    {
       "name": "xlarge.disk",
       "cpu": 4,
       "ram": 16,
@@ -579,6 +586,15 @@
       }
     },
     {
+      "name": "xlarge.cpu",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeralDisk": 32,
+      "cost": {
+        "Typical": 0.158
+      }
+    },
+    {
       "name": "xlarge.disk",
       "cpu": 4,
       "ram": 16,
@@ -604,57 +620,6 @@
       "cost": {
         "Typical": 0.413
       }
-    }
-  ],
-  "nhc-openstack": [
-    {
-      "name": "m1.small",
-      "cpu": 1,
-      "ram": 2,
-      "ephemeralDisk": 24,
-      "cost": null
-    },
-    {
-      "name": "m1.medium",
-      "cpu": 2,
-      "ram": 4,
-      "ephemeralDisk": 40,
-      "cost": null
-    },
-    {
-      "name": "m1.large",
-      "cpu": 4,
-      "ram": 8,
-      "ephemeralDisk": 80,
-      "cost": null
-    },
-    {
-      "name": "m1.xlarge",
-      "cpu": 8,
-      "ram": 16,
-      "ephemeralDisk": 160,
-      "cost": null
-    },
-    {
-      "name": "m1.large-diego-cell",
-      "cpu": 4,
-      "ram": 16,
-      "ephemeralDisk": 32,
-      "cost": null
-    },
-    {
-      "name": "m1.xlarge-diego-cell",
-      "cpu": 8,
-      "ram": 32,
-      "ephemeralDisk": 64,
-      "cost": null
-    },
-    {
-      "name": "m1.nhc-mnr",
-      "cpu": 4,
-      "ram": 16,
-      "ephemeralDisk": 40,
-      "cost": null
     }
   ],
   "nhc-vsphere": [
@@ -753,6 +718,13 @@
       "name": "xlarge",
       "cpu": 4,
       "ram": 16,
+      "ephemeralDisk": 32,
+      "cost": null
+    },
+    {
+      "name": "xlarge.cpu",
+      "cpu": 8,
+      "ram": 8,
       "ephemeralDisk": 32,
       "cost": null
     },

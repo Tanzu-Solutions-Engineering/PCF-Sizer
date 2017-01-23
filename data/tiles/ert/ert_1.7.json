@@ -1,7 +1,7 @@
 {
   "name": "Elastic Runtime",
   "version": "1.7",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "openstack", "nhc-vsphere", "nhc-openstack"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "small",
@@ -119,11 +119,6 @@
             "instanceType": "m1.xlarge"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "OpsManager"
@@ -159,11 +154,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.xlarge"
           }
@@ -240,11 +230,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -294,11 +279,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -356,11 +336,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -410,11 +385,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -501,11 +471,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -573,11 +538,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "small"
@@ -617,11 +577,6 @@
             "instanceType": "m1.large"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.large"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "large.disk"
@@ -657,11 +612,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.xlarge"
           }
@@ -719,11 +669,6 @@
             "instanceType": "m1.xlarge"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium.disk"
@@ -749,11 +694,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -798,11 +738,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }
@@ -860,11 +795,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -918,11 +848,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -972,11 +897,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.medium"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.medium"
           }
@@ -1078,15 +998,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.large-diego-cell",
-            "validInstanceTypes": [
-              "m1.large-diego-cell",
-              "m1.xlarge-diego-cell"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "xlarge",
@@ -1150,11 +1061,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -1208,11 +1114,6 @@
             "instanceType": "m1.small"
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro"
@@ -1254,11 +1155,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.xlarge"
           }
@@ -1307,11 +1203,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small"
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small"
           }

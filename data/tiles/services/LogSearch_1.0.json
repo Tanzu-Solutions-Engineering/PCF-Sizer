@@ -1,7 +1,7 @@
 {
   "name": "LogSearch",
   "version": "1.0",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "all",
@@ -63,14 +63,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
@@ -148,14 +140,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium.mem",
@@ -219,14 +203,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
@@ -304,14 +280,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "small",
@@ -375,14 +343,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
@@ -460,14 +420,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "small",
@@ -531,14 +483,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
@@ -616,14 +560,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "medium",
@@ -687,14 +623,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [
@@ -772,14 +700,6 @@
             ]
           }
         },
-        "nhc-openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
         "nhc-vsphere": {
           "all": {
             "instanceType": "micro",
@@ -843,14 +763,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.small",
-            "validInstanceTypes": [
-              "m1.small"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.small",
             "validInstanceTypes": [

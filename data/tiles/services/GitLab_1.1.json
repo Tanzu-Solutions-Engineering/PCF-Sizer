@@ -1,7 +1,7 @@
 {
   "name": "GitLab",
   "version": "1.1",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
       "size": "all",
@@ -63,14 +63,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge",
-            "validInstanceTypes": [
-              "m1.xlarge"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.xlarge",
             "validInstanceTypes": [
@@ -141,14 +133,6 @@
           }
         },
         "openstack": {
-          "all": {
-            "instanceType": "m1.large",
-            "validInstanceTypes": [
-              "m1.large"
-            ]
-          }
-        },
-        "nhc-openstack": {
           "all": {
             "instanceType": "m1.large",
             "validInstanceTypes": [
