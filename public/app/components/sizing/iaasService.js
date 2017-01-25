@@ -109,16 +109,6 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       iaasTuning: true,
       showSystemResourcesUsed: true,
       showInstanceFlavorsUsed: false
-    },{
-      id: 'nhc-openstack',
-      name: 'NHC OpenStack',
-      isDefault: false,
-      isDisabled: false,
-      pricingUrl: null,
-      showPricingTypes: false,
-      iaasTuning: true,
-      showSystemResourcesUsed: true,
-      showInstanceFlavorsUsed: true
     }
   ];
 
