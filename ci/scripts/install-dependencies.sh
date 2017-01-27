@@ -9,9 +9,9 @@ echo "{\"allow_root\": true}" > ~/.bowerrc
 
 cd git-repo
 npm install
-npm install -g bower
-npm install gulp
-bower install
+#npm install -g bower
+#npm install gulp
+#bower install
 
 cp -r * ../pcfsizer
 ls -lah ../pcfsizer

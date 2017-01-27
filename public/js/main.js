@@ -10,7 +10,7 @@
 
     $routeProvider
     .when('/sizing/:iaas/:version?/:size?', {
-      templateUrl: 'app/components/sizing/sizing.html',
+      templateUrl: 'js/components/sizing/sizing.html',
       controller: 'PCFSizingController',
       controllerAs: 'vm',
       resolve: {

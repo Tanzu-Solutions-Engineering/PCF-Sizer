@@ -357,7 +357,6 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.loadIaaSTemplate = function(iaas) {
-    console.log('in here');
     return $q(function(resolve, reject) {
       if (iaasService.loadedConfig.iaas === iaas) {
         resolve();
@@ -366,10 +365,10 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
       var url = ['/instanceTypes', iaas].join('/');
       return $http.get(url)
-      .success(function(data) {
-        iaasService.instanceTypes = data;
-        resolve();
-      }).error(function(data) {
+      .then(function(data) {
+        iaasService.instanceTypes = data.data;
+        resolve('');
+      },function(data) {
         reject("Failed to get PCF Iaas Types");
       });
     });
@@ -422,10 +421,10 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       iaasService.resetTemplateVMs();
       iaasService.resetInstallSizes();
       return $http.get(url)
-      .success(function(data) {
-        iaasService.processTemplates(data);
+      .then(function(data) {
+        iaasService.processTemplates(data.data);
         resolve();
-      }).error(function(data) {
+      }, function(data) {
         reject("Failed to get PCF Template JSON template");
       });
     });
