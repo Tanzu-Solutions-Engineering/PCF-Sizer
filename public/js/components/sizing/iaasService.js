@@ -157,6 +157,15 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
     return _.filter(this.vms, {tile: tile});
   };
 
+  iaasService.calculateERTVMCount = () => {
+    var vms = iaasService.getVMs("Elastic Runtime");
+    vms.forEach((vm) => {
+      if (vm.scaling) {
+        vm.instances = Math.max(vm.instances, Math.ceil(sizingStorageService.data.aiPacks * aisPerPack / vm.scaling.ratio));
+      }
+    })
+  }
+
   /**
     END methods for VMs currently  active
   */
@@ -193,7 +202,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.getPCFVersions = function() {
-    return Object.keys(this.pcfInstallSizes);
+    return ["1.10", "1.9", "1.8", "1.7"];
   }
 
   iaasService.getPricingTypes = function() {
@@ -332,6 +341,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
     var numbersOfCellsBasedOnDisk = disk / (this.getUsedCellDisk(cell.instanceInfo));
     cell.instances = Math.ceil(Math.max(numbersOfCellsBasedOnRam, numbersOfCellsBasedOnDisk));
     cell.instances += (sizingStorageService.data.elasticRuntimeConfig.azCount * sizingStorageService.data.elasticRuntimeConfig.extraRunnersPerAZ);
+
+    iaasService.calculateERTVMCount();
   }
 
   iaasService.getTotalAIRam = function() {

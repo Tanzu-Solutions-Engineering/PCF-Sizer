@@ -58,6 +58,7 @@ app.get('/v2/tiles/:iaas', function(req, res) {
             dynamic_ips: job.dynamicIPs,
             static_ips: job.staticIPs,
             singleton: job.singleton,
+            scaling: job.scaling,
             temporary: job.temporary || false,
             instances: getJobInstances(job, s.size),
             persistent_disk: getJobPersistentDisk(job, iaas, s.size),

@@ -7,6 +7,7 @@
       for (var i = 1; i <= 300; ++i) {
         $scope.data.aiPackOptions.push({ label: i + " ("+i*50+")", value: i});
       }
+      $scope.data.aiPackOptions.push({ label: 1000 + " (50000)", value: 1000});
     };
 
     $scope.setAIPackOptions();
@@ -193,6 +194,8 @@
 
     $scope.fixedSizing = function (size) {
       var version = $scope.storage.elasticRuntimeConfig.ersVersion;
+      var iaas = $scope.storage.selectedIaaS;
+      $location.path(['/sizing', iaas, version, size].join('/'));
       $scope.loadVMs(size, version);
       $scope.storage.fixedSize = size;
       $scope.data.instanceTypes = $scope.getAvailableCellTypes();

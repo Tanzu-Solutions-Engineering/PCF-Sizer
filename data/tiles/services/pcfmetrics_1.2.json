@@ -1,6 +1,6 @@
 {
   "name": "PCF Metrics",
-  "version": "1.1",
+  "version": "1.2",
   "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
@@ -11,108 +11,38 @@
   "jobs":
   [
     {
-      "vm": "Push APM UI",
-      "dynamicIPs": 1,
-      "staticIPs": 1,
-      "singleton": true,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 0
-        }
-      },
-      "iaas": {
-        "vsphere": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
-            ]
-          }
-        },
-        "aws": {
-          "all": {
-            "instanceType": "c4.xlarge",
-            "validInstanceTypes": [
-              "c4.xlarge"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "c4.xlarge",
-            "validInstanceTypes": [
-              "c4.xlarge"
-            ]
-          }
-        },
-        "azure": {
-          "all": {
-            "instanceType": "Standard_F4s",
-            "validInstanceTypes": [
-              "Standard_F4s"
-            ]
-          }
-        },
-        "gcp": {
-          "all": {
-            "instanceType": "medium.cpu",
-            "validInstanceTypes": [
-              "medium.cpu"
-            ]
-          }
-        },
-        "openstack": {
-          "all": {
-            "instanceType": "m1.large",
-            "validInstanceTypes": [
-              "m1.large"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "vm": "Zookeeper",
+      "vm": "Elasticsearch Master",
       "dynamicIPs": 1,
       "staticIPs": 1,
       "singleton": false,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 0
+          "instances": 3,
+          "persistentDisk": 10
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "r3.2xlarge",
+            "instanceType": "m3.xlarge",
             "validInstanceTypes": [
-              "r3.2xlarge"
+              "m3.xlarge"
             ]
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "r3.2xlarge",
+            "instanceType": "m3.xlarge",
             "validInstanceTypes": [
-              "r3.2xlarge"
+              "m3.xlarge"
             ]
           }
         },
@@ -126,9 +56,9 @@
         },
         "gcp": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         },
@@ -142,63 +72,63 @@
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         }
       }
     },
     {
-      "vm": "Kafka",
+      "vm": "Elasticsearch Coordinator",
       "dynamicIPs": 1,
       "staticIPs": 1,
       "singleton": false,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 0
+          "instances": 2,
+          "persistentDisk": 1
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "r3.2xlarge",
+            "instanceType": "r3.large",
             "validInstanceTypes": [
-              "r3.2xlarge"
+              "r3.large"
             ]
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "r3.2xlarge",
+            "instanceType": "r3.large",
             "validInstanceTypes": [
-              "r3.2xlarge"
+              "r3.large"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_DS12_v2",
+            "instanceType": "Standard_DS11_v2",
             "validInstanceTypes": [
-              "Standard_DS12_v2"
+              "Standard_DS11_v2"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         },
@@ -212,63 +142,63 @@
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         }
       }
     },
     {
-      "vm": "Network Metrics Data Store",
+      "vm": "Elasticsearch Data",
       "dynamicIPs": 1,
       "staticIPs": 1,
       "singleton": false,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 0
+          "instances": 4,
+          "persistentDisk": 100
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "r3.2xlarge",
+            "instanceType": "r3.large",
             "validInstanceTypes": [
-              "r3.2xlarge"
+              "r3.large"
             ]
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "r3.2xlarge",
+            "instanceType": "r3.large",
             "validInstanceTypes": [
-              "r3.2xlarge"
+              "r3.large"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_DS12_v2",
+            "instanceType": "Standard_DS11_v2",
             "validInstanceTypes": [
-              "Standard_DS12_v2"
+              "Standard_DS11_v2"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         },
@@ -282,226 +212,16 @@
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "xlarge.disk",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "xlarge.disk"
+              "xlarge"
             ]
           }
         }
       }
     },
     {
-      "vm": "Container Metrics Data Store",
-      "dynamicIPs": 1,
-      "staticIPs": 1,
-      "singleton": false,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 0
-        }
-      },
-      "iaas": {
-        "vsphere": {
-          "all": {
-            "instanceType": "xlarge.disk",
-            "validInstanceTypes": [
-              "xlarge.disk"
-            ]
-          }
-        },
-        "aws": {
-          "all": {
-            "instanceType": "r3.2xlarge",
-            "validInstanceTypes": [
-              "r3.2xlarge"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "r3.2xlarge",
-            "validInstanceTypes": [
-              "r3.2xlarge"
-            ]
-          }
-        },
-        "azure": {
-          "all": {
-            "instanceType": "Standard_DS12_v2",
-            "validInstanceTypes": [
-              "Standard_DS12_v2"
-            ]
-          }
-        },
-        "gcp": {
-          "all": {
-            "instanceType": "xlarge.disk",
-            "validInstanceTypes": [
-              "xlarge.disk"
-            ]
-          }
-        },
-        "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge",
-            "validInstanceTypes": [
-              "m1.xlarge"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "xlarge.disk",
-            "validInstanceTypes": [
-              "xlarge.disk"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "vm": "App Event Data Store",
-      "dynamicIPs": 1,
-      "staticIPs": 1,
-      "singleton": false,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 0
-        }
-      },
-      "iaas": {
-        "vsphere": {
-          "all": {
-            "instanceType": "xlarge.disk",
-            "validInstanceTypes": [
-              "xlarge.disk"
-            ]
-          }
-        },
-        "aws": {
-          "all": {
-            "instanceType": "r3.2xlarge",
-            "validInstanceTypes": [
-              "r3.2xlarge"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "r3.2xlarge",
-            "validInstanceTypes": [
-              "r3.2xlarge"
-            ]
-          }
-        },
-        "azure": {
-          "all": {
-            "instanceType": "Standard_DS12_v2",
-            "validInstanceTypes": [
-              "Standard_DS12_v2"
-            ]
-          }
-        },
-        "gcp": {
-          "all": {
-            "instanceType": "xlarge.disk",
-            "validInstanceTypes": [
-              "xlarge.disk"
-            ]
-          }
-        },
-        "openstack": {
-          "all": {
-            "instanceType": "m1.xlarge",
-            "validInstanceTypes": [
-              "m1.xlarge"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "xlarge.disk",
-            "validInstanceTypes": [
-              "xlarge.disk"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "vm": "ElasticSearchMaster",
-      "dynamicIPs": 1,
-      "staticIPs": 1,
-      "singleton": true,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 50
-        }
-      },
-      "iaas": {
-        "vsphere": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
-            ]
-          }
-        },
-        "aws": {
-          "all": {
-            "instanceType": "m3.large",
-            "validInstanceTypes": [
-              "m3.large"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.large",
-            "validInstanceTypes": [
-              "m3.large"
-            ]
-          }
-        },
-        "azure": {
-          "all": {
-            "instanceType": "Standard_F2s",
-            "validInstanceTypes": [
-              "Standard_F2s"
-            ]
-          }
-        },
-        "gcp": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
-            ]
-          }
-        },
-        "openstack": {
-          "all": {
-            "instanceType": "m1.medium",
-            "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "vm": "ElasticSearchData",
+      "vm": "MySQL Server",
       "dynamicIPs": 1,
       "staticIPs": 1,
       "singleton": false,
@@ -514,9 +234,219 @@
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "medium"
+              "xlarge"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "r3.large",
+            "validInstanceTypes": [
+              "r3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "r3.large",
+            "validInstanceTypes": [
+              "r3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_DS11_v2",
+            "validInstanceTypes": [
+              "Standard_DS11_v2"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "xlarge",
+            "validInstanceTypes": [
+              "xlarge"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "xlarge",
+            "validInstanceTypes": [
+              "xlarge"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "MySQL Proxy",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 2,
+          "persistentDisk": 0
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "xlarge",
+            "validInstanceTypes": [
+              "xlarge"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "r3.large",
+            "validInstanceTypes": [
+              "r3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "r3.large",
+            "validInstanceTypes": [
+              "r3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_DS11_v2",
+            "validInstanceTypes": [
+              "Standard_DS11_v2"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "xlarge",
+            "validInstanceTypes": [
+              "xlarge"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "xlarge",
+            "validInstanceTypes": [
+              "xlarge"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "MySQL Monitor",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 0
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "small.disk",
+            "validInstanceTypes": [
+              "small.disk"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.medium",
+            "validInstanceTypes": [
+              "m3.medium"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.medium",
+            "validInstanceTypes": [
+              "m3.medium"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_DS11_v2",
+            "validInstanceTypes": [
+              "Standard_DS11_v2"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "xlarge",
+            "validInstanceTypes": [
+              "xlarge"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "small.disk",
+            "validInstanceTypes": [
+              "small.disk"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "Metron",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 0
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.disk",
+            "validInstanceTypes": [
+              "medium.disk"
             ]
           }
         },
@@ -538,46 +468,46 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
+            "instanceType": "Standard_DS11_v2",
             "validInstanceTypes": [
-              "Standard_F2s"
+              "Standard_DS11_v2"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "xlarge",
             "validInstanceTypes": [
-              "medium"
+              "xlarge"
             ]
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.medium",
+            "instanceType": "m1.xlarge",
             "validInstanceTypes": [
-              "m1.medium"
+              "m1.xlarge"
             ]
           }
         },
         "nhc-vsphere": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "medium.disk",
             "validInstanceTypes": [
-              "medium"
+              "medium.disk"
             ]
           }
         }
       }
     },
     {
-      "vm": "Cleanup",
+      "vm": "Errands",
       "dynamicIPs": 1,
       "staticIPs": 0,
       "singleton": true,
       "defaults": {
         "all": {
-          "instances": 1,
+          "instances": 0,
           "persistentDisk": 0
         }
       },
@@ -600,17 +530,17 @@
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.medium",
+            "instanceType": "m3.large",
             "validInstanceTypes": [
-              "m3.medium"
+              "m3.large"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
+            "instanceType": "Standard_DS1",
             "validInstanceTypes": [
-              "Standard_F1s"
+              "Standard_DS1"
             ]
           }
         },

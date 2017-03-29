@@ -30,7 +30,7 @@
               return $q(function(resolve, reject) {
                 iaasService.loadedConfig.iaas = iaas;
                 iaasService.loadedConfig.ersFixedSize = size;
-                var availableVersions = iaasService.getPCFVersions().sort().reverse();
+                var availableVersions = iaasService.getPCFVersions();
 
                 if (availableVersions.indexOf(version) === -1) {
                   storage.elasticRuntimeConfig.ersVersion = availableVersions[0];
