@@ -452,41 +452,41 @@
         },
         "aws": {
           "all": {
-            "instanceType": "m3.large",
+            "instanceType": "c4.large",
             "validInstanceTypes": [
-              "m3.large"
+              "c4.large"
             ]
           }
         },
         "aws-dedicated": {
           "all": {
-            "instanceType": "m3.large",
+            "instanceType": "c4.large",
             "validInstanceTypes": [
-              "m3.large"
+              "c4.large"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_DS11_v2",
+            "instanceType": "Standard_F2s",
             "validInstanceTypes": [
-              "Standard_DS11_v2"
+              "Standard_F2s"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "xlarge",
+            "instanceType": "medium",
             "validInstanceTypes": [
-              "xlarge"
+              "medium"
             ]
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.xlarge",
+            "instanceType": "m1.medium",
             "validInstanceTypes": [
-              "m1.xlarge"
+              "m1.medium"
             ]
           }
         },
