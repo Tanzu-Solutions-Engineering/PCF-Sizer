@@ -409,7 +409,7 @@
       "ram": 3.5,
       "ephemeralDisk": 50,
       "cost": {
-        "On Demand": 0.077
+        "On Demand": 0.070
       }
     },
     {
@@ -418,7 +418,7 @@
       "ram": 7,
       "ephemeralDisk": 100,
       "cost": {
-        "On Demand": 0.154
+        "On Demand": 0.140
       }
     },
     {
@@ -427,7 +427,7 @@
       "ram": 14,
       "ephemeralDisk": 100,
       "cost": {
-        "On Demand": 0.195
+        "On Demand": 0.185
       }
     },
     {
@@ -436,7 +436,7 @@
       "ram": 28,
       "ephemeralDisk": 200,
       "cost": {
-        "On Demand": 0.39
+        "On Demand": 0.371
       }
     },
     {
@@ -445,7 +445,7 @@
       "ram": 2,
       "ephemeralDisk": 4,
       "cost": {
-        "On Demand": 0.111
+        "On Demand": 0.062
       }
     },
     {
@@ -454,7 +454,7 @@
       "ram": 4,
       "ephemeralDisk": 8,
       "cost": {
-        "On Demand": 0.221
+        "On Demand": 0.124
       }
     },
     {
@@ -463,7 +463,7 @@
       "ram": 8,
       "ephemeralDisk": 16,
       "cost": {
-        "On Demand": 0.442
+        "On Demand": 0.249
       }
     }
   ],

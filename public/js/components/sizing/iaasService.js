@@ -220,7 +220,6 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       if (!sizingStorageService.data.pricingType) {
           sizingStorageService.data.pricingType = uniqueTypes[0];
       }
-
       return uniqueTypes;
     }
   };
@@ -286,9 +285,12 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       var vm = this.vms[i];
       if (vm.instance_type) {
         var cost = 0;
+        var perVmCost = 0;
         if (sizingStorageService.data.pricingType) {
-          cost = vm.instances * vm.instanceInfo.cost[sizingStorageService.data.pricingType];
+          perVmCost = vm.instanceInfo.cost[sizingStorageService.data.pricingType]
+          cost = vm.instances * perVmCost;
         }
+
 
         this.resourceSummary.totalVMs = this.resourceSummary.totalVMs + vm.instances;
         this.resourceSummary.ram += vm.instanceInfo.ram * vm.instances; //total ram
@@ -308,7 +310,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
               instanceInfo: vm.instanceInfo,
               count: vm.instances,
               totalCost: cost,
-              cost: cost,
+              cost: perVmCost,
               cpu: vm.instanceInfo.cpu,
               ram: vm.instanceInfo.ram
             }
