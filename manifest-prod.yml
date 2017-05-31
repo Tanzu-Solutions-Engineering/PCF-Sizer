@@ -3,3 +3,4 @@ applications:
   memory: 128M
   host: pcfsizer
   buildpack: nodejs_buildpack
+  domain: pivotal.io
