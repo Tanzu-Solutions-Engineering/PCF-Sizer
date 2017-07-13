@@ -108,6 +108,89 @@ app.get('/v2/tiles/:iaas', function(req, res) {
   res.status(200).json(json);
 });
 
+app.get('/v2/checkResources', function(req, res) {
+  const runtime = glob.sync('data/tiles/ert/*1\.11*.json');
+  const iaas = req.params['iaas'];
+  const services = glob.sync('data/tiles/services/*.json');
+  const instanceTypes = JSON.parse(fs.readFileSync('data/instance_types.json'));
+  console.log(instanceTypes);
+
+  var json = [];
+
+  runtime.forEach(function(file) {
+    let tile = JSON.parse(fs.readFileSync(file));
+    tile.sizes.forEach((s) => {
+      let tileInfo = {
+        tile: tile.name,
+        version: tile.version,
+        size: s.size,
+        display_name: s.displayName,
+        vms: []
+      };
+
+      tile.jobs.forEach((job) => {
+        // console.log(instanceTypes)
+        Object.keys(instanceTypes).forEach((iaas) => {
+          // console.log(iaas)
+          if (job.iaas[iaas]) {
+            let jobInfo = {
+              vm: job.vm,
+              iaas: iaas
+            };
+
+            let instanceType = getJobInstanceType(job, iaas, s.size);
+            if (instanceType !== null) {
+                // console.log(instanceTypes)
+                let info = _.find(instanceTypes[iaas], {name: instanceType})
+                console.log(info)
+                jobInfo.instance_type = {name: info.name, cpu: info.cpu, ram: info.ram}
+            }
+
+            tileInfo.vms.push(jobInfo);
+          }
+        })
+
+      });
+      json.push(tileInfo);
+    });
+  });
+
+  // services.forEach(function(file) {
+  //   let tile = JSON.parse(fs.readFileSync(file));
+  //   // if (tile.supportedIaaS.indexOf(iaas) === -1) {
+  //   //   return;
+  //   // }
+  //   tile.sizes.forEach((s) => {
+  //     let tileInfo = {
+  //       tile: tile.name,
+  //       version: tile.version,
+  //       size: s.size,
+  //       vms: []
+  //     };
+  //
+  //     tile.jobs.forEach((job) => {
+  //       if (job.iaas[iaas]) {
+  //         let jobInfo = {
+  //           vm: job.vm,
+  //           dynamic_ips: job.dynamicIPs,
+  //           static_ips: job.staticIPs,
+  //           singleton: job.singleton,
+  //           temporary: job.temporary || false,
+  //           instances: getJobInstances(job, s.size),
+  //           persistent_disk: getJobPersistentDisk(job, iaas, s.size)
+  //         };
+  //
+  //         instance_type: getJobInstanceType(job, iaas, s.size)
+  //         tileInfo.vms.push(jobInfo);
+  //       }
+  //     });
+  //     json.push(tileInfo);
+  //   });
+  // });
+
+  res.status(200).json(json);
+});
+
 app.get('/missingInstanceTypeCheck', function(req, res) {
   const runtime = glob.sync('data/tiles/ert/*.json');
   const services = glob.sync('data/tiles/services/*.json');

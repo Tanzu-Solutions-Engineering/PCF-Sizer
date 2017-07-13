@@ -9,9 +9,9 @@
     },
     {
       "name": "OpsManager",
-      "cpu": 4,
+      "cpu": 1,
       "ram": 8,
-      "ephemeralDisk": 32,
+      "ephemeralDisk": 0,
       "cost": null
     },
     {
@@ -632,9 +632,9 @@
     },
     {
       "name": "OpsManager",
-      "cpu": 4,
+      "cpu": 1,
       "ram": 8,
-      "ephemeralDisk": 32,
+      "ephemeralDisk": 0,
       "cost": null
     },
     {
