@@ -11,7 +11,7 @@
   "jobs":
   [
     {
-      "vm": "NHC Installer",
+      "vm": "NHC Controller",
       "staticIPs": 0,
       "dynamicIPs": 1,
       "singleton": true,
@@ -40,7 +40,7 @@
       "defaults": {
         "all": {
           "instances": 1,
-          "persistentDisk": 100
+          "persistentDisk": 370
         }
       },
       "iaas": {
@@ -49,28 +49,6 @@
             "instanceType": "nhc.large",
             "validInstanceTypes": [
               "nhc.large"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "vm": "NHC Backup",
-      "staticIPs": 0,
-      "dynamicIPs": 1,
-      "singleton": true,
-      "defaults": {
-        "all": {
-          "instances": 1,
-          "persistentDisk": 1500
-        }
-      },
-      "iaas": {
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "micro",
-            "validInstanceTypes": [
-              "micro"
             ]
           }
         }
