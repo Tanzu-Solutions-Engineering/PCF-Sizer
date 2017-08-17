@@ -117,7 +117,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_DS2"
+            "instanceType": "Standard_DS2_v2"
           }
         },
         "gcp": {
@@ -167,7 +167,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s"
+            "instanceType": "Standard_DS2_v2"
           }
         },
         "gcp": {

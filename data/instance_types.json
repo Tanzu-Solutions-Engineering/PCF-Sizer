@@ -422,12 +422,21 @@
       }
     },
     {
+      "name": "Standard_DS2_v2",
+      "cpu": 2,
+      "ram": 7,
+      "ephemeralDisk": 100,
+      "cost": {
+        "On Demand": 0.100
+      }
+    },
+    {
       "name": "Standard_DS11_v2",
       "cpu": 2,
       "ram": 14,
       "ephemeralDisk": 100,
       "cost": {
-        "On Demand": 0.185
+        "On Demand": 0.149
       }
     },
     {
@@ -436,7 +445,7 @@
       "ram": 28,
       "ephemeralDisk": 200,
       "cost": {
-        "On Demand": 0.371
+        "On Demand": 0.299
       }
     },
     {
@@ -445,7 +454,7 @@
       "ram": 2,
       "ephemeralDisk": 4,
       "cost": {
-        "On Demand": 0.062
+        "On Demand": 0.05
       }
     },
     {
@@ -454,7 +463,7 @@
       "ram": 4,
       "ephemeralDisk": 8,
       "cost": {
-        "On Demand": 0.124
+        "On Demand": 0.099
       }
     },
     {
@@ -463,7 +472,7 @@
       "ram": 8,
       "ephemeralDisk": 16,
       "cost": {
-        "On Demand": 0.249
+        "On Demand": 0.199
       }
     }
   ],
