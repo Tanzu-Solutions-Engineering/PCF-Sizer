@@ -202,7 +202,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.getPCFVersions = function() {
-    return ["1.11", "1.10", "1.9"];
+    return ["1.12", "1.11", "1.10", "1.9"];
   }
 
   iaasService.getPricingTypes = function() {
@@ -286,9 +286,16 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       if (vm.instance_type) {
         var cost = 0;
         var perVmCost = 0;
+        var diskPerVMCost = 0;
         if (sizingStorageService.data.pricingType) {
-          perVmCost = vm.instanceInfo.cost[sizingStorageService.data.pricingType]
+
+          perVmCost = vm.instanceInfo.cost[sizingStorageService.data.pricingType];
+          diskPerVMCost = vm.disk_cost[sizingStorageService.data.pricingType];
+          if (diskPerVMCost) {
+            perVmCost = perVmCost + diskPerVMCost
+          }
           cost = vm.instances * perVmCost;
+          // console.log(cost)
         }
 
 
@@ -311,6 +318,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
               count: vm.instances,
               totalCost: cost,
               cost: perVmCost,
+              disk_cost: diskPerVMCost,
               cpu: vm.instanceInfo.cpu,
               ram: vm.instanceInfo.ram
             }
@@ -417,6 +425,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
         angular.extend(vm.instanceInfo, iaasService.getInstanceTypeInfo(vm.instance_type));
         vm.tshirt = t.size;
         vm.version = t.version;
+        vm.disk_cost = vm.disk_cost;
         iaasService.addTemplateVM(vm);
       });
     });

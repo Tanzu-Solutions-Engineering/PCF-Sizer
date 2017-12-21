@@ -63,7 +63,8 @@ app.get('/v2/tiles/:iaas', function(req, res) {
             instances: getJobInstances(job, s.size),
             persistent_disk: getJobPersistentDisk(job, iaas, s.size),
             instance_type: getJobInstanceType(job, iaas, s.size),
-            valid_instance_types: getJobValidInstanceTypes(job, iaas, s.size)
+            valid_instance_types: getJobValidInstanceTypes(job, iaas, s.size),
+            disk_cost: getJobDiskCosts(job, iaas, s.size)
           };
           tileInfo.vms.push(jobInfo);
         }
@@ -113,7 +114,7 @@ app.get('/v2/checkResources', function(req, res) {
   const iaas = req.params['iaas'];
   const services = glob.sync('data/tiles/services/*.json');
   const instanceTypes = JSON.parse(fs.readFileSync('data/instance_types.json'));
-  console.log(instanceTypes);
+  // console.log(instanceTypes);
 
   var json = [];
 
@@ -142,7 +143,7 @@ app.get('/v2/checkResources', function(req, res) {
             if (instanceType !== null) {
                 // console.log(instanceTypes)
                 let info = _.find(instanceTypes[iaas], {name: instanceType})
-                console.log(info)
+                // console.log(info)
                 jobInfo.instance_type = {name: info.name, cpu: info.cpu, ram: info.ram}
             }
 
@@ -258,7 +259,33 @@ app.get('/instanceTypes/:iaas', function(req, res) {
     const instanceTypes = JSON.parse(fs.readFileSync('data/instance_types.json'));
     const iaas = req.params['iaas'];
 
-    res.status(200).json(instanceTypes[iaas]);
+    //iterate over all instance types for IaaS
+    const updatedInstanceTypes = instanceTypes[iaas].map(instance => {
+      if (instance.cost) {
+        let priceTypes = Object.keys(instance.cost); //get price types ie On Demand
+        let newCosts = {};
+
+        priceTypes.forEach(type => {
+          if (_.isNumber(instance.cost[type])) { //check if cost is number already
+            newCosts[type] = instance.cost[type];
+          } else {
+            let costs = Object.keys(instance.cost[type]); //loop through all costs and add it up
+            let total = 0;
+            costs.forEach(cost => {
+              total += instance.cost[type][cost];
+            })
+            newCosts[type] = total.toFixed(2);
+          }
+        })
+        instance.cost = newCosts;
+      }
+
+      return instance;
+    })
+
+
+
+    res.status(200).json(updatedInstanceTypes);
 });
 
 function getJobInstances(job, size) {
@@ -275,6 +302,31 @@ function getJobInstances(job, size) {
   }
 
   return instances;
+}
+
+function getJobDiskCosts(job, iaas, size) {
+  let cost = 0;
+
+  //check default all
+  if (job.defaults.all && job.defaults.all.cost) {
+    cost = job.defaults.all.cost;
+  }
+
+  //check default size
+  if (job.defaults[size] && job.defaults[size].cost) {
+    cost = job.defaults[size].cost;
+  }
+
+  // console.log(job.iaas[iaas])
+  if (job.iaas[iaas] && job.iaas[iaas].all && job.iaas[iaas].all.cost) {
+    cost = job.iaas[iaas].all.cost;
+  }
+
+  if (job.iaas[iaas] && job.iaas[iaas][size] && job.iaas[iaas][size].cost) {
+    cost = job.iaas[iaas][size].cost;
+  }
+
+  return cost;
 }
 
 function getJobPersistentDisk(job, iaas, size) {

@@ -1,6 +1,6 @@
 {
-  "name": "Spring Cloud Services",
-  "version": "1.2",
+  "name": "Single Sign On",
+  "version": "1.5.1",
   "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
   "sizes": [
     {
@@ -17,7 +17,7 @@
       "singleton": true,
       "defaults": {
         "all": {
-          "instances": 4,
+          "instances": 2,
           "persistentDisk": 0
         }
       },
