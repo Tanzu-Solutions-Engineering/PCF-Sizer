@@ -1,7 +1,7 @@
 {
   "name": "Elastic Runtime",
   "version": "1.12",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
+  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack"],
   "sizes": [
     {
       "size": "small",
@@ -118,11 +118,7 @@
         "azure": {
           "all": {
             "instanceType": "Standard_DS2_v2",
-            "persistentDisk": 50,
-            "cost": {
-              "Standard Managed Disk": 0.00202957,
-              "Premium Managed Disk": 0.013723118
-            }
+            "persistentDisk": 50
           }
         },
         "gcp": {
@@ -172,11 +168,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_DS2_v2",
-            "cost": {
-              "Standard Managed Disk": 0.00202957,
-              "Premium Managed Disk": 0.013723118
-            }
+            "instanceType": "Standard_DS2_v2"
           }
         },
         "gcp": {
@@ -225,11 +217,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F4s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F4s"
           }
         },
         "gcp": {
@@ -309,11 +297,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0.001034946,
-              "Premium Managed Disk": 0.007096774
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -416,11 +400,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -486,11 +466,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
-            "cost": {
-              "Standard Managed Disk": 0.003965054,
-              "Premium Managed Disk": 0.026491935
-            }
+            "instanceType": "Standard_F2s"
           },
           "value": {
             "instanceType": "Basic_A2"
@@ -536,11 +512,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -591,11 +563,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_DS11_v2",
-            "cost": {
-              "Standard Managed Disk": 0.003965054,
-              "Premium Managed Disk": 0.026491935
-            }
+            "instanceType": "Standard_DS11_v2"
           },
           "value": {
             "instanceType": "Standard_A2m_v2"
@@ -637,14 +605,15 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0.007620968,
-              "Premium Managed Disk": 0.051102151
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "micro"
           }
         },
         "openstack": {
@@ -753,11 +722,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0.001034946,
-              "Premium Managed Disk": 0.007096774
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -845,11 +810,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F2s"
           },
           "value": {
             "instanceType": "Basic_A2"
@@ -913,11 +874,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
-            "cost": {
-              "Standard Managed Disk": 0.001034946,
-              "Premium Managed Disk": 0.007096774
-            }
+            "instanceType": "Standard_F2s"
           },
           "value": {
             "instanceType": "Basic_A2"
@@ -959,11 +916,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1040,11 +993,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1116,11 +1065,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1167,11 +1112,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1247,11 +1188,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1324,11 +1261,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0.001034946,
-              "Premium Managed Disk": 0.007096774
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1423,11 +1356,7 @@
             "validInstanceTypes": [
               "Standard_DS11_v2",
               "Standard_DS12_v2"
-            ],
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            ]
           },
           "large": {
             "instanceType": "Standard_DS12_v2"
@@ -1530,11 +1459,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1610,11 +1535,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1687,11 +1608,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1767,11 +1684,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1847,11 +1760,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0.001034946,
-              "Premium Managed Disk": 0.007096774
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
@@ -1904,11 +1813,7 @@
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
-            "cost": {
-              "Standard Managed Disk": 0,
-              "Premium Managed Disk": 0
-            }
+            "instanceType": "Standard_F1s"
           },
           "value": {
             "instanceType": "Basic_A1"
