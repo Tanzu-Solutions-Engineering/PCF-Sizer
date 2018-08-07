@@ -503,6 +503,17 @@
       }
     },
     {
+      "name": "Basic_A4",
+      "cpu": 4,
+      "ram": 8,
+      "ephemeralDisk": 60,
+      "cost": {
+        "On Demand": 0.159,
+        "1-Year Term": 0.159,
+        "3-Year Term": 0.159
+      }
+    },
+    {
       "name": "Standard_F4s",
       "cpu": 4,
       "ram": 8,
