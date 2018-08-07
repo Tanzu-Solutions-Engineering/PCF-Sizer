@@ -10,5 +10,8 @@ image_resource:
 inputs:
   - name: git-repo
 
+caches:
+  - path: git-repo/node_modules
+
 run:
   path: git-repo/ci/scripts/unit.sh

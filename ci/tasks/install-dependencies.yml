@@ -13,5 +13,9 @@ inputs:
 outputs:
   - name: pcfsizer
 
+
+caches:
+  - path: git-repo/node_modules
+  
 run:
   path: git-repo/ci/scripts/install-dependencies.sh
