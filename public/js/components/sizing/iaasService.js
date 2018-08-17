@@ -280,10 +280,15 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
         if (sizingStorageService.data.pricingType) {
 
           perVmCost = vm.instanceInfo.cost[sizingStorageService.data.pricingType];
-          diskPerVMCost = vm.disk_cost[sizingStorageService.data.pricingType];
+
+          if (vm.disk_cost) {
+              diskPerVMCost = vm.disk_cost[sizingStorageService.data.pricingType];
+          }
+
           if (diskPerVMCost) {
             perVmCost = perVmCost + diskPerVMCost
           }
+
           cost = vm.instances * perVmCost;
           // console.log(cost)
         }
