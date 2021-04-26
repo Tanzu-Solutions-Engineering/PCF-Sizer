@@ -46,4 +46,4 @@ That should get you going. If you can't find karma run `npm -g list` and make su
 Coverage is lackluster, help us make it better if you like.
 
 #Adding services
-Check out the tile converter at https://github.com/pivotalservices/shekel-tile-parser. After that drop your service json in `js/data/services` and make sure to respect the naming convention of `<service>-<version>.json`. **NOTE** this tool does not currently catch singleton jobs!
+Check out the service json in `js/data/services` and make sure to respect the naming convention of `<service>-<version>.json`. **NOTE** this tool does not currently catch singleton jobs!
