@@ -18,14 +18,14 @@
       "name": "nano",
       "cpu": 1,
       "ram": 0.5,
-      "ephemeralDisk": 1,
+      "ephemeralDisk": 8,
       "cost": null
     },
     {
       "name": "micro",
       "cpu": 1,
       "ram": 1,
-      "ephemeralDisk": 2,
+      "ephemeralDisk": 8,
       "cost": null
     },
     {
@@ -39,7 +39,7 @@
       "name": "small",
       "cpu": 1,
       "ram": 2,
-      "ephemeralDisk": 4,
+      "ephemeralDisk": 8,
       "cost": null
     },
     {
@@ -57,13 +57,6 @@
       "cost": null
     },
     {
-      "name": "medium.disk",
-      "cpu": 4,
-      "ram": 4,
-      "ephemeralDisk": 32,
-      "cost": null
-    },
-    {
       "name": "medium.mem",
       "cpu": 1,
       "ram": 8,
@@ -71,9 +64,30 @@
       "cost": null
     },
     {
+      "name": "medium.disk",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeralDisk": 32,
+      "cost": null
+    },
+    {
+      "name": "medium.cpu",
+      "cpu": 4,
+      "ram": 2,
+      "ephemeralDisk": 8,
+      "cost": null
+    },
+    {
       "name": "large",
       "cpu": 2,
       "ram": 8,
+      "ephemeralDisk": 16,
+      "cost": null
+    },
+    {
+      "name": "large.mem",
+      "cpu": 1,
+      "ram": 16,
       "ephemeralDisk": 16,
       "cost": null
     },
@@ -99,9 +113,9 @@
       "cost": null
     },
     {
-      "name": "xlarge.cpu",
-      "cpu": 8,
-      "ram": 8,
+      "name": "xlarge.mem",
+      "cpu": 2,
+      "ram": 32,
       "ephemeralDisk": 32,
       "cost": null
     },
@@ -113,9 +127,23 @@
       "cost": null
     },
     {
-      "name": "2xlarge.cpu",
-      "cpu": 16,
-      "ram": 16,
+      "name": "xlarge.cpu",
+      "cpu": 8,
+      "ram": 8,
+      "ephemeralDisk": 32,
+      "cost": null
+    },
+    {
+      "name": "2xlarge",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeralDisk": 64,
+      "cost": null
+    },
+    {
+      "name": "2xlarge.mem",
+      "cpu": 4,
+      "ram": 64,
       "ephemeralDisk": 64,
       "cost": null
     },
@@ -127,41 +155,41 @@
       "cost": null
     },
     {
-      "name": "2xlarge",
-      "cpu": 8,
-      "ram": 32,
+      "name": "2xlarge.cpu",
+      "cpu": 16,
+      "ram": 16,
       "ephemeralDisk": 64,
       "cost": null
     }
   ],
   "aws": [
     {
-      "name": "t2.micro",
+      "name": "t3.micro",
       "cpu": 1,
       "ram": 1,
-      "ephemeralDisk": 1,
+      "ephemeralDisk": 8,
       "cost": {
         "On-Demand": 0.0116,
-        "1-Year Term": 0.006728,
-        "3-Year Term": 0.004408
+        "1-Year Term": 0.007,
+        "3-Year Term": 0.005
       }
     },
     {
-      "name": "t2.small",
+      "name": "t3.small",
       "cpu": 1,
       "ram": 2,
-      "ephemeralDisk": 2,
+      "ephemeralDisk": 8,
       "cost": {
         "On-Demand": 0.023,
-        "1-Year Term": 0.01334,
-        "3-Year Term": 0.00874
+        "1-Year Term": 0.014,
+        "3-Year Term": 0.009
       }
     },
     {
-      "name": "m3.medium",
+      "name": "t3.medium",
       "cpu": 1,
       "ram": 3.75,
-      "ephemeralDisk": 4,
+      "ephemeralDisk": 32,
       "cost": {
         "On-Demand": 0.067,
         "1-Year Term": 0.0402,
@@ -169,10 +197,10 @@
       }
     },
     {
-      "name": "m3.large",
+      "name": "c5.large",
       "cpu": 2,
-      "ram": 7.5,
-      "ephemeralDisk": 16,
+      "ram": 3.5,
+      "ephemeralDisk": 32,
       "cost": {
         "On-Demand": 0.133,
         "1-Year Term": 0.08113,
@@ -180,10 +208,21 @@
       }
     },
     {
-      "name": "m3.xlarge",
-      "cpu": 4,
-      "ram": 15,
+      "name": "m5.large",
+      "cpu": 2,
+      "ram": 7.5,
       "ephemeralDisk": 32,
+      "cost": {
+        "On-Demand": 0.133,
+        "1-Year Term": 0.08113,
+        "3-Year Term": 0.05187
+      }
+    },
+    {
+      "name": "r5.large",
+      "cpu": 2,
+      "ram": 15,
+      "ephemeralDisk": 64,
       "cost": {
         "On-Demand": 0.266,
         "1-Year Term": 0.16226,
@@ -191,9 +230,9 @@
       }
     },
     {
-      "name": "m3.2xlarge",
-      "cpu": 8,
-      "ram": 30,
+      "name": "c5.xlarge",
+      "cpu": 4,
+      "ram": 7.5,
       "ephemeralDisk": 64,
       "cost": {
         "On-Demand": 0.532,
@@ -202,10 +241,65 @@
       }
     },
     {
-      "name": "db.r3.large",
-      "cpu": 2,
+      "name": "m5.xlarge",
+      "cpu": 4,
       "ram": 15,
-      "ephemeralDisk": 0,
+      "ephemeralDisk": 64,
+      "cost": {
+        "On-Demand": 0.532,
+        "1-Year Term": 0.32452,
+        "3-Year Term": 0.20748
+      }
+    },
+    {
+      "name": "r5.xlarge",
+      "cpu": 4,
+      "ram": 30,
+      "ephemeralDisk": 128,
+      "cost": {
+        "On-Demand": 0.532,
+        "1-Year Term": 0.32452,
+        "3-Year Term": 0.20748
+      }
+    },
+    {
+      "name": "c5.2xlarge",
+      "cpu": 8,
+      "ram": 15,
+      "ephemeralDisk": 128,
+      "cost": {
+        "On-Demand": 0.532,
+        "1-Year Term": 0.32452,
+        "3-Year Term": 0.20748
+      }
+    },
+    {
+      "name": "m5.2xlarge",
+      "cpu": 8,
+      "ram": 30,
+      "ephemeralDisk": 128,
+      "cost": {
+        "On-Demand": 0.532,
+        "1-Year Term": 0.32452,
+        "3-Year Term": 0.20748
+      }
+    },
+    {
+      "name": "r5.2xlarge",
+      "cpu": 8,
+      "ram": 61,
+      "ephemeralDisk": 256,
+      "cost": {
+        "On-Demand": 0.532,
+        "1-Year Term": 0.32452,
+        "3-Year Term": 0.20748
+      }
+    },
+    {
+      "name": "c5.4xlarge",
+      "cpu": 16,
+      "ram": 30,
+      "ephemeralDisk": 256,
       "cost": {
         "On-Demand": 0.290,
         "1-Year Term": 0.158,
@@ -213,10 +307,32 @@
       }
     },
     {
-      "name": "r3.large",
-      "cpu": 2,
-      "ram": 15,
-      "ephemeralDisk": 64,
+      "name": "m5.4xlarge",
+      "cpu": 16,
+      "ram": 64,
+      "ephemeralDisk": 256,
+      "cost": {
+        "On-Demand": 0.290,
+        "1-Year Term": 0.158,
+        "3-Year Term": 0.101
+      }
+    },
+    {
+      "name": "r5.4xlarge",
+      "cpu": 16,
+      "ram": 122,
+      "ephemeralDisk": 512,
+      "cost": {
+        "On-Demand": 0.290,
+        "1-Year Term": 0.158,
+        "3-Year Term": 0.101
+      }
+    },
+    {
+      "name": "c5.9xlarge",
+      "cpu": 36,
+      "ram": 72,
+      "ephemeralDisk": 512,
       "cost": {
         "On-Demand": 0.166,
         "1-Year Term": 0.08798,
@@ -224,10 +340,10 @@
       }
     },
     {
-      "name": "r3.xlarge",
-      "cpu": 4,
-      "ram": 30.5,
-      "ephemeralDisk": 128,
+      "name": "m5.12xlarge",
+      "cpu": 48,
+      "ram": 192,
+      "ephemeralDisk": 1024,
       "cost": {
         "On-Demand": 0.333,
         "1-Year Term": 0.17649,
@@ -235,10 +351,10 @@
       }
     },
     {
-      "name": "r3.2xlarge",
-      "cpu": 8,
-      "ram": 61,
-      "ephemeralDisk": 128,
+      "name": "r5.12xlarge",
+      "cpu": 48,
+      "ram": 384,
+      "ephemeralDisk": 2048,
       "cost": {
         "On-Demand": 0.665,
         "1-Year Term": 0.35245,
@@ -246,10 +362,10 @@
       }
     },
     {
-      "name": "r3.4xlarge",
-      "cpu": 4,
-      "ram": 15,
-      "ephemeralDisk": 32,
+      "name": "i3.8xlarge",
+      "cpu": 32,
+      "ram": 244,
+      "ephemeralDisk": 960,
       "cost": {
         "On-Demand": 1.33,
         "1-Year Term": 0.7049,
@@ -257,157 +373,23 @@
       }
     },
     {
-      "name": "c4.large",
-      "cpu": 2,
-      "ram": 3.75,
-      "ephemeralDisk": 8,
+      "name": "d2.8xlarge",
+      "cpu": 36,
+      "ram": 244,
+      "ephemeralDisk": 960,
       "cost": {
         "On-Demand": 0.105,
         "1-Year Term": 0.06195,
         "3-Year Term": 0.04095
       }
-    },
-    {
-      "name": "c4.xlarge",
-      "cpu": 4,
-      "ram": 7.5,
-      "ephemeralDisk": 16,
-      "cost": {
-        "On-Demand": 0.209,
-        "1-Year Term": 0.1254,
-        "3-Year Term": 0.08151
-      }
-    }
-  ],
-  "aws-dedicated": [
-    {
-      "name": "m3.medium",
-      "cpu": 1,
-      "ram": 3.75,
-      "ephemeralDisk": 4,
-      "cost": {
-        "On-Demand": 0.0815,
-        "1-Year Term": 0.046875,
-        "3-Year Term": 0.030375
-      }
-    },
-    {
-      "name": "m3.large",
-      "cpu": 2,
-      "ram": 7.5,
-      "ephemeralDisk": 16,
-      "cost": {
-        "On-Demand": 0.163,
-        "1-Year Term": 0.09375,
-        "3-Year Term": 0.06075
-      }
-    },
-    {
-      "name": "m3.xlarge",
-      "cpu": 4,
-      "ram": 15,
-      "ephemeralDisk": 32,
-      "cost": {
-        "On-Demand": 0.326,
-        "1-Year Term": 0.1875,
-        "3-Year Term": 0.1215
-      }
-    },
-    {
-      "name": "m3.2xlarge",
-      "cpu": 8,
-      "ram": 30,
-      "ephemeralDisk": 64,
-      "cost": {
-        "On-Demand": 0.652,
-        "1-Year Term": 0.375,
-        "3-Year Term": 0.243
-      }
-    },
-    {
-      "name": "db.r3.large",
-      "cpu": 2,
-      "ram": 15,
-      "ephemeralDisk": 0,
-      "cost": {
-        "On-Demand": 0.290,
-        "1-Year Term": 0.158,
-        "3-Year Term": 0.101
-      }
-    },
-    {
-      "name": "r3.large",
-      "cpu": 2,
-      "ram": 15,
-      "ephemeralDisk": 16,
-      "cost": {
-        "On-Demand": 0.182875,
-        "1-Year Term": 0.0970625,
-        "3-Year Term": 0.064125
-      }
-    },
-    {
-      "name": "r3.xlarge",
-      "cpu": 4,
-      "ram": 30.5,
-      "ephemeralDisk": 128,
-      "cost": {
-        "On-Demand": 0.36575,
-        "1-Year Term": 0.194125,
-        "3-Year Term": 0.12825
-      }
-    },
-    {
-      "name": "r3.2xlarge",
-      "cpu": 8,
-      "ram": 61,
-      "ephemeralDisk": 128,
-      "cost": {
-        "On-Demand": 0.7315,
-        "1-Year Term": 0.38825,
-        "3-Year Term": 0.2565
-      }
-    },
-    {
-      "name": "r3.4xlarge",
-      "cpu": 4,
-      "ram": 15,
-      "ephemeralDisk": 512,
-      "cost": {
-        "On-Demand": 1.463,
-        "1-Year Term": 0.7765,
-        "3-Year Term": 0.513
-      }
-    },
-    {
-      "name": "c4.large",
-      "cpu": 2,
-      "ram": 3.75,
-      "ephemeralDisk": 8,
-      "cost": {
-        "On-Demand": 0.109375,
-        "1-Year Term": 0.0650625,
-        "3-Year Term": 0.0426875
-      }
-    },
-    {
-      "name": "c4.xlarge",
-      "cpu": 4,
-      "ram": 7.5,
-      "ephemeralDisk": 16,
-      "cost": {
-        "On-Demand": 0.21875,
-        "1-Year Term": 0.130125,
-        "3-Year Term": 0.085375
-      }
     }
   ],
   "azure": [
     {
-      "name": "Standard_DS2_v2",
-      "cpu": 2,
-      "ram": 7,
-      "ephemeralDisk": 100,
+      "name": "Standard_B1s",
+      "cpu": 1,
+      "ram": 1,
+      "ephemeralDisk": 8,
       "cost": {
         "On Demand": 0.114,
         "1-Year Term": 0.062,
@@ -415,10 +397,10 @@
       }
     },
     {
-      "name": "Standard_DS11_v2",
-      "cpu": 2,
-      "ram": 14,
-      "ephemeralDisk": 100,
+      "name": "Standard_B2s",
+      "cpu": 1,
+      "ram": 4,
+      "ephemeralDisk": 50,
       "cost": {
         "On Demand": 0.149,
         "1-Year Term": 0.088,
@@ -426,9 +408,9 @@
       }
     },
     {
-      "name": "Standard_A2m_v2",
+      "name": "Standard_D2s_v3",
       "cpu": 2,
-      "ram": 16,
+      "ram": 8,
       "ephemeralDisk": 100,
       "cost": {
         "On Demand": 0.099,
@@ -437,9 +419,9 @@
       }
     },
     {
-      "name": "Standard_DS12_v2",
+      "name": "Standard_D4s_v3",
       "cpu": 4,
-      "ram": 28,
+      "ram": 14,
       "ephemeralDisk": 200,
       "cost": {
         "On Demand": 0.299,
@@ -448,10 +430,10 @@
       }
     },
     {
-      "name": "Standard_A4m_v2",
-      "cpu": 4,
+      "name": "Standard_D8s_v3",
+      "cpu": 8,
       "ram": 32,
-      "ephemeralDisk": 200,
+      "ephemeralDisk": 400,
       "cost": {
         "On Demand": 0.208,
         "1-Year Term": 0.208,
@@ -459,10 +441,10 @@
       }
     },
     {
-      "name": "Standard_F1s",
-      "cpu": 1,
-      "ram": 2,
-      "ephemeralDisk": 16,
+      "name": "Standard_D16s_v3",
+      "cpu": 16,
+      "ram": 64,
+      "ephemeralDisk": 800,
       "cost": {
         "On Demand": 0.05,
         "1-Year Term": 0.031,
@@ -470,10 +452,10 @@
       }
     },
     {
-      "name": "Basic_A1",
-      "cpu": 1,
-      "ram": 1.75,
-      "ephemeralDisk": 40,
+      "name": "Standard_D32s_v3",
+      "cpu": 32,
+      "ram": 128,
+      "ephemeralDisk": 1600,
       "cost": {
         "On Demand": 0.024,
         "1-Year Term": 0.024,
@@ -481,10 +463,10 @@
       }
     },
     {
-      "name": "Standard_F2s",
-      "cpu": 2,
-      "ram": 4,
-      "ephemeralDisk": 32,
+      "name": "Standard_D48s_v3",
+      "cpu": 48,
+      "ram": 192,
+      "ephemeralDisk": 3200,
       "cost": {
         "On Demand": 0.099,
         "1-Year Term": 0.062,
@@ -492,10 +474,10 @@
       }
     },
     {
-      "name": "Basic_A2",
-      "cpu": 1,
-      "ram": 3.5,
-      "ephemeralDisk": 60,
+      "name": "Standard_D64s_v3",
+      "cpu": 64,
+      "ram": 256,
+      "ephemeralDisk": 6400,
       "cost": {
         "On Demand": 0.068,
         "1-Year Term": 0.068,
@@ -503,10 +485,10 @@
       }
     },
     {
-      "name": "Basic_A4",
+      "name": "Standard_E2s_v3",
       "cpu": 4,
-      "ram": 8,
-      "ephemeralDisk": 60,
+      "ram": 14,
+      "ephemeralDisk": 100,
       "cost": {
         "On Demand": 0.159,
         "1-Year Term": 0.159,
@@ -514,10 +496,175 @@
       }
     },
     {
-      "name": "Standard_F4s",
+      "name": "Standard_E4s_v3",
+      "cpu": 4,
+      "ram": 32,
+      "ephemeralDisk": 200,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_E8s_v3",
+      "cpu": 8,
+      "ram": 64,
+      "ephemeralDisk": 400,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_E16s_v3",
+      "cpu": 16,
+      "ram": 128,
+      "ephemeralDisk": 800,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_E20s_v3",
+      "cpu": 20,
+      "ram": 160,
+      "ephemeralDisk": 1200,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_E32s_v3",
+      "cpu": 32,
+      "ram": 256,
+      "ephemeralDisk": 1600,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_E4s_v3",
+      "cpu": 4,
+      "ram": 32,
+      "ephemeralDisk": 200,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_E48s_v3",
+      "cpu": 48,
+      "ram": 384,
+      "ephemeralDisk": 2400,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_E64s_v3",
+      "cpu": 64,
+      "ram": 432,
+      "ephemeralDisk": 3200,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_B1ms",
+      "cpu": 1,
+      "ram": 2,
+      "ephemeralDisk": 16,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_F2s_v2",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeralDisk": 32,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_F4s_v2",
       "cpu": 4,
       "ram": 8,
       "ephemeralDisk": 64,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_F8s_v2",
+      "cpu": 8,
+      "ram": 16,
+      "ephemeralDisk": 128,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_F16s_v2",
+      "cpu": 16,
+      "ram": 32,
+      "ephemeralDisk": 256,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_F32s_v2",
+      "cpu": 32,
+      "ram": 64,
+      "ephemeralDisk": 512,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_F48s_v2",
+      "cpu": 48,
+      "ram": 96,
+      "ephemeralDisk": 768,
+      "cost": {
+        "On Demand": 0.199,
+        "1-Year Term": 0.125,
+        "3-Year Term": 0.079
+      }
+    },
+    {
+      "name": "Standard_F64s_v2",
+      "cpu": 64,
+      "ram": 128,
+      "ephemeralDisk": 1024,
       "cost": {
         "On Demand": 0.199,
         "1-Year Term": 0.125,
@@ -536,7 +683,7 @@
       }
     },
     {
-      "name": "micro",
+      "name": "e2-micro",
       "cpu": 1,
       "ram": 1,
       "ephemeralDisk": 8,
@@ -545,7 +692,7 @@
       }
     },
     {
-      "name": "micro.cpu",
+      "name": "e2-small",
       "cpu": 2,
       "ram": 2,
       "ephemeralDisk": 8,
@@ -554,279 +701,157 @@
       }
     },
     {
-      "name": "small",
-      "cpu": 1,
-      "ram": 2,
+      "name": "e2-medium",
+      "cpu": 2,
+      "ram": 4,
       "ephemeralDisk": 8,
       "cost": {
         "Sustained Usage": 0.03132
       }
     },
     {
-      "name": "small.disk",
-      "cpu": 1,
-      "ram": 2,
-      "ephemeralDisk": 16,
+      "name": "e2-medium.disk",
+      "cpu": 2,
+      "ram": 4,
+      "ephemeralDisk": 32,
       "cost": {
         "Sustained Usage": 0.03318
       }
     },
     {
-      "name": "medium",
+      "name": "e2-standard-2",
       "cpu": 2,
-      "ram": 4,
-      "ephemeralDisk": 8,
+      "ram": 8,
+      "ephemeralDisk": 16,
       "cost": {
         "Sustained Usage": 0.06075
       }
     },
     {
-      "name": "medium.disk",
+      "name": "e2-standard-2.disk",
       "cpu": 2,
-      "ram": 4,
+      "ram": 8,
       "ephemeralDisk": 32,
       "cost": {
         "Sustained Usage": 0.06634
       }
     },
     {
-      "name": "medium.mem",
-      "cpu": 1,
-      "ram": 6,
-      "ephemeralDisk": 8,
+      "name": "e2-standard-4",
+      "cpu": 4,
+      "ram": 16,
+      "ephemeralDisk": 32,
       "cost": {
         "Sustained Usage": 0.04375
       }
     },
     {
-      "name": "medium.cpu",
+      "name": "e2-standard-4.disk",
       "cpu": 4,
-      "ram": 4,
-      "ephemeralDisk": 8,
+      "ram": 16,
+      "ephemeralDisk": 64,
       "cost": {
         "Sustained Usage": 0.10447
       }
     },
     {
-      "name": "large",
-      "cpu": 2,
-      "ram": 8,
-      "ephemeralDisk": 16,
-      "cost": {
-        "Sustained Usage": 0.07507
-      }
-    },
-    {
-      "name": "large.cpu",
-      "cpu": 4,
-      "ram": 4,
-      "ephemeralDisk": 16,
+      "name": "e2-standard-8",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeralDisk": 64,
       "cost": {
         "Sustained Usage": 0.10907
       }
     },
     {
-      "name": "large.disk",
-      "cpu": 2,
-      "ram": 8,
+      "name": "e2-standard-8.disk",
+      "cpu": 8,
+      "ram": 32,
+      "ephemeralDisk": 128,
+      "cost": {
+        "Sustained Usage": 0.07507
+      }
+    },
+    {
+      "name": "e2-standard-16",
+      "cpu": 16,
+      "ram": 64,
       "ephemeralDisk": 64,
       "cost": {
         "Sustained Usage": 0.08625
       }
     },
     {
-      "name": "xlarge",
+      "name": "e2-highcpu-4",
       "cpu": 4,
-      "ram": 16,
-      "ephemeralDisk": 32,
+      "ram": 4,
+      "ephemeralDisk": 16,
       "cost": {
         "Sustained Usage": 0.15014
       }
     },
     {
-      "name": "xlarge.cpu",
-      "cpu": 8,
-      "ram": 8,
-      "ephemeralDisk": 32,
+      "name": "e2-highcpu-4.disk",
+      "cpu": 4,
+      "ram": 4,
+      "ephemeralDisk": 64,
       "cost": {
         "Sustained Usage": 0.21812
       }
     },
     {
-      "name": "xlarge.disk",
-      "cpu": 4,
+      "name": "e2-highmem-2",
+      "cpu": 2,
       "ram": 16,
-      "ephemeralDisk": 128,
+      "ephemeralDisk": 64,
       "cost": {
         "Sustained Usage": 0.17249
       }
     },
     {
-      "name": "2xlarge",
-      "cpu": 8,
-      "ram": 32,
-      "ephemeralDisk": 64,
+      "name": "e2-highmem-2.disk",
+      "cpu": 2,
+      "ram": 16,
+      "ephemeralDisk": 128,
       "cost": {
         "Sustained Usage": 0.30027
       }
     },
     {
-      "name": "2xlarge.disk",
-      "cpu": 8,
+      "name": "e2-highmem-4",
+      "cpu": 4,
       "ram": 32,
+      "ephemeralDisk": 128,
+      "cost": {
+        "Sustained Usage": 0.34499
+      }
+    },
+    {
+      "name": "e2-highmem-8",
+      "cpu": 8,
+      "ram": 64,
       "ephemeralDisk": 256,
       "cost": {
         "Sustained Usage": 0.34499
       }
-    }
-  ],
-  "nhc-vsphere": [
-    {
-      "name": "vCenter",
-      "cpu": 2,
-      "ram": 12,
-      "ephemeralDisk": 0,
-      "cost": null
     },
     {
-      "name": "OpsManager",
-      "cpu": 1,
-      "ram": 8,
-      "ephemeralDisk": 0,
-      "cost": null
-    },
-    {
-      "name": "nano",
-      "cpu": 1,
-      "ram": 0.5,
-      "ephemeralDisk": 1,
-      "cost": null
-    },
-    {
-      "name": "micro",
-      "cpu": 1,
-      "ram": 1,
-      "ephemeralDisk": 2,
-      "cost": null
-    },
-    {
-      "name": "micro.ram",
-      "cpu": 2,
-      "ram": 1,
-      "ephemeralDisk": 8,
-      "cost": null
-    },
-    {
-      "name": "small",
-      "cpu": 1,
-      "ram": 2,
-      "ephemeralDisk": 4,
-      "cost": null
-    },
-    {
-      "name": "small.disk",
-      "cpu": 1,
-      "ram": 2,
-      "ephemeralDisk": 16,
-      "cost": null
-    },
-    {
-      "name": "medium",
-      "cpu": 2,
-      "ram": 4,
-      "ephemeralDisk": 8,
-      "cost": null
-    },
-    {
-      "name": "medium.disk",
-      "cpu": 4,
-      "ram": 4,
-      "ephemeralDisk": 32,
-      "cost": null
-    },
-    {
-      "name": "medium.mem",
-      "cpu": 1,
-      "ram": 8,
-      "ephemeralDisk": 8,
-      "cost": null
-    },
-    {
-      "name": "large",
-      "cpu": 2,
-      "ram": 8,
-      "ephemeralDisk": 16,
-      "cost": null
-    },
-    {
-      "name": "large.disk",
-      "cpu": 2,
-      "ram": 8,
-      "ephemeralDisk": 64,
-      "cost": null
-    },
-    {
-      "name": "large.cpu",
-      "cpu": 4,
-      "ram": 4,
-      "ephemeralDisk": 16,
-      "cost": null
-    },
-    {
-      "name": "xlarge",
-      "cpu": 4,
-      "ram": 16,
-      "ephemeralDisk": 32,
-      "cost": null
-    },
-    {
-      "name": "xlarge.cpu",
+      "name": "e2-highcpu-8",
       "cpu": 8,
       "ram": 8,
       "ephemeralDisk": 32,
-      "cost": null
+      "cost": {
+        "Sustained Usage": 0.34499
+      }
     },
     {
-      "name": "xlarge.disk",
-      "cpu": 4,
-      "ram": 16,
-      "ephemeralDisk": 128,
-      "cost": null
-    },
-    {
-      "name": "2xlarge.cpu",
+      "name": "e2-highcpu-16",
       "cpu": 16,
       "ram": 16,
       "ephemeralDisk": 64,
-      "cost": null
-    },
-    {
-      "name": "2xlarge.disk",
-      "cpu": 8,
-      "ram": 32,
-      "ephemeralDisk": 256,
-      "cost": null
-    },
-    {
-      "name": "2xlarge",
-      "cpu": 8,
-      "ram": 32,
-      "ephemeralDisk": 64,
-      "cost": null
-    },
-    {
-      "name": "nhc.small",
-      "cpu": 1,
-      "ram": 4,
-      "ephemeralDisk": 8,
-      "cost": null
-    },
-    {
-      "name": "nhc.large",
-      "cpu": 8,
-      "ram": 16,
-      "ephemeralDisk": 64,
-      "cost": null
+      "cost": {
+        "Sustained Usage": 0.34499
+      }
     }
   ],
   "openstack": [
@@ -834,7 +859,7 @@
       "name": "m1.small",
       "cpu": 1,
       "ram": 2,
-      "ephemeralDisk": 24,
+      "ephemeralDisk": 20,
       "cost": null
     },
     {
@@ -862,14 +887,14 @@
       "name": "m1.large-diego-cell",
       "cpu": 4,
       "ram": 16,
-      "ephemeralDisk": 32,
+      "ephemeralDisk": 64,
       "cost": null
     },
     {
       "name": "m1.xlarge-diego-cell",
       "cpu": 8,
       "ram": 32,
-      "ephemeralDisk": 64,
+      "ephemeralDisk": 320,
       "cost": null
     }
   ]

@@ -59,17 +59,6 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       showInstanceFlavorsUsed: true
     },
     {
-      id: 'aws-dedicated',
-      name: 'AWS Dedicated',
-      isDefault: false,
-      isDisabled: false,
-      pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/',
-      showPricingTypes: true,
-      iaasTuning: false,
-      showSystemResourcesUsed: false,
-      showInstanceFlavorsUsed: true
-    },
-    {
       id: 'azure',
       name: 'Azure',
       isDefault: false,
@@ -79,7 +68,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       iaasTuning: false,
       showSystemResourcesUsed: false,
       showInstanceFlavorsUsed: true
-    },{
+    },
+    {
       id: 'gcp',
       name: 'GCP',
       isDefault: false,
@@ -89,7 +79,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       iaasTuning: false,
       showSystemResourcesUsed: false,
       showInstanceFlavorsUsed: true
-    },{
+    },
+    {
       id: 'openstack',
       name: 'OpenStack',
       isDefault: false,
@@ -192,7 +183,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.getPCFVersions = function() {
-    return ["2.2","2.1","2.0","1.12"];
+    // return ["2.11","2.13","4.0","5.0"];
+    return ["2.11"];
   }
 
   iaasService.getPricingTypes = function() {

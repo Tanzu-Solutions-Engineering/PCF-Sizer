@@ -110,7 +110,7 @@ app.get('/v2/tiles/:iaas', function(req, res) {
 });
 
 app.get('/v2/checkResources', function(req, res) {
-  const runtime = glob.sync('data/tiles/ert/*1\.11*.json');
+  const runtime = glob.sync('data/tiles/ert/*.json');
   const iaas = req.params['iaas'];
   const services = glob.sync('data/tiles/services/*.json');
   const instanceTypes = JSON.parse(fs.readFileSync('data/instance_types.json'));
