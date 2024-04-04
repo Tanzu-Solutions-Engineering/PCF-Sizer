@@ -184,7 +184,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
   iaasService.getPCFVersions = function() {
     // return ["2.11","2.13","4.0","5.0"];
-    return ["2.11"];
+    return ["2.11+","4.0","5.0"];
   }
 
   iaasService.getPricingTypes = function() {

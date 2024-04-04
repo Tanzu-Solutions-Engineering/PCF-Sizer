@@ -1,7 +1,7 @@
 {
-  "name": "JMX Bridge (Ops Metrics)",
-  "version": "1.8",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
+  "name": "CredHub Service Broker",
+  "version": "1.6.x",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
   "sizes": [
     {
       "size": "all",

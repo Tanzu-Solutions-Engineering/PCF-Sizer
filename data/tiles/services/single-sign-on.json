@@ -1,0 +1,154 @@
+{
+  "name": "Single Sign-On",
+  "version": "1.1.0",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "JMX Provider",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "OpenTSDB Firehose Nozzle",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "aws-dedicated": {
+          "all": {
+            "instanceType": "m3.large",
+            "validInstanceTypes": [
+              "m3.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s",
+            "validInstanceTypes": [
+              "Standard_F2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        },
+        "nhc-vsphere": {
+          "all": {
+            "instanceType": "medium",
+            "validInstanceTypes": [
+              "medium"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
