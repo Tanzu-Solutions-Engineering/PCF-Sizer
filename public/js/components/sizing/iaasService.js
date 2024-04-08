@@ -139,7 +139,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   };
 
   iaasService.calculateERTVMCount = () => {
-    var vms = iaasService.getVMs("Elastic Runtime");
+    var vms = iaasService.getVMs("Tanzu Application Service");
     vms.forEach((vm) => {
       if (vm.scaling) {
         vm.instances = Math.max(vm.instances, Math.ceil(sizingStorageService.data.aiPacks * aisPerPack / vm.scaling.ratio));
@@ -212,7 +212,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
   iaasService.getServices = function() {
     var serviceNames = _.map(_.uniqBy(this.templateVms, 'tile'), 'tile');
-    var idx = serviceNames.indexOf('Elastic Runtime');
+    var idx = serviceNames.indexOf('Tanzu Application Service');
     serviceNames.splice(idx, 1);
     var services = [];
     serviceNames.forEach(function(service) {
@@ -244,11 +244,11 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.getDiegoCellInfo = function() {
-    return _.find(this.vms, {tile: "Elastic Runtime", vm: "Diego Cell"});
+    return _.find(this.vms, {tile: "Tanzu Application Service", vm: "Diego Cell"});
   };
 
   iaasService.getDiegoCellTemplateInfo = function() {
-    return _.find(this.templateVms, {tile: "Elastic Runtime", vm: "Diego Cell"});
+    return _.find(this.templateVms, {tile: "Tanzu Application Service", vm: "Diego Cell"});
   };
 
   iaasService.generateResourceSummary = function() {
@@ -384,7 +384,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
   iaasService.processTemplates = function(tiles) {
     tiles.forEach(function(t) {
-      if (t.tile === 'Elastic Runtime') {
+      if (t.tile === 'Tanzu Application Service') {
 
         if (!iaasService.pcfInstallSizes[t.version]) {
           iaasService.pcfInstallSizes[t.version] = [];

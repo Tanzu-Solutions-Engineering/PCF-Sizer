@@ -1,12 +1,12 @@
 {
-  "name": "Elastic Runtime",
+  "name": "Tanzu Application Service",
   "version": "2.11+",
   "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
   "sizes": [
     {
       "size": "small",
       "displayName": "Small",
-      "description": "Small Size of PCF Foundation and Elastic Runtime for POC and Evalution",
+      "description": "Small Size of PCF Foundation and Tanzu Application Service for POC and Evalution",
       "isDefault": true,
       "avgAIRam": 1,
       "avgAIDisk": 1,
@@ -20,7 +20,7 @@
     {
       "size": "medium",
       "displayName": "Medium",
-      "description": "Medium Size of PCF Foundation and Elastic Runtime for Dev and Test Env",
+      "description": "Medium Size of PCF Foundation and Tanzu Application Service for Dev and Test Env",
       "avgAIRam": 1.5,
       "avgAIDisk": 2,
       "aiPacks": 2,
@@ -34,7 +34,7 @@
     {
       "size": "large",
       "displayName": "Large",
-      "description": "Large Size of PCF Foundation and Elastic Runtime for Multiple Dev/Test/Production Env",
+      "description": "Large Size of PCF Foundation and Tanzu Application Service for Multiple Dev/Test/Production Env",
       "avgAIRam": 2,
       "avgAIDisk": 3,
       "aiPacks": 4,
@@ -48,7 +48,7 @@
     {
       "size": "custom",
       "displayName": "Custom",
-      "description": "Custom Size of PCF Foundation and Elastic Runtime where you can choose the AI Pack Size",
+      "description": "Custom Size of PCF Foundation and Tanzu Application Service where you can choose the AI Pack Size",
       "avgAIRam": 2,
       "avgAIDisk": 4,
       "aiPacks": 4,
