@@ -26,12 +26,12 @@
 }
 
 .panel-primary {
-    border-color: #138078;
+    border-color: #1b2a32;
 }
 
 .navbar-brand>img {
-  height: 93px;
-  padding: 0px;
+  height: 80px;
+  padding: 20px;
   width: auto;
   left: 0;
   position: absolute;
@@ -39,5 +39,5 @@
 }
 
 ul.navbar > .active > a, ul.navbar > .active > a:hover, ul.navbar > .active > a:focus {
-  color: #138078;
+  color: #f5f7f8;
 }
