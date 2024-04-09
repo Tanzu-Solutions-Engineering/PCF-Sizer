@@ -1,6 +1,6 @@
 {
   "name": "App Metrics",
-  "version": "2.2.0",
+  "version": "2.2.x",
   "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
   "sizes": [
     {
@@ -11,140 +11,108 @@
   "jobs":
   [
     {
-      "vm": "JMX Provider",
+      "vm": "PostgreSQL Server and Errand Runner",
       "dynamicIPs": 1,
-      "staticIPs": 1,
+      "staticIPs": 0,
       "singleton": true,
       "defaults": {
         "all": {
           "instances": 1,
-          "persistentDisk": 1
+          "persistentDisk": 10
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "xlarge.cpu",
             "validInstanceTypes": [
-              "medium"
+              "xlarge.cpu"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "m3.large",
+            "instanceType": "c5.2xlarge",
             "validInstanceTypes": [
-              "m3.large"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.large",
-            "validInstanceTypes": [
-              "m3.large"
+              "c5.2xlarge"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
+            "instanceType": "Standard_F8s_v2",
             "validInstanceTypes": [
-              "Standard_F2s"
+              "Standard_F8s_v2"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "e2-highmem-8",
             "validInstanceTypes": [
-              "medium"
+              "e2-highmem-8"
             ]
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.medium",
+            "instanceType": "m1.xlarge",
             "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
+              "m1.xlarge"
             ]
           }
         }
       }
     },
     {
-      "vm": "OpenTSDB Firehose Nozzle",
-      "dynamicIPs": 1,
-      "staticIPs": 1,
+      "vm": "LogStore",
+      "dynamicIPs": 3,
+      "staticIPs": 0,
       "singleton": false,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 1
+          "instances": 3,
+          "persistentDisk": 500
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "xlarge.disk",
             "validInstanceTypes": [
-              "medium"
+              "xlarge.disk"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "m3.large",
+            "instanceType": "r5.xlarge",
             "validInstanceTypes": [
-              "m3.large"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.large",
-            "validInstanceTypes": [
-              "m3.large"
+              "r5.xlarge"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
+            "instanceType": "Standard_D4s_v3",
             "validInstanceTypes": [
-              "Standard_F2s"
+              "Standard_D4s_v3"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "e2-standard-4",
             "validInstanceTypes": [
-              "medium"
+              "e2-standard-4"
             ]
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.medium",
+            "instanceType": "m1.xlarge",
             "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
+              "m1.xlarge"
             ]
           }
         }

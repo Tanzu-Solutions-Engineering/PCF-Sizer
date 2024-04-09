@@ -982,7 +982,7 @@
       "singleton": false,
       "defaults": {
         "all": {
-          "instances": 2,
+          "instances": 3,
           "persistentDisk": 0
         },
         "medium": {
@@ -1030,7 +1030,7 @@
           "all": {
             "instanceType": "Standard_E4s_v3",
             "validInstanceTypes": [
-              "Standard_DS11_v2",
+              "Standard_E8s_v3",
               "Standard_E4s_v3"
             ]
           },
@@ -1120,6 +1120,63 @@
         "openstack": {
           "all": {
             "instanceType": "m1.small"
+          }
+        }
+      }
+    },
+    {
+      "vm": "Log Cache",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 0
+        },
+        "medium": {
+          "instances": 3
+        },
+        "large": {
+          "instances": 3
+        },
+        "custom": {
+          "instances": 3
+        }
+      },
+      "scaling": {
+        "ratio": 800
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.mem"
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m5.large"
+          },
+          "large": {
+            "instanceType": "c5.large"
+          },
+          "custom": {
+            "instanceType": "c5.large"
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_B2s"
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-standard-2"
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium"
           }
         }
       }

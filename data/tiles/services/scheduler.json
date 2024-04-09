@@ -11,140 +11,318 @@
   "jobs":
   [
     {
-      "vm": "JMX Provider",
+      "vm": "Install",
       "dynamicIPs": 1,
-      "staticIPs": 1,
-      "singleton": true,
+      "staticIPs": 0,
+      "singleton": false,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 1
+          "instances": 1
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "medium.cpu",
             "validInstanceTypes": [
-              "medium"
+              "medium.cpu"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "m3.large",
+            "instanceType": "c5.xlarge",
             "validInstanceTypes": [
-              "m3.large"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.large",
-            "validInstanceTypes": [
-              "m3.large"
+              "c5.xlarge"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
+            "instanceType": "Standard_D4s_v3",
             "validInstanceTypes": [
-              "Standard_F2s"
+              "Standard_D4s_v3"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "e2-highcpu-4",
             "validInstanceTypes": [
-              "medium"
+              "e2-highcpu-4"
             ]
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.medium",
+            "instanceType": "m1.xlarge",
             "validInstanceTypes": [
-              "m1.medium"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "medium",
-            "validInstanceTypes": [
-              "medium"
+              "m1.xlarge"
             ]
           }
         }
       }
     },
     {
-      "vm": "OpenTSDB Firehose Nozzle",
+      "vm": "Create UAA Client",
       "dynamicIPs": 1,
-      "staticIPs": 1,
+      "staticIPs": 0,
       "singleton": false,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 1
+          "instances": 1
         }
       },
       "iaas": {
         "vsphere": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "medium.cpu",
             "validInstanceTypes": [
-              "medium"
+              "medium.cpu"
             ]
           }
         },
         "aws": {
           "all": {
-            "instanceType": "m3.large",
+            "instanceType": "c5.xlarge",
             "validInstanceTypes": [
-              "m3.large"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.large",
-            "validInstanceTypes": [
-              "m3.large"
+              "c5.xlarge"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F2s",
+            "instanceType": "Standard_D4s_v3",
             "validInstanceTypes": [
-              "Standard_F2s"
+              "Standard_D4s_v3"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "e2-highcpu-4",
             "validInstanceTypes": [
-              "medium"
+              "e2-highcpu-4"
             ]
           }
         },
         "openstack": {
           "all": {
-            "instanceType": "m1.medium",
+            "instanceType": "m1.xlarge",
             "validInstanceTypes": [
-              "m1.medium"
+              "m1.xlarge"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "Uninstall",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.cpu",
+            "validInstanceTypes": [
+              "medium.cpu"
             ]
           }
         },
-        "nhc-vsphere": {
+        "aws": {
           "all": {
-            "instanceType": "medium",
+            "instanceType": "c5.xlarge",
             "validInstanceTypes": [
-              "medium"
+              "c5.xlarge"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D4s_v3",
+            "validInstanceTypes": [
+              "Standard_D4s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-highcpu-4",
+            "validInstanceTypes": [
+              "e2-highcpu-4"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "Register Broker",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.cpu",
+            "validInstanceTypes": [
+              "medium.cpu"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "c5.xlarge",
+            "validInstanceTypes": [
+              "c5.xlarge"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D4s_v3",
+            "validInstanceTypes": [
+              "Standard_D4s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-highcpu-4",
+            "validInstanceTypes": [
+              "e2-highcpu-4"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "Publicize Service",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.cpu",
+            "validInstanceTypes": [
+              "medium.cpu"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "c5.xlarge",
+            "validInstanceTypes": [
+              "c5.xlarge"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D4s_v3",
+            "validInstanceTypes": [
+              "Standard_D4s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-highcpu-4",
+            "validInstanceTypes": [
+              "e2-highcpu-4"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "Smoke Tests",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.cpu",
+            "validInstanceTypes": [
+              "medium.cpu"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "c5.xlarge",
+            "validInstanceTypes": [
+              "c5.xlarge"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D4s_v3",
+            "validInstanceTypes": [
+              "Standard_D4s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-highcpu-4",
+            "validInstanceTypes": [
+              "e2-highcpu-4"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
             ]
           }
         }

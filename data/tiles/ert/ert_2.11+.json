@@ -1125,6 +1125,63 @@
       }
     },
     {
+      "vm": "Log Cache",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 0
+        },
+        "medium": {
+          "instances": 3
+        },
+        "large": {
+          "instances": 3
+        },
+        "custom": {
+          "instances": 3
+        }
+      },
+      "scaling": {
+        "ratio": 800
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.mem"
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m5.large"
+          },
+          "large": {
+            "instanceType": "c5.large"
+          },
+          "custom": {
+            "instanceType": "c5.large"
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s"
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "medium.mem"
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium"
+          }
+        }
+      }
+    },
+    {
       "vm": "Doppler Server",
       "dynamicIPs": 1,
       "staticIPs": 1,
