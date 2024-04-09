@@ -1,0 +1,178 @@
+{
+  "name": "Isolation Segment",
+  "version": "5.0.10",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "Diego Cell",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 3,
+          "persistentDisk": 0
+        },
+        "medium": {
+          "instances": 6
+        },
+        "large": {
+          "instances": 14
+        },
+        "custom": {
+          "instances": 19
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "xlarge.disk",
+            "validInstanceTypes": [
+              "xlarge.disk",
+              "2xlarge.disk"
+            ]
+          },
+          "large": {
+            "instanceType": "xlarge.disk"
+          },
+          "custom": {
+            "instanceType": "xlarge.disk"
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "r5.xlarge",
+            "validInstanceTypes": [
+              "r5.xlarge",
+              "r5.2xlarge"
+            ]
+          },
+          "large": {
+            "instanceType": "r5.xlarge"
+          },
+          "custom": {
+            "instanceType": "r5.xlarge"
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_E4s_v3",
+            "validInstanceTypes": [
+              "Standard_E8s_v3",
+              "Standard_E4s_v3"
+            ]
+          },
+          "large": {
+            "instanceType": "Standard_E4s_v3"
+          },
+          "custom": {
+            "instanceType": "Standard_E4s_v3"
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-highmem-4",
+            "validInstanceTypes": [
+              "e2-highmem-4",
+              "e2-highmem-8"
+            ]
+          },
+          "large": {
+            "instanceType": "e2-highmem-8"
+          },
+          "custom": {
+            "instanceType": "e2-highmem-8"
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.large-diego-cell",
+            "validInstanceTypes": [
+              "m1.large-diego-cell",
+              "m1.xlarge-diego-cell"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "Router",
+      "dynamicIPs": 1,
+      "staticIPs": 1,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 0
+        },
+        "medium": {
+          "instances": 2
+        },
+        "large": {
+          "instances": 3
+        },
+        "custom": {
+          "instances": 3
+        }
+      },
+      "scaling": {
+        "ratio": 2500
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro.ram"
+          },
+          "large": {
+            "instanceType": "xlarge.cpu"
+          },
+          "custom": {
+            "instanceType": "xlarge.cpu"
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t3.micro"
+          },
+          "large": {
+            "instanceType": "c5.large"
+          },
+          "custom": {
+            "instanceType": "c5.large"
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F2s_v2"
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-small"
+          },
+          "small": {
+            "instanceType": "e2-micro"
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small"
+          },
+          "large": {
+            "instanceType": "m1.large"
+          },
+          "custom": {
+            "instanceType": "m1.large"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -189,7 +189,7 @@
     }
 
     $scope.loadVMs = function(size, version) {
-      iaasService.addTileVMs('Elastic Runtime', size, version);
+      iaasService.addTileVMs('Tanzu Application Service', size, version);
       $scope.data.services = iaasService.getServices();
     }
 

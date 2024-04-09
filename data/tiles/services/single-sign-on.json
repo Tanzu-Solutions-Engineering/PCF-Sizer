@@ -1,0 +1,120 @@
+{
+  "name": "Single Sign-On",
+  "version": "1.1.0",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "Deploy Single Sign-On",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "small",
+            "validInstanceTypes": [
+              "small"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t3-small",
+            "validInstanceTypes": [
+              "t3-small"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_B1ms",
+            "validInstanceTypes": [
+              "Standard_B1ms"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-small",
+            "validInstanceTypes": [
+              "e2-small"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.medium",
+            "validInstanceTypes": [
+              "m1.medium"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "Remove Single Sign-On",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "small",
+            "validInstanceTypes": [
+              "small"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t3-small",
+            "validInstanceTypes": [
+              "t3-small"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_B1ms",
+            "validInstanceTypes": [
+              "Standard_B1ms"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-small",
+            "validInstanceTypes": [
+              "e2-small"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

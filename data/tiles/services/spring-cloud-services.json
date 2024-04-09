@@ -1,0 +1,68 @@
+{
+  "name": "Spring Cloud Services",
+  "version": "3.2.x",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "spring-cloud-services",
+      "dynamicIPs": 0,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 5
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "medium.disk",
+            "validInstanceTypes": [
+              "medium.disk"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "m5.large",
+            "validInstanceTypes": [
+              "m5.large"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_B2s",
+            "validInstanceTypes": [
+              "Standard_B2s"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-standard-4",
+            "validInstanceTypes": [
+              "e2-standard-4"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

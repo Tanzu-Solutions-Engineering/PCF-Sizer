@@ -1,0 +1,68 @@
+{
+  "name": "Metric Store",
+  "version": "1.6.0",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "Metric Store",
+      "dynamicIPs": 3,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 3,
+          "persistentDisk": 300
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "2xlarge.disk",
+            "validInstanceTypes": [
+              "2xlarge.disk"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "r5.2xlarge",
+            "validInstanceTypes": [
+              "r5.2xlarge"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_E4s_v3",
+            "validInstanceTypes": [
+              "Standard_E4s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-highmem-4",
+            "validInstanceTypes": [
+              "e2-highmem-4"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge-diego-cell",
+            "validInstanceTypes": [
+              "m1.xlarge-diego-cell"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

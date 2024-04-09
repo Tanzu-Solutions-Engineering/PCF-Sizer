@@ -59,17 +59,6 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       showInstanceFlavorsUsed: true
     },
     {
-      id: 'aws-dedicated',
-      name: 'AWS Dedicated',
-      isDefault: false,
-      isDisabled: false,
-      pricingUrl: 'https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/',
-      showPricingTypes: true,
-      iaasTuning: false,
-      showSystemResourcesUsed: false,
-      showInstanceFlavorsUsed: true
-    },
-    {
       id: 'azure',
       name: 'Azure',
       isDefault: false,
@@ -79,7 +68,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       iaasTuning: false,
       showSystemResourcesUsed: false,
       showInstanceFlavorsUsed: true
-    },{
+    },
+    {
       id: 'gcp',
       name: 'GCP',
       isDefault: false,
@@ -89,7 +79,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
       iaasTuning: false,
       showSystemResourcesUsed: false,
       showInstanceFlavorsUsed: true
-    },{
+    },
+    {
       id: 'openstack',
       name: 'OpenStack',
       isDefault: false,
@@ -148,7 +139,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   };
 
   iaasService.calculateERTVMCount = () => {
-    var vms = iaasService.getVMs("Elastic Runtime");
+    var vms = iaasService.getVMs("Tanzu Application Service");
     vms.forEach((vm) => {
       if (vm.scaling) {
         vm.instances = Math.max(vm.instances, Math.ceil(sizingStorageService.data.aiPacks * aisPerPack / vm.scaling.ratio));
@@ -192,7 +183,8 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.getPCFVersions = function() {
-    return ["2.2","2.1","2.0","1.12"];
+    // return ["2.11","2.13","4.0","5.0"];
+    return ["2.11+","4.0","5.0"];
   }
 
   iaasService.getPricingTypes = function() {
@@ -220,7 +212,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
   iaasService.getServices = function() {
     var serviceNames = _.map(_.uniqBy(this.templateVms, 'tile'), 'tile');
-    var idx = serviceNames.indexOf('Elastic Runtime');
+    var idx = serviceNames.indexOf('Tanzu Application Service');
     serviceNames.splice(idx, 1);
     var services = [];
     serviceNames.forEach(function(service) {
@@ -252,11 +244,11 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
   }
 
   iaasService.getDiegoCellInfo = function() {
-    return _.find(this.vms, {tile: "Elastic Runtime", vm: "Diego Cell"});
+    return _.find(this.vms, {tile: "Tanzu Application Service", vm: "Diego Cell"});
   };
 
   iaasService.getDiegoCellTemplateInfo = function() {
-    return _.find(this.templateVms, {tile: "Elastic Runtime", vm: "Diego Cell"});
+    return _.find(this.templateVms, {tile: "Tanzu Application Service", vm: "Diego Cell"});
   };
 
   iaasService.generateResourceSummary = function() {
@@ -392,7 +384,7 @@ var iaasService = angular.module('sizerApp').factory('iaasService', function(siz
 
   iaasService.processTemplates = function(tiles) {
     tiles.forEach(function(t) {
-      if (t.tile === 'Elastic Runtime') {
+      if (t.tile === 'Tanzu Application Service') {
 
         if (!iaasService.pcfInstallSizes[t.version]) {
           iaasService.pcfInstallSizes[t.version] = [];

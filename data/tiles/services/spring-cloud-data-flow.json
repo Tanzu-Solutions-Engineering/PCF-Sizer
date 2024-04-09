@@ -1,0 +1,173 @@
+{
+  "name": "Spring Cloud Data Flow for VMware Tanzu",
+  "version": "1.14.1",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "create-uaa-client",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t3.micro",
+            "validInstanceTypes": [
+              "t3.micro"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D2s_v3",
+            "validInstanceTypes": [
+              "Standard_D2s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-micro",
+            "validInstanceTypes": [
+              "e2-micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "deploy-all",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t3.micro",
+            "validInstanceTypes": [
+              "t3.micro"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D2s_v3",
+            "validInstanceTypes": [
+              "Standard_D2s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-micro",
+            "validInstanceTypes": [
+              "e2-micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "delete-all",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t3.micro",
+            "validInstanceTypes": [
+              "t3.micro"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D2s_v3",
+            "validInstanceTypes": [
+              "Standard_D2s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-micro",
+            "validInstanceTypes": [
+              "e2-micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "name": "App Metrics",
+  "version": "2.2.x",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "PostgreSQL Server and Errand Runner",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1,
+          "persistentDisk": 10
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "xlarge.cpu",
+            "validInstanceTypes": [
+              "xlarge.cpu"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "c5.2xlarge",
+            "validInstanceTypes": [
+              "c5.2xlarge"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_F8s_v2",
+            "validInstanceTypes": [
+              "Standard_F8s_v2"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-highmem-8",
+            "validInstanceTypes": [
+              "e2-highmem-8"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "vm": "LogStore",
+      "dynamicIPs": 3,
+      "staticIPs": 0,
+      "singleton": false,
+      "defaults": {
+        "all": {
+          "instances": 3,
+          "persistentDisk": 500
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "xlarge.disk",
+            "validInstanceTypes": [
+              "xlarge.disk"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "r5.xlarge",
+            "validInstanceTypes": [
+              "r5.xlarge"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D4s_v3",
+            "validInstanceTypes": [
+              "Standard_D4s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-standard-4",
+            "validInstanceTypes": [
+              "e2-standard-4"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.xlarge",
+            "validInstanceTypes": [
+              "m1.xlarge"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "name": "MySQL 2.0",
-  "version": "2.1",
-  "supportedIaaS": ["vsphere", "aws", "aws-dedicated", "azure", "gcp", "openstack", "nhc-vsphere"],
+  "name": "CredHub Service Broker",
+  "version": "1.6.x",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
   "sizes": [
     {
       "size": "all",
@@ -11,15 +11,13 @@
   "jobs":
   [
     {
-      "vm": "MySQL Broker",
+      "vm": "deploy-all",
       "dynamicIPs": 1,
       "staticIPs": 0,
-      "singleton": false,
-      "tooltip" : "Tooltip for Service Broker",
+      "singleton": true,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 0
+          "instances": 1
         }
       },
       "iaas": {
@@ -33,33 +31,25 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.micro",
+            "instanceType": "t3.micro",
             "validInstanceTypes": [
-              "t2.micro"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.medium",
-            "validInstanceTypes": [
-              "m3.medium"
+              "t3.micro"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
+            "instanceType": "Standard_D2s_v3",
             "validInstanceTypes": [
-              "Standard_F1s"
+              "Standard_D2s_v3"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "micro",
+            "instanceType": "e2-micro",
             "validInstanceTypes": [
-              "micro"
+              "e2-micro"
             ]
           }
         },
@@ -68,28 +58,19 @@
             "instanceType": "m1.small",
             "validInstanceTypes": [
               "m1.small"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "micro",
-            "validInstanceTypes": [
-              "micro"
             ]
           }
         }
       }
     },
     {
-      "vm": "Errands",
-      "dynamicIPs": 6,
+      "vm": "delete-all",
+      "dynamicIPs": 1,
       "staticIPs": 0,
       "singleton": true,
       "defaults": {
         "all": {
-          "instances": 1,
-          "persistentDisk": 0
+          "instances": 1
         }
       },
       "iaas": {
@@ -103,33 +84,25 @@
         },
         "aws": {
           "all": {
-            "instanceType": "t2.micro",
+            "instanceType": "t3.micro",
             "validInstanceTypes": [
-              "t2.micro"
-            ]
-          }
-        },
-        "aws-dedicated": {
-          "all": {
-            "instanceType": "m3.medium",
-            "validInstanceTypes": [
-              "m3.medium"
+              "t3.micro"
             ]
           }
         },
         "azure": {
           "all": {
-            "instanceType": "Standard_F1s",
+            "instanceType": "Standard_D2s_v3",
             "validInstanceTypes": [
-              "Standard_F1s"
+              "Standard_D2s_v3"
             ]
           }
         },
         "gcp": {
           "all": {
-            "instanceType": "micro",
+            "instanceType": "e2-micro",
             "validInstanceTypes": [
-              "micro"
+              "e2-micro"
             ]
           }
         },
@@ -138,14 +111,6 @@
             "instanceType": "m1.small",
             "validInstanceTypes": [
               "m1.small"
-            ]
-          }
-        },
-        "nhc-vsphere": {
-          "all": {
-            "instanceType": "micro",
-            "validInstanceTypes": [
-              "micro"
             ]
           }
         }

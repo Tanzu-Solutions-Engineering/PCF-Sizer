@@ -1,0 +1,67 @@
+{
+  "name": "VMware SQL with MySQL for Tanzu Application Service",
+  "version": "3.2.x",
+  "supportedIaaS": ["vsphere", "aws", "azure", "gcp", "openstack"],
+  "sizes": [
+    {
+      "size": "all",
+      "displayName": "All"
+    }
+  ],
+  "jobs":
+  [
+    {
+      "vm": "MySQL broker",
+      "dynamicIPs": 1,
+      "staticIPs": 0,
+      "singleton": true,
+      "defaults": {
+        "all": {
+          "instances": 1
+        }
+      },
+      "iaas": {
+        "vsphere": {
+          "all": {
+            "instanceType": "micro",
+            "validInstanceTypes": [
+              "micro"
+            ]
+          }
+        },
+        "aws": {
+          "all": {
+            "instanceType": "t3.micro",
+            "validInstanceTypes": [
+              "t3.micro"
+            ]
+          }
+        },
+        "azure": {
+          "all": {
+            "instanceType": "Standard_D2s_v3",
+            "validInstanceTypes": [
+              "Standard_D2s_v3"
+            ]
+          }
+        },
+        "gcp": {
+          "all": {
+            "instanceType": "e2-micro",
+            "validInstanceTypes": [
+              "e2-micro"
+            ]
+          }
+        },
+        "openstack": {
+          "all": {
+            "instanceType": "m1.small",
+            "validInstanceTypes": [
+              "m1.small"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
